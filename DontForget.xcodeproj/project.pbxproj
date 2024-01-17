@@ -12,6 +12,7 @@
 		AD147F032B57F85700561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F022B57F85700561846 /* Assets.xcassets */; };
 		AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F052B57F85700561846 /* Preview Assets.xcassets */; };
 		AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = AD147F0C2B57F89300561846 /* .swiftlint.yml */; };
+		AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD147F1C2B57FDA500561846 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,8 @@
 		AD147F022B57F85700561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F052B57F85700561846 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD147F0C2B57F89300561846 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		AD147F1B2B57FDA500561846 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD147F1F2B57FDD300561846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +57,8 @@
 		AD147EFD2B57F85600561846 /* DontForget */ = {
 			isa = PBXGroup;
 			children = (
-				AD147EFE2B57F85600561846 /* DontForgetApp.swift */,
-				AD147F002B57F85600561846 /* ContentView.swift */,
-				AD147F022B57F85700561846 /* Assets.xcassets */,
+				AD147F0F2B57FAB500561846 /* Sources */,
+				AD147F102B57FAF900561846 /* Resources */,
 				AD147F042B57F85700561846 /* Preview Content */,
 			);
 			path = DontForget;
@@ -68,6 +70,64 @@
 				AD147F052B57F85700561846 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AD147F0F2B57FAB500561846 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AD147F122B57FB2500561846 /* Presentations */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		AD147F102B57FAF900561846 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD147F022B57F85700561846 /* Assets.xcassets */,
+				AD147F1C2B57FDA500561846 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AD147F112B57FB1C00561846 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AD147F122B57FB2500561846 /* Presentations */ = {
+			isa = PBXGroup;
+			children = (
+				AD147F132B57FBAD00561846 /* Application */,
+				AD147F112B57FB1C00561846 /* Extensions */,
+			);
+			path = Presentations;
+			sourceTree = "<group>";
+		};
+		AD147F132B57FBAD00561846 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AD147F142B57FC7B00561846 /* Main */,
+				AD147F152B57FC8800561846 /* Common */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AD147F142B57FC7B00561846 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				AD147EFE2B57F85600561846 /* DontForgetApp.swift */,
+				AD147F002B57F85600561846 /* ContentView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		AD147F152B57FC8800561846 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -113,6 +173,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = AD147EF22B57F85600561846;
 			productRefGroup = AD147EFC2B57F85600561846 /* Products */;
@@ -130,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */,
+				AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */,
 				AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */,
 				AD147F032B57F85700561846 /* Assets.xcassets in Resources */,
 			);
@@ -170,6 +232,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AD147F1C2B57FDA500561846 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD147F1B2B57FDA500561846 /* ko */,
+				AD147F1F2B57FDD300561846 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AD147F072B57F85700561846 /* Debug */ = {
