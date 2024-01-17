@@ -14,7 +14,38 @@
 		AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = AD147F0C2B57F89300561846 /* .swiftlint.yml */; };
 		AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD147F1C2B57FDA500561846 /* Localizable.strings */; };
 		AD147F212B57FF7500561846 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F202B57FF7500561846 /* String+Extension.swift */; };
+		AD147F292B57FFB500561846 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD147F282B57FFB500561846 /* WidgetKit.framework */; };
+		AD147F2B2B57FFB500561846 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD147F2A2B57FFB500561846 /* SwiftUI.framework */; };
+		AD147F2E2B57FFB500561846 /* DontForgetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F2D2B57FFB500561846 /* DontForgetWidgetBundle.swift */; };
+		AD147F302B57FFB500561846 /* DontForgetWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F2F2B57FFB500561846 /* DontForgetWidget.swift */; };
+		AD147F322B57FFB500561846 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F312B57FFB500561846 /* AppIntent.swift */; };
+		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
+		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AD147F362B57FFB600561846 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD147EF32B57F85600561846 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD147F252B57FFB500561846;
+			remoteInfo = DontForgetWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AD147F3C2B57FFB600561846 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AD147EFB2B57F85600561846 /* DontForget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DontForget.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +57,14 @@
 		AD147F1B2B57FDA500561846 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD147F1F2B57FDD300561846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD147F202B57FF7500561846 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DontForgetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD147F282B57FFB500561846 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		AD147F2A2B57FFB500561846 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		AD147F2D2B57FFB500561846 /* DontForgetWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetWidgetBundle.swift; sourceTree = "<group>"; };
+		AD147F2F2B57FFB500561846 /* DontForgetWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetWidget.swift; sourceTree = "<group>"; };
+		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +72,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD147F232B57FFB500561846 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD147F2B2B57FFB500561846 /* SwiftUI.framework in Frameworks */,
+				AD147F292B57FFB500561846 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +92,8 @@
 			children = (
 				AD147F0C2B57F89300561846 /* .swiftlint.yml */,
 				AD147EFD2B57F85600561846 /* DontForget */,
+				AD147F2C2B57FFB500561846 /* DontForgetWidget */,
+				AD147F272B57FFB500561846 /* Frameworks */,
 				AD147EFC2B57F85600561846 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				AD147EFB2B57F85600561846 /* DontForget.app */,
+				AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +184,27 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		AD147F272B57FFB500561846 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD147F282B57FFB500561846 /* WidgetKit.framework */,
+				AD147F2A2B57FFB500561846 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD147F2C2B57FFB500561846 /* DontForgetWidget */ = {
+			isa = PBXGroup;
+			children = (
+				AD147F2D2B57FFB500561846 /* DontForgetWidgetBundle.swift */,
+				AD147F2F2B57FFB500561846 /* DontForgetWidget.swift */,
+				AD147F312B57FFB500561846 /* AppIntent.swift */,
+				AD147F332B57FFB600561846 /* Assets.xcassets */,
+				AD147F352B57FFB600561846 /* Info.plist */,
+			);
+			path = DontForgetWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,15 +216,34 @@
 				AD147EF72B57F85600561846 /* Sources */,
 				AD147EF82B57F85600561846 /* Frameworks */,
 				AD147EF92B57F85600561846 /* Resources */,
+				AD147F3C2B57FFB600561846 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AD147F372B57FFB600561846 /* PBXTargetDependency */,
 			);
 			name = DontForget;
 			productName = DontForget;
 			productReference = AD147EFB2B57F85600561846 /* DontForget.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AD147F252B57FFB500561846 /* DontForgetWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD147F392B57FFB600561846 /* Build configuration list for PBXNativeTarget "DontForgetWidgetExtension" */;
+			buildPhases = (
+				AD147F222B57FFB500561846 /* Sources */,
+				AD147F232B57FFB500561846 /* Frameworks */,
+				AD147F242B57FFB500561846 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DontForgetWidgetExtension;
+			productName = DontForgetWidgetExtension;
+			productReference = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -165,6 +256,9 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					AD147EFA2B57F85600561846 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					AD147F252B57FFB500561846 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -184,6 +278,7 @@
 			projectRoot = "";
 			targets = (
 				AD147EFA2B57F85600561846 /* DontForget */,
+				AD147F252B57FFB500561846 /* DontForgetWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -197,6 +292,14 @@
 				AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */,
 				AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */,
 				AD147F032B57F85700561846 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD147F242B57FFB500561846 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD147F342B57FFB600561846 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +338,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD147F222B57FFB500561846 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD147F2E2B57FFB500561846 /* DontForgetWidgetBundle.swift in Sources */,
+				AD147F302B57FFB500561846 /* DontForgetWidget.swift in Sources */,
+				AD147F322B57FFB500561846 /* AppIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AD147F372B57FFB600561846 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD147F252B57FFB500561846 /* DontForgetWidgetExtension */;
+			targetProxy = AD147F362B57FFB600561846 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AD147F1C2B57FDA500561846 /* Localizable.strings */ = {
@@ -372,6 +493,7 @@
 		AD147F0A2B57F85700561846 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -402,6 +524,7 @@
 		AD147F0B2B57F85700561846 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -429,6 +552,60 @@
 			};
 			name = Release;
 		};
+		AD147F3A2B57FFB600561846 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DontForgetWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DontForgetWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamnexters.DontForget.DontForgetWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD147F3B2B57FFB600561846 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DontForgetWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DontForgetWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamnexters.DontForget.DontForgetWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -446,6 +623,15 @@
 			buildConfigurations = (
 				AD147F0A2B57F85700561846 /* Debug */,
 				AD147F0B2B57F85700561846 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD147F392B57FFB600561846 /* Build configuration list for PBXNativeTarget "DontForgetWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD147F3A2B57FFB600561846 /* Debug */,
+				AD147F3B2B57FFB600561846 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
