@@ -22,6 +22,9 @@
 		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
 		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AD147F3E2B58006000561846 /* ComposableArchitecture */; };
+		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
+		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
+		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				AD147F202B57FF7500561846 /* String+Extension.swift */,
+				AD76D0632B594D2F00EFB12E /* Color+Extension.swift */,
+				AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				AD147F142B57FC7B00561846 /* Main */,
+				ADA138412B580925006F0219 /* Home */,
 				AD147F152B57FC8800561846 /* Common */,
 			);
 			path = Application;
@@ -205,6 +214,14 @@
 				AD147F352B57FFB600561846 /* Info.plist */,
 			);
 			path = DontForgetWidget;
+			sourceTree = "<group>";
+		};
+		ADA138412B580925006F0219 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ADA138422B58093E006F0219 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +358,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
+				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
+				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
+				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
 				AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */,
 			);

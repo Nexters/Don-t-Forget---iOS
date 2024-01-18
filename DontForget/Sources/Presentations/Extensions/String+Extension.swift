@@ -23,3 +23,10 @@ extension String {
     /* App */
     static let app = "app".localized()
 }
+
+// MARK: - Constants
+extension String {
+    /* Image */
+    static let starBackground = "StarBackground"
+    static let moonIcon = "moon"
+}
