@@ -16,6 +16,7 @@ extension Color {
     }
 
     static let neutral1 = Color(hex: 0xFBFAF1)
+    static let neutral2 = Color(hex: 0xD0B874)
     
     static let primary1 = Color(hex: 0xEB5234)
     static let primary2 = Color(hex: 0xD93720)

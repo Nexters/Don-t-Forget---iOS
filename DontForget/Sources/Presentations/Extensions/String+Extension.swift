@@ -29,4 +29,6 @@ extension String {
     /* Image */
     static let starBackground = "StarBackground"
     static let moonIcon = "moon"
+    static let starInGrid1 = "StarInGrid1"
+    static let starInGrid2 = "StarInGrid2"
 }

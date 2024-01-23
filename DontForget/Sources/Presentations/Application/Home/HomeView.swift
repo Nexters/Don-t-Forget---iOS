@@ -91,9 +91,9 @@ struct HomeView: View {
                                 )
                         }
                     }
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 30)
                 }
-                .padding(.horizontal, 32)
+                .padding(.horizontal, 40)
             }
             
             Spacer()
@@ -101,17 +101,14 @@ struct HomeView: View {
             LazyVGrid(
                 columns: [GridItem(), GridItem()]
             ) {
-                ForEach(0..<4) { _ in
-                    RoundedRectangle(cornerRadius: 16)
-                        .frame(width: 183, height: 183)
-                        .foregroundStyle(Color.neutral1)
-                        .padding(.bottom, 8)
+                ForEach(0..<4) { index in
+                    GridView(isEven: index % 2 == 0)
                 }
             }
             .padding(.horizontal, 24)
             .padding(.top, 30)
         }
-        .background(Color.black)
+        .background(Color(hex: 0x191919))
         .ignoresSafeArea()
     }
 }
