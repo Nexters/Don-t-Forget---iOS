@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */; };
+		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
+		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
+		09FD8FAD2B626A2C00EB83D8 /* CreationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAC2B626A2C00EB83D8 /* CreationFeature.swift */; };
 		AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147EFE2B57F85600561846 /* DontForgetApp.swift */; };
 		AD147F012B57F85600561846 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F002B57F85600561846 /* ContentView.swift */; };
 		AD147F032B57F85700561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F022B57F85700561846 /* Assets.xcassets */; };
@@ -49,6 +53,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationUIView.swift; sourceTree = "<group>"; };
+		09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
+		09FD8FAC2B626A2C00EB83D8 /* CreationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFeature.swift; sourceTree = "<group>"; };
 		AD147EFB2B57F85600561846 /* DontForget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DontForget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD147EFE2B57F85600561846 /* DontForgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetApp.swift; sourceTree = "<group>"; };
 		AD147F002B57F85600561846 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +97,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0965460C2B5B9CB800CDF4CC /* Creation */ = {
+			isa = PBXGroup;
+			children = (
+				09FD8FA52B5FE66B00EB83D8 /* Section */,
+				0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */,
+				09FD8FAC2B626A2C00EB83D8 /* CreationFeature.swift */,
+			);
+			path = Creation;
+			sourceTree = "<group>";
+		};
+		09FD8FA52B5FE66B00EB83D8 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
 		AD147EF22B57F85600561846 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				AD147F202B57FF7500561846 /* String+Extension.swift */,
+				09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -164,6 +191,7 @@
 		AD147F132B57FBAD00561846 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				0965460C2B5B9CB800CDF4CC /* Creation */,
 				AD147F142B57FC7B00561846 /* Main */,
 				AD147F152B57FC8800561846 /* Common */,
 			);
@@ -340,8 +368,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */,
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
+				09FD8FAD2B626A2C00EB83D8 /* CreationFeature.swift in Sources */,
+				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
+				09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */,
 				AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

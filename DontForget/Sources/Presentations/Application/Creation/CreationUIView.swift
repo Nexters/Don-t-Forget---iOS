@@ -10,6 +10,8 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CreationUIView: View {
+    @State private var keyboardHeight: CGFloat = 0
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
@@ -19,9 +21,15 @@ struct CreationUIView: View {
                     InputDateView()
                     AlarmView()
                         .padding(.bottom, 48)
-                    memoView()
+                    MemoView()
                         .padding(.bottom, 90)
                 }
+                .background(
+                    Color.white
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
+                )
             }
             VStack {
                 Spacer()
@@ -29,7 +37,7 @@ struct CreationUIView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        print("Floating button tapped")
+                        print("다음")
                     }) {
                         Text("다음")
                             .foregroundColor(.white)
@@ -42,9 +50,43 @@ struct CreationUIView: View {
                     .padding()
                 }
             }
+            .padding(.top, keyboardHeight)
+            .animation(.default, value: keyboardHeight)
+        }
+        .onAppear {
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
+                                                           object: nil,
+                                                           queue: .main) { noti in
+                        guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                        keyboardHeight = keyboardFrame.height
+                    }
+
+                    NotificationCenter
+                .default
+                .addObserver(forName: UIResponder.keyboardWillHideNotification,
+                    object: nil,
+                    queue: .main) { _ in
+                        keyboardHeight = 0
+                    }
+                }
+        .onDisappear {
+            NotificationCenter
+                .default
+                .removeObserver(self,
+                                name: UIResponder.keyboardWillShowNotification,
+                                object: nil)
+            NotificationCenter
+                .default
+                .removeObserver(self,
+                                name: UIResponder.keyboardWillHideNotification,
+                                object: nil)
         }
     }
 }
+
+private func hideKeyboard() {
+      UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+  }
 
 struct InputNameView: View {
     
@@ -145,7 +187,7 @@ struct AlarmView: View {
     }
 }
 
-struct memoView: View {
+struct MemoView: View {
     
     @State var memo: String = ""
 
