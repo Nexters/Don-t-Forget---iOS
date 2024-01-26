@@ -26,6 +26,7 @@
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
+		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			children = (
 				AD147EFE2B57F85600561846 /* DontForgetApp.swift */,
 				AD147F002B57F85600561846 /* ContentView.swift */,
+				ADAA24692B63822E00363D04 /* SplashView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
+				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
 				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
 				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
