@@ -27,8 +27,13 @@ extension String {
 // MARK: - Constants
 extension String {
     /* Image */
-    static let starBackground = "StarBackground"
+    static let background = "background"
     static let moonIcon = "moon"
     static let starInGrid1 = "StarInGrid1"
     static let starInGrid2 = "StarInGrid2"
+    static let cardType1Background = "cardType1Background"
+    static let cardType3Background = "cardType3Background"
+    
+    /* SF Symbols */
+    static let calendarAddOn = "calendarAddOn"
 }

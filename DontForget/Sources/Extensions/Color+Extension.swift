@@ -36,5 +36,9 @@ extension Color {
     
     static let red500 = Color(hex: 0xFF5C26)
     static let pink500 = Color(hex: 0xEF83AB)
+    static let yellow500 = Color(hex: 0xFFCD00)
+    
     static let primary500 = Color(hex: 0x3D82F6)
+    static let primary600 = Color(hex: 0x2B62D4)
+    static let primary700 = Color(hex: 0x1E48B1)
 }

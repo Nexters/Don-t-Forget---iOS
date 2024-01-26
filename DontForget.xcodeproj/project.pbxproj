@@ -27,6 +27,8 @@
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
+		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
+		ADAA24712B63980800363D04 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24702B63980800363D04 /* Anniversary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ADAA24702B63980800363D04 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 		AD147F0F2B57FAB500561846 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AD147F112B57FB1C00561846 /* Extensions */,
+				ADAA246F2B6397FA00363D04 /* Models */,
 				AD147F122B57FB2500561846 /* Presentations */,
 			);
 			path = Sources;
@@ -168,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				AD147F132B57FBAD00561846 /* Application */,
-				AD147F112B57FB1C00561846 /* Extensions */,
 			);
 			path = Presentations;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 		AD147F152B57FC8800561846 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				ADAA246D2B638BFF00363D04 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -228,6 +234,14 @@
 				AD9320E22B600589009A9437 /* GridView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		ADAA246F2B6397FA00363D04 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADAA24702B63980800363D04 /* Anniversary.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,10 +377,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADAA24712B63980800363D04 /* Anniversary.swift in Sources */,
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
 				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
+				ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */,
 				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
 				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
