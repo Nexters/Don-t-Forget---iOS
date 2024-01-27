@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import Moya
 
 enum DontForgetTarget {
@@ -36,7 +35,7 @@ extension DontForgetTarget: TargetType {
             return "anniversary/\(anniversaryId)"
         case .changePushState(deviceId: let deviceId):
             return "device/\(deviceId)"
-
+            
         }
     }
     
@@ -45,10 +44,10 @@ extension DontForgetTarget: TargetType {
         case .registerAnniversary:
             return .post
         case .checkAnniversary,
-             .checkAnniversaryList:
+                .checkAnniversaryList:
             return .get
         case .editAnniversary,
-             .changePushState:
+                .changePushState:
             return .put
         case .deleteAnniversary:
             return .delete
@@ -77,5 +76,4 @@ extension DontForgetTarget: TargetType {
     var validationType: ValidationType {
         return .successCodes
     }
-    
 }

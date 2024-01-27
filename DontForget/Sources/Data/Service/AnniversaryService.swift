@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import Moya
 
 class AnniversaryService {
@@ -24,5 +23,4 @@ class AnniversaryService {
     func registerAnniversary() {
         
     }
-    
 }

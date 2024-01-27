@@ -34,6 +34,13 @@
 		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
 		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AD147F3E2B58006000561846 /* ComposableArchitecture */; };
+		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
+		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
+		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
+		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
+		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
+		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
+		ADAA24712B63980800363D04 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24702B63980800363D04 /* Anniversary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +94,13 @@
 		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ADAA24702B63980800363D04 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				09642C342B649A750015220E /* Data */,
+				AD147F112B57FB1C00561846 /* Extensions */,
+				ADAA246F2B6397FA00363D04 /* Models */,
 				AD147F122B57FB2500561846 /* Presentations */,
 			);
 			path = Sources;
@@ -228,6 +244,8 @@
 			children = (
 				AD147F202B57FF7500561846 /* String+Extension.swift */,
 				09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */,
+				AD76D0632B594D2F00EFB12E /* Color+Extension.swift */,
+				AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -236,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				AD147F132B57FBAD00561846 /* Application */,
-				AD147F112B57FB1C00561846 /* Extensions */,
 			);
 			path = Presentations;
 			sourceTree = "<group>";
@@ -246,6 +263,7 @@
 			children = (
 				0965460C2B5B9CB800CDF4CC /* Creation */,
 				AD147F142B57FC7B00561846 /* Main */,
+				ADA138412B580925006F0219 /* Home */,
 				AD147F152B57FC8800561846 /* Common */,
 			);
 			path = Application;
@@ -256,6 +274,7 @@
 			children = (
 				AD147EFE2B57F85600561846 /* DontForgetApp.swift */,
 				AD147F002B57F85600561846 /* ContentView.swift */,
+				ADAA24692B63822E00363D04 /* SplashView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -263,6 +282,7 @@
 		AD147F152B57FC8800561846 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				ADAA246D2B638BFF00363D04 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -286,6 +306,23 @@
 				AD147F352B57FFB600561846 /* Info.plist */,
 			);
 			path = DontForgetWidget;
+			sourceTree = "<group>";
+		};
+		ADA138412B580925006F0219 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ADA138422B58093E006F0219 /* HomeView.swift */,
+				AD9320E22B600589009A9437 /* GridView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ADAA246F2B6397FA00363D04 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADAA24702B63980800363D04 /* Anniversary.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +467,13 @@
 				09FD8FAD2B626A2C00EB83D8 /* CreationFeature.swift in Sources */,
 				09642C3B2B649B260015220E /* EndPoint.swift in Sources */,
 				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
+				ADAA24712B63980800363D04 /* Anniversary.swift in Sources */,
+				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
+				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
+				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
+				ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */,
+				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
+				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
 				09642C4A2B64A37A0015220E /* AnniversaryService.swift in Sources */,
 				09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */,

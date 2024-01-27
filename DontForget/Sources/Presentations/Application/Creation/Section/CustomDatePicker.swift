@@ -45,7 +45,7 @@ struct CustomDatePicker: View {
             .pickerStyle(WheelPickerStyle())
             .frame(width: 60)
             .clipped()
-            .onChange(of: selectedYear) { _ in
+            .onChange(of: selectedYear) {
                 correctDaySelection()
             }
 
@@ -57,7 +57,7 @@ struct CustomDatePicker: View {
             .pickerStyle(WheelPickerStyle())
             .frame(width: 60)
             .clipped()
-            .onChange(of: selectedMonth) { _ in
+            .onChange(of: selectedMonth) {
                 correctDaySelection()
             }
         }

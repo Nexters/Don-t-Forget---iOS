@@ -10,7 +10,7 @@ import SwiftUI
 struct DontForgetApp: App {
     var body: some Scene {
         WindowGroup {
-            CreationUIView(        store: .init(
+            CreationUIView(store: .init(
                 initialState: .init(),
                 reducer: {
                     CreationFeature()
