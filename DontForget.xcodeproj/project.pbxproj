@@ -40,7 +40,6 @@
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
 		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
-		ADAA24712B63980800363D04 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24702B63980800363D04 /* Anniversary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +99,6 @@
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		ADAA24702B63980800363D04 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,7 +222,6 @@
 			children = (
 				09642C342B649A750015220E /* Data */,
 				AD147F112B57FB1C00561846 /* Extensions */,
-				ADAA246F2B6397FA00363D04 /* Models */,
 				AD147F122B57FB2500561846 /* Presentations */,
 			);
 			path = Sources;
@@ -315,14 +312,6 @@
 				AD9320E22B600589009A9437 /* GridView.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		ADAA246F2B6397FA00363D04 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				ADAA24702B63980800363D04 /* Anniversary.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,7 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -467,7 +456,6 @@
 				09FD8FAD2B626A2C00EB83D8 /* CreationFeature.swift in Sources */,
 				09642C3B2B649B260015220E /* EndPoint.swift in Sources */,
 				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
-				ADAA24712B63980800363D04 /* Anniversary.swift in Sources */,
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
 				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,

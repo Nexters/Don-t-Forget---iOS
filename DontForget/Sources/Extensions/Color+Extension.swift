@@ -14,14 +14,6 @@ extension Color {
             let blue = Double(hex & 0xff) / 255.0
             self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
-
-    /* DEPRECATED */
-    static let neutral1 = Color(hex: 0xFBFAF1)
-    static let neutral2 = Color(hex: 0xD0B874)
-    
-    static let primary1 = Color(hex: 0xEB5234)
-    static let primary2 = Color(hex: 0xD93720)
-    /* DEPRECATED */
     
     static let gray50 = Color(hex: 0xF8F9FA)
     static let gray100 = Color(hex: 0xF1F3F5)

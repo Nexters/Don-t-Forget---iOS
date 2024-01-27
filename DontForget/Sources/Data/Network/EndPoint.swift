@@ -9,13 +9,14 @@ import Foundation
 import Moya
 
 enum DontForgetTarget {
-    case registerAnniversary(request: anniversaryRequestDTO) // 기념일 등록
+    case registerAnniversary(request: AnniversaryRequestDTO) // 기념일 등록
     case checkAnniversary(anniversaryId: String) // 기념일 단건 조회
     case checkAnniversaryList // 기념일 목록조회
     case editAnniversary(anniversaryId: String) // 기념일 수정
     case deleteAnniversary(anniversaryId: String) // 기념일 삭제
     case changePushState(deviceId: String) // 디바이스 알림상태 변경
 }
+
 extension DontForgetTarget: TargetType {
     var baseURL: URL {
         return URL(string: APIConstants.baseURL)!

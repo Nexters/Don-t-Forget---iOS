@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct anniversaryRequestDTO: Decodable {
+struct AnniversaryRequestDTO: Decodable {
     let title: String
     let date: String
     let type: String
@@ -15,7 +15,7 @@ struct anniversaryRequestDTO: Decodable {
     let content: String
 }
 
-struct checkAnniversaryDTO: Decodable {
+struct CheckAnniversaryDTO: Decodable {
     let anniversaryId: String
     let title: String
     let lunarDate: String
@@ -26,13 +26,23 @@ struct checkAnniversaryDTO: Decodable {
     let deviceId: String
 }
 
-struct anniversaryListResponseDTO: Decodable {
+struct AnniversaryListResponseDTO: Decodable {
     let deviceId: String
-    let anniversaries: [anniversary]
+    let anniversaries: [Anniversary]
 }
-struct anniversary: Codable {
+
+struct Anniversary: Codable {
     let anniversaryId: String
     let title: String
     let lunarDate: String
     let solarDate: String
+}
+
+extension Anniversary {
+    static let dummy = Anniversary(
+        anniversaryId: UUID().uuidString,
+        title: "할머니 생신",
+        lunarDate: Date().formatted(),
+        solarDate: Date().formatted()
+    )
 }
