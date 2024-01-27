@@ -37,7 +37,7 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationAppIntent
 }
 
-struct DontForgetWidgetEntryView : View {
+struct DontForgetWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
