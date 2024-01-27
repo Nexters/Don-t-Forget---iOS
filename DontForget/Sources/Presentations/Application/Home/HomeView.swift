@@ -61,11 +61,13 @@ struct HomeView: View {
                         if anniversaryCount > 0 {
                             if index == anniversaryCount {
                                 AddNewAnniversaryButton()
+                                    .frame(height: 173)
                             } else {
                                 GridView(
                                     cardType: index % 5,
                                     anniversary: Anniversary.dummy
                                 )
+                                .frame(height: 173)
                             }
                         }
                     }

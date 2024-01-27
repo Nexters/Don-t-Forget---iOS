@@ -56,6 +56,7 @@ struct GridView: View {
                     HStack {
                         Spacer()
                         Image(.cardType3Background)
+                            .padding(.top, 40)
                     }
                 default:
                     Color.clear
