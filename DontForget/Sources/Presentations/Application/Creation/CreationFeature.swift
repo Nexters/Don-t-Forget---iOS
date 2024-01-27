@@ -13,12 +13,19 @@ import ComposableArchitecture
 struct CreationFeature: Reducer {
     
     struct State: Equatable {
+        enum FocusField {
+            case inputName
+            case datePicker
+            case memo
+        }
         @BindingState var textInput: String = ""
+        var focusField: FocusField? = nil   
     }
 
     enum Action: BindableAction {
         // MARK: User Action
         case binding(BindingAction<State>)
+        case setFocus(CreationFeature.State.FocusField?)
 
         // MARK: Inner Business Action
         case _onAppear
@@ -36,8 +43,10 @@ struct CreationFeature: Reducer {
             switch action {
             case .binding:
                 return .none
-
             case ._onAppear:
+                return .none
+            case .setFocus(let focusField):
+                state.focusField = focusField
                 return .none
             }
         }

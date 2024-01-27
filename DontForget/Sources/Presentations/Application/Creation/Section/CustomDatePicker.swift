@@ -30,7 +30,7 @@ struct CustomDatePicker: View {
         HStack {
             Picker("Year", selection: $selectedYear) {
                 ForEach(years, id: \.self) { year in
-                    Text("\(year)년").tag(year)
+                    Text("\(year)").tag(year)
                 }
             }
             .pickerStyle(WheelPickerStyle())
@@ -39,7 +39,7 @@ struct CustomDatePicker: View {
 
             Picker("Month", selection: $selectedMonth) {
                 ForEach(months, id: \.self) { month in
-                    Text("\(month)월").tag(month)
+                    Text("\(month)").tag(month)
                 }
             }
             .pickerStyle(WheelPickerStyle())
@@ -51,7 +51,7 @@ struct CustomDatePicker: View {
 
             Picker("Day", selection: $selectedDay) {
                 ForEach(days, id: \.self) { day in
-                    Text("\(day)일").tag(day)
+                    Text("\(day)").tag(day)
                 }
             }
             .pickerStyle(WheelPickerStyle())
