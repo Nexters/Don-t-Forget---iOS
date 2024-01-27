@@ -28,7 +28,7 @@ struct CreationFeature: Reducer {
         case setFocus(CreationFeature.State.FocusField?)
 
         // MARK: Inner Business Action
-        case _onAppear
+        case onAppear
 
         // MARK: Inner SetState Action
 
@@ -43,7 +43,7 @@ struct CreationFeature: Reducer {
             switch action {
             case .binding:
                 return .none
-            case ._onAppear:
+            case .onAppear:
                 return .none
             case .setFocus(let focusField):
                 state.focusField = focusField
