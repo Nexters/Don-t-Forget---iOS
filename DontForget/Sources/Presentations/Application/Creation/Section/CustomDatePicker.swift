@@ -6,79 +6,76 @@
 //
 
 import SwiftUI
-// TODO: 문선생님한테 휠 픽커 물어보기
 
 struct CustomDatePicker: View {
-    @State private var selectedYear: Int
-    @State private var selectedMonth: Int
-    @State private var selectedDay: Int
-    let years: [Int]
-    let months: [Int] = Array(1...12)
-    var days: [Int] {
-        Array(1...numberOfDaysInMonth(year: selectedYear, month: selectedMonth))
-    }
+    @State private var selectedDay = 1
+    @State private var selectedMonth = 1
+    @State private var selectedYear = 2022
 
-    init() {
-        let currentYear = Calendar.current.component(.year, from: Date())
-        self.years = Array((currentYear-10)...(currentYear+10))
-        self._selectedYear = State(initialValue: currentYear)
-        self._selectedMonth = State(initialValue: Calendar.current.component(.month, from: Date()))
-        self._selectedDay = State(initialValue: Calendar.current.component(.day, from: Date()))
-    }
+    let days = 1...31
+    let months = 1...12
+    let years = 00...99
 
     var body: some View {
-        HStack {
-            Picker("Year", selection: $selectedYear) {
-                ForEach(years, id: \.self) { year in
-                    Text("\(year)").tag(year)
-                }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: 80)
-            .clipped()
 
-            Picker("Month", selection: $selectedMonth) {
-                ForEach(months, id: \.self) { month in
-                    Text("\(month)").tag(month)
-                }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: 60)
-            .clipped()
-            .onChange(of: selectedYear) {
-                correctDaySelection()
-            }
+            HStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    datePickerComponent(values: Array(years), selection: $selectedYear)
+                    Text("년")
+                        .foregroundColor(.gray)
 
-            Picker("Day", selection: $selectedDay) {
-                ForEach(days, id: \.self) { day in
-                    Text("\(day)").tag(day)
+                }
+                HStack(spacing: 0) {
+                    datePickerComponent(values: Array(months), selection: $selectedMonth)
+                    Text("월").foregroundColor(.gray)
+                }
+                HStack(spacing: 0) {
+                    datePickerComponent(values: Array(days), selection: $selectedDay)
+                    Text("일").foregroundColor(.gray)
                 }
             }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: 60)
-            .clipped()
-            .onChange(of: selectedMonth) {
-                correctDaySelection()
-            }
-        }
+            .padding(.horizontal, 20)
     }
 
-    private func numberOfDaysInMonth(year: Int, month: Int) -> Int {
-        var components = DateComponents()
-        components.year = year
-        components.month = month
-        let calendar = Calendar.current
-        if let date = calendar.date(from: components), let range = calendar.range(of: .day, in: .month, for: date) {
-            return range.count
+    private func datePickerComponent(values: [Int], selection: Binding<Int>) -> some View {
+        VStack {
+            GeometryReader { fullView in
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        Spacer(minLength: fullView.size.height / 2 - 31.5) 
+                        LazyVGrid(columns: [GridItem(.fixed(32))], spacing: 0) {
+                            ForEach(values, id: \.self) { value in
+                                Text(String(format: "%02d", value)) 
+                                    .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
+                                    .frame(height: 63)
+                                    .onTapGesture {
+                                        selection.wrappedValue = value
+                                    }
+                                    .anchorPreference(key: CenterPreferenceKey.self, value: .center) { anchor in
+                                        [value: fullView[anchor].y - (fullView.size.height / 2)]
+                                    }
+                            }
+                        }
+                        Spacer(minLength: fullView.size.height / 2 - 31.5)
+                    }
+                }
+                .onPreferenceChange(CenterPreferenceKey.self) { centers in
+                    if let closest = centers.min(by: { abs($0.value) < abs($1.value) }) {
+                        selection.wrappedValue = closest.key
+                    }
+                }
+            }
+            .frame(height: 200)
         }
-        return 28
     }
+}
 
-    private func correctDaySelection() {
-        let dayCount = numberOfDaysInMonth(year: selectedYear, month: selectedMonth)
-        if selectedDay > dayCount {
-            selectedDay = dayCount
-        }
+private struct CenterPreferenceKey: PreferenceKey {
+    typealias Value = [Int: CGFloat]
+    static var defaultValue: [Int: CGFloat] = [:]
+
+    static func reduce(value: inout [Int: CGFloat], nextValue: () -> [Int: CGFloat]) {
+        value.merge(nextValue(), uniquingKeysWith: { $1 })
     }
 }
 

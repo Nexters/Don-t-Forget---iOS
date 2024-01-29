@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import Moya
 
 struct APIConstants {
-    static let baseURL = ""
+    static let baseURL = "https://3.38.240.168"
 }

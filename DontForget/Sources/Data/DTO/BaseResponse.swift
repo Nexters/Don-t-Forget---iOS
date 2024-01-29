@@ -8,3 +8,7 @@
 import Foundation
 
 struct Empty: Decodable {}
+
+struct CreationResponse: Decodable {
+    let anniversaryId: String
+}
