@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import ComposableArchitecture
-
 struct CreationUIView: View {
     // MARK: - Properties
     
@@ -17,22 +15,18 @@ struct CreationUIView: View {
     }
     
     @State private var keyboardHeight: CGFloat = 0
-    private let store: StoreOf<CreationFeature>
-    @ObservedObject private var viewStore: ViewStoreOf<CreationFeature>
     @FocusState private var focusField: Field?
     @State private var scrollViewProxy: ScrollViewProxy?
 
     // MARK: - LifeCycle
 
-    init(store: StoreOf<CreationFeature>) {
-        self.store = store
-        self.viewStore = ViewStore(store, observe: { $0 })
-    }
     
     // MARK: - View
     
     var body: some View {
         ZStack(alignment: .bottom) {
+            Color.gray900
+                .ignoresSafeArea(.all)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(alignment: .leading) {
@@ -41,6 +35,7 @@ struct CreationUIView: View {
                             .id(Field.eventName)
                             .padding(.bottom, 48)
                         InputDateView()
+                        
                             .focused($focusField, equals: .date)
                             .id(Field.date)
                         AlarmView()
@@ -57,7 +52,7 @@ struct CreationUIView: View {
                             scrollViewProxy.scrollTo(field, anchor: .bottom)                       }
                     }
                     .background(
-                        Color.white
+                        Color.gray900
                             .onTapGesture {
                                 hideKeyboard()
                             }
@@ -78,7 +73,7 @@ struct CreationUIView: View {
                                 .frame(height: 50)
                                 .frame(maxWidth: .infinity)
                                 .background(RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.black))
+                                    .fill(Color.primary500))
                         }
                         .padding()
                     }
@@ -130,8 +125,9 @@ struct InputNameView: View {
                              color: .red)
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
+                .foregroundColor(.white)
             
-            TextField("기념일을 입력해주세요.",
+            TextField("사랑하는 엄마에게",
                       text: $name)
             .multilineTextAlignment(.center)
             .padding(.horizontal, 20)
@@ -139,7 +135,7 @@ struct InputNameView: View {
             Rectangle()
             .padding(.horizontal, 20)
             .frame(height: 1)
-            .foregroundColor(Color.gray)
+            .foregroundColor(Color.gray800)
         }
     }
 }
@@ -157,9 +153,10 @@ struct InputDateView: View {
                              color: .red)
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
+                .foregroundColor(.white)
 
             Picker("",
-                   selection:$selectedSegment) {
+                   selection: $selectedSegment) {
                 ForEach(0..<2) { index in
                     Text(segments[index]).tag(index)
                 }
@@ -170,11 +167,12 @@ struct InputDateView: View {
 
             HStack {
                 Spacer()
-                DatePicker("", selection: $selectedDate, displayedComponents: .date)
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
+                CustomDatePicker()
+                    .padding(.horizontal, 30)
+
                 Spacer()
             }
+            .padding(.horizontal, 16)
         }
     }
 }
@@ -187,22 +185,16 @@ struct AlarmView: View {
             Text("미리 알림")
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
-            HStack {
-                LazyHGrid(rows: [GridItem(.flexible())], spacing: 8) {
+                .foregroundColor(.white)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: [GridItem(.fixed(74))], spacing: 8) {
                     ForEach(0..<5) { index in
                         Rectangle()
-                            .fill(selectedAlarmIndexes.contains(index) ? Color.blue : Color.white)
-                            .border(.gray, width: 1)
+                            .fill(selectedAlarmIndexes.contains(index) ? Color.primary500 : Color.gray700)
                             .frame(width: 74, height: 40)
                             .cornerRadius(50)
-                            .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                            .inset(by: 0.5)
-                            .stroke(Color(red: 0.91,
-                                          green: 0.91,
-                                          blue: 0.9),
-                                    lineWidth: 1)
-                            )                            .onTapGesture {
+                            .onTapGesture {
                                 if selectedAlarmIndexes.contains(index) {
                                     selectedAlarmIndexes.remove(index)
                                 } else {
@@ -211,6 +203,7 @@ struct AlarmView: View {
                         }
                     }
                 }
+                .padding(.horizontal, 16)
             }
         }
     }
@@ -226,6 +219,8 @@ struct MemoView: View {
             Text("간단 메모")
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
+                .foregroundColor(.white)
+
             TextField("간단한 메모를 하세요.(최대 30자)",
                       text: $memo)
             .multilineTextAlignment(.center)
@@ -234,20 +229,14 @@ struct MemoView: View {
             Rectangle()
             .padding(.horizontal, 20)
             .frame(height: 1)
-            .foregroundColor(Color.gray)
+            .foregroundColor(Color.white)
         }
     }
 }
 // MARK: - Preview
 
 #Preview {
-    CreationUIView(        store: .init(
-        initialState: .init(),
-        reducer: {
-            CreationFeature()
-                ._printChanges()
-        }
-    ))
+    CreationUIView()
 }
 // MARK: - Extension
 
@@ -256,16 +245,10 @@ extension CreationUIView {
           UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
       }
     
-    private func nextField(currentField: Field?) -> Field? {
-        switch currentField {
-            case .eventName:
-                return .date
-            case .date:
-                return .alarm
-            case .alarm:
-                return .memo
-            case .memo, .none:
-                return nil
-        }
+    private func configure() {
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.gray900)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.gray500)], for: .normal)
+        UISegmentedControl.appearance().backgroundColor = UIColor(Color.gray800)
     }
 }
