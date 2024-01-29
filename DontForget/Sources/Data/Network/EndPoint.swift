@@ -64,7 +64,7 @@ extension DontForgetTarget: TargetType {
         }
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         default:
             guard let deviceId = UserDefaults.standard.string(forKey: "(deviceId)") else {

@@ -22,6 +22,7 @@
 		09642C5B2B67CA230015220E /* CreationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C5A2B67CA230015220E /* CreationRepository.swift */; };
 		09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C5D2B67CA6F0015220E /* CreationModel.swift */; };
 		09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C602B67D2DC0015220E /* ErrorResponse.swift */; };
+		09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */; };
 		0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */; };
 		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
 		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
@@ -121,6 +122,7 @@
 				09642C402B649B820015220E /* CombineMoya in Frameworks */,
 				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
 				AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */,
+				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +414,7 @@
 				09642C3F2B649B820015220E /* CombineMoya */,
 				09642C412B649B820015220E /* Moya */,
 				09642C432B649B820015220E /* ReactiveMoya */,
+				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
 			);
 			productName = DontForget;
 			productReference = AD147EFB2B57F85600561846 /* DontForget.app */;
@@ -465,6 +468,7 @@
 			packageReferences = (
 				AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */,
+				09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */,
 			);
 			productRefGroup = AD147EFC2B57F85600561846 /* Products */;
 			projectDirPath = "";
@@ -861,6 +865,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swift-man/KoreanLunarSolarConverter";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.2;
+			};
+		};
 		AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "http://github.com/pointfreeco/swift-composable-architecture.git";
@@ -886,6 +898,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = ReactiveMoya;
+		};
+		09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */;
+			productName = KoreanLunarSolarConverter;
 		};
 		AD147F3E2B58006000561846 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

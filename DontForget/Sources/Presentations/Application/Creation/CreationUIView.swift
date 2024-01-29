@@ -17,9 +17,15 @@ struct CreationUIView: View {
     @State private var keyboardHeight: CGFloat = 0
     @FocusState private var focusField: Field?
     @State private var scrollViewProxy: ScrollViewProxy?
+    @State private var selectedAlarmIndexes: Set<AlarmPeriod> = []
+    private let viewModel: CreationViewModel
 
     // MARK: - LifeCycle
 
+    init(viewModel: CreationViewModel) {
+        self.viewModel = viewModel
+        configure()
+    }
     
     // MARK: - View
     
@@ -38,7 +44,7 @@ struct CreationUIView: View {
                         
                             .focused($focusField, equals: .date)
                             .id(Field.date)
-                        AlarmView()
+                        AlarmView(selectedAlarmIndexes: $selectedAlarmIndexes, alarmPeriods: viewModel.alarmPeriods)
                             .focused($focusField, equals: .alarm)
                             .id(Field.alarm)
                             .padding(.bottom, 48)
@@ -114,34 +120,34 @@ struct CreationUIView: View {
 }
 
 struct InputNameView: View {
-    
     @State var name: String = ""
+    @FocusState private var isNameFieldFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading,
-               spacing: 0) {
-            Text.coloredText("기념일 이름 *",
-                             coloredPart: "*",
-                             color: .red)
+        VStack(alignment: .leading, spacing: 0) {
+            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .red)
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
-            
-            TextField("사랑하는 엄마에게",
-                      text: $name)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 20)
-            .frame(height: 46)
+
+            TextField("사랑하는 엄마에게", text: $name)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .frame(height: 46)
+                .focused($isNameFieldFocused)
+
             Rectangle()
-            .padding(.horizontal, 20)
-            .frame(height: 1)
-            .foregroundColor(Color.gray800)
+                .padding(.horizontal, 20)
+                .frame(height: 1)
+                .foregroundColor(isNameFieldFocused ? Color.primary500 : Color.gray800)
         }
     }
 }
 
 struct InputDateView: View {
-    @State private var selectedDate = Date()
+    @State private var selectedDay = 1
+    @State private var selectedMonth = 1
+    @State private var selectedYear = 2022
     @State private var selectedSegment = 0
     let segments = ["양력으로 입력", "음력으로 입력"]
 
@@ -167,18 +173,23 @@ struct InputDateView: View {
 
             HStack {
                 Spacer()
-                CustomDatePicker()
-                    .padding(.horizontal, 30)
+                CustomDatePicker(selectedDay: $selectedDay, selectedMonth: $selectedMonth, selectedYear: $selectedYear)
+                    .onChange(of: selectedDay) { _ in }
+                    .onChange(of: selectedMonth) { _ in }
+                    .onChange(of: selectedYear) { _ in }
+                    .padding(.horizontal, 30)                    .padding(.horizontal, 30)
 
                 Spacer()
             }
             .padding(.horizontal, 16)
         }
     }
+
 }
 
 struct AlarmView: View {
-    @State private var selectedAlarmIndexes: Set<Int> = []
+    @Binding var selectedAlarmIndexes: Set<AlarmPeriod>
+    var alarmPeriods: [AlarmPeriod]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -189,18 +200,22 @@ struct AlarmView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.fixed(74))], spacing: 8) {
-                    ForEach(0..<5) { index in
+                    ForEach(alarmPeriods, id: \.self) { alarmPeriod in
                         Rectangle()
-                            .fill(selectedAlarmIndexes.contains(index) ? Color.primary500 : Color.gray700)
+                            .fill(selectedAlarmIndexes.contains(alarmPeriod) ? Color.primary500 : Color.gray700)
                             .frame(width: 74, height: 40)
                             .cornerRadius(50)
+                            .overlay(
+                                Text(alarmPeriod.title)
+                                    .foregroundColor(selectedAlarmIndexes.contains(alarmPeriod) ? Color.white : Color.gray400)
+                            )
                             .onTapGesture {
-                                if selectedAlarmIndexes.contains(index) {
-                                    selectedAlarmIndexes.remove(index)
+                                if selectedAlarmIndexes.contains(alarmPeriod) {
+                                    selectedAlarmIndexes.remove(alarmPeriod)
                                 } else {
-                                    selectedAlarmIndexes.insert(index)
+                                    selectedAlarmIndexes.insert(alarmPeriod)
                                 }
-                        }
+                            }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -236,7 +251,7 @@ struct MemoView: View {
 // MARK: - Preview
 
 #Preview {
-    CreationUIView()
+    CreationUIView(viewModel: CreationViewModel(creationUseCse: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
 }
 // MARK: - Extension
 

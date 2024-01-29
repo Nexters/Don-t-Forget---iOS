@@ -12,12 +12,14 @@ final class CreationViewModel: ViewModelType {
     
     // MARK: - Properties
     @Published var state: State
+    @Published var alarmPeriods: [AlarmPeriod] = []
     private let creationUseCse: CreationUseCaseProtocol
-    
-    
+    @Published var convertedDate: Date?
+
     // MARK: - Types
     enum Action {
         case registerAnniversary(AnniversaryRequestDTO)
+
     }
     enum State {
         case idle
@@ -31,6 +33,7 @@ final class CreationViewModel: ViewModelType {
     init(creationUseCse: CreationUseCaseProtocol) {
         self.creationUseCse = creationUseCse
         self.state = .idle
+        self.alarmPeriods = creationUseCse.getAlarmPeriod()
     }
     
     // MARK: - Action
@@ -54,5 +57,5 @@ final class CreationViewModel: ViewModelType {
             }
         }
     }
-    
+
 }

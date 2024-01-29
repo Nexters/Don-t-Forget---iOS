@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CustomDatePicker: View {
-    @State private var selectedDay = 1
-    @State private var selectedMonth = 1
-    @State private var selectedYear = 2022
+    @Binding var selectedDay: Int
+    @Binding var selectedMonth: Int
+    @Binding var selectedYear: Int
 
     let days = 1...31
     let months = 1...12
@@ -80,7 +80,11 @@ private struct CenterPreferenceKey: PreferenceKey {
 }
 
 struct CustomDatePicker_Previews: PreviewProvider {
+    @State static var selectedDay = 1
+    @State static var selectedMonth = 1
+    @State static var selectedYear = 2022
+    
     static var previews: some View {
-        CustomDatePicker()
+        CustomDatePicker(selectedDay: $selectedDay, selectedMonth: $selectedMonth, selectedYear: $selectedYear)
     }
 }

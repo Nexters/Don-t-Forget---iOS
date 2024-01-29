@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "koreanlunarsolarconverter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-man/KoreanLunarSolarConverter",
+      "state" : {
+        "revision" : "c824f1037e9011e56280f1c0d7627d33d7d01827",
+        "version" : "0.7.2"
+      }
+    },
+    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya",
