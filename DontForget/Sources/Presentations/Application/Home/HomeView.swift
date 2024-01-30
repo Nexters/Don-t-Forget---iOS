@@ -35,41 +35,7 @@ struct HomeView: View {
                                         .padding(.bottom, 510)
                                 })
                             } else {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text("2024.2.24")
-                                            .foregroundStyle(Color.gray600)
-                                            .font(.system(size: 18))
-                                        Text("D-31")
-                                            .font(.system(size: 72, weight: .bold))
-                                            .foregroundStyle(Color.primary500)
-                                        Spacer()
-                                            .frame(height: 20)
-                                        
-                                        VStack(alignment: .leading, spacing: 8) {
-                                            Text("음력으로 내 생일")
-                                                .font(.system(size: 20, weight: .semibold))
-                                                .foregroundStyle(.white)
-                                            Text("가족 여행 미리 계획하기")
-                                                .font(.system(size: 16))
-                                                .foregroundStyle(Color.gray600)
-                                        }
-                                        .padding(.horizontal, 16)
-                                        .overlay(
-                                            Rectangle()
-                                                .frame(
-                                                    width: 2.5,
-                                                    height: nil
-                                                )
-                                                .foregroundColor(Color.primary500),
-                                            alignment: .leading
-                                        )
-                                        .padding(.leading, 4)
-                                    }
-                                    Spacer()
-                                }
-                                .padding(.horizontal, 36)
-                                .padding(.bottom, 259)
+                                MainAnniversaryCardView(mainAnniversary: Anniversary.dummy)
                             }
                         }
                         .padding(.top, Constants.topLayout)
@@ -149,5 +115,46 @@ struct AddNewAnniversaryView: View {
             }
             .padding(.horizontal, 20)
         }
+    }
+}
+
+struct MainAnniversaryCardView: View {
+    let mainAnniversary: Anniversary
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("2024.2.24")
+                    .foregroundStyle(Color.gray600)
+                    .font(.system(size: 18))
+                Text("D-31")
+                    .font(.system(size: 72, weight: .bold))
+                    .foregroundStyle(Color.primary500)
+                Spacer()
+                    .frame(height: 20)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(mainAnniversary.title)
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundStyle(.white)
+                    Text(mainAnniversary.note)
+                        .font(.system(size: 16))
+                        .foregroundStyle(Color.gray600)
+                }
+                .padding(.horizontal, 16)
+                .overlay(
+                    Rectangle()
+                        .frame(
+                            width: 2.5,
+                            height: nil
+                        )
+                        .foregroundColor(Color.primary500),
+                    alignment: .leading
+                )
+                .padding(.leading, 4)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 36)
+        .padding(.bottom, 259)
     }
 }
