@@ -12,25 +12,23 @@ struct ContentView: View {
     @State private var showingSplash = true
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                LinearGradient(
-                    colors: [
-                        Color(hex: 0x212529),
-                        Color(hex: 0x0E1317)
-                    ],
-                    startPoint: .top,
-                    endPoint: .center
-                )
-                if showingSplash {
-                    SplashView()
-                        .onAppear(perform: actionWhileShowingSplash)
-                } else {
-                    HomeView()
-                }
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color(hex: 0x212529),
+                    Color(hex: 0x0E1317)
+                ],
+                startPoint: .top,
+                endPoint: .center
+            )
+            if showingSplash {
+                SplashView()
+                    .onAppear(perform: actionWhileShowingSplash)
+            } else {
+                HomeView()
             }
-            .ignoresSafeArea()
         }
+        .ignoresSafeArea()
     }
     
     private func actionWhileShowingSplash() {

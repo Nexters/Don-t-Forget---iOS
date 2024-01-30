@@ -30,6 +30,7 @@ extension String {
     static let splashBackground = "splashBackground"
     
     static let homeBackground = "homeBackground"
+    static let homeBackgroundHalf = "homeBackgroundHalf"
     static let moonIcon = "moon"
     static let starInGrid1 = "StarInGrid1"
     static let starInGrid2 = "StarInGrid2"

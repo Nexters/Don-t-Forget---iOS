@@ -40,6 +40,7 @@
 		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
 		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AD147F3E2B58006000561846 /* ComposableArchitecture */; };
+		AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */; };
 		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
@@ -105,6 +106,7 @@
 		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailView.swift; sourceTree = "<group>"; };
 		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			children = (
 				ADA138422B58093E006F0219 /* HomeView.swift */,
 				AD9320E22B600589009A9437 /* GridView.swift */,
+				AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
 				09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */,
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
+				AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */,
 				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
 				09642C552B67C8440015220E /* CreationViewModel.swift in Sources */,
 				09642C512B67C7640015220E /* CreationInterface.swift in Sources */,
