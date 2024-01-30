@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum convertDate {
+    case solar
+    case lunar
+}
+
 enum AlarmPeriod {
     case dDay
     case dayAgo

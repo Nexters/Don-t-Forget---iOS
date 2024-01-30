@@ -40,7 +40,7 @@ struct CreationUIView: View {
                             .focused($focusField, equals: .eventName)
                             .id(Field.eventName)
                             .padding(.bottom, 48)
-                        InputDateView()
+                        InputDateView(viewModel: viewModel)
                         
                             .focused($focusField, equals: .date)
                             .id(Field.date)
@@ -150,7 +150,8 @@ struct InputDateView: View {
     @State private var selectedYear = 2022
     @State private var selectedSegment = 0
     let segments = ["양력으로 입력", "음력으로 입력"]
-
+    var viewModel: CreationViewModel
+    
     var body: some View {
         VStack(alignment: .leading, 
                spacing: 0) {
@@ -167,6 +168,16 @@ struct InputDateView: View {
                     Text(segments[index]).tag(index)
                 }
             }
+            .onChange(of: selectedSegment) {  old, new in
+                Task {
+                    let dateType: convertDate = selectedSegment == 0 ? .lunar : .solar
+                    let convertedDate = await viewModel.convertToLunarOrSolar(type: dateType, date: updateViewModelWithSelectedDate())
+                    selectedYear = convertedDate[0]
+                    selectedMonth = convertedDate[1]
+                    selectedDay = convertedDate[2]
+                    print(selectedYear,selectedMonth, selectedDay)
+                }
+            }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
@@ -174,17 +185,19 @@ struct InputDateView: View {
             HStack {
                 Spacer()
                 CustomDatePicker(selectedDay: $selectedDay, selectedMonth: $selectedMonth, selectedYear: $selectedYear)
-                    .onChange(of: selectedDay) { _ in }
-                    .onChange(of: selectedMonth) { _ in }
-                    .onChange(of: selectedYear) { _ in }
-                    .padding(.horizontal, 30)                    .padding(.horizontal, 30)
-
+                    .onChange(of: selectedDay) { oldday, newDay in
+                    }
+                    .onChange(of: selectedMonth) { oldmonth, newMonth in
+                    }
+                    .onChange(of: selectedYear) { oldyear, newYear in
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.horizontal, 30)
                 Spacer()
             }
             .padding(.horizontal, 16)
         }
     }
-
 }
 
 struct AlarmView: View {
@@ -265,5 +278,25 @@ extension CreationUIView {
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.gray500)], for: .normal)
         UISegmentedControl.appearance().backgroundColor = UIColor(Color.gray800)
+    }
+}
+extension InputDateView {
+    //TODO: - UI 변환로직이니 뷰? 논의
+    private func convertToFullYear(twoDigitYear: Int) -> Int {
+        // 1925년부터 2024년 사이를 커버하는 로직
+        if twoDigitYear >= 25 && twoDigitYear <= 99 {
+            return 1900 + twoDigitYear
+        } else if twoDigitYear >= 0 && twoDigitYear <= 24 {
+            return 2000 + twoDigitYear
+        } else {
+            return twoDigitYear // 이미 네 자리 숫자인 경우 그대로 반환
+        }
+    }
+    
+    private func updateViewModelWithSelectedDate() -> Date {
+        let fullYear = convertToFullYear(twoDigitYear: selectedYear)
+        return viewModel.updateConvertedDate(day: selectedDay ,
+                                             month: selectedMonth,
+                                             year: fullYear)
     }
 }
