@@ -38,7 +38,7 @@ struct AnniversaryContentView: View {
                             width: 2.5,
                             height: nil
                         )
-                        .foregroundColor(Color.primary500),
+                        .foregroundStyle(Color.primary500),
                     alignment: .leading
                 )
                 .padding(.leading, 4)

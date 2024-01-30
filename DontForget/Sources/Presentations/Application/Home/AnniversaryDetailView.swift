@@ -20,7 +20,7 @@ struct AnniversaryDetailView: View {
     @State private var iconStates = [HeaderIcon.back: false,
                                      .edit: false,
                                      .delete: false]
-    
+    @State private var showConfirmView = false
     var body: some View {
         NavigationView {
             ZStack {
@@ -105,6 +105,7 @@ struct AnniversaryDetailView: View {
                                 .onEnded({ _ in
                                     iconStates[.delete] = false
                                     // TODO: - Delete Action
+                                    showConfirmView = true
                                 })
                             )
                     }
@@ -113,6 +114,13 @@ struct AnniversaryDetailView: View {
                     
                     AnniversaryContentView(anniversary: anniversary)
                         .padding(.bottom, 200)
+                }
+                
+                if showConfirmView {
+                    ConfirmView(
+                        alertType: .deleteAnniversry,
+                        isPresentend: $showConfirmView
+                    )
                 }
             }
             .ignoresSafeArea()
