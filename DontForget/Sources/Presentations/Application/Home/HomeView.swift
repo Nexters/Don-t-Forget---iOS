@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    private let anniversaryCount = 5
+    private let anniversaryCount = 7
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -21,7 +21,7 @@ struct HomeView: View {
                 VStack {
                     ZStack {
                         /* Background */
-                        Image(anniversaryCount == 0 ? .homeBackground : .homeBackgroundHalf)
+                        Image(anniversaryCount == 0 ? .homeBackgroundFull : .homeBackgroundHalf)
                             .resizable()
                             .scaledToFill()
                         
@@ -30,12 +30,15 @@ struct HomeView: View {
                             if anniversaryCount == 0 {
                                 LazyVGrid(columns: columns, content: {
                                     AddNewAnniversaryView()
-                                        .frame(height: 183)
                                         .padding(.leading, 24)
                                         .padding(.bottom, 510)
                                 })
                             } else {
-                                MainAnniversaryCardView(mainAnniversary: Anniversary.dummy)
+                                NavigationLink {
+                                    AnniversaryDetailView(anniversary: Anniversary.dummy)
+                                } label: {
+                                    AnniversaryContentView(anniversary: Anniversary.dummy)
+                                }
                             }
                         }
                         .padding(.top, Constants.topLayout)
@@ -55,17 +58,15 @@ struct HomeView: View {
                                         CreationUIView()
                                     } label: {
                                         AddNewAnniversaryView()
-                                            .frame(height: 173)
                                     }
                                 } else {
                                     NavigationLink {
-                                        AnniversaryDetailView()
+                                        AnniversaryDetailView(anniversary: Anniversary.dummy)
                                     } label: {
                                         GridView(
                                             cardType: index % 5,
                                             anniversary: Anniversary.dummy
                                         )
-                                        .frame(height: 173)
                                     }
                                 }
                             }
@@ -106,7 +107,7 @@ struct AddNewAnniversaryView: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color.gray700, lineWidth: 1.0)
             VStack(spacing: 12) {
-                Image(.calendarAddOn)
+                Image(.calendarAddOnIcon)
                     .resizable()
                     .frame(width: 56, height: 56)
                     .foregroundStyle(Color.gray500)
@@ -115,46 +116,6 @@ struct AddNewAnniversaryView: View {
             }
             .padding(.horizontal, 20)
         }
-    }
-}
-
-struct MainAnniversaryCardView: View {
-    let mainAnniversary: Anniversary
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("2024.2.24")
-                    .foregroundStyle(Color.gray600)
-                    .font(.system(size: 18))
-                Text("D-31")
-                    .font(.system(size: 72, weight: .bold))
-                    .foregroundStyle(Color.primary500)
-                Spacer()
-                    .frame(height: 20)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(mainAnniversary.title)
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundStyle(.white)
-                    Text(mainAnniversary.note)
-                        .font(.system(size: 16))
-                        .foregroundStyle(Color.gray600)
-                }
-                .padding(.horizontal, 16)
-                .overlay(
-                    Rectangle()
-                        .frame(
-                            width: 2.5,
-                            height: nil
-                        )
-                        .foregroundColor(Color.primary500),
-                    alignment: .leading
-                )
-                .padding(.leading, 4)
-            }
-            Spacer()
-        }
-        .padding(.horizontal, 36)
-        .padding(.bottom, 259)
+        .frame(minHeight: 170)
     }
 }

@@ -35,40 +35,41 @@ struct GridView: View {
         .background(
             ZStack {
                 Color(hex: 0x181E23)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .ignoresSafeArea()
                 switch cardType {
                 case 1:
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.primary500, lineWidth: 1.5)
+                    Image(.cardBackground1)
+                        .resizable()
+                        .scaledToFill()
                 case 2:
                     Color(hex: 0xD3E3F0)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                    VStack {
-                        Spacer()
-                        Image(.cardType1Background)
-                            .resizable()
-                            .scaledToFit()
-                    }
+                    Image(.cardBackground2)
+                        .resizable()
+                        .scaledToFill()
                 case 3:
-                    Color.primary600
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                    Color.primary500
+                    Image(.cardBackground3)
+                        .resizable()
+                        .scaledToFill()
                 case 4:
-                    HStack {
-                        Spacer()
-                        Image(.cardType3Background)
-                            .padding(.top, 40)
-                    }
+                    Image(.cardBackground4)
+                        .resizable()
+                        .scaledToFill()
                 default:
-                    Color.clear
+                    Image(.cardBackground5)
+                        .resizable()
+                        .scaledToFill()
                 }
             }
+                .clipShape(RoundedRectangle(cornerRadius: 16))
         )
     }
 }
 
 #Preview {
     GridView(
-        cardType: 4,
+        cardType: 2,
         anniversary: Anniversary.dummy
     )
+    .frame(width: 183, height: 183)
 }
