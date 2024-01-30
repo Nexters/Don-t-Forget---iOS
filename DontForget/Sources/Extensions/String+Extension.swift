@@ -27,13 +27,21 @@ extension String {
 // MARK: - Constants
 extension String {
     /* Image */
-    static let background = "background"
-    static let moonIcon = "moon"
-    static let starInGrid1 = "StarInGrid1"
-    static let starInGrid2 = "StarInGrid2"
-    static let cardType1Background = "cardType1Background"
-    static let cardType3Background = "cardType3Background"
+    static let splashBackground = "splashBackground"
+    
+    static let homeBackgroundFull = "homeBackgroundFull"
+    static let homeBackgroundHalf = "homeBackgroundHalf"
+    static let cardBackground1 = "Card_BG_1"
+    static let cardBackground2 = "Card_BG_2"
+    static let cardBackground3 = "Card_BG_3"
+    static let cardBackground4 = "Card_BG_4"
+    static let cardBackground5 = "Card_BG_5"
+    
+    static let backIcon = "backIcon"
+    static let deleteIcon = "deleteIcon"
+    static let editIcon = "editIcon"
+    static let calendarAddOnIcon = "calendarAddOn"
     
     /* SF Symbols */
-    static let calendarAddOn = "calendarAddOn"
+    static let chevronBackward = "chevron.backward"
 }
