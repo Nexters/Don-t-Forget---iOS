@@ -27,7 +27,9 @@ extension String {
 // MARK: - Constants
 extension String {
     /* Image */
-    static let background = "background"
+    static let splashBackground = "splashBackground"
+    
+    static let homeBackground = "homeBackground"
     static let moonIcon = "moon"
     static let starInGrid1 = "StarInGrid1"
     static let starInGrid2 = "StarInGrid2"

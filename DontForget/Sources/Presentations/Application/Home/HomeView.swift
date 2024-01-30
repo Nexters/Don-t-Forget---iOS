@@ -14,7 +14,7 @@ struct HomeView: View {
             VStack {
                 ZStack {
                     /* Background */
-                    Image(.background)
+                    Image(.homeBackground)
                         .resizable()
                         .scaledToFill()
                     
@@ -60,8 +60,12 @@ struct HomeView: View {
                     ForEach(1..<anniversaryCount + 1) { index in
                         if anniversaryCount > 0 {
                             if index == anniversaryCount {
-                                AddNewAnniversaryButton()
-                                    .frame(height: 173)
+                                NavigationLink {
+                                    CreationUIView()
+                                } label: {
+                                    AddNewAnniversaryButton()
+                                        .frame(height: 173)
+                                }
                             } else {
                                 GridView(
                                     cardType: index % 5,
