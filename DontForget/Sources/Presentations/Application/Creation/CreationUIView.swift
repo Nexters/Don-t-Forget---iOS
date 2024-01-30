@@ -14,12 +14,15 @@ struct CreationUIView: View {
       case eventName, date, alarm, memo
     }
     
+    @State private var name: String = ""
     @State private var keyboardHeight: CGFloat = 0
     @FocusState private var focusField: Field?
     @State private var scrollViewProxy: ScrollViewProxy?
     @State private var selectedAlarmIndexes: Set<AlarmPeriod> = []
     private let viewModel: CreationViewModel
-
+    private var isKeyboardVisible: Bool {
+        keyboardHeight > 0
+    }
     // MARK: - LifeCycle
 
     init(viewModel: CreationViewModel) {
@@ -36,14 +39,14 @@ struct CreationUIView: View {
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(alignment: .leading) {
-                        InputNameView(name: "")
+                        InputNameView(name: $name)
                             .focused($focusField, equals: .eventName)
                             .id(Field.eventName)
                             .padding(.bottom, 48)
                         InputDateView(viewModel: viewModel)
-                        
                             .focused($focusField, equals: .date)
                             .id(Field.date)
+                            .disableAutocorrection(true)
                         AlarmView(selectedAlarmIndexes: $selectedAlarmIndexes, alarmPeriods: viewModel.alarmPeriods)
                             .focused($focusField, equals: .alarm)
                             .id(Field.alarm)
@@ -52,10 +55,12 @@ struct CreationUIView: View {
                             .focused($focusField, equals: .memo)
                             .id(Field.memo)
                             .padding(.bottom, 90)
+                            .disableAutocorrection(true)
                     }
                     .onReceive(focusField.publisher) { field in
                         withAnimation {
-                            scrollViewProxy.scrollTo(field, anchor: .bottom)                       }
+                            scrollViewProxy.scrollTo(field, anchor: .bottom)
+                        }
                     }
                     .background(
                         Color.gray900
@@ -71,17 +76,19 @@ struct CreationUIView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            focusField = .alarm
+                            
                         }) {
-                            Text(focusField == .memo ? "완료" : "다음")
+                            Text(focusField == .eventName ? "다음" : "완료")
                                 .foregroundColor(.white)
                                 .padding()
                                 .frame(height: 50)
                                 .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: 8)
+                                .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
                                     .fill(Color.primary500))
                         }
-                        .padding()
+                        .padding(.bottom, isKeyboardVisible ? 0 : 16)
+                        .padding(.leading, isKeyboardVisible ? -10 : 20)
+                        .padding(.trailing, isKeyboardVisible ? 0 : 20)
                     }
                 }
                 .padding(.top, keyboardHeight)
@@ -120,7 +127,7 @@ struct CreationUIView: View {
 }
 
 struct InputNameView: View {
-    @State var name: String = ""
+    @Binding var name: String
     @FocusState private var isNameFieldFocused: Bool
 
     var body: some View {
@@ -130,12 +137,13 @@ struct InputNameView: View {
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
 
-            TextField("사랑하는 엄마에게", text: $name)
+            TextField("", text: $name,
+                      prompt: Text("사랑하는 엄마에게").foregroundColor(.gray700))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .frame(height: 46)
                 .focused($isNameFieldFocused)
-
+                .foregroundColor(.white)
             Rectangle()
                 .padding(.horizontal, 20)
                 .frame(height: 1)
@@ -240,6 +248,7 @@ struct AlarmView: View {
 struct MemoView: View {
     
     @State var memo: String = ""
+    @FocusState private var isMemoFieldFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading,
@@ -248,16 +257,18 @@ struct MemoView: View {
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
-
-            TextField("간단한 메모를 하세요.(최대 30자)",
-                      text: $memo)
+            
+            TextField("", text: $memo,
+                      prompt: Text("가족여행 미리 계획하기").foregroundColor(.gray700))
             .multilineTextAlignment(.center)
             .padding(.horizontal, 20)
             .frame(height: 46)
+            .focused($isMemoFieldFocused)
+            .foregroundColor(.white)
             Rectangle()
-            .padding(.horizontal, 20)
-            .frame(height: 1)
-            .foregroundColor(Color.white)
+                .padding(.horizontal, 20)
+                .frame(height: 1)
+                .foregroundColor(isMemoFieldFocused ? Color.primary500 : Color.gray800)
         }
     }
 }
