@@ -22,100 +22,113 @@ struct AnniversaryDetailView: View {
                                      .delete: false]
     
     var body: some View {
-        ZStack {
-            /* Background */
-            Image(.homeBackgroundFull)
-                .resizable()
-                .scaledToFill()
-            
-            VStack {
-                /* Custom Navigation Bar */
-                HStack(spacing: 0) {
-                    /* back icon */
-                    Image(.backIcon)
-                        .foregroundColor(.white)
-                        .frame(width: 24, height: 24)
-                        .padding(12)
-                        .background {
-                            if iconStates[.back]! {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.white.opacity(0.1))
-                            }
-                        }
-                        .gesture(
-                            DragGesture(
-                                minimumDistance: 0,
-                                coordinateSpace: .local
-                            )
-                            .onChanged({ _ in
-                                iconStates[.back] = true
-                            })
-                            .onEnded({ _ in
-                                iconStates[.back] = false
-                                dismiss()
-                            })
-                        )
-                    
-                    Spacer()
-                    /* edit icon */
-                    Image(.editIcon)
-                        .foregroundColor(.white)
-                        .frame(width: 24, height: 24)
-                        .padding(12)
-                        .background {
-                            if iconStates[.edit]! {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.white.opacity(0.1))
-                            }
-                        }
-                        .gesture(
-                            DragGesture(
-                                minimumDistance: 0,
-                                coordinateSpace: .local
-                            )
-                            .onChanged({ _ in
-                                iconStates[.edit] = true
-                            })
-                            .onEnded({ _ in
-                                iconStates[.edit] = false
-                                // TODO: - Navigate to EditView
-                            })
-                        )
-                    
-                    /* delete icon */
-                    Image(.deleteIcon)
-                        .foregroundColor(.white)
-                        .frame(width: 24, height: 24)
-                        .padding(12)
-                        .background {
-                            if iconStates[.delete]! {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.white.opacity(0.1))
-                            }
-                        }
-                        .gesture(
-                            DragGesture(
-                                minimumDistance: 0,
-                                coordinateSpace: .local
-                            )
-                            .onChanged({ _ in
-                                iconStates[.delete] = true
-                            })
-                            .onEnded({ _ in
-                                iconStates[.delete] = false
-                                // TODO: - Delete Action
-                            })
-                        )
-                }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 16)
+        NavigationView {
+            ZStack {
+                /* Background */
+                Image(.homeBackgroundFull)
+                    .resizable()
+                    .scaledToFill()
                 
-                AnniversaryContentView(anniversary: Anniversary.dummy)
-                    .padding(.bottom, 200)
+                VStack {
+                    /* Custom Navigation Bar */
+                    HStack(spacing: 0) {
+                        /* back icon */
+                        Image(.backIcon)
+                            .foregroundColor(.white)
+                            .frame(width: 24, height: 24)
+                            .padding(12)
+                            .background {
+                                if iconStates[.back]! {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .foregroundStyle(Color.white.opacity(0.1))
+                                }
+                            }
+                            .gesture(
+                                DragGesture(
+                                    minimumDistance: 0,
+                                    coordinateSpace: .local
+                                )
+                                .onChanged({ _ in
+                                    iconStates[.back] = true
+                                })
+                                .onEnded({ _ in
+                                    iconStates[.back] = false
+                                    dismiss()
+                                })
+                            )
+                        
+                        Spacer()
+                        /* edit icon */
+                        Image(.editIcon)
+                            .foregroundColor(.white)
+                            .frame(width: 24, height: 24)
+                            .padding(12)
+                            .background {
+                                if iconStates[.edit]! {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .foregroundStyle(Color.white.opacity(0.1))
+                                }
+                            }
+                            .gesture(
+                                DragGesture(
+                                    minimumDistance: 0,
+                                    coordinateSpace: .local
+                                )
+                                .onChanged({ _ in
+                                    iconStates[.edit] = true
+                                })
+                                .onEnded({ _ in
+                                    iconStates[.edit] = false
+                                    // TODO: - Navigate to EditView
+                                })
+                            )
+                        
+                        /* delete icon */
+                        Image(.deleteIcon)
+                            .foregroundColor(.white)
+                            .frame(width: 24, height: 24)
+                            .padding(12)
+                            .background {
+                                if iconStates[.delete]! {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .foregroundStyle(Color.white.opacity(0.1))
+                                }
+                            }
+                            .gesture(
+                                DragGesture(
+                                    minimumDistance: 0,
+                                    coordinateSpace: .local
+                                )
+                                .onChanged({ _ in
+                                    iconStates[.delete] = true
+                                })
+                                .onEnded({ _ in
+                                    iconStates[.delete] = false
+                                    // TODO: - Delete Action
+                                })
+                            )
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 16)
+                    
+                    AnniversaryContentView(anniversary: Anniversary.dummy)
+                        .padding(.bottom, 200)
+                }
             }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
+        .gesture(
+            DragGesture(
+                minimumDistance: 10,
+                coordinateSpace: .local
+            )
+            .onEnded({ value in
+                if value.translation.width > 10 {
+                    dismiss()
+                }
+            })
+        )
     }
 }
 
