@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GridView: View {
     
-    let cardType: Int
     let anniversary: Anniversary
     
     var body: some View {
@@ -17,14 +16,14 @@ struct GridView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(anniversary.title)
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(cardType == 2 ? Color.gray900: .gray50)
+                    .foregroundStyle(anniversary.cardType == 2 ? Color.gray900: .gray50)
                 Text("D-81")
                     .font(.system(size: 36, weight: .bold))
-                    .foregroundStyle([0, 1, 2].contains(cardType) ? Color.primary500 : cardType == 3 ? .gray50 : .yellow500)
+                    .foregroundStyle([0, 1, 2].contains(anniversary.cardType) ? Color.primary500 : anniversary.cardType == 3 ? .gray50 : .yellow500)
                 Spacer(minLength: 30)
                 Text("24.2.13")
                     .font(.system(size: 16))
-                    .foregroundStyle(cardType == 2 ? Color.primary700 : .white)
+                    .foregroundStyle(anniversary.cardType == 2 ? Color.primary700 : .white)
                     .opacity(0.5)
             }
             .padding(.horizontal, 20)
@@ -36,7 +35,7 @@ struct GridView: View {
             ZStack {
                 Color(hex: 0x181E23)
                     .ignoresSafeArea()
-                switch cardType {
+                switch anniversary.cardType {
                 case 1:
                     Image(.cardBackground1)
                         .resizable()
@@ -68,8 +67,7 @@ struct GridView: View {
 
 #Preview {
     GridView(
-        cardType: 2,
-        anniversary: Anniversary.dummy
+        anniversary: Anniversary.dummy.first!
     )
     .frame(width: 183, height: 183)
 }

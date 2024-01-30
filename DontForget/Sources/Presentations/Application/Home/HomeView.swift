@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    private let anniversaryCount = 7
+    private let anniversaries = Anniversary.dummy
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -21,24 +21,24 @@ struct HomeView: View {
                 VStack {
                     ZStack {
                         /* Background */
-                        Image(anniversaryCount == 0 ? .homeBackgroundFull : .homeBackgroundHalf)
+                        Image(self.anniversaries.count == 0 ? .homeBackgroundFull : .homeBackgroundHalf)
                             .resizable()
                             .scaledToFill()
                         
                         VStack {
                             /* Main Anniversary */
-                            if anniversaryCount == 0 {
+                            if let firstAnniversary = anniversaries.first {
+                                NavigationLink {
+                                    AnniversaryDetailView(anniversary: firstAnniversary)
+                                } label: {
+                                    AnniversaryContentView(anniversary: firstAnniversary)
+                                }
+                            } else {
                                 LazyVGrid(columns: columns, content: {
                                     AddNewAnniversaryView()
                                         .padding(.leading, 24)
                                         .padding(.bottom, 510)
                                 })
-                            } else {
-                                NavigationLink {
-                                    AnniversaryDetailView(anniversary: Anniversary.dummy)
-                                } label: {
-                                    AnniversaryContentView(anniversary: Anniversary.dummy)
-                                }
                             }
                         }
                         .padding(.top, Constants.topLayout)
@@ -51,9 +51,9 @@ struct HomeView: View {
                         columns: columns,
                         spacing: 20
                     ) {
-                        ForEach(1..<anniversaryCount + 1) { index in
-                            if anniversaryCount > 0 {
-                                if index == anniversaryCount {
+                        ForEach(1..<anniversaries.count + 1) { index in
+                            if anniversaries.count > 0 {
+                                if index == anniversaries.count {
                                     NavigationLink {
                                         CreationUIView()
                                     } label: {
@@ -61,12 +61,9 @@ struct HomeView: View {
                                     }
                                 } else {
                                     NavigationLink {
-                                        AnniversaryDetailView(anniversary: Anniversary.dummy)
+                                        AnniversaryDetailView(anniversary: anniversaries[index])
                                     } label: {
-                                        GridView(
-                                            cardType: index % 5,
-                                            anniversary: Anniversary.dummy
-                                        )
+                                        GridView(anniversary: anniversaries[index])
                                     }
                                 }
                             }

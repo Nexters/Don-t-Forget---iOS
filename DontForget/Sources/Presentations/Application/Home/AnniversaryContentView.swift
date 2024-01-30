@@ -14,10 +14,10 @@ struct AnniversaryContentView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("2024.2.24")
+                Text(anniversary.solarDate)
                     .foregroundStyle(Color.gray600)
                     .font(.system(size: 18))
-                Text("D-31")
+                Text("D-\(Int.random(in: 1..<365))")
                     .font(.system(size: 72, weight: .bold))
                     .foregroundStyle(Color.primary500)
                 Spacer()
@@ -51,5 +51,5 @@ struct AnniversaryContentView: View {
 }
 
 #Preview {
-    AnniversaryContentView(anniversary: Anniversary.dummy)
+    AnniversaryContentView(anniversary: Anniversary.dummy.first!)
 }

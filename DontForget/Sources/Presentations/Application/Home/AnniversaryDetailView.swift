@@ -111,7 +111,7 @@ struct AnniversaryDetailView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
                     
-                    AnniversaryContentView(anniversary: Anniversary.dummy)
+                    AnniversaryContentView(anniversary: anniversary)
                         .padding(.bottom, 200)
                 }
             }
@@ -133,5 +133,5 @@ struct AnniversaryDetailView: View {
 }
 
 #Preview {
-    AnniversaryDetailView(anniversary: Anniversary.dummy)
+    AnniversaryDetailView(anniversary: Anniversary.dummy.first!)
 }
