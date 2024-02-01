@@ -26,15 +26,8 @@ struct AnniversaryListResponseDTO: Decodable {
 struct Anniversary: Codable {
     let anniversaryId: String
     let title: String
+    let note: String
+    let cardType: Int
     let lunarDate: String
     let solarDate: String
-}
-
-extension Anniversary {
-    static let dummy = Anniversary(
-        anniversaryId: UUID().uuidString,
-        title: "할머니 생신",
-        lunarDate: Date().formatted(),
-        solarDate: Date().formatted()
-    )
 }

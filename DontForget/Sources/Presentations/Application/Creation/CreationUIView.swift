@@ -60,7 +60,10 @@ struct CreationUIView: View {
                     }
                     .onReceive(focusField.publisher) { field in
                         withAnimation {
-                            scrollViewProxy.scrollTo(field, anchor: .bottom)
+                            scrollViewProxy.scrollTo(
+                                field,
+                                anchor: .bottom
+                            )
                         }
                     }
                     .background(
@@ -98,9 +101,11 @@ struct CreationUIView: View {
             }
             .onAppear {
                 focusField = .eventName
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
-                                                       object: nil,
-                                                       queue: .main) { noti in
+                NotificationCenter.default.addObserver(
+                    forName: UIResponder.keyboardWillShowNotification,
+                    object: nil,
+                    queue: .main
+                ) { noti in
                     guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                     keyboardHeight = keyboardFrame.height
                 }
@@ -287,6 +292,7 @@ extension CreationUIView {
         UISegmentedControl.appearance().backgroundColor = UIColor(Color.gray800)
     }
 }
+
 extension InputDateView {
     private func convertToFullYear(twoDigitYear: Int) -> Int {
         // 1925년부터 2024년 사이를 커버하는 로직

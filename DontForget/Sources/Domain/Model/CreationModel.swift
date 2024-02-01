@@ -46,9 +46,9 @@ enum AlarmPeriod {
         }
     }
 }
+
 extension AlarmPeriod {
    static var allCases: [AlarmPeriod] {
         return [.dDay, .dayAgo, .threeDayAgo, .oneWeekAgo, .twoWeekAgo, .oneMonthAgo]
     }
-        
 }
