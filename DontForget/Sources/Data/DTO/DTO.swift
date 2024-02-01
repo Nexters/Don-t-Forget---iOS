@@ -7,14 +7,6 @@
 
 import Foundation
 
-struct AnniversaryRequestDTO: Decodable {
-    let title: String
-    let date: String
-    let type: String
-    let alarmSchedule: [String]
-    let content: String
-}
-
 struct CheckAnniversaryDTO: Decodable {
     let anniversaryId: String
     let title: String

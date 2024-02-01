@@ -17,9 +17,9 @@ class AnniversaryService {
         
     }
     
-    func registerAnniversary(request: AnniversaryRequestDTO) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
+    func registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
         return try await withCheckedThrowingContinuation { continuation in
-            provider.request(.registerAnniversary(request: request)) { result in
+            provider.request(.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)) { result in
                 switch result {
                 case .success(let response):
                     do {

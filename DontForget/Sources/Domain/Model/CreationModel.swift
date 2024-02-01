@@ -10,6 +10,15 @@ import Foundation
 enum convertDate {
     case solar
     case lunar
+    
+    var title: String {
+        switch self {
+        case .solar:
+            return "SOLAR"
+        case .lunar:
+            return "LUNAR"
+        }
+    }
 }
 
 enum AlarmPeriod {

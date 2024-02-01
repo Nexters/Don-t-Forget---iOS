@@ -8,5 +8,5 @@
 import Foundation
 
 struct APIConstants {
-    static let baseURL = "https://3.38.240.168"
+    static let baseURL = "43.200.183.182/api/"
 }
