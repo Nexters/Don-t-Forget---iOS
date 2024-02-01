@@ -24,37 +24,29 @@ struct CustomDatePicker: View {
     let years = 00...99
 
     var body: some View {
-//        ScrollViewReader { proxy in
             
             HStack(spacing: 0) {
                 HStack(spacing: 0) {
                     datePickerComponent(values: Array(years), selection: $selectedYear, proxy: $yearProxy)
-                        .onChange(of: selectedYear) { old, new in
-                                       }
                     Text("년")
                         .foregroundColor(.gray)
                 }
                 HStack(spacing: 0) {
                     datePickerComponent(values: Array(months), selection: $selectedMonth, proxy: $monthProxy)
-                        .onChange(of: selectedMonth) { old, new in
-                                       }
                     Text("월").foregroundColor(.gray)
                 }
                 HStack(spacing: 0) {
                     datePickerComponent(values: Array(days), selection: $selectedDay, proxy: $dayProxy)
-                        .onChange(of: selectedDay) { old, new in
-       
-                                       }
                     Text("일").foregroundColor(.gray)
                 }
             }
-            .onChange(of: selectedYear) { newValue in
+            .onChange(of: selectedYear) { _, newValue in
                  scrollToComponent(value: newValue, proxy: yearProxy)
              }
-             .onChange(of: selectedMonth) { newValue in
+             .onChange(of: selectedMonth) { _, newValue in
                  scrollToComponent(value: newValue, proxy: monthProxy)
              }
-             .onChange(of: selectedDay) { newValue in
+             .onChange(of: selectedDay) { _, newValue in
                  scrollToComponent(value: newValue, proxy: dayProxy)
              }
             .padding(.horizontal, 20)
@@ -102,14 +94,13 @@ struct CustomDatePicker: View {
     }
 
     private struct CenterPreferenceKey: PreferenceKey {
-        typealias Value = [Int: CGFloat]
+        typealias Value = [Int: CGFloat] //여기서 Lint 중첩경고가 뜨는데 왜?뜨는지 몰겟셩
         static var defaultValue: [Int: CGFloat] = [:]
 
         static func reduce(value: inout [Int: CGFloat], nextValue: () -> [Int: CGFloat]) {
             value.merge(nextValue(), uniquingKeysWith: { $1 })
         }
     }
-    
     
     private func scrollToComponent(value: Int, proxy: ScrollViewProxy?) {
         isProgrammaticScroll = true

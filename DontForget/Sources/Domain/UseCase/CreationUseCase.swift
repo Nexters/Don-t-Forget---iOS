@@ -13,7 +13,7 @@ import KoreanLunarSolarConverter
 protocol CreationUseCaseProtocol {
     func registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) async throws -> CreationResponse
     func getAlarmPeriod() -> [AlarmPeriod]
-    func converToDate(type: convertDate, date: Date) async -> Date
+    func converToDate(type: ConvertDate, date: Date) async -> Date
 }
 final class CreationUseCase: CreationUseCaseProtocol {
     
@@ -40,7 +40,7 @@ final class CreationUseCase: CreationUseCaseProtocol {
         return AlarmPeriod.allCases
     }
     
-    func converToDate(type: convertDate, date: Date) async -> Date {
+    func converToDate(type: ConvertDate, date: Date) async -> Date {
         switch type {
         case .solar:
             let lunarDate = try? lunarConverter.lunarDate(fromSolar: date)

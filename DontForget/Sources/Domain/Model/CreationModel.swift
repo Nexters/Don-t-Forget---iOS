@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum convertDate {
+enum ConvertDate {
     case solar
     case lunar
     

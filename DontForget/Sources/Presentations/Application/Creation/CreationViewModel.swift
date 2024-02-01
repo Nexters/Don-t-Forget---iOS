@@ -11,16 +11,17 @@ import Combine
 final class CreationViewModel: ViewModelType {
     
     // MARK: - Properties
-    
+    private var cancellables = Set<AnyCancellable>()
     @Published var state: State
     @Published var alarmPeriods: [AlarmPeriod] = []
     private let creationUseCase: CreationUseCaseProtocol
     @Published var convertedDate: Date?
-
+    @Published var creationResponse: CreationResponse?
+    @Published var errorMessage: String?
     // MARK: - Types
     
     enum Action {
-        case registerAnniversary(AnniversaryRequestDTO)
+        case registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String])
 
     }
     enum State {
@@ -42,23 +43,33 @@ final class CreationViewModel: ViewModelType {
     
     func action(_ action: Action) {
         switch action {
-        case .registerAnniversary(let requestDTO):
-            registerAnniversary(requestDTO)
+        case .registerAnniversary(deviceId: let deviceId, title: let title, date: let date, content: let content, type: let type, alarmSchedule: let alarmSchedule):
+            self.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)
         }
     }
     
     // MARK: - Method
     
-    func registerAnniversary(_ requestDTO: AnniversaryRequestDTO) {
-        state = .loading
-        Task {
-            do {
-                let request = try await creationUseCase.registerAnniversary(request: requestDTO)
-                state = .success
-            } catch {
-                state = .failed(error.localizedDescription)
+    func registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) {
+        Future<CreationResponse?, Error> { promise in
+            Task {
+                do {
+                    let response = try await self.creationUseCase.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)
+                    promise(.success(response))
+                } catch {
+                    promise(.failure(error))
+                }
             }
         }
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: { completion in
+            if case let .failure(error) = completion {
+                self.errorMessage = error.localizedDescription
+            }
+        }, receiveValue: { [weak self] response in
+            self?.creationResponse = response
+        })
+        .store(in: &cancellables)
     }
     
     func updateConvertedDate(day: Int, month: Int, year: Int) -> Date {
@@ -71,7 +82,7 @@ final class CreationViewModel: ViewModelType {
         return convertedDate!
     }
     
-    func convertToLunarOrSolar(type: convertDate, date: Date) async -> [Int] {
+    func convertToLunarOrSolar(type: ConvertDate, date: Date) async -> [Int] {
         let convertedDate = await creationUseCase.converToDate(type: type, date: date)
         let calendar = Calendar.current
         let year = calendar.component(.year, from: convertedDate)

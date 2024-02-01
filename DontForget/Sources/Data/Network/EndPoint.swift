@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum DontForgetTarget {
-    case registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) // 기념일 등록
+    case registerAnniversary(deviceUuid: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) // 기념일 등록
     case checkAnniversary(anniversaryId: String) // 기념일 단건 조회
     case checkAnniversaryList // 기념일 목록조회
     case editAnniversary(anniversaryId: String) // 기념일 수정
@@ -24,7 +24,7 @@ extension DontForgetTarget: TargetType {
     
     var path: String {
         switch self {
-        case .registerAnniversary(deviceId: let deviceId, title: let title, date: let date, content: let content, type: let type, alarmSchedule: let alarmSchedule):
+        case .registerAnniversary:
             return "anniversary"
         case .checkAnniversary(anniversaryId: let anniversaryId):
             return "anniversary/\(anniversaryId)"
@@ -57,9 +57,9 @@ extension DontForgetTarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .registerAnniversary(let deviceId, let title, let date, let content, let type, let alarmSchedule):
+        case .registerAnniversary(let deviceUuid, let title, let date, let content, let type, let alarmSchedule):
             let parameters: [String: Any] = [
-                "deviceId": deviceId,
+                "deviceUuid": deviceUuid,
                 "title": title,
                 "date": date,
                 "content": content,
@@ -75,7 +75,7 @@ extension DontForgetTarget: TargetType {
     var headers: [String: String]? {
         switch self {
         default:
-            return ["Content-Type": "application/json"]
+            return ["deviceId": "Jicheol's iPhone", "Content-Type": "application/json"]
         }
     }
     
