@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CreationUIView: View {
     // MARK: - Properties
@@ -14,12 +15,21 @@ struct CreationUIView: View {
       case eventName, date, alarm, memo
     }
     
+    @State private var name: String = ""
     @State private var keyboardHeight: CGFloat = 0
     @FocusState private var focusField: Field?
     @State private var scrollViewProxy: ScrollViewProxy?
-
+    @State private var selectedAlarmIndexes: Set<AlarmPeriod> = []
+    @ObservedObject private var viewModel: CreationViewModel
+    private var isKeyboardVisible: Bool {
+        keyboardHeight > 0
+    }
     // MARK: - LifeCycle
 
+    init(viewModel: CreationViewModel) {
+        self.viewModel = viewModel
+        configure()
+    }
     
     // MARK: - View
     
@@ -30,15 +40,15 @@ struct CreationUIView: View {
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(alignment: .leading) {
-                        InputNameView(name: "")
+                        InputNameView(name: $name)
                             .focused($focusField, equals: .eventName)
                             .id(Field.eventName)
                             .padding(.bottom, 48)
-                        InputDateView()
-                        
+                        InputDateView(viewModel: viewModel)
                             .focused($focusField, equals: .date)
                             .id(Field.date)
-                        AlarmView()
+                            .disableAutocorrection(true)
+                        AlarmView(selectedAlarmIndexes: $selectedAlarmIndexes, alarmPeriods: viewModel.alarmPeriods)
                             .focused($focusField, equals: .alarm)
                             .id(Field.alarm)
                             .padding(.bottom, 48)
@@ -46,10 +56,15 @@ struct CreationUIView: View {
                             .focused($focusField, equals: .memo)
                             .id(Field.memo)
                             .padding(.bottom, 90)
+                            .disableAutocorrection(true)
                     }
                     .onReceive(focusField.publisher) { field in
                         withAnimation {
-                            scrollViewProxy.scrollTo(field, anchor: .bottom)                       }
+                            scrollViewProxy.scrollTo(
+                                field,
+                                anchor: .bottom
+                            )
+                        }
                     }
                     .background(
                         Color.gray900
@@ -65,17 +80,20 @@ struct CreationUIView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            focusField = .alarm
+                            let alarm = ["ONE_MONTH"]
+                            self.viewModel.registerAnniversary(deviceId: "123e4567-e89b-12d3-a456-426614174000", title: "샘플 제목지철짱", date: "2024-01-27", content: "다연센세이", type: "SOLAR", alarmSchedule: alarm)
                         }) {
-                            Text(focusField == .memo ? "완료" : "다음")
+                            Text(focusField == .eventName ? "다음" : "완료")
                                 .foregroundColor(.white)
                                 .padding()
                                 .frame(height: 50)
                                 .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: 8)
+                                .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
                                     .fill(Color.primary500))
                         }
-                        .padding()
+                        .padding(.bottom, isKeyboardVisible ? 0 : 16)
+                        .padding(.leading, isKeyboardVisible ? -10 : 20)
+                        .padding(.trailing, isKeyboardVisible ? 0 : 20)
                     }
                 }
                 .padding(.top, keyboardHeight)
@@ -83,9 +101,11 @@ struct CreationUIView: View {
             }
             .onAppear {
                 focusField = .eventName
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
-                                                       object: nil,
-                                                       queue: .main) { noti in
+                NotificationCenter.default.addObserver(
+                    forName: UIResponder.keyboardWillShowNotification,
+                    object: nil,
+                    queue: .main
+                ) { noti in
                     guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                     keyboardHeight = keyboardFrame.height
                 }
@@ -114,37 +134,39 @@ struct CreationUIView: View {
 }
 
 struct InputNameView: View {
-    
-    @State var name: String = ""
+    @Binding var name: String
+    @FocusState private var isNameFieldFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading,
-               spacing: 0) {
-            Text.coloredText("기념일 이름 *",
-                             coloredPart: "*",
-                             color: .red)
+        VStack(alignment: .leading, spacing: 0) {
+            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .red)
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
-            
-            TextField("사랑하는 엄마에게",
-                      text: $name)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 20)
-            .frame(height: 46)
+
+            TextField("", text: $name,
+                      prompt: Text("사랑하는 엄마에게").foregroundColor(.gray700))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .frame(height: 46)
+                .focused($isNameFieldFocused)
+                .foregroundColor(.white)
             Rectangle()
-            .padding(.horizontal, 20)
-            .frame(height: 1)
-            .foregroundColor(Color.gray800)
+                .padding(.horizontal, 20)
+                .frame(height: 1)
+                .foregroundColor(isNameFieldFocused ? Color.primary500 : Color.gray800)
         }
     }
 }
 
 struct InputDateView: View {
-    @State private var selectedDate = Date()
+    @State private var selectedDay = 1
+    @State private var selectedMonth = 1
+    @State private var selectedYear = 2022
     @State private var selectedSegment = 0
     let segments = ["양력으로 입력", "음력으로 입력"]
-
+    var viewModel: CreationViewModel
+    
     var body: some View {
         VStack(alignment: .leading, 
                spacing: 0) {
@@ -161,15 +183,25 @@ struct InputDateView: View {
                     Text(segments[index]).tag(index)
                 }
             }
+            .onChange(of: selectedSegment) {  old, new in
+                Task {
+                    let dateType: ConvertDate = selectedSegment == 0 ? .lunar : .solar
+                    let convertedDate = await viewModel.convertToLunarOrSolar(type: dateType, date: updateViewModelWithSelectedDate())
+                    selectedYear = convertedDate[0]
+                    selectedMonth = convertedDate[1]
+                    selectedDay = convertedDate[2]
+                    print(selectedYear,selectedMonth, selectedDay)
+                }
+            }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
 
             HStack {
                 Spacer()
-                CustomDatePicker()
+                CustomDatePicker(selectedDay: $selectedDay, selectedMonth: $selectedMonth, selectedYear: $selectedYear)
                     .padding(.horizontal, 30)
-
+                    .padding(.horizontal, 30)
                 Spacer()
             }
             .padding(.horizontal, 16)
@@ -178,7 +210,8 @@ struct InputDateView: View {
 }
 
 struct AlarmView: View {
-    @State private var selectedAlarmIndexes: Set<Int> = []
+    @Binding var selectedAlarmIndexes: Set<AlarmPeriod>
+    var alarmPeriods: [AlarmPeriod]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -189,18 +222,22 @@ struct AlarmView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.fixed(74))], spacing: 8) {
-                    ForEach(0..<5) { index in
+                    ForEach(alarmPeriods, id: \.self) { alarmPeriod in
                         Rectangle()
-                            .fill(selectedAlarmIndexes.contains(index) ? Color.primary500 : Color.gray700)
+                            .fill(selectedAlarmIndexes.contains(alarmPeriod) ? Color.primary500 : Color.gray700)
                             .frame(width: 74, height: 40)
                             .cornerRadius(50)
+                            .overlay(
+                                Text(alarmPeriod.title)
+                                    .foregroundColor(selectedAlarmIndexes.contains(alarmPeriod) ? Color.white : Color.gray400)
+                            )
                             .onTapGesture {
-                                if selectedAlarmIndexes.contains(index) {
-                                    selectedAlarmIndexes.remove(index)
+                                if selectedAlarmIndexes.contains(alarmPeriod) {
+                                    selectedAlarmIndexes.remove(alarmPeriod)
                                 } else {
-                                    selectedAlarmIndexes.insert(index)
+                                    selectedAlarmIndexes.insert(alarmPeriod)
                                 }
-                        }
+                            }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -212,6 +249,7 @@ struct AlarmView: View {
 struct MemoView: View {
     
     @State var memo: String = ""
+    @FocusState private var isMemoFieldFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading,
@@ -220,23 +258,25 @@ struct MemoView: View {
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
-
-            TextField("간단한 메모를 하세요.(최대 30자)",
-                      text: $memo)
+            
+            TextField("", text: $memo,
+                      prompt: Text("가족여행 미리 계획하기").foregroundColor(.gray700))
             .multilineTextAlignment(.center)
             .padding(.horizontal, 20)
             .frame(height: 46)
+            .focused($isMemoFieldFocused)
+            .foregroundColor(.white)
             Rectangle()
-            .padding(.horizontal, 20)
-            .frame(height: 1)
-            .foregroundColor(Color.white)
+                .padding(.horizontal, 20)
+                .frame(height: 1)
+                .foregroundColor(isMemoFieldFocused ? Color.primary500 : Color.gray800)
         }
     }
 }
 // MARK: - Preview
 
 #Preview {
-    CreationUIView()
+    CreationUIView(viewModel: CreationViewModel(creationUseCse: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
 }
 // MARK: - Extension
 
@@ -250,5 +290,25 @@ extension CreationUIView {
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.gray500)], for: .normal)
         UISegmentedControl.appearance().backgroundColor = UIColor(Color.gray800)
+    }
+}
+
+extension InputDateView {
+    private func convertToFullYear(twoDigitYear: Int) -> Int {
+        // 1925년부터 2024년 사이를 커버하는 로직
+        if twoDigitYear >= 25 && twoDigitYear <= 99 {
+            return 1900 + twoDigitYear
+        } else if twoDigitYear >= 0 && twoDigitYear <= 24 {
+            return 2000 + twoDigitYear
+        } else {
+            return twoDigitYear // 이미 네 자리 숫자인 경우 그대로 반환
+        }
+    }
+    
+    private func updateViewModelWithSelectedDate() -> Date {
+        let fullYear = convertToFullYear(twoDigitYear: selectedYear)
+        return viewModel.updateConvertedDate(day: selectedDay,
+                                             month: selectedMonth,
+                                             year: fullYear)
     }
 }

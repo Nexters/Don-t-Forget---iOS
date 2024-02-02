@@ -22,6 +22,7 @@
 		09642C5B2B67CA230015220E /* CreationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C5A2B67CA230015220E /* CreationRepository.swift */; };
 		09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C5D2B67CA6F0015220E /* CreationModel.swift */; };
 		09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C602B67D2DC0015220E /* ErrorResponse.swift */; };
+		09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */; };
 		0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */; };
 		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
 		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
@@ -40,6 +41,7 @@
 		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
 		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AD147F3E2B58006000561846 /* ComposableArchitecture */; };
+		AD1C725E2B6BE1250028FF5A /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C725D2B6BE1250028FF5A /* HomeModel.swift */; };
 		AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */; };
 		AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45862B68C287009529DE /* AnniversaryContentView.swift */; };
 		AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B458C2B68DE8F009529DE /* ConfirmView.swift */; };
@@ -111,6 +113,7 @@
 		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD1C725D2B6BE1250028FF5A /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailView.swift; sourceTree = "<group>"; };
 		AD3B45862B68C287009529DE /* AnniversaryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryContentView.swift; sourceTree = "<group>"; };
 		AD3B458C2B68DE8F009529DE /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 				09642C402B649B820015220E /* CombineMoya in Frameworks */,
 				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
 				AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */,
+				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
 				ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
 			);
@@ -235,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				09642C5D2B67CA6F0015220E /* CreationModel.swift */,
+				AD1C725D2B6BE1250028FF5A /* HomeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				09642C3F2B649B820015220E /* CombineMoya */,
 				09642C412B649B820015220E /* Moya */,
 				09642C432B649B820015220E /* ReactiveMoya */,
+				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
 				ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */,
 				ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */,
 			);
@@ -495,6 +501,7 @@
 			packageReferences = (
 				AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */,
+				09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */,
 				ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = AD147EFC2B57F85600561846 /* Products */;
@@ -581,6 +588,7 @@
 				09642C3D2B649B2D0015220E /* APIConstant.swift in Sources */,
 				AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */,
 				09642C482B64A1680015220E /* BaseResponse.swift in Sources */,
+				AD1C725E2B6BE1250028FF5A /* HomeModel.swift in Sources */,
 				AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */,
 				09642C462B649FD00015220E /* DTO.swift in Sources */,
 				09642C582B67C8730015220E /* ViewModelType.swift in Sources */,
@@ -900,6 +908,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swift-man/KoreanLunarSolarConverter";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.2;
+			};
+		};
 		AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "http://github.com/pointfreeco/swift-composable-architecture.git";
@@ -933,6 +949,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = ReactiveMoya;
+		};
+		09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */;
+			productName = KoreanLunarSolarConverter;
 		};
 		AD147F3E2B58006000561846 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

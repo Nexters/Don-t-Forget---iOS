@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum DontForgetTarget {
-    case registerAnniversary(request: AnniversaryRequestDTO) // 기념일 등록
+    case registerAnniversary(deviceUuid: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) // 기념일 등록
     case checkAnniversary(anniversaryId: String) // 기념일 단건 조회
     case checkAnniversaryList // 기념일 목록조회
     case editAnniversary(anniversaryId: String) // 기념일 수정
@@ -25,7 +25,7 @@ extension DontForgetTarget: TargetType {
     var path: String {
         switch self {
         case .registerAnniversary:
-            return "device/{deviceId}"
+            return "anniversary"
         case .checkAnniversary(anniversaryId: let anniversaryId):
             return "anniversary/\(anniversaryId)"
         case .checkAnniversaryList:
@@ -57,20 +57,25 @@ extension DontForgetTarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .registerAnniversary(let request):
-            return .requestJSONEncodable(request as! Encodable)
+        case .registerAnniversary(let deviceUuid, let title, let date, let content, let type, let alarmSchedule):
+            let parameters: [String: Any] = [
+                "deviceUuid": deviceUuid,
+                "title": title,
+                "date": date,
+                "content": content,
+                "type": type,
+                "alarmSchedule": alarmSchedule
+            ]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         default:
-            guard let deviceId = UserDefaults.standard.string(forKey: "(deviceId)") else {
-                return nil
-            }
-            return ["Authorization": "Bearer \(deviceId)", "Content-Type": "application/json"]
+            return ["deviceId": "Jicheol's iPhone", "Content-Type": "application/json"]
         }
     }
     
