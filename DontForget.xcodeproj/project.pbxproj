@@ -49,6 +49,13 @@
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
+		ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */; };
+		ADA2CBFE2B6CCA25001A38D9 /* GridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CBFD2B6CCA25001A38D9 /* GridViewModel.swift */; };
+		ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */; };
+		ADA2CC082B6CCD76001A38D9 /* AnniversariesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */; };
+		ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */; };
+		ADA2CC0C2B6CD037001A38D9 /* AnniversaryQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0B2B6CD037001A38D9 /* AnniversaryQuery.swift */; };
+		ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
 		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
 		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
@@ -121,6 +128,13 @@
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ADA2CBFD2B6CCA25001A38D9 /* GridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewModel.swift; sourceTree = "<group>"; };
+		ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAnniversariesUseCase.swift; sourceTree = "<group>"; };
+		ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesInterface.swift; sourceTree = "<group>"; };
+		ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
+		ADA2CC0B2B6CD037001A38D9 /* AnniversaryQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryQuery.swift; sourceTree = "<group>"; };
+		ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesRepository.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADC7C2022B6A7DF400EBE58C /* DontForget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DontForget.entitlements; sourceTree = "<group>"; };
@@ -207,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				09642C502B67C7640015220E /* CreationInterface.swift */,
+				ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -215,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				09642C522B67C76F0015220E /* CreationUseCase.swift */,
+				ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -231,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				09642C5A2B67CA230015220E /* CreationRepository.swift */,
+				ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -240,6 +257,8 @@
 			children = (
 				09642C5D2B67CA6F0015220E /* CreationModel.swift */,
 				AD1C725D2B6BE1250028FF5A /* HomeModel.swift */,
+				ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */,
+				ADA2CC0B2B6CD037001A38D9 /* AnniversaryQuery.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,10 +434,28 @@
 		ADA138412B580925006F0219 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				ADA2CC002B6CCA2F001A38D9 /* View */,
+				ADA2CBFF2B6CCA29001A38D9 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ADA2CBFF2B6CCA29001A38D9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */,
+				ADA2CBFD2B6CCA25001A38D9 /* GridViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ADA2CC002B6CCA2F001A38D9 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				ADA138422B58093E006F0219 /* HomeView.swift */,
 				AD9320E22B600589009A9437 /* GridView.swift */,
 			);
-			path = Home;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -571,6 +608,7 @@
 				09642C3B2B649B260015220E /* EndPoint.swift in Sources */,
 				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
+				ADA2CC0C2B6CD037001A38D9 /* AnniversaryQuery.swift in Sources */,
 				09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */,
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
 				AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */,
@@ -579,12 +617,18 @@
 				09642C512B67C7640015220E /* CreationInterface.swift in Sources */,
 				ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */,
 				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
+				ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */,
+				ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */,
 				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
+				ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
+				ADA2CBFE2B6CCA25001A38D9 /* GridViewModel.swift in Sources */,
+				ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */,
 				09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */,
 				09642C4A2B64A37A0015220E /* AnniversaryService.swift in Sources */,
 				09642C532B67C76F0015220E /* CreationUseCase.swift in Sources */,
 				09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */,
+				ADA2CC082B6CCD76001A38D9 /* AnniversariesInterface.swift in Sources */,
 				09642C3D2B649B2D0015220E /* APIConstant.swift in Sources */,
 				AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */,
 				09642C482B64A1680015220E /* BaseResponse.swift in Sources */,

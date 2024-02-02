@@ -273,11 +273,13 @@ struct MemoView: View {
         }
     }
 }
+
 // MARK: - Preview
 
 #Preview {
-    CreationUIView(viewModel: CreationViewModel(creationUseCse: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
+    CreationUIView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
 }
+
 // MARK: - Extension
 
 extension CreationUIView {

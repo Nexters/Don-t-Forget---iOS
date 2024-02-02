@@ -27,7 +27,7 @@ struct AnniversaryContentView: View {
                     Text(anniversary.title)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text(anniversary.note)
+                    Text(anniversary.note ?? "")
                         .font(.system(size: 16))
                         .foregroundStyle(Color.gray600)
                 }

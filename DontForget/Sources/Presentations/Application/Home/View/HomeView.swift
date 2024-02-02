@@ -55,7 +55,7 @@ struct HomeView: View {
                             if anniversaries.count > 0 {
                                 if index == anniversaries.count {
                                     NavigationLink {
-                                        CreationUIView(viewModel: CreationViewModel(creationUseCse: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
+                                        CreationUIView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
                                     } label: {
                                         AddNewAnniversaryView()
                                     }

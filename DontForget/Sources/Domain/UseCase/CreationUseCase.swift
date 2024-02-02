@@ -11,10 +11,18 @@ import Combine /// 비동기처리가 필요없는 모델(엔티티)를 이용�
 import KoreanLunarSolarConverter
 
 protocol CreationUseCaseProtocol {
-    func registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) async throws -> CreationResponse
+    func registerAnniversary(
+        deviceId: String,
+        title: String,
+        date: String,
+        content: String,
+        type: String,
+        alarmSchedule: [String]
+    ) async throws -> CreationResponse
     func getAlarmPeriod() -> [AlarmPeriod]
     func converToDate(type: ConvertDate, date: Date) async -> Date
 }
+
 final class CreationUseCase: CreationUseCaseProtocol {
     
     // MARK: - Properties
@@ -23,19 +31,31 @@ final class CreationUseCase: CreationUseCaseProtocol {
     private let lunarConverter = KoreanSolarToLunarConverter()
     
     // MARK: - Init
-
     init(creationRepository: CreationInterface) {
         self.creationRepository = creationRepository
     }
     
     // MARK: - Method to Network
 
-    func registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) async throws -> CreationResponse {
-        return try await creationRepository.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)
+    func registerAnniversary(
+        deviceId: String,
+        title: String,
+        date: String,
+        content: String,
+        type: String,
+        alarmSchedule: [String]
+    ) async throws -> CreationResponse {
+        return try await creationRepository.registerAnniversary(
+            deviceId: deviceId,
+            title: title,
+            date: date,
+            content: content,
+            type: type,
+            alarmSchedule: alarmSchedule
+        )
     }
     
     // MARK: - Method to Model(Entity)
-    
     func getAlarmPeriod() -> [AlarmPeriod] {
         return AlarmPeriod.allCases
     }
