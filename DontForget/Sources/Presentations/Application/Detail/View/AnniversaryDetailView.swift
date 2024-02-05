@@ -128,7 +128,8 @@ struct AnniversaryDetailView: View {
                     
                     if showConfirmView {
                         ConfirmView(
-                            alertType: .deleteAnniversry,
+                            viewModel: viewModel,
+                            alertType: .deleteAnniversary,
                             isPresentend: $showConfirmView
                         )
                     }

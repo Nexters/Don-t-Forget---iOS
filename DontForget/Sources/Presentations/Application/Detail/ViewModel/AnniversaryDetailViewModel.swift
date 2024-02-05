@@ -15,10 +15,13 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     private var cancellables = Set<AnyCancellable>()
     @Published var state: State
     @Published var anniversaryDetail: AnniversaryDetailDTO?
+    private let anniversaryDetailRepository: AnniversaryDetailRepository
     private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+    private let deleteAnniversaryUseCase: DeleteAnniversaryUseCase
     
     enum Action {
         case fetchAnniversaryDetail
+        case deleteAnniversary
     }
     
     enum State {
@@ -30,11 +33,17 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     
     init(
         anniversaryId: Int,
-        fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+        anniversaryDetailRepository: AnniversaryDetailRepository
     ) {
         self.state = .idle
         self.anniversaryId = anniversaryId
-        self.fetchAnniversaryDetailUseCase = fetchAnniversaryDetailUseCase
+        self.anniversaryDetailRepository = anniversaryDetailRepository
+        self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
+            anniversaryDetailRepository: anniversaryDetailRepository
+        )
+        self.deleteAnniversaryUseCase = DefaultDeleteAnniversaryUseCase(
+            anniversaryDetailRepository: anniversaryDetailRepository
+        )
     }
     
     // MARK: - Action
@@ -42,6 +51,8 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         switch action {
         case .fetchAnniversaryDetail:
             fetchAnniversaryDetail()
+        case .deleteAnniversary:
+            deleteAnniversary()
         }
     }
     
@@ -78,5 +89,20 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
             }
         }
         .store(in: &cancellables)
+    }
+    
+    private func deleteAnniversary() {
+        self.state = .loading
+        Task {
+            do {
+                try await self.deleteAnniversaryUseCase.execute(
+                    requestValue: .init(
+                        query: AnniversaryDetailQuery(
+                            queryId: self.anniversaryId
+                        )
+                    )
+                )
+            }
+        }
     }
 }

@@ -8,10 +8,10 @@
 import Foundation
 
 protocol FetchAnniversaryDetailUseCase {
-    func execute(requestValue: FetchAnniversaryDetailUseCaseRequestValue) async throws -> AnniversaryDetailResponse
+    func execute(requestValue: FetchDetailUseCaseRequestValue) async throws -> AnniversaryDetailResponse
 }
 
-struct FetchAnniversaryDetailUseCaseRequestValue {
+struct FetchDetailUseCaseRequestValue {
     let query: AnniversaryDetailQuery
 }
 
@@ -24,7 +24,7 @@ final class DefaultFetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase 
         self.anniversaryDetailRepository = anniversaryDetailRepository
     }
     
-    func execute(requestValue: FetchAnniversaryDetailUseCaseRequestValue) async throws -> AnniversaryDetailResponse {
+    func execute(requestValue: FetchDetailUseCaseRequestValue) async throws -> AnniversaryDetailResponse {
         return try await anniversaryDetailRepository.fetchAnniversaryDetail(query: requestValue.query)
     }
 }

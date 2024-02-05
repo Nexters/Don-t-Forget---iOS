@@ -92,4 +92,17 @@ class AnniversaryService {
             }
         }
     }
+    
+    func deleteAnniversary(anniversaryId: Int) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            provider.request(.deleteAnniversary(anniversaryId: anniversaryId)) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case let .failure(error):
+                    print("=== DEBUG: \(error)")
+                }
+            }
+        }
+    }
 }

@@ -41,10 +41,8 @@ struct HomeView: View {
                                     AnniversaryDetailView(
                                         viewModel: DefaultAnniversaryDetailViewModel(
                                             anniversaryId: firstAnniversary.anniversaryId,
-                                            fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
-                                                anniversaryDetailRepository: AnniversaryDetailRepository(
-                                                    service: AnniversaryService.shared
-                                                )
+                                            anniversaryDetailRepository: AnniversaryDetailRepository(
+                                                service: AnniversaryService.shared
                                             )
                                         )
                                     )
@@ -88,10 +86,8 @@ struct HomeView: View {
                                         AnniversaryDetailView(
                                             viewModel: DefaultAnniversaryDetailViewModel(
                                                 anniversaryId: anniversaries[index].anniversaryId,
-                                                fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
-                                                    anniversaryDetailRepository: AnniversaryDetailRepository(
-                                                        service: AnniversaryService.shared
-                                                    )
+                                                anniversaryDetailRepository: AnniversaryDetailRepository(
+                                                    service: AnniversaryService.shared
                                                 )
                                             )
                                         )

@@ -19,8 +19,8 @@ enum DontForgetTarget {
     ) // 기념일 등록
     case readAnniversary(anniversaryId: Int) // 기념일 단건 조회
     case readAnniversaries // 기념일 목록조회
-    case editAnniversary(anniversaryId: String) // 기념일 수정
-    case deleteAnniversary(anniversaryId: String) // 기념일 삭제
+    case editAnniversary(anniversaryId: Int) // 기념일 수정
+    case deleteAnniversary(anniversaryId: Int) // 기념일 삭제
     case changePushState(deviceId: String) // 디바이스 알림상태 변경
 }
 

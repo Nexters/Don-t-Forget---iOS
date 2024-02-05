@@ -61,6 +61,7 @@
 		ADAFFDD52B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD42B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift */; };
 		ADAFFDD72B70C98C00746D3E /* AnniversaryDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */; };
 		ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */; };
+		ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */; };
 		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
 		ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */; };
 		ADC7C2052B6A99F800EBE58C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */; };
@@ -143,6 +144,7 @@
 		ADAFFDD42B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnniversaryDetailUseCase.swift; sourceTree = "<group>"; };
 		ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailRepository.swift; sourceTree = "<group>"; };
 		ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailInterface.swift; sourceTree = "<group>"; };
+		ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAnniversaryUseCase.swift; sourceTree = "<group>"; };
 		ADC7C2022B6A7DF400EBE58C /* DontForget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DontForget.entitlements; sourceTree = "<group>"; };
 		ADC7C2032B6A7DFA00EBE58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				09642C522B67C76F0015220E /* CreationUseCase.swift */,
 				ADAFFDD42B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift */,
+				ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */,
 				ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */,
 			);
 			path = UseCase;
@@ -639,6 +642,7 @@
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
 				ADAFFDD32B70C7FB00746D3E /* AnniversaryDetailViewModel.swift in Sources */,
 				AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */,
+				ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */,
 				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
 				09642C552B67C8440015220E /* CreationViewModel.swift in Sources */,
 				09642C512B67C7640015220E /* CreationInterface.swift in Sources */,

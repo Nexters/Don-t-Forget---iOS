@@ -18,4 +18,8 @@ final class AnniversaryDetailRepository: AnniversaryDetailInterface {
     func fetchAnniversaryDetail(query: AnniversaryDetailQuery) async throws -> AnniversaryDetailResponse {
         return try await service.fetchAnniversaryDetail(anniversaryId: query.queryId)
     }
+    
+    func deleteAnniversary(query: AnniversaryDetailQuery) async throws {
+        try await service.deleteAnniversary(anniversaryId: query.queryId)
+    }
 }
