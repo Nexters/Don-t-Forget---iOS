@@ -10,3 +10,7 @@ import Foundation
 struct AnniversaryQuery: Equatable {
     let query: String
 }
+
+struct AnniversaryDetailQuery: Equatable {
+    let queryId: Int
+}

@@ -9,13 +9,12 @@ import SwiftUI
 
 struct AnniversaryContentView: View {
     
-    let anniversaryId: Int
-    let anniversary = Anniversary.dummy.first!
+    let anniversary: AnniversaryDTO
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(anniversary.date)
+                Text(anniversary.solarDate)
                     .foregroundStyle(Color.gray600)
                     .font(.system(size: 18))
                 Text("D-\(Int.random(in: 1..<365))")
@@ -28,9 +27,10 @@ struct AnniversaryContentView: View {
                     Text(anniversary.title)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text(anniversary.content ?? "")
-                        .font(.system(size: 16))
-                        .foregroundStyle(Color.gray600)
+                    // TODO: - 첫번째카드는 전체리스트에서도 보여야 함
+//                    Text(anniversary.content ?? "")
+//                        .font(.system(size: 16))
+//                        .foregroundStyle(Color.gray600)
                 }
                 .padding(.horizontal, 16)
                 .overlay(

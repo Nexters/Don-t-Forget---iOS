@@ -13,25 +13,6 @@ class AnniversaryService {
     static let shared = AnniversaryService()
     private let provider = MoyaProvider<DontForgetTarget>()
     
-    func fetchAnniversaries() async throws -> AnniversariesResponse {
-        return try await withCheckedThrowingContinuation { continuation in
-            provider.request(.readAnniversaries) { result in
-                switch result {
-                case let .success(response):
-                    do {
-                        let response = try response.map([AnniversaryDTO].self)
-                        continuation.resume(returning: AnniversariesResponse(anniversaries: response))
-                    } catch {
-                        continuation.resume(throwing: error)
-                    }
-                case let .failure(error):
-                    print("=== DEBUG: \(error)")
-                    // TODO: - handling error
-                }
-            }
-        }
-    }
-    
     func registerAnniversary(
         title: String,
         date: String,
@@ -69,6 +50,44 @@ class AnniversaryService {
                         /// 디코딩 실패 시 일반 에러로 처리합니다.
                         continuation.resume(throwing: ServiceError.unknownError(error))
                     }
+                }
+            }
+        }
+    }
+    
+    func fetchAnniversaries() async throws -> AnniversariesResponse {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.readAnniversaries) { result in
+                switch result {
+                case let .success(response):
+                    do {
+                        let response = try response.map([AnniversaryDTO].self)
+                        continuation.resume(returning: AnniversariesResponse(anniversaries: response))
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case let .failure(error):
+                    print("=== DEBUG: \(error)")
+                    // TODO: - handling error
+                }
+            }
+        }
+    }
+    
+    func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.readAnniversary(anniversaryId: anniversaryId)) { result in
+                switch result {
+                case let .success(response):
+                    do {
+                        let response = try response.map(AnniversaryDetailDTO.self)
+                        continuation.resume(returning: AnniversaryDetailResponse(anniversaryDetail: response))
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case let .failure(error):
+                    print("=== DEBUG: \(error)")
+                    // TODO: - handling error
                 }
             }
         }

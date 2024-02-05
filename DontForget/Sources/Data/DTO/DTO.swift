@@ -14,3 +14,14 @@ struct AnniversaryDTO: Decodable {
     let solarDate: String
     let cardType: String
 }
+
+struct AnniversaryDetailDTO: Decodable {
+    let anniversaryId: Int
+    let title: String
+    let lunarDate: String
+    let solarDate: String
+    let alarmSchedule: [String]
+    let content: String
+    let deviceId: String
+    let cardType: String
+}

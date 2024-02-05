@@ -41,9 +41,9 @@ final class DefaultHomeViewModel: ViewModelType {
         }
     }
     
-    #warning("TEST NEEDED")
     // MARK: - Method
     private func readAnniversaries() {
+        self.state = .loading
         Future<AnniversariesResponse?, Error> { promise in
             Task {
                 do {
@@ -52,6 +52,7 @@ final class DefaultHomeViewModel: ViewModelType {
                 } catch {
                     print("=== DEBUG: \(error)")
                     promise(.failure(error))
+                    self.state = .failed("failed readAnniversaries()")
                 }
             }
         }
@@ -64,6 +65,7 @@ final class DefaultHomeViewModel: ViewModelType {
             if let response = response {
                 self?.anniversaries = response.anniversaries
                 print("=== DEBUG: \(self?.anniversaries)")
+                self?.state = .success
             }
         }
         .store(in: &cancellables)

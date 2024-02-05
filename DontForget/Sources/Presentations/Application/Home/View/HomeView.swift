@@ -38,9 +38,18 @@ struct HomeView: View {
                             /* Main Anniversary */
                             if let firstAnniversary = viewModel.anniversaries.first {
                                 NavigationLink {
-                                    AnniversaryDetailView(anniversaryId: firstAnniversary.anniversaryId)
+                                    AnniversaryDetailView(
+                                        viewModel: DefaultAnniversaryDetailViewModel(
+                                            anniversaryId: firstAnniversary.anniversaryId,
+                                            fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                                                anniversaryDetailRepository: AnniversaryDetailRepository(
+                                                    service: AnniversaryService.shared
+                                                )
+                                            )
+                                        )
+                                    )
                                 } label: {
-                                    AnniversaryContentView(anniversaryId: firstAnniversary.anniversaryId)
+                                    AnniversaryContentView(anniversary: firstAnniversary)
                                 }
                             } else {
                                 LazyVGrid(columns: columns, content: {
@@ -76,7 +85,16 @@ struct HomeView: View {
                                     }
                                 } else {
                                     NavigationLink {
-                                        AnniversaryDetailView(anniversaryId: anniversaries[index].anniversaryId)
+                                        AnniversaryDetailView(
+                                            viewModel: DefaultAnniversaryDetailViewModel(
+                                                anniversaryId: anniversaries[index].anniversaryId,
+                                                fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                                                    anniversaryDetailRepository: AnniversaryDetailRepository(
+                                                        service: AnniversaryService.shared
+                                                    )
+                                                )
+                                            )
+                                        )
                                     } label: {
                                         GridView(anniversary: anniversaries[index])
                                     }

@@ -17,7 +17,7 @@ enum DontForgetTarget {
         cardType: String,
         alarmSchedule: [String]
     ) // 기념일 등록
-    case readAnniversary(anniversaryId: String) // 기념일 단건 조회
+    case readAnniversary(anniversaryId: Int) // 기념일 단건 조회
     case readAnniversaries // 기념일 목록조회
     case editAnniversary(anniversaryId: String) // 기념일 수정
     case deleteAnniversary(anniversaryId: String) // 기념일 삭제
