@@ -21,8 +21,14 @@ final class CreationViewModel: ViewModelType {
     // MARK: - Types
     
     enum Action {
-        case registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String])
-
+        case registerAnniversary(
+            title: String,
+            date: String,
+            content: String,
+            calendarType: String,
+            cardType: String,
+            alarmSchedule: [String]
+        )
     }
     enum State {
         case idle
@@ -33,28 +39,49 @@ final class CreationViewModel: ViewModelType {
     
     // MARK: - Init
     
-    init(creationUseCse: CreationUseCaseProtocol) {
-        self.creationUseCase = creationUseCse
+    init(creationUseCase: CreationUseCaseProtocol) {
+        self.creationUseCase = creationUseCase
         self.state = .idle
-        self.alarmPeriods = creationUseCse.getAlarmPeriod()
+        self.alarmPeriods = creationUseCase.getAlarmPeriod()
     }
     
     // MARK: - Action
     
     func action(_ action: Action) {
         switch action {
-        case .registerAnniversary(deviceId: let deviceId, title: let title, date: let date, content: let content, type: let type, alarmSchedule: let alarmSchedule):
-            self.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)
+        case let .registerAnniversary(title, date, content, calendarType, cardType, alarmSchedule):
+            self.registerAnniversary(
+                title: title,
+                date: date,
+                content: content,
+                calendarType: calendarType,
+                cardType: cardType,
+                alarmSchedule: alarmSchedule
+            )
         }
     }
     
     // MARK: - Method
     
-    func registerAnniversary(deviceId: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) {
+    func registerAnniversary(
+        title: String,
+        date: String,
+        content: String,
+        calendarType: String,
+        cardType: String,
+        alarmSchedule: [String]
+    ) {
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
-                    let response = try await self.creationUseCase.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)
+                    let response = try await self.creationUseCase.registerAnniversary(
+                        title: title,
+                        date: date,
+                        content: content,
+                        calendarType: calendarType,
+                        cardType: cardType,
+                        alarmSchedule: alarmSchedule
+                    )
                     promise(.success(response))
                 } catch {
                     promise(.failure(error))

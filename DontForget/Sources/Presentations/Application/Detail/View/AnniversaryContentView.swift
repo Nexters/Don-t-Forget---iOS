@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AnniversaryContentView: View {
     
-    let anniversary: Anniversary
+    let anniversary: AnniversaryDetailDTO
     
     var body: some View {
         HStack {
@@ -27,7 +27,8 @@ struct AnniversaryContentView: View {
                     Text(anniversary.title)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text(anniversary.note)
+                    // TODO: - 첫번째카드는 전체리스트에서도 보여야 함
+                    Text(anniversary.content ?? "")
                         .font(.system(size: 16))
                         .foregroundStyle(Color.gray600)
                 }
@@ -48,8 +49,4 @@ struct AnniversaryContentView: View {
         .padding(.horizontal, 36)
         .padding(.bottom, 259)
     }
-}
-
-#Preview {
-    AnniversaryContentView(anniversary: Anniversary.dummy.first!)
 }

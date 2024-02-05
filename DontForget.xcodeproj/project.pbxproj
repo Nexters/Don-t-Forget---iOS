@@ -49,8 +49,19 @@
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
+		ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */; };
+		ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */; };
+		ADA2CC082B6CCD76001A38D9 /* AnniversariesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */; };
+		ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */; };
+		ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0B2B6CD037001A38D9 /* Query.swift */; };
+		ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
 		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
+		ADAFFDD32B70C7FB00746D3E /* AnniversaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */; };
+		ADAFFDD52B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD42B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift */; };
+		ADAFFDD72B70C98C00746D3E /* AnniversaryDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */; };
+		ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */; };
+		ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */; };
 		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
 		ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */; };
 		ADC7C2052B6A99F800EBE58C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */; };
@@ -121,8 +132,19 @@
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAnniversariesUseCase.swift; sourceTree = "<group>"; };
+		ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesInterface.swift; sourceTree = "<group>"; };
+		ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
+		ADA2CC0B2B6CD037001A38D9 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesRepository.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailViewModel.swift; sourceTree = "<group>"; };
+		ADAFFDD42B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnniversaryDetailUseCase.swift; sourceTree = "<group>"; };
+		ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailRepository.swift; sourceTree = "<group>"; };
+		ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailInterface.swift; sourceTree = "<group>"; };
+		ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAnniversaryUseCase.swift; sourceTree = "<group>"; };
 		ADC7C2022B6A7DF400EBE58C /* DontForget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DontForget.entitlements; sourceTree = "<group>"; };
 		ADC7C2032B6A7DFA00EBE58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -207,6 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				09642C502B67C7640015220E /* CreationInterface.swift */,
+				ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */,
+				ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -215,6 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				09642C522B67C76F0015220E /* CreationUseCase.swift */,
+				ADAFFDD42B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift */,
+				ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */,
+				ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -231,6 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				09642C5A2B67CA230015220E /* CreationRepository.swift */,
+				ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */,
+				ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -240,6 +269,8 @@
 			children = (
 				09642C5D2B67CA6F0015220E /* CreationModel.swift */,
 				AD1C725D2B6BE1250028FF5A /* HomeModel.swift */,
+				ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */,
+				ADA2CC0B2B6CD037001A38D9 /* Query.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,8 +437,8 @@
 		AD3B45902B6A7056009529DE /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */,
-				AD3B45862B68C287009529DE /* AnniversaryContentView.swift */,
+				ADAFFDDB2B70CD6100746D3E /* View */,
+				ADAFFDDA2B70CD5A00746D3E /* ViewModel */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -415,10 +446,44 @@
 		ADA138412B580925006F0219 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				ADA2CC002B6CCA2F001A38D9 /* View */,
+				ADA2CBFF2B6CCA29001A38D9 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ADA2CBFF2B6CCA29001A38D9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ADA2CC002B6CCA2F001A38D9 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				ADA138422B58093E006F0219 /* HomeView.swift */,
 				AD9320E22B600589009A9437 /* GridView.swift */,
 			);
-			path = Home;
+			path = View;
+			sourceTree = "<group>";
+		};
+		ADAFFDDA2B70CD5A00746D3E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ADAFFDDB2B70CD6100746D3E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */,
+				AD3B45862B68C287009529DE /* AnniversaryContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,25 +631,36 @@
 			files = (
 				09642C5B2B67CA230015220E /* CreationRepository.swift in Sources */,
 				AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */,
+				ADAFFDD72B70C98C00746D3E /* AnniversaryDetailRepository.swift in Sources */,
 				09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */,
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
 				09642C3B2B649B260015220E /* EndPoint.swift in Sources */,
 				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
+				ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */,
 				09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */,
 				AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */,
+				ADAFFDD32B70C7FB00746D3E /* AnniversaryDetailViewModel.swift in Sources */,
 				AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */,
+				ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */,
 				AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */,
 				09642C552B67C8440015220E /* CreationViewModel.swift in Sources */,
 				09642C512B67C7640015220E /* CreationInterface.swift in Sources */,
 				ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */,
 				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
+				ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */,
+				ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */,
+				ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */,
 				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
+				ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
+				ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */,
 				09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */,
 				09642C4A2B64A37A0015220E /* AnniversaryService.swift in Sources */,
 				09642C532B67C76F0015220E /* CreationUseCase.swift in Sources */,
+				ADAFFDD52B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift in Sources */,
 				09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */,
+				ADA2CC082B6CCD76001A38D9 /* AnniversariesInterface.swift in Sources */,
 				09642C3D2B649B2D0015220E /* APIConstant.swift in Sources */,
 				AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */,
 				09642C482B64A1680015220E /* BaseResponse.swift in Sources */,

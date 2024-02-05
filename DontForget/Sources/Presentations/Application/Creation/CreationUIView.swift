@@ -81,7 +81,14 @@ struct CreationUIView: View {
                         Spacer()
                         Button(action: {
                             let alarm = ["ONE_MONTH"]
-                            self.viewModel.registerAnniversary(deviceId: "123e4567-e89b-12d3-a456-426614174000", title: "샘플 제목지철짱", date: "2024-01-27", content: "다연센세이", type: "SOLAR", alarmSchedule: alarm)
+                            self.viewModel.registerAnniversary(
+                                title: "샘플 제목지철짱",
+                                date: "2024-01-27",
+                                content: "다연센세이",
+                                calendarType: "SOLAR",
+                                cardType: "LUNAR",
+                                alarmSchedule: alarm
+                            )
                         }) {
                             Text(focusField == .eventName ? "다음" : "완료")
                                 .foregroundColor(.white)
@@ -273,11 +280,13 @@ struct MemoView: View {
         }
     }
 }
+
 // MARK: - Preview
 
 #Preview {
-    CreationUIView(viewModel: CreationViewModel(creationUseCse: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
+    CreationUIView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
 }
+
 // MARK: - Extension
 
 extension CreationUIView {

@@ -9,21 +9,28 @@ import SwiftUI
 
 struct GridView: View {
     
-    let anniversary: Anniversary
+    let anniversary: AnniversaryDTO
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(anniversary.title)
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(anniversary.cardType == 2 ? Color.gray900: .gray50)
+                    .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.gray900: .gray50)
                 Text("D-81")
                     .font(.system(size: 36, weight: .bold))
-                    .foregroundStyle([0, 1, 2].contains(anniversary.cardType) ? Color.primary500 : anniversary.cardType == 3 ? .gray50 : .yellow500)
+                    .foregroundStyle(
+                        [
+                            Anniversary.CardType.lunar.rawValue,
+                            Anniversary.CardType.face.rawValue,
+                            Anniversary.CardType.forest.rawValue
+                        ].contains(anniversary.cardType) ? Color.primary500 :
+                            anniversary.cardType == Anniversary.CardType.arm.rawValue ? .gray50 : .yellow500
+                    )
                 Spacer(minLength: 30)
                 Text("24.2.13")
                     .font(.system(size: 16))
-                    .foregroundStyle(anniversary.cardType == 2 ? Color.primary700 : .white)
+                    .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.primary700 : .white)
                     .opacity(0.5)
             }
             .padding(.horizontal, 20)
@@ -36,21 +43,21 @@ struct GridView: View {
                 Color(hex: 0x181E23)
                     .ignoresSafeArea()
                 switch anniversary.cardType {
-                case 1:
+                case Anniversary.CardType.lunar.rawValue:
                     Image(.cardBackground1)
                         .resizable()
                         .scaledToFill()
-                case 2:
+                case Anniversary.CardType.face.rawValue:
                     Color(hex: 0xD3E3F0)
                     Image(.cardBackground2)
                         .resizable()
                         .scaledToFill()
-                case 3:
+                case Anniversary.CardType.arm.rawValue:
                     Color.primary500
                     Image(.cardBackground3)
                         .resizable()
                         .scaledToFill()
-                case 4:
+                case Anniversary.CardType.tail.rawValue:
                     Image(.cardBackground4)
                         .resizable()
                         .scaledToFill()
@@ -63,11 +70,4 @@ struct GridView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16))
         )
     }
-}
-
-#Preview {
-    GridView(
-        anniversary: Anniversary.dummy.first!
-    )
-    .frame(width: 183, height: 183)
 }

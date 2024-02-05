@@ -9,9 +9,12 @@ import SwiftUI
 
 enum AlertType {
     case cancelEditing
-    case deleteAnniversry
+    case deleteAnniversary
 }
+
 struct ConfirmView: View {
+    
+    let viewModel: any ViewModelType
     
     let alertType: AlertType
     @Binding var isPresentend: Bool
@@ -29,7 +32,7 @@ struct ConfirmView: View {
         switch self.alertType {
         case .cancelEditing:
             return "기념일 수정을 취소할까요?"
-        case .deleteAnniversry:
+        case .deleteAnniversary:
             return "기념일을 삭제할까요?"
         }
     }
@@ -38,7 +41,7 @@ struct ConfirmView: View {
         switch alertType {
         case .cancelEditing:
             "수정 중이던 내용은\n저장되지 않고, 사라집니다."
-        case .deleteAnniversry:
+        case .deleteAnniversary:
             "기념일을 삭제한 후에는\n되돌릴 수 없어요."
         }
     }
@@ -52,14 +55,23 @@ struct ConfirmView: View {
         }
     }
     
-    private func cancelEditingAction() {
+    private func dismissView() {
         if let dismiss = dismiss {
             dismiss.callAsFunction()
         }
     }
     
+    private func cancelEditingAction() {
+        dismissView()
+    }
+    
     private func deleteAnniversaryAction() {
-        // TODO: - delete api
+        if viewModel is DefaultAnniversaryDetailViewModel {
+            let viewModel = viewModel as! DefaultAnniversaryDetailViewModel
+            viewModel.action(.deleteAnniversary)
+            #warning("Need to check response code")
+            cancelEditingAction()
+        }
     }
     
     var body: some View {
@@ -139,11 +151,4 @@ struct ConfirmView: View {
         }
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    ConfirmView(
-        alertType: .deleteAnniversry,
-        isPresentend: .constant(true)
-    )
 }

@@ -9,11 +9,18 @@ import Foundation
 import Moya
 
 enum DontForgetTarget {
-    case registerAnniversary(deviceUuid: String, title: String, date: String, content: String, type: String, alarmSchedule: [String]) // 기념일 등록
-    case checkAnniversary(anniversaryId: String) // 기념일 단건 조회
-    case checkAnniversaryList // 기념일 목록조회
-    case editAnniversary(anniversaryId: String) // 기념일 수정
-    case deleteAnniversary(anniversaryId: String) // 기념일 삭제
+    case registerAnniversary(
+        title: String,
+        date: String,
+        content: String,
+        calendarType: String,
+        cardType: String,
+        alarmSchedule: [String]
+    ) // 기념일 등록
+    case readAnniversary(anniversaryId: Int) // 기념일 단건 조회
+    case readAnniversaries // 기념일 목록조회
+    case editAnniversary(anniversaryId: Int) // 기념일 수정
+    case deleteAnniversary(anniversaryId: Int) // 기념일 삭제
     case changePushState(deviceId: String) // 디바이스 알림상태 변경
 }
 
@@ -26,15 +33,15 @@ extension DontForgetTarget: TargetType {
         switch self {
         case .registerAnniversary:
             return "anniversary"
-        case .checkAnniversary(anniversaryId: let anniversaryId):
+        case let .readAnniversary(anniversaryId):
             return "anniversary/\(anniversaryId)"
-        case .checkAnniversaryList:
+        case .readAnniversaries:
             return "anniversary"
-        case .editAnniversary(anniversaryId: let anniversaryId):
+        case let .editAnniversary(anniversaryId):
             return "anniversary/\(anniversaryId)"
-        case .deleteAnniversary(anniversaryId: let anniversaryId):
+        case let .deleteAnniversary(anniversaryId):
             return "anniversary/\(anniversaryId)"
-        case .changePushState(deviceId: let deviceId):
+        case let .changePushState(deviceId):
             return "device/\(deviceId)"
             
         }
@@ -44,8 +51,8 @@ extension DontForgetTarget: TargetType {
         switch self {
         case .registerAnniversary:
             return .post
-        case .checkAnniversary,
-                .checkAnniversaryList:
+        case .readAnniversary,
+                .readAnniversaries:
             return .get
         case .editAnniversary,
                 .changePushState:
@@ -57,13 +64,13 @@ extension DontForgetTarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .registerAnniversary(let deviceUuid, let title, let date, let content, let type, let alarmSchedule):
+        case let .registerAnniversary(title, date, content, calendarType, cardType, alarmSchedule):
             let parameters: [String: Any] = [
-                "deviceUuid": deviceUuid,
                 "title": title,
                 "date": date,
                 "content": content,
-                "type": type,
+                "calendarType": calendarType,
+                "cardType": cardType,
                 "alarmSchedule": alarmSchedule
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
@@ -75,7 +82,7 @@ extension DontForgetTarget: TargetType {
     var headers: [String: String]? {
         switch self {
         default:
-            return ["deviceId": "Jicheol's iPhone", "Content-Type": "application/json"]
+            return ["deviceId": "deviceId", "Content-Type": "application/json"]
         }
     }
     

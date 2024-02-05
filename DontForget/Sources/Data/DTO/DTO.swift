@@ -7,27 +7,21 @@
 
 import Foundation
 
-struct CheckAnniversaryDTO: Decodable {
-    let anniversaryId: String
+struct AnniversaryDTO: Decodable {
+    let anniversaryId: Int
     let title: String
     let lunarDate: String
     let solarDate: String
-    let type: String
+    let cardType: String
+}
+
+struct AnniversaryDetailDTO: Decodable {
+    let anniversaryId: Int
+    let title: String
+    let lunarDate: String
+    let solarDate: String
     let alarmSchedule: [String]
     let content: String
     let deviceId: String
-}
-
-struct AnniversaryListResponseDTO: Decodable {
-    let deviceId: String
-    let anniversaries: [Anniversary]
-}
-
-struct Anniversary: Codable {
-    let anniversaryId: String
-    let title: String
-    let note: String
-    let cardType: Int
-    let lunarDate: String
-    let solarDate: String
+    let cardType: String
 }

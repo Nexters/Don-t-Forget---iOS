@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-    private let anniversaries = Anniversary.dummy
+
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
+    @StateObject private var viewModel = DefaultHomeViewModel(
+        readAnniversariesUseCase: DefaultReadAnniversariesUseCase(
+            anniversariesRepository: AnniversariesRepository(
+                service: AnniversaryService.shared
+            )
+        )
+    )
+    private var anniversaries: [AnniversaryDTO] {
+        viewModel.anniversaries
+    }
     
     var body: some View {
         NavigationView {
@@ -21,17 +30,26 @@ struct HomeView: View {
                 VStack {
                     ZStack {
                         /* Background */
-                        Image(self.anniversaries.count == 0 ? .homeBackgroundFull : .homeBackgroundHalf)
+                        Image(viewModel.anniversaries.count == 0 ? .homeBackgroundFull : .homeBackgroundHalf)
                             .resizable()
                             .scaledToFill()
                         
                         VStack {
                             /* Main Anniversary */
-                            if let firstAnniversary = anniversaries.first {
+                            if let firstAnniversary = viewModel.anniversaries.first {
                                 NavigationLink {
-                                    AnniversaryDetailView(anniversary: firstAnniversary)
+                                    AnniversaryDetailView(
+                                        viewModel: DefaultAnniversaryDetailViewModel(
+                                            anniversaryId: firstAnniversary.anniversaryId,
+                                            anniversaryDetailRepository: AnniversaryDetailRepository(
+                                                service: AnniversaryService.shared
+                                            )
+                                        )
+                                    )
                                 } label: {
-                                    AnniversaryContentView(anniversary: firstAnniversary)
+                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                        AnniversaryContentView(anniversary: firstAnniversaryDetail)
+                                    }
                                 }
                             } else {
                                 LazyVGrid(columns: columns, content: {
@@ -51,17 +69,30 @@ struct HomeView: View {
                         columns: columns,
                         spacing: 20
                     ) {
-                        ForEach(1..<anniversaries.count + 1) { index in
+                        ForEach(1..<anniversaries.count + 1, id: \.self) { index in
                             if anniversaries.count > 0 {
                                 if index == anniversaries.count {
                                     NavigationLink {
-                                        CreationUIView(viewModel: CreationViewModel(creationUseCse: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService()))))
+                                        CreationUIView(
+                                            viewModel: CreationViewModel(
+                                                creationUseCase: CreationUseCase(
+                                                    creationRepository: CreationRepository(service: AnniversaryService.shared)
+                                                )
+                                            )
+                                        )
                                     } label: {
                                         AddNewAnniversaryView()
                                     }
                                 } else {
                                     NavigationLink {
-                                        AnniversaryDetailView(anniversary: anniversaries[index])
+                                        AnniversaryDetailView(
+                                            viewModel: DefaultAnniversaryDetailViewModel(
+                                                anniversaryId: anniversaries[index].anniversaryId,
+                                                anniversaryDetailRepository: AnniversaryDetailRepository(
+                                                    service: AnniversaryService.shared
+                                                )
+                                            )
+                                        )
                                     } label: {
                                         GridView(anniversary: anniversaries[index])
                                     }
@@ -74,6 +105,9 @@ struct HomeView: View {
                     
                     Spacer()
                         .frame(height: 30)
+                }
+                .onAppear {
+                    viewModel.action(.readAnniversaries)
                 }
             }
             .background(

@@ -12,3 +12,11 @@ struct Empty: Decodable {}
 struct CreationResponse: Decodable {
     let anniversaryId: String
 }
+
+struct AnniversariesResponse: Decodable {
+    let anniversaries: [AnniversaryDTO]
+}
+
+struct AnniversaryDetailResponse: Decodable {
+    let anniversaryDetail: AnniversaryDetailDTO
+}
