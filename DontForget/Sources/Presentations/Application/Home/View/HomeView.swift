@@ -47,7 +47,9 @@ struct HomeView: View {
                                         )
                                     )
                                 } label: {
-                                    AnniversaryContentView(anniversary: firstAnniversary)
+                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                        AnniversaryContentView(anniversary: firstAnniversaryDetail)
+                                    }
                                 }
                             } else {
                                 LazyVGrid(columns: columns, content: {

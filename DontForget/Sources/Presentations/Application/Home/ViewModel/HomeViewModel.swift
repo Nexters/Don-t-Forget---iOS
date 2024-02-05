@@ -13,8 +13,10 @@ final class DefaultHomeViewModel: ViewModelType {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     @Published var state: State
+    @Published var firstAnniversaryDetail: AnniversaryDetailDTO?
     @Published var anniversaries: [AnniversaryDTO]
     private let readAnniversariesUseCase: ReadAnniversariesUseCase
+    private let fetchFirstAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
     
     enum Action {
         case readAnniversaries
@@ -31,6 +33,11 @@ final class DefaultHomeViewModel: ViewModelType {
         self.state = .idle
         self.anniversaries = []
         self.readAnniversariesUseCase = readAnniversariesUseCase
+        self.fetchFirstAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
+            anniversaryDetailRepository: AnniversaryDetailRepository(
+                service: AnniversaryService.shared
+            )
+        )
     }
     
     // MARK: - Action
@@ -62,10 +69,45 @@ final class DefaultHomeViewModel: ViewModelType {
                 #warning("handling error")
             }
         } receiveValue: { [weak self] response in
+            if let self = self, let response = response {
+                // TODO: - Sort anniversaries by date
+                self.anniversaries = response.anniversaries
+                print("=== DEBUG: \(self.anniversaries)")
+                if !self.anniversaries.isEmpty {
+                    self.fetchFirstAnniversaryDetail(anniversaryId: self.anniversaries.first!.anniversaryId)
+                }
+                self.state = .success
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func fetchFirstAnniversaryDetail(anniversaryId: Int) {
+        Future<AnniversaryDetailResponse?, Error> { promise in
+            Task {
+                do {
+                    let response = try await self.fetchFirstAnniversaryDetailUseCase.execute(
+                        requestValue: .init(
+                            query: AnniversaryDetailQuery(
+                                queryId: anniversaryId
+                            )
+                        )
+                    )
+                    promise(.success(response))
+                } catch {
+                    print("=== DEBUG: \(error)")
+                    promise(.failure(error))
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case .failure = completion {
+                #warning("handling error")
+            }
+        } receiveValue: { [weak self] response in
             if let response = response {
-                self?.anniversaries = response.anniversaries
-                print("=== DEBUG: \(self?.anniversaries)")
-                self?.state = .success
+                self?.firstAnniversaryDetail = response.anniversaryDetail
             }
         }
         .store(in: &cancellables)

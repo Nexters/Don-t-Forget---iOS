@@ -106,7 +106,6 @@ struct AnniversaryDetailView: View {
                                     })
                                     .onEnded({ _ in
                                         iconStates[.delete] = false
-                                        // TODO: - Delete Action
                                         showConfirmView = true
                                     })
                                 )
@@ -114,15 +113,7 @@ struct AnniversaryDetailView: View {
                         .padding(.horizontal, 24)
                         .padding(.vertical, 16)
                         
-                        AnniversaryContentView(
-                            anniversary: AnniversaryDTO(
-                                anniversaryId: anniversaryDetail.anniversaryId,
-                                title: anniversaryDetail.title,
-                                lunarDate: anniversaryDetail.lunarDate,
-                                solarDate: anniversaryDetail.solarDate,
-                                cardType: anniversaryDetail.cardType
-                            )
-                        )
+                        AnniversaryContentView(anniversary: anniversaryDetail)
                         .padding(.bottom, 200)
                     }
                     
