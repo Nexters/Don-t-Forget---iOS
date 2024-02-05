@@ -11,6 +11,7 @@ enum AlertType {
     case cancelEditing
     case deleteAnniversary
 }
+
 struct ConfirmView: View {
     
     let viewModel: any ViewModelType
@@ -54,16 +55,22 @@ struct ConfirmView: View {
         }
     }
     
-    private func cancelEditingAction() {
+    private func dismissView() {
         if let dismiss = dismiss {
             dismiss.callAsFunction()
         }
+    }
+    
+    private func cancelEditingAction() {
+        dismissView()
     }
     
     private func deleteAnniversaryAction() {
         if viewModel is DefaultAnniversaryDetailViewModel {
             let viewModel = viewModel as! DefaultAnniversaryDetailViewModel
             viewModel.action(.deleteAnniversary)
+            #warning("Need to check response code")
+            cancelEditingAction()
         }
     }
     

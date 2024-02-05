@@ -130,7 +130,8 @@ struct AnniversaryDetailView: View {
                         ConfirmView(
                             viewModel: viewModel,
                             alertType: .deleteAnniversary,
-                            isPresentend: $showConfirmView
+                            isPresentend: $showConfirmView,
+                            dismiss: dismiss
                         )
                     }
                 }
