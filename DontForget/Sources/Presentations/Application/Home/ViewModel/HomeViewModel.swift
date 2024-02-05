@@ -50,18 +50,20 @@ final class DefaultHomeViewModel: ViewModelType {
                     let response = try await self.readAnniversariesUseCase.execute(requestValue: .init(query: AnniversaryQuery(query: "deviceId")))
                     promise(.success(response))
                 } catch {
+                    print("=== DEBUG: \(error)")
                     promise(.failure(error))
                 }
             }
         }
-        .receive(on: DispatchQueue.global())
+        .receive(on: DispatchQueue.main)
         .sink { completion in
             if case .failure = completion {
                 #warning("handling error")
             }
         } receiveValue: { [weak self] response in
             if let response = response {
-                self?.anniversaries = response.anniversaries.anniversaries
+                self?.anniversaries = response.anniversaries
+                print("=== DEBUG: \(self?.anniversaries)")
             }
         }
         .store(in: &cancellables)

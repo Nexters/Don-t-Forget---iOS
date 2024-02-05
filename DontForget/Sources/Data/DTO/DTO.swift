@@ -8,17 +8,9 @@
 import Foundation
 
 struct AnniversaryDTO: Decodable {
-    let anniversaryId: String
+    let anniversaryId: Int
     let title: String
     let lunarDate: String
     let solarDate: String
-    let type: String
-    let alarmSchedule: [String]
-    let content: String
-    let deviceId: String
-}
-
-struct AnniversariesDTO: Decodable {
-    let deviceId: String
-    let anniversaries: [AnniversaryDTO]
+    let cardType: String
 }

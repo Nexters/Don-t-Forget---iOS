@@ -10,6 +10,7 @@ import Moya
 
 class AnniversaryService {
     
+    static let shared = AnniversaryService()
     private let provider = MoyaProvider<DontForgetTarget>()
     
     func fetchAnniversaries() async throws -> AnniversariesResponse {
@@ -17,14 +18,12 @@ class AnniversaryService {
             provider.request(.readAnniversaries) { result in
                 switch result {
                 case let .success(response):
-                    print("=== DEBUG: \(response)")
                     do {
-                        let response = try response.map(AnniversariesResponse.self)
-                        continuation.resume(returning: response)
+                        let response = try response.map([AnniversaryDTO].self)
+                        continuation.resume(returning: AnniversariesResponse(anniversaries: response))
                     } catch {
                         continuation.resume(throwing: error)
                     }
-                    
                 case let .failure(error):
                     print("=== DEBUG: \(error)")
                     // TODO: - handling error
@@ -34,16 +33,23 @@ class AnniversaryService {
     }
     
     func registerAnniversary(
-        deviceId: String,
         title: String,
         date: String,
         content: String,
-        type: String,
+        calendarType: String,
+        cardType: String,
         alarmSchedule: [String]
     ) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
         print("asdas")
         return try await withCheckedThrowingContinuation { continuation in
-            provider.request(.registerAnniversary(deviceUuid: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)) { result in
+            provider.request(.registerAnniversary(
+                title: title,
+                date: date,
+                content: content,
+                calendarType: calendarType,
+                cardType: cardType,
+                alarmSchedule: alarmSchedule
+            )) { result in
                 switch result {
                 case .success(let response):
                     print(response)

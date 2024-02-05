@@ -12,11 +12,11 @@ import KoreanLunarSolarConverter
 
 protocol CreationUseCaseProtocol {
     func registerAnniversary(
-        deviceId: String,
         title: String,
         date: String,
         content: String,
-        type: String,
+        calendarType: String,
+        cardType: String,
         alarmSchedule: [String]
     ) async throws -> CreationResponse
     func getAlarmPeriod() -> [AlarmPeriod]
@@ -38,19 +38,19 @@ final class CreationUseCase: CreationUseCaseProtocol {
     // MARK: - Method to Network
 
     func registerAnniversary(
-        deviceId: String,
         title: String,
         date: String,
         content: String,
-        type: String,
+        calendarType: String,
+        cardType: String,
         alarmSchedule: [String]
     ) async throws -> CreationResponse {
         return try await creationRepository.registerAnniversary(
-            deviceId: deviceId,
             title: title,
             date: date,
             content: content,
-            type: type,
+            calendarType: calendarType,
+            cardType: cardType,
             alarmSchedule: alarmSchedule
         )
     }

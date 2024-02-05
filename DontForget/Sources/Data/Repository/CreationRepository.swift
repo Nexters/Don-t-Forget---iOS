@@ -16,19 +16,19 @@ final class CreationRepository: CreationInterface {
     }
     
     func registerAnniversary(
-        deviceId: String,
         title: String,
         date: String,
         content: String,
-        type: String,
+        calendarType: String,
+        cardType: String,
         alarmSchedule: [String]
     ) async throws -> CreationResponse {
         return try await service.registerAnniversary(
-            deviceId: deviceId,
             title: title,
             date: date,
             content: content,
-            type: type,
+            calendarType: calendarType,
+            cardType: cardType,
             alarmSchedule: alarmSchedule
         )
     }

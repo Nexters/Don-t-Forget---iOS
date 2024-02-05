@@ -15,7 +15,8 @@ struct AnniversaryDetailView: View {
         case delete
     }
     
-    let anniversary: Anniversary
+    // TODO: 단일 조회
+    let anniversaryId: Int
     @Environment(\.dismiss) private var dismiss
     @State private var iconStates = [HeaderIcon.back: false,
                                      .edit: false,
@@ -112,7 +113,7 @@ struct AnniversaryDetailView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
                     
-                    AnniversaryContentView(anniversary: anniversary)
+                    AnniversaryContentView(anniversaryId: anniversaryId)
                         .padding(.bottom, 200)
                 }
                 
@@ -138,8 +139,4 @@ struct AnniversaryDetailView: View {
             })
         )
     }
-}
-
-#Preview {
-    AnniversaryDetailView(anniversary: Anniversary.dummy.first!)
 }

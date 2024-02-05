@@ -22,11 +22,11 @@ final class CreationViewModel: ViewModelType {
     
     enum Action {
         case registerAnniversary(
-            deviceId: String,
             title: String,
             date: String,
             content: String,
-            type: String,
+            calendarType: String,
+            cardType: String,
             alarmSchedule: [String]
         )
     }
@@ -49,13 +49,13 @@ final class CreationViewModel: ViewModelType {
     
     func action(_ action: Action) {
         switch action {
-        case let .registerAnniversary(deviceId, title, date, content,  type, alarmSchedule):
+        case let .registerAnniversary(title, date, content, calendarType, cardType, alarmSchedule):
             self.registerAnniversary(
-                deviceId: deviceId,
                 title: title,
                 date: date,
                 content: content,
-                type: type,
+                calendarType: calendarType,
+                cardType: cardType,
                 alarmSchedule: alarmSchedule
             )
         }
@@ -64,17 +64,24 @@ final class CreationViewModel: ViewModelType {
     // MARK: - Method
     
     func registerAnniversary(
-        deviceId: String,
         title: String,
         date: String,
         content: String,
-        type: String,
+        calendarType: String,
+        cardType: String,
         alarmSchedule: [String]
     ) {
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
-                    let response = try await self.creationUseCase.registerAnniversary(deviceId: deviceId, title: title, date: date, content: content, type: type, alarmSchedule: alarmSchedule)
+                    let response = try await self.creationUseCase.registerAnniversary(
+                        title: title,
+                        date: date,
+                        content: content,
+                        calendarType: calendarType,
+                        cardType: cardType,
+                        alarmSchedule: alarmSchedule
+                    )
                     promise(.success(response))
                 } catch {
                     promise(.failure(error))

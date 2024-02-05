@@ -14,5 +14,5 @@ struct CreationResponse: Decodable {
 }
 
 struct AnniversariesResponse: Decodable {
-    let anniversaries: AnniversariesDTO
+    let anniversaries: [AnniversaryDTO]
 }

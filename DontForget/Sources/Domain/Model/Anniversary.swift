@@ -8,13 +8,32 @@
 import Foundation
 
 struct Anniversary: Equatable, Identifiable {
+    
+    enum CalendarType: String {
+        case solar = "SOLAR"
+        case lunar = "LUNAR"
+    }
+    
+    enum CardType: String {
+        case lunar = "LUNAR"
+        case face = "FACE"
+        case arm = "ARM"
+        case tail = "TAIL"
+        case forest = "FOREST"
+    }
+    
+    enum AlarmPeriod: String {
+        case oneMonth = "ONE_MONTH"
+    }
+    
     typealias Identifier = String
     let id: Identifier
-    let title: String
-    let note: String?
-    let cardType: Int
-    let lunarDate: String
-    let solarDate: String
+    var title: String
+    var date: String
+    var content: String
+    var calendarType: String
+    let cardType: String
+    var alarmSchedule: [String]
 }
 
 struct Anniversaries {

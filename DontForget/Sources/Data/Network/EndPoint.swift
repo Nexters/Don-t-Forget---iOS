@@ -10,11 +10,11 @@ import Moya
 
 enum DontForgetTarget {
     case registerAnniversary(
-        deviceUuid: String,
         title: String,
         date: String,
         content: String,
-        type: String,
+        calendarType: String,
+        cardType: String,
         alarmSchedule: [String]
     ) // 기념일 등록
     case readAnniversary(anniversaryId: String) // 기념일 단건 조회
@@ -64,13 +64,13 @@ extension DontForgetTarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case let .registerAnniversary(deviceUuid, title, date, content, type, alarmSchedule):
+        case let .registerAnniversary(title, date, content, calendarType, cardType, alarmSchedule):
             let parameters: [String: Any] = [
-                "deviceUuid": deviceUuid,
                 "title": title,
                 "date": date,
                 "content": content,
-                "type": type,
+                "calendarType": calendarType,
+                "cardType": cardType,
                 "alarmSchedule": alarmSchedule
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
@@ -82,7 +82,7 @@ extension DontForgetTarget: TargetType {
     var headers: [String: String]? {
         switch self {
         default:
-            return ["deviceId": "Jicheol's iPhone", "Content-Type": "application/json"]
+            return ["deviceId": "deviceId", "Content-Type": "application/json"]
         }
     }
     

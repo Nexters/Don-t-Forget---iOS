@@ -9,12 +9,13 @@ import SwiftUI
 
 struct AnniversaryContentView: View {
     
-    let anniversary: Anniversary
+    let anniversaryId: Int
+    let anniversary = Anniversary.dummy.first!
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(anniversary.solarDate)
+                Text(anniversary.date)
                     .foregroundStyle(Color.gray600)
                     .font(.system(size: 18))
                 Text("D-\(Int.random(in: 1..<365))")
@@ -27,7 +28,7 @@ struct AnniversaryContentView: View {
                     Text(anniversary.title)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text(anniversary.note ?? "")
+                    Text(anniversary.content ?? "")
                         .font(.system(size: 16))
                         .foregroundStyle(Color.gray600)
                 }
@@ -48,8 +49,4 @@ struct AnniversaryContentView: View {
         .padding(.horizontal, 36)
         .padding(.bottom, 259)
     }
-}
-
-#Preview {
-    AnniversaryContentView(anniversary: Anniversary.dummy.first!)
 }
