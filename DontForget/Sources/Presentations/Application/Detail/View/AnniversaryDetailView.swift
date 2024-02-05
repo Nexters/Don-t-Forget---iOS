@@ -143,7 +143,7 @@ struct AnniversaryDetailView: View {
                 coordinateSpace: .local
             )
             .onEnded({ value in
-                if value.translation.width > 10 {
+                if value.translation.width > 200 {
                     dismiss()
                 }
             })
