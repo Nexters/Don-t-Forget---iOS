@@ -11,14 +11,7 @@ import Combine /// 비동기처리가 필요없는 모델(엔티티)를 이용�
 import KoreanLunarSolarConverter
 
 protocol CreationUseCaseProtocol {
-    func registerAnniversary(
-        title: String,
-        date: String,
-        content: String,
-        calendarType: String,
-        cardType: String,
-        alarmSchedule: [String]
-    ) async throws -> CreationResponse
+    func registerAnniversary(request: RegisterAnniversaryRequest)async throws -> CreationResponse
     func getAlarmPeriod() -> [AlarmPeriod]
     func converToDate(type: ConvertDate, date: Date) async -> Date
 }
@@ -37,22 +30,8 @@ final class CreationUseCase: CreationUseCaseProtocol {
     
     // MARK: - Method to Network
 
-    func registerAnniversary(
-        title: String,
-        date: String,
-        content: String,
-        calendarType: String,
-        cardType: String,
-        alarmSchedule: [String]
-    ) async throws -> CreationResponse {
-        return try await creationRepository.registerAnniversary(
-            title: title,
-            date: date,
-            content: content,
-            calendarType: calendarType,
-            cardType: cardType,
-            alarmSchedule: alarmSchedule
-        )
+    func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse {
+        return try await creationRepository.registerAnniversary(request: request)
     }
     
     // MARK: - Method to Model(Entity)

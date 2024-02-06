@@ -18,17 +18,18 @@ final class CreationViewModel: ViewModelType {
     @Published var convertedDate: Date?
     @Published var creationResponse: CreationResponse?
     @Published var errorMessage: String?
+    
+    @Published var title: String?
+    @Published var date: String?
+    @Published var content: String = ""
+    @Published var calendarType: String = ""
+    @Published var cardType: String = ""
+    @Published var alarmSchedule: [String] = []
+
     // MARK: - Types
     
     enum Action {
-        case registerAnniversary(
-            title: String,
-            date: String,
-            content: String,
-            calendarType: String,
-            cardType: String,
-            alarmSchedule: [String]
-        )
+        case registerAnniversary(parameters: RegisterAnniversaryRequest)
     }
     enum State {
         case idle
@@ -49,39 +50,18 @@ final class CreationViewModel: ViewModelType {
     
     func action(_ action: Action) {
         switch action {
-        case let .registerAnniversary(title, date, content, calendarType, cardType, alarmSchedule):
-            self.registerAnniversary(
-                title: title,
-                date: date,
-                content: content,
-                calendarType: calendarType,
-                cardType: cardType,
-                alarmSchedule: alarmSchedule
-            )
+        case .registerAnniversary(parameters: let parameters):
+            self.registerAnniversary(request: parameters)
         }
     }
     
     // MARK: - Method
     
-    func registerAnniversary(
-        title: String,
-        date: String,
-        content: String,
-        calendarType: String,
-        cardType: String,
-        alarmSchedule: [String]
-    ) {
+    func registerAnniversary(request: RegisterAnniversaryRequest) {
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
-                    let response = try await self.creationUseCase.registerAnniversary(
-                        title: title,
-                        date: date,
-                        content: content,
-                        calendarType: calendarType,
-                        cardType: cardType,
-                        alarmSchedule: alarmSchedule
-                    )
+                    let response = try await self.creationUseCase.registerAnniversary(request: request)
                     promise(.success(response))
                 } catch {
                     promise(.failure(error))
@@ -115,6 +95,7 @@ final class CreationViewModel: ViewModelType {
         let year = calendar.component(.year, from: convertedDate)
         let month = calendar.component(.month, from: convertedDate)
         let day = calendar.component(.day, from: convertedDate)
+        self.date = "\(year)-\(month)-\(day)"
         var calculateYear = 0
         if year >= 1925 && year <= 1999 {
             calculateYear = year - 1900

@@ -13,24 +13,10 @@ class AnniversaryService {
     static let shared = AnniversaryService()
     private let provider = MoyaProvider<DontForgetTarget>()
     
-    func registerAnniversary(
-        title: String,
-        date: String,
-        content: String,
-        calendarType: String,
-        cardType: String,
-        alarmSchedule: [String]
-    ) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
+    func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
         print("asdas")
         return try await withCheckedThrowingContinuation { continuation in
-            provider.request(.registerAnniversary(
-                title: title,
-                date: date,
-                content: content,
-                calendarType: calendarType,
-                cardType: cardType,
-                alarmSchedule: alarmSchedule
-            )) { result in
+            provider.request(.registerAnniversary(parameter: parameters)) { result in
                 switch result {
                 case .success(let response):
                     print(response)

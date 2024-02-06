@@ -40,7 +40,7 @@ struct CreationUIView: View {
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(alignment: .leading) {
-                        InputNameView(name: $name)
+                        InputNameView(name: $name, viewModel: viewModel)
                             .focused($focusField, equals: .eventName)
                             .id(Field.eventName)
                             .padding(.bottom, 48)
@@ -48,11 +48,11 @@ struct CreationUIView: View {
                             .focused($focusField, equals: .date)
                             .id(Field.date)
                             .disableAutocorrection(true)
-                        AlarmView(selectedAlarmIndexes: $selectedAlarmIndexes, alarmPeriods: viewModel.alarmPeriods)
+                        AlarmView(selectedAlarmIndexes: $selectedAlarmIndexes, alarmPeriods: viewModel.alarmPeriods, viewModel: viewModel)
                             .focused($focusField, equals: .alarm)
                             .id(Field.alarm)
                             .padding(.bottom, 48)
-                        MemoView()
+                        MemoView(viewModel: viewModel)
                             .focused($focusField, equals: .memo)
                             .id(Field.memo)
                             .padding(.bottom, 90)
@@ -80,15 +80,7 @@ struct CreationUIView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            let alarm = ["ONE_MONTH"]
-                            self.viewModel.registerAnniversary(
-                                title: "샘플 제목지철짱",
-                                date: "2024-01-27",
-                                content: "다연센세이",
-                                calendarType: "SOLAR",
-                                cardType: "LUNAR",
-                                alarmSchedule: alarm
-                            )
+                            
                         }) {
                             Text(focusField == .eventName ? "다음" : "완료")
                                 .foregroundColor(.white)
@@ -143,6 +135,7 @@ struct CreationUIView: View {
 struct InputNameView: View {
     @Binding var name: String
     @FocusState private var isNameFieldFocused: Bool
+    var viewModel: CreationViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -162,6 +155,9 @@ struct InputNameView: View {
                 .padding(.horizontal, 20)
                 .frame(height: 1)
                 .foregroundColor(isNameFieldFocused ? Color.primary500 : Color.gray800)
+                .onChange(of: name, { _, text in
+                    self.viewModel.title = text
+                })
         }
     }
 }
@@ -190,14 +186,15 @@ struct InputDateView: View {
                     Text(segments[index]).tag(index)
                 }
             }
-            .onChange(of: selectedSegment) {  old, new in
+            .onChange(of: selectedSegment) {  _, _ in
                 Task {
                     let dateType: ConvertDate = selectedSegment == 0 ? .lunar : .solar
                     let convertedDate = await viewModel.convertToLunarOrSolar(type: dateType, date: updateViewModelWithSelectedDate())
                     selectedYear = convertedDate[0]
                     selectedMonth = convertedDate[1]
                     selectedDay = convertedDate[2]
-                    print(selectedYear,selectedMonth, selectedDay)
+                    let strType: String = selectedSegment == 0 ? "LUNAR" : "SOLAR"
+                    self.viewModel.calendarType = strType
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
@@ -219,6 +216,7 @@ struct InputDateView: View {
 struct AlarmView: View {
     @Binding var selectedAlarmIndexes: Set<AlarmPeriod>
     var alarmPeriods: [AlarmPeriod]
+    var viewModel: CreationViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -247,6 +245,9 @@ struct AlarmView: View {
                             }
                     }
                 }
+                .onChange(of: selectedAlarmIndexes, { _, alarm in
+                    self.viewModel.alarmSchedule =  selectedAlarmIndexes.map { $0.schedule }
+                })
                 .padding(.horizontal, 16)
             }
         }
@@ -257,6 +258,7 @@ struct MemoView: View {
     
     @State var memo: String = ""
     @FocusState private var isMemoFieldFocused: Bool
+    var viewModel: CreationViewModel
 
     var body: some View {
         VStack(alignment: .leading,
@@ -273,6 +275,9 @@ struct MemoView: View {
             .frame(height: 46)
             .focused($isMemoFieldFocused)
             .foregroundColor(.white)
+            .onChange(of: memo, { _, text in
+                self.viewModel.content = text
+            })
             Rectangle()
                 .padding(.horizontal, 20)
                 .frame(height: 1)
