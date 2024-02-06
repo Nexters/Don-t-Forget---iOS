@@ -66,8 +66,10 @@ struct CustomDatePicker: View {
                                         .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
                                         .frame(height: 63)
                                         .id(value)
-                                        .anchorPreference(key: CenterPreferenceKey.self, value: .bounds) { anchor in
-                                            [value: fullView[anchor].midY - (fullView.size.height / 2)]
+                                        .anchorPreference(key: CenterPreferenceKey.self, value: .bounds) { 
+                                                anchor in
+                                                [value: fullView[anchor].midY - (fullView.size.height / 2)]
+                                        
                                         }
                                 }
                             }
@@ -76,10 +78,11 @@ struct CustomDatePicker: View {
                     }
                     .onAppear {
                         proxy.wrappedValue = scrollViewProxy
+                        scrollToComponent(value: selection.wrappedValue, proxy: scrollViewProxy) 
                     }
                     .onPreferenceChange(CenterPreferenceKey.self) { centers in
-                        if !isProgrammaticScroll, let closest = centers.min(by: { abs($0.value) < abs($1.value) }) {
-                            DispatchQueue.main.async {
+                        DispatchQueue.main.async {
+                            if !isProgrammaticScroll, let closest = centers.min(by: { abs($0.value) < abs($1.value) }), selection.wrappedValue != closest.key {
                                 withAnimation {
                                     scrollViewProxy.scrollTo(closest.key, anchor: .center)
                                     selection.wrappedValue = closest.key
@@ -94,7 +97,7 @@ struct CustomDatePicker: View {
     }
 
     private struct CenterPreferenceKey: PreferenceKey {
-        typealias Value = [Int: CGFloat] //여기서 Lint 중첩경고가 뜨는데 왜?뜨는지 몰겟셩
+        typealias Value = [Int: CGFloat]
         static var defaultValue: [Int: CGFloat] = [:]
 
         static func reduce(value: inout [Int: CGFloat], nextValue: () -> [Int: CGFloat]) {
@@ -115,7 +118,7 @@ struct CustomDatePicker: View {
 struct CustomDatePicker_Previews: PreviewProvider {
     @State static var selectedDay = 1
     @State static var selectedMonth = 1
-    @State static var selectedYear = 00
+    @State static var selectedYear = 80
     
     static var previews: some View {
         CustomDatePicker(selectedDay: $selectedDay, selectedMonth: $selectedMonth, selectedYear: $selectedYear)

@@ -73,7 +73,7 @@ struct HomeView: View {
                             if anniversaries.count > 0 {
                                 if index == anniversaries.count {
                                     NavigationLink {
-                                        CreationUIView(
+                                        CreationView(
                                             viewModel: CreationViewModel(
                                                 creationUseCase: CreationUseCase(
                                                     creationRepository: CreationRepository(service: AnniversaryService.shared)

@@ -23,7 +23,7 @@
 		09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C5D2B67CA6F0015220E /* CreationModel.swift */; };
 		09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C602B67D2DC0015220E /* ErrorResponse.swift */; };
 		09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */; };
-		0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */; };
+		0965460E2B5B9CE900CDF4CC /* CreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965460D2B5B9CE900CDF4CC /* CreationView.swift */; };
 		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
 		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
 		AD147EFF2B57F85600561846 /* DontForgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147EFE2B57F85600561846 /* DontForgetApp.swift */; };
@@ -80,14 +80,14 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		AD147F3C2B57FFB600561846 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
 				AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -104,7 +104,7 @@
 		09642C5A2B67CA230015220E /* CreationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRepository.swift; sourceTree = "<group>"; };
 		09642C5D2B67CA6F0015220E /* CreationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationModel.swift; sourceTree = "<group>"; };
 		09642C602B67D2DC0015220E /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationUIView.swift; sourceTree = "<group>"; };
+		0965460D2B5B9CE900CDF4CC /* CreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationView.swift; sourceTree = "<group>"; };
 		09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		AD147EFB2B57F85600561846 /* DontForget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DontForget.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,7 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				09FD8FA52B5FE66B00EB83D8 /* Section */,
-				0965460D2B5B9CE900CDF4CC /* CreationUIView.swift */,
+				0965460D2B5B9CE900CDF4CC /* CreationView.swift */,
 				09642C542B67C8440015220E /* CreationViewModel.swift */,
 			);
 			path = Creation;
@@ -635,7 +635,7 @@
 				09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */,
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
 				09642C3B2B649B260015220E /* EndPoint.swift in Sources */,
-				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
+				0965460E2B5B9CE900CDF4CC /* CreationView.swift in Sources */,
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
 				ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */,
 				09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */,
@@ -833,7 +833,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DontForget/Preview Content\"";
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = JA7UDVTQBU;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -848,7 +848,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamnexters.DontForget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamnexters.DontForgettt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -866,7 +866,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DontForget/Preview Content\"";
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = JA7UDVTQBU;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -881,7 +881,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamnexters.DontForget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamnexters.DontForgettt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -896,7 +896,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = JA7UDVTQBU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DontForgetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DontForgetWidget;
@@ -923,7 +923,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = JA7UDVTQBU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DontForgetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DontForgetWidget;
