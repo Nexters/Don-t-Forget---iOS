@@ -14,7 +14,7 @@ struct CreationView: View {
     enum Field: Hashable {
         case eventName, date, alarm, memo
     }
-    
+    @Environment(\.presentationMode) var presentationMode
     @State private var name: String = ""
     @State private var memo: String = ""
     @State private var strDate: String  = ""
@@ -26,6 +26,8 @@ struct CreationView: View {
     @State private var cancellables: Set<AnyCancellable> = []
     @State private var strAlarmAry: [String] = []
     @State private var calendarType: String = "SOLAR"
+    @State private var requestDate: String = "1980-01-01"
+    
     private var isKeyboardVisible: Bool {
         keyboardHeight > 0
     }
@@ -51,7 +53,7 @@ struct CreationView: View {
                                 .focused($focusField, equals: .eventName)
                                 .id(Field.eventName)
                                 .padding(.bottom, 48)
-                            InputDateView(calendarType: $calendarType, viewModel: viewModel)
+                            InputDateView(requestDate: $requestDate, calendarType: $calendarType, viewModel: viewModel)
                                 .focused($focusField, equals: .date)
                                 .id(Field.date)
                                 .disableAutocorrection(true)
@@ -77,7 +79,7 @@ struct CreationView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
-                            
+                            self.presentationMode.wrappedValue.dismiss()
                         }) {
                             Text("취소")
                                 .foregroundColor(.gray600)
@@ -93,7 +95,7 @@ struct CreationView: View {
                                 hideKeyboard()
                             } else {
                                 print(self.calendarType)
-                                let request = RegisterAnniversaryRequest(title: self.name, date: self.viewModel.date ?? "1980-01-01", content: self.memo, calendarType: self.calendarType, cardType: self.calendarType, alarmSchedule: strAlarmAry)
+                                let request = RegisterAnniversaryRequest(title: self.name, date: self.requestDate, content: self.memo, calendarType: self.calendarType, cardType: "LUNAR", alarmSchedule: strAlarmAry)
                                 print(request)
                                 viewModel.action(.registerAnniversary(parameters: request))
                             }
@@ -107,12 +109,12 @@ struct CreationView: View {
                                 .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
                                     .fill(Color.primary500))
                         }
-                        .padding(.bottom, isKeyboardVisible ? 0 : 16)
+                        .padding(.bottom, isKeyboardVisible  ? 0 : 16)
                         .padding(.leading, isKeyboardVisible ? -10 : 20)
                         .padding(.trailing, isKeyboardVisible ? 0 : 20)
                     }
                 }
-                .padding(.top, keyboardHeight)
+                .padding(.top, isKeyboardVisible && focusField == .memo ? keyboardHeight + 20 : 0)
                 .animation(.default, value: keyboardHeight)
             }
             .onAppear {
@@ -185,6 +187,7 @@ struct InputDateView: View {
     @State private var selectedMonth = 1
     @State private var selectedYear = 80
     @State private var selectedSegment = 0
+    @Binding var requestDate: String
     @Binding var calendarType: String
     let segments = ["양력으로 입력", "음력으로 입력"]
     var viewModel: CreationViewModel
@@ -212,6 +215,7 @@ struct InputDateView: View {
                     selectedYear = convertedDate[0]
                     selectedMonth = convertedDate[1]
                     selectedDay = convertedDate[2]
+                    self.requestDate = "\(convertToFullYear(twoDigitYear: selectedYear))-\(String(format: "%02d", selectedMonth))-\(String(format: "%02d", selectedDay))"
                     let strType: String = selectedSegment == 0 ? "SOLAR" : "LUNAR"
                     self.calendarType = strType
                 }
@@ -223,6 +227,9 @@ struct InputDateView: View {
             HStack {
                 Spacer()
                 CustomDatePicker(selectedDay: $selectedDay, selectedMonth: $selectedMonth, selectedYear: $selectedYear)
+                    .onChange(of: selectedDay) { _, _ in updateRequestDate() }
+                    .onChange(of: selectedMonth) { _, _ in updateRequestDate() }
+                    .onChange(of: selectedYear) { _, _ in updateRequestDate() }
                     .padding(.horizontal, 30)
                     .padding(.horizontal, 30)
                 Spacer()
@@ -301,6 +308,7 @@ struct MemoView: View {
                 .foregroundColor(isMemoFieldFocused ? Color.primary500 : Color.gray800)
         }
     }
+    
 }
 
 // MARK: - Preview
@@ -343,6 +351,10 @@ extension InputDateView {
         } else {
             return twoDigitYear
         }
+    }
+    
+    func updateRequestDate() {
+        self.requestDate = "\(convertToFullYear(twoDigitYear: selectedYear))-\(String(format: "%02d", selectedMonth))-\(String(format: "%02d", selectedDay))"
     }
     
     private func updateViewModelWithSelectedDate() -> Date {

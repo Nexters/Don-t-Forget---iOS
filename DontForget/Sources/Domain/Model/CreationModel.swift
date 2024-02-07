@@ -50,13 +50,13 @@ enum AlarmPeriod {
         case .dDay:
             return "D_DAY"
         case .dayAgo:
-            return "ONE_DAY"
+            return "ONE_DAYS"
         case .threeDayAgo:
-            return "THREE_DAY"
+            return "THREE_DAYS"
         case .oneWeekAgo:
-            return "ONE_WEEK"
+            return "ONE_WEEKS"
         case .twoWeekAgo:
-            return "TWO_WEEK"
+            return "TWO_WEEKS"
         case .oneMonthAgo:
             return "ONE_MONTH"
 
