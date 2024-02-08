@@ -16,7 +16,7 @@ enum DontForgetTarget {
     case readAnniversaries // 기념일 목록조회
     case editAnniversary(anniversaryId: Int) // 기념일 수정
     case deleteAnniversary(anniversaryId: Int) // 기념일 삭제
-    case changePushState(deviceId: String) // 디바이스 알림상태 변경
+    case changePushState // 디바이스 알림상태 변경
 }
 
 extension DontForgetTarget: TargetType {
@@ -36,9 +36,8 @@ extension DontForgetTarget: TargetType {
             return "anniversary/\(anniversaryId)"
         case let .deleteAnniversary(anniversaryId):
             return "anniversary/\(anniversaryId)"
-        case let .changePushState(deviceId):
-            return "device/\(deviceId)"
-            
+        case .changePushState:
+            return "device/\(Constants.uuid)"
         }
     }
     
@@ -61,7 +60,10 @@ extension DontForgetTarget: TargetType {
         switch self {
         case let .registerAnniversary(parameter):
             let parameters = parameter.toDictionary()
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            return .requestParameters(
+                parameters: parameters,
+                encoding: JSONEncoding.default
+            )
         default:
             return .requestPlain
         }
@@ -70,7 +72,10 @@ extension DontForgetTarget: TargetType {
     var headers: [String: String]? {
         switch self {
         default:
-            return ["deviceId": String(UIDevice.current.identifierForVendor!.uuidString), "Content-Type": "application/json"]
+            return [
+                "deviceId": Constants.uuid,
+                "Content-Type": "application/json"
+            ]
         }
     }
     

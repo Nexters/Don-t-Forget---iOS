@@ -14,12 +14,11 @@ class AnniversaryService {
     private let provider = MoyaProvider<DontForgetTarget>()
     
     func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
-        print("asdas")
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.registerAnniversary(parameter: parameters)) { result in
                 switch result {
                 case .success(let response):
-                    print(response)
+                    print("=== DEBUG: \(response)")
                     do {
                         let creationResponse = try response.map(CreationResponse.self)
                         continuation.resume(returning: creationResponse)
@@ -27,7 +26,7 @@ class AnniversaryService {
                         continuation.resume(throwing: error)
                     }
                 case .failure(let error):
-                    print(error)
+                    print("=== DEBUG: \(error)")
                     do {
                         /// 에러 응답을 ErrorResponse로 디코딩합니다.
                         let errorResponse = try error.response?.map(ErrorResponse.self)
@@ -54,7 +53,6 @@ class AnniversaryService {
                     }
                 case let .failure(error):
                     print("=== DEBUG: \(error)")
-                    // TODO: - handling error
                 }
             }
         }
@@ -73,7 +71,6 @@ class AnniversaryService {
                     }
                 case let .failure(error):
                     print("=== DEBUG: \(error)")
-                    // TODO: - handling error
                 }
             }
         }

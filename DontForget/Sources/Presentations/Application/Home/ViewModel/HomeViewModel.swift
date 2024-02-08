@@ -54,7 +54,13 @@ final class DefaultHomeViewModel: ViewModelType {
         Future<AnniversariesResponse?, Error> { promise in
             Task {
                 do {
-                    let response = try await self.readAnniversariesUseCase.execute(requestValue: .init(query: AnniversaryQuery(query: "deviceId")))
+                    let response = try await self.readAnniversariesUseCase.execute(
+                        requestValue: .init(
+                            query: AnniversaryQuery(
+                                query: Constants.uuid
+                            )
+                        )
+                    )
                     promise(.success(response))
                 } catch {
                     print("=== DEBUG: \(error)")

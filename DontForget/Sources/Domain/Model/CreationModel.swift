@@ -45,6 +45,7 @@ enum AlarmPeriod {
             return "1달 전"
         }
     }
+    
     var schedule: String {
         switch self {
         case .dDay:
@@ -59,7 +60,6 @@ enum AlarmPeriod {
             return "TWO_WEEKS"
         case .oneMonthAgo:
             return "ONE_MONTH"
-
         }
     }
 }

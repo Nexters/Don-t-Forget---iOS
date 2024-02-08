@@ -97,7 +97,6 @@ final class CreationViewModel: ViewModelType {
         let day = calendar.component(.day, from: convertedDate)
         DispatchQueue.main.async {
             self.date = "\(year)-\(month)-\(day)"
-            print(self.date)
         }
         var calculateYear = 0
         if year >= 1925 && year <= 1999 {

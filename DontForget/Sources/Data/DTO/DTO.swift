@@ -15,6 +15,7 @@ struct RegisterAnniversaryRequest {
     let cardType: String
     let alarmSchedule: [String]
 }
+
 extension RegisterAnniversaryRequest {
     func toDictionary() -> [String: Any] {
          return [

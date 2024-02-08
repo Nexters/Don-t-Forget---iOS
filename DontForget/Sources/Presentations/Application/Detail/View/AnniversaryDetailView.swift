@@ -9,16 +9,18 @@ import SwiftUI
 
 struct AnniversaryDetailView: View {
     
-    enum HeaderIcon {
+    private enum HeaderIcon {
         case back
         case edit
         case delete
     }
     
     @Environment(\.dismiss) private var dismiss
-    @State private var iconStates = [HeaderIcon.back: false,
-                                     .edit: false,
-                                     .delete: false]
+    @State private var iconStates = [
+        HeaderIcon.back: false,
+        .edit: false,
+        .delete: false
+    ]
     @State private var showConfirmView = false
     @StateObject var viewModel: DefaultAnniversaryDetailViewModel
     
@@ -114,7 +116,7 @@ struct AnniversaryDetailView: View {
                         .padding(.vertical, 16)
                         
                         AnniversaryContentView(anniversary: anniversaryDetail)
-                        .padding(.bottom, 200)
+                            .padding(.bottom, 200)
                     }
                     
                     if showConfirmView {

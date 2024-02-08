@@ -27,8 +27,7 @@ struct AnniversaryContentView: View {
                     Text(anniversary.title)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(.white)
-                    // TODO: - 첫번째카드는 전체리스트에서도 보여야 함
-                    Text(anniversary.content ?? "")
+                    Text(anniversary.content)
                         .font(.system(size: 16))
                         .foregroundStyle(Color.gray600)
                 }
