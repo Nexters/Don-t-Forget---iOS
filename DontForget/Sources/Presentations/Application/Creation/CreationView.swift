@@ -36,7 +36,6 @@ struct CreationView: View {
     init(viewModel: CreationViewModel) {
         self.viewModel = viewModel
         configure()
-        binding()
     }
     
     // MARK: - View
@@ -95,7 +94,7 @@ struct CreationView: View {
                                 hideKeyboard()
                             } else {
                                 print(self.calendarType)
-                                let request = RegisterAnniversaryRequest(title: self.name, date: self.requestDate, content: self.memo, calendarType: self.calendarType, cardType: "LUNAR", alarmSchedule: strAlarmAry)
+                                let request = RegisterAnniversaryRequest(title: self.name, date: self.requestDate, content: self.memo, calendarType: self.calendarType, cardType: randomCartType(), alarmSchedule: strAlarmAry)
                                 print(request)
                                 viewModel.action(.registerAnniversary(parameters: request))
                             }
@@ -337,8 +336,10 @@ extension CreationView {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
     
-    private func binding() {
-
+    private func randomCartType() -> String{
+        let cardType = ["TAIL", "ARM", "FACE", "FOREST"]
+        
+        return cardType.randomElement()!
     }
 }
 
