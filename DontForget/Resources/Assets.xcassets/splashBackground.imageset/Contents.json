@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "BG.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "BG@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "BG@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Splash_background.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

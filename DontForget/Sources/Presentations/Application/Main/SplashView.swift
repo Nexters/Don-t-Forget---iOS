@@ -11,8 +11,10 @@ import Lottie
 
 struct SplashView: View {
     var body: some View {
-        VStack {
-            Spacer()
+        ZStack {
+            Image(.splashBackground)
+                .resizable()
+                .scaledToFill()
             LottieView(name: .splashLottie)
         }
     }
