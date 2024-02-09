@@ -17,7 +17,7 @@ struct GridView: View {
                 Text(anniversary.title)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.gray900: .gray50)
-                Text("D-81")
+                Text("D\(Constants.getDDay(anniversary.solarDate))")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundStyle(
                         [
@@ -28,7 +28,7 @@ struct GridView: View {
                             anniversary.cardType == Anniversary.CardType.arm.rawValue ? .gray50 : .yellow500
                     )
                 Spacer(minLength: 30)
-                Text("24.2.13")
+                Text(anniversary.solarDate)
                     .font(.system(size: 16))
                     .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.primary700 : .white)
                     .opacity(0.5)

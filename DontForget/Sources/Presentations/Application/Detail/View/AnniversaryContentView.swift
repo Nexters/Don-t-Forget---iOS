@@ -17,7 +17,7 @@ struct AnniversaryContentView: View {
                 Text(anniversary.solarDate)
                     .foregroundStyle(Color.gray600)
                     .font(.system(size: 18))
-                Text("D-\(Int.random(in: 1..<365))")
+                Text("D\(Constants.getDDay(anniversary.solarDate))")
                     .font(.system(size: 72, weight: .bold))
                     .foregroundStyle(Color.primary500)
                 Spacer()
