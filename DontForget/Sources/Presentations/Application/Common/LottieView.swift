@@ -35,10 +35,18 @@ struct LottieView: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: .zero)
         view.addSubview(animationView)
+        view.backgroundColor = .clear
+        animationView.backgroundColor = .clear
         animationView.contentMode = contentMode
         animationView.translatesAutoresizingMaskIntoConstraints = false
-        animationView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        animationView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalToConstant: 300), /// 높이 넒이 알잘딱하게 수정하시면됩니다.
+            animationView.heightAnchor.constraint(equalToConstant: 300),
+            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        
         animationView.loopMode = loopMode
         animationView.animationSpeed = animationSpeed
         return view
