@@ -40,8 +40,12 @@ extension String {
     static let backIcon = "backIcon"
     static let deleteIcon = "deleteIcon"
     static let editIcon = "editIcon"
-    static let calendarAddOnIcon = "calendarAddOn"
+    static let calendarAddOnIcon = "anniversary_add"
+    static let calendarDeleteIcon = "anniversary_delete"
     
     /* SF Symbols */
     static let chevronBackward = "chevron.backward"
+    
+    /* Lottie */
+    static let splashLottie = "splash_lottie"
 }

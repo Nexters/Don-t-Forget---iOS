@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+import Lottie
+
 struct SplashView: View {
     var body: some View {
-        Image(.splashBackground)
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
+        VStack {
+            Spacer()
+            LottieView(name: .splashLottie)
+        }
     }
 }
 

@@ -79,20 +79,9 @@ struct ConfirmView: View {
             Color.black.opacity(0.4)
             
             VStack {
-                // TODO: - 로고들어갈 자리
-                Rectangle()
+                Image(.anniversaryDelete)
+                    .resizable()
                     .frame(width: 56, height: 56)
-                    .foregroundStyle(.clear)
-                    .overlay(
-                        Rectangle()
-                            .strokeBorder(
-                                style: StrokeStyle(
-                                    lineWidth: 1,
-                                    dash: [4]
-                                )
-                            )
-                            .foregroundStyle(Color.gray700)
-                    )
                     .padding(.top, 32)
                     .padding(.bottom, 24)
                 Text(confirmTitle)

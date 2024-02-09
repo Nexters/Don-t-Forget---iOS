@@ -47,6 +47,9 @@
 		AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B458C2B68DE8F009529DE /* ConfirmView.swift */; };
 		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
+		AD7D58602B75E7CB00832817 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = AD7D585F2B75E7CB00832817 /* Lottie */; };
+		AD7D58622B75E89B00832817 /* splash_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD7D58612B75E89B00832817 /* splash_lottie.json */; };
+		AD7D58642B75E8F400832817 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7D58632B75E8F400832817 /* LottieView.swift */; };
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
 		ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */; };
@@ -130,6 +133,8 @@
 		AD3B458C2B68DE8F009529DE /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		AD7D58612B75E89B00832817 /* splash_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_lottie.json; sourceTree = "<group>"; };
+		AD7D58632B75E8F400832817 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -162,6 +167,7 @@
 				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
 				ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
+				AD7D58602B75E7CB00832817 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +363,7 @@
 		AD147F102B57FAF900561846 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AD7D58612B75E89B00832817 /* splash_lottie.json */,
 				AD147F022B57F85700561846 /* Assets.xcassets */,
 				AD147F1C2B57FDA500561846 /* Localizable.strings */,
 			);
@@ -409,6 +416,7 @@
 			children = (
 				ADAA246D2B638BFF00363D04 /* Constants.swift */,
 				AD3B458C2B68DE8F009529DE /* ConfirmView.swift */,
+				AD7D58632B75E8F400832817 /* LottieView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -513,6 +521,7 @@
 				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
 				ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */,
 				ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */,
+				AD7D585F2B75E7CB00832817 /* Lottie */,
 			);
 			productName = DontForget;
 			productReference = AD147EFB2B57F85600561846 /* DontForget.app */;
@@ -568,6 +577,7 @@
 				09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */,
 				09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */,
 				ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AD7D585E2B75E7CB00832817 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = AD147EFC2B57F85600561846 /* Products */;
 			projectDirPath = "";
@@ -585,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */,
+				AD7D58622B75E89B00832817 /* splash_lottie.json in Resources */,
 				AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */,
 				ADC7C2052B6A99F800EBE58C /* GoogleService-Info.plist in Resources */,
 				AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */,
@@ -636,6 +647,7 @@
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,
 				09642C3B2B649B260015220E /* EndPoint.swift in Sources */,
 				0965460E2B5B9CE900CDF4CC /* CreationUIView.swift in Sources */,
+				AD7D58642B75E8F400832817 /* LottieView.swift in Sources */,
 				ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */,
 				ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */,
 				09642C5E2B67CA6F0015220E /* CreationModel.swift in Sources */,
@@ -1016,6 +1028,14 @@
 				minimumVersion = 1.6.0;
 			};
 		};
+		AD7D585E2B75E7CB00832817 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
 		ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1051,6 +1071,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		AD7D585F2B75E7CB00832817 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD7D585E2B75E7CB00832817 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
