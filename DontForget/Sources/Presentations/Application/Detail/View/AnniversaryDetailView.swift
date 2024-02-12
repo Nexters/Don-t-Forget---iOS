@@ -15,6 +15,7 @@ struct AnniversaryDetailView: View {
         case delete
     }
     
+    @State private var showEditView = false
     @Environment(\.dismiss) private var dismiss
     @State private var iconStates = [
         HeaderIcon.back: false,
@@ -32,7 +33,9 @@ struct AnniversaryDetailView: View {
                     Image(.homeBackgroundFull)
                         .resizable()
                         .scaledToFill()
-                    
+                    NavigationLink(destination: CreationView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService())), fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(anniversaryDetailRepository: AnniversaryDetailRepository(service: AnniversaryService()))), id: 61, type: .edit), isActive: $showEditView) {
+                        
+                    }
                     VStack {
                         /* Custom Navigation Bar */
                         HStack(spacing: 0) {
@@ -84,6 +87,7 @@ struct AnniversaryDetailView: View {
                                     .onEnded({ _ in
                                         iconStates[.edit] = false
                                         // TODO: - Navigate to EditView
+                                        self.showEditView = true
                                     })
                                 )
                             

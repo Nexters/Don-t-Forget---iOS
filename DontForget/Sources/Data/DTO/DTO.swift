@@ -46,4 +46,6 @@ struct AnniversaryDetailDTO: Decodable {
     let content: String
     let deviceId: String
     let cardType: String
+    let baseDate: String
+    let baseType: String
 }

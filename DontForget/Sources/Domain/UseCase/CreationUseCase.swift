@@ -12,6 +12,7 @@ import KoreanLunarSolarConverter
 
 protocol CreationUseCaseProtocol {
     func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse
+    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
     func getAlarmPeriod() -> [AlarmPeriod]
     func converToDate(type: ConvertDate, date: Date) async -> Date
 }
@@ -32,6 +33,10 @@ final class CreationUseCase: CreationUseCaseProtocol {
 
     func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse {
         return try await creationRepository.registerAnniversary(request: request)
+    }
+    
+    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+        return try await creationRepository.putAnniversary(id: id, parameters: parameters)
     }
     
     // MARK: - Method to Model(Entity)

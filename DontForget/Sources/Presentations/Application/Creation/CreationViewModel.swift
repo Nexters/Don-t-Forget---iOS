@@ -18,18 +18,20 @@ final class CreationViewModel: ViewModelType {
     @Published var convertedDate: Date?
     @Published var creationResponse: CreationResponse?
     @Published var errorMessage: String?
-    
+    private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+    @Published var anniversaryDetail: AnniversaryDetailDTO?
     @Published var title: String?
     @Published var date: String?
     @Published var content: String = ""
     @Published var calendarType: String = ""
     @Published var cardType: String = ""
     @Published var alarmSchedule: [String] = []
-
+    @Published var getDate: [Int] = []
     // MARK: - Types
     
     enum Action {
         case registerAnniversary(parameters: RegisterAnniversaryRequest)
+        case editAnniversary(parameters: RegisterAnniversaryRequest)
     }
     enum State {
         case idle
@@ -40,9 +42,10 @@ final class CreationViewModel: ViewModelType {
     
     // MARK: - Init
     
-    init(creationUseCase: CreationUseCaseProtocol) {
+    init(creationUseCase: CreationUseCaseProtocol, fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase) {
         self.creationUseCase = creationUseCase
         self.state = .idle
+        self.fetchAnniversaryDetailUseCase = fetchAnniversaryDetailUseCase
         self.alarmPeriods = creationUseCase.getAlarmPeriod()
     }
     
@@ -52,6 +55,8 @@ final class CreationViewModel: ViewModelType {
         switch action {
         case .registerAnniversary(parameters: let parameters):
             self.registerAnniversary(request: parameters)
+        case .editAnniversary(parameters: let parameters):
+            break
         }
     }
     
@@ -76,6 +81,61 @@ final class CreationViewModel: ViewModelType {
         }, receiveValue: { [weak self] response in
             self?.creationResponse = response
         })
+        .store(in: &cancellables)
+    }
+    
+    func editAnniversary(id: Int, request: RegisterAnniversaryRequest) {
+        Future<CreationResponse?, Error> { promise in
+            Task {
+                do {
+                    let response = try await self.creationUseCase.putAnniversary(id: id, parameters: request)
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: { completion in
+            if case let .failure(error) = completion {
+                self.errorMessage = error.localizedDescription
+            }
+        }, receiveValue: { [weak self] response in
+            self?.creationResponse = response
+        })
+        .store(in: &cancellables)
+    }
+    
+    func fetchAnniversaryDetail(id: Int) {
+        self.state = .loading
+        Future<AnniversaryDetailResponse?, Error> { promise in
+            Task {
+                do {
+                    let response = try await self.fetchAnniversaryDetailUseCase.execute(
+                        requestValue: .init(
+                            query: AnniversaryDetailQuery(
+                                queryId: id
+                            )
+                        )
+                    )
+                    promise(.success(response))
+                } catch {
+                    print("=== DEBUG: \(error)")
+                    promise(.failure(error))
+                    self.state = .failed("failed fetchAnniversaryDetail()")
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case .failure = completion {
+                #warning("handling error")
+            }
+        } receiveValue: { [weak self] response in
+            if let response = response {
+                self?.anniversaryDetail = response.anniversaryDetail
+                self?.state = .success
+            }
+        }
         .store(in: &cancellables)
     }
     

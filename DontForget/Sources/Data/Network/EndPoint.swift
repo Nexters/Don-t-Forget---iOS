@@ -14,7 +14,7 @@ enum DontForgetTarget {
     case registerAnniversary(parameter: RegisterAnniversaryRequest) // 기념일 등록
     case readAnniversary(anniversaryId: Int) // 기념일 단건 조회
     case readAnniversaries // 기념일 목록조회
-    case editAnniversary(anniversaryId: Int) // 기념일 수정
+    case editAnniversary(anniversaryId: Int, parameter: RegisterAnniversaryRequest) // 기념일 수정
     case deleteAnniversary(anniversaryId: Int) // 기념일 삭제
     case changePushState // 디바이스 알림상태 변경
 }
@@ -32,7 +32,7 @@ extension DontForgetTarget: TargetType {
             return "anniversary/\(anniversaryId)"
         case .readAnniversaries:
             return "anniversary"
-        case let .editAnniversary(anniversaryId):
+        case let .editAnniversary(anniversaryId, parameter):
             return "anniversary/\(anniversaryId)"
         case let .deleteAnniversary(anniversaryId):
             return "anniversary/\(anniversaryId)"
@@ -59,6 +59,12 @@ extension DontForgetTarget: TargetType {
     var task: Moya.Task {
         switch self {
         case let .registerAnniversary(parameter):
+            let parameters = parameter.toDictionary()
+            return .requestParameters(
+                parameters: parameters,
+                encoding: JSONEncoding.default
+            )
+        case let .editAnniversary(id,parameter):
             let parameters = parameter.toDictionary()
             return .requestParameters(
                 parameters: parameters,

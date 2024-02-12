@@ -40,6 +40,31 @@ class AnniversaryService {
         }
     }
     
+    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.editAnniversary(anniversaryId: id, parameter: parameters)) { result in
+                switch result {
+                case .success(let response):
+                    print("=== DEBUG: \(response)")
+                    do {
+                        let creationResponse = try response.map(CreationResponse.self)
+                        continuation.resume(returning: creationResponse)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    print("=== DEBUG: \(error)")
+                    do {
+                        let errorResponse = try error.response?.map(ErrorResponse.self)
+                        continuation.resume(throwing: ServiceError.serverError(errorResponse ?? ErrorResponse(message: "에러메시지가 null")))
+                    } catch {
+                        continuation.resume(throwing: ServiceError.unknownError(error))
+                    }
+                }
+            }
+        }
+    }
+    
     func fetchAnniversaries() async throws -> AnniversariesResponse {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.readAnniversaries) { result in

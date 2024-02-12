@@ -27,15 +27,24 @@ struct CreationView: View {
     @State private var strAlarmAry = [String]()
     @State private var calendarType = "SOLAR"
     @State private var requestDate = "1980-01-01"
-    
+    @State private var baseType = 0
+    @State private var baseDate = [80,1,1]
+    private var type:  CreationVIewType
     private var isKeyboardVisible: Bool {
         keyboardHeight > 0
     }
     
     // MARK: - LifeCycle
     
-    init(viewModel: CreationViewModel) {
+    init(viewModel: CreationViewModel, id: Int?, type: CreationVIewType) {
         self.viewModel = viewModel
+        self.type = type
+        switch type {
+        case .create:
+            break
+        case .edit:
+            viewModel.fetchAnniversaryDetail(id: id!)
+        }
         configure()
     }
     
@@ -57,9 +66,7 @@ struct CreationView: View {
                             .id(Field.eventName)
                             .padding(.bottom, 48)
                             InputDateView(
-                                requestDate: $requestDate,
-                                calendarType: $calendarType,
-                                viewModel: viewModel
+                                selectedDay: $baseDate[0], selectedMonth: $baseDate[1], selectedYear: $baseDate[2], selectedSegment: $baseType, requestDate: $requestDate, calendarType: $calendarType, viewModel: viewModel
                             )
                             .focused($focusField, equals: .date)
                             .id(Field.date)
@@ -109,17 +116,30 @@ struct CreationView: View {
                             if focusField == .eventName {
                                 hideKeyboard()
                             } else {
-                                print("=== DEBUG: \(self.calendarType)")
-                                let request = RegisterAnniversaryRequest(
-                                    title: name,
-                                    date: requestDate,
-                                    content: memo,
-                                    calendarType: calendarType,
-                                    cardType: randomCardType(),
-                                    alarmSchedule: strAlarmAry
-                                )
-                                print("=== DEBUG: \(request)")
-                                viewModel.action(.registerAnniversary(parameters: request))
+                                
+                                switch type {
+                                    
+                                case .create:
+                                    let request = RegisterAnniversaryRequest(
+                                        title: name,
+                                        date: requestDate,
+                                        content: memo,
+                                        calendarType: calendarType,
+                                        cardType: randomCardType(),
+                                        alarmSchedule: strAlarmAry
+                                    )
+                                    viewModel.action(.registerAnniversary(parameters: request))
+                                case .edit:
+                                    let request = RegisterAnniversaryRequest(
+                                        title: name,
+                                        date: requestDate,
+                                        content: memo,
+                                        calendarType: calendarType,
+                                        cardType: randomCardType(),
+                                        alarmSchedule: strAlarmAry
+                                    )
+                                    viewModel.action(.editAnniversary(parameters: request))
+                                }
                             }
                         } label: {
                             Text(focusField == .eventName ? "다음" : "완료")
@@ -139,6 +159,22 @@ struct CreationView: View {
                 .animation(.default, value: keyboardHeight)
             }
             .onAppear {
+                switch type {
+                    
+                case .create:
+                    self.selectedAlarmIndexes = Set(["D_DAY"])
+                case .edit:
+                    viewModel.$anniversaryDetail
+                        .receive(on: DispatchQueue.main)
+                        .sink {  res in
+                            self.name = res?.title ?? ""
+                            self.memo = res?.content ?? ""
+                            self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
+                            self.baseType = res?.baseType == "SOLAR" ? 0 : 1
+                            self.baseDate = self.extractYearMonthDay(from: res!.baseDate) ?? []
+                        }
+                        .store(in: &cancellables)
+                }
                 focusField = .eventName
                 NotificationCenter.default.addObserver(
                     forName: UIResponder.keyboardWillShowNotification,
@@ -212,10 +248,10 @@ struct InputNameView: View {
 }
 
 struct InputDateView: View {
-    @State private var selectedDay = 1
-    @State private var selectedMonth = 1
-    @State private var selectedYear = 80
-    @State private var selectedSegment = 0
+    @Binding var selectedDay: Int
+    @Binding var selectedMonth: Int
+    @Binding var selectedYear: Int
+    @Binding var selectedSegment: Int
     @Binding var requestDate: String
     @Binding var calendarType: String
     private let segments = ["양력으로 입력", "음력으로 입력"]
@@ -357,6 +393,24 @@ extension CreationView {
             from: nil,
             for: nil
         )
+    }
+    
+    private func extractYearMonthDay(from dateString: String) -> [Int]? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = dateFormatter.date(from: dateString) else {
+            print("Invalid date format")
+            return nil
+        }
+
+        let calendar = Calendar.current
+
+        let year = calendar.component(.year, from: date) % 100
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+
+        return [year, month, day]
     }
     
     private func configure() {

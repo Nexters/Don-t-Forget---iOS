@@ -73,13 +73,7 @@ struct HomeView: View {
                             if anniversaries.count > 0 {
                                 if index == anniversaries.count {
                                     NavigationLink {
-                                        CreationView(
-                                            viewModel: CreationViewModel(
-                                                creationUseCase: CreationUseCase(
-                                                    creationRepository: CreationRepository(service: AnniversaryService.shared)
-                                                )
-                                            )
-                                        )
+                                        CreationView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService())), fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(anniversaryDetailRepository: AnniversaryDetailRepository(service: AnniversaryService()))), id: nil, type: .create)
                                     } label: {
                                         AddNewAnniversaryView()
                                     }
