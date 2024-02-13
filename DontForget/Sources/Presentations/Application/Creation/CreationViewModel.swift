@@ -31,7 +31,7 @@ final class CreationViewModel: ViewModelType {
     
     enum Action {
         case registerAnniversary(parameters: RegisterAnniversaryRequest)
-        case editAnniversary(parameters: RegisterAnniversaryRequest)
+        case editAnniversary(parameters: RegisterAnniversaryRequest, id: Int)
     }
     enum State {
         case idle
@@ -55,8 +55,8 @@ final class CreationViewModel: ViewModelType {
         switch action {
         case .registerAnniversary(parameters: let parameters):
             self.registerAnniversary(request: parameters)
-        case .editAnniversary(parameters: let parameters):
-            break
+        case .editAnniversary(parameters: let parameters, id: let id):
+            self.editAnniversary(id: id, request: parameters)
         }
     }
     

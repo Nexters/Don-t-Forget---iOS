@@ -29,7 +29,9 @@ struct CreationView: View {
     @State private var requestDate = "1980-01-01"
     @State private var baseType = 0
     @State private var baseDate = [80,1,1]
-    private var type:  CreationVIewType
+    
+    private var id: Int?
+    private var type: CreationVIewType
     private var isKeyboardVisible: Bool {
         keyboardHeight > 0
     }
@@ -43,6 +45,7 @@ struct CreationView: View {
         case .create:
             break
         case .edit:
+            self.id = id
             viewModel.fetchAnniversaryDetail(id: id!)
         }
         configure()
@@ -66,7 +69,7 @@ struct CreationView: View {
                             .id(Field.eventName)
                             .padding(.bottom, 48)
                             InputDateView(
-                                selectedDay: $baseDate[0], selectedMonth: $baseDate[1], selectedYear: $baseDate[2], selectedSegment: $baseType, requestDate: $requestDate, calendarType: $calendarType, viewModel: viewModel
+                                selectedDay: $baseDate[2], selectedMonth: $baseDate[1], selectedYear: $baseDate[0], selectedSegment: $baseType, requestDate: $requestDate, calendarType: $calendarType, viewModel: viewModel
                             )
                             .focused($focusField, equals: .date)
                             .id(Field.date)
@@ -129,7 +132,10 @@ struct CreationView: View {
                                         alarmSchedule: strAlarmAry
                                     )
                                     viewModel.action(.registerAnniversary(parameters: request))
+                                    self.presentationMode.wrappedValue.dismiss()
+
                                 case .edit:
+                                    print("asdasdasd")
                                     let request = RegisterAnniversaryRequest(
                                         title: name,
                                         date: requestDate,
@@ -138,7 +144,8 @@ struct CreationView: View {
                                         cardType: randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    viewModel.action(.editAnniversary(parameters: request))
+                                    viewModel.action(.editAnniversary(parameters: request, id: id!))
+                                    self.presentationMode.wrappedValue.dismiss()
                                 }
                             }
                         } label: {
@@ -167,11 +174,17 @@ struct CreationView: View {
                     viewModel.$anniversaryDetail
                         .receive(on: DispatchQueue.main)
                         .sink {  res in
+                            print("=============\(res)")
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
                             self.baseType = res?.baseType == "SOLAR" ? 0 : 1
-                            self.baseDate = self.extractYearMonthDay(from: res!.baseDate) ?? []
+                            if let date = res?.baseDate {
+                                print(self.extractYearMonthDay(from: date)!)
+                                self.baseDate = self.extractYearMonthDay(from: date)!
+                            } else {
+                                print("Date is nil")
+                            }
                         }
                         .store(in: &cancellables)
                 }

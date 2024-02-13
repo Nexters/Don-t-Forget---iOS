@@ -33,8 +33,10 @@ struct AnniversaryDetailView: View {
                     Image(.homeBackgroundFull)
                         .resizable()
                         .scaledToFill()
-                    NavigationLink(destination: CreationView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService())), fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(anniversaryDetailRepository: AnniversaryDetailRepository(service: AnniversaryService()))), id: 61, type: .edit), isActive: $showEditView) {
-                        
+                    NavigationLink(destination: CreationView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService())), fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(anniversaryDetailRepository: AnniversaryDetailRepository(service: AnniversaryService()))), id: anniversaryDetail.anniversaryId, type: .edit)
+                        .navigationBarHidden(true)
+                        , isActive: $showEditView)
+                    {
                     }
                     VStack {
                         /* Custom Navigation Bar */
@@ -135,7 +137,6 @@ struct AnniversaryDetailView: View {
                 .ignoresSafeArea()
             }
         }
-        .navigationBarBackButtonHidden(true)
         .gesture(
             DragGesture(
                 minimumDistance: 10,
