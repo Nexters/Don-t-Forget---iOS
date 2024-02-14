@@ -7,6 +7,28 @@
 
 import Foundation
 
+struct RegisterAnniversaryRequest {
+    let title: String
+    let date: String
+    let content: String
+    let calendarType: String
+    let cardType: String
+    let alarmSchedule: [String]
+}
+
+extension RegisterAnniversaryRequest {
+    func toDictionary() -> [String: Any] {
+         return [
+             "title": title,
+             "date": date,
+             "content": content,
+             "calendarType": calendarType,
+             "cardType": cardType,
+             "alarmSchedule": alarmSchedule
+         ]
+     }
+}
+
 struct AnniversaryDTO: Decodable {
     let anniversaryId: Int
     let title: String
@@ -24,4 +46,6 @@ struct AnniversaryDetailDTO: Decodable {
     let content: String
     let deviceId: String
     let cardType: String
+    let baseDate: String
+    let baseType: String
 }

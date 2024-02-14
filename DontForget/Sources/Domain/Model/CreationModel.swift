@@ -45,6 +45,23 @@ enum AlarmPeriod {
             return "1달 전"
         }
     }
+    
+    var schedule: String {
+        switch self {
+        case .dDay:
+            return "D_DAY"
+        case .dayAgo:
+            return "ONE_DAYS"
+        case .threeDayAgo:
+            return "THREE_DAYS"
+        case .oneWeekAgo:
+            return "ONE_WEEKS"
+        case .twoWeekAgo:
+            return "TWO_WEEKS"
+        case .oneMonthAgo:
+            return "ONE_MONTH"
+        }
+    }
 }
 
 extension AlarmPeriod {

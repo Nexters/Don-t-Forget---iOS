@@ -13,27 +13,12 @@ class AnniversaryService {
     static let shared = AnniversaryService()
     private let provider = MoyaProvider<DontForgetTarget>()
     
-    func registerAnniversary(
-        title: String,
-        date: String,
-        content: String,
-        calendarType: String,
-        cardType: String,
-        alarmSchedule: [String]
-    ) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
-        print("asdas")
+    func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리
         return try await withCheckedThrowingContinuation { continuation in
-            provider.request(.registerAnniversary(
-                title: title,
-                date: date,
-                content: content,
-                calendarType: calendarType,
-                cardType: cardType,
-                alarmSchedule: alarmSchedule
-            )) { result in
+            provider.request(.registerAnniversary(parameter: parameters)) { result in
                 switch result {
                 case .success(let response):
-                    print(response)
+                    print("=== DEBUG: \(response)")
                     do {
                         let creationResponse = try response.map(CreationResponse.self)
                         continuation.resume(returning: creationResponse)
@@ -41,13 +26,38 @@ class AnniversaryService {
                         continuation.resume(throwing: error)
                     }
                 case .failure(let error):
-                    print(error)
+                    print("=== DEBUG: \(error)")
                     do {
                         /// 에러 응답을 ErrorResponse로 디코딩합니다.
                         let errorResponse = try error.response?.map(ErrorResponse.self)
                         continuation.resume(throwing: ServiceError.serverError(errorResponse ?? ErrorResponse(message: "에러메시지가 null")))
                     } catch {
                         /// 디코딩 실패 시 일반 에러로 처리합니다.
+                        continuation.resume(throwing: ServiceError.unknownError(error))
+                    }
+                }
+            }
+        }
+    }
+    
+    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.editAnniversary(anniversaryId: id, parameter: parameters)) { result in
+                switch result {
+                case .success(let response):
+                    print("=== DEBUG: \(response)")
+                    do {
+                        let creationResponse = try response.map(CreationResponse.self)
+                        continuation.resume(returning: creationResponse)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    print("=== DEBUG: \(error)")
+                    do {
+                        let errorResponse = try error.response?.map(ErrorResponse.self)
+                        continuation.resume(throwing: ServiceError.serverError(errorResponse ?? ErrorResponse(message: "에러메시지가 null")))
+                    } catch {
                         continuation.resume(throwing: ServiceError.unknownError(error))
                     }
                 }
@@ -68,7 +78,6 @@ class AnniversaryService {
                     }
                 case let .failure(error):
                     print("=== DEBUG: \(error)")
-                    // TODO: - handling error
                 }
             }
         }
@@ -87,7 +96,6 @@ class AnniversaryService {
                     }
                 case let .failure(error):
                     print("=== DEBUG: \(error)")
-                    // TODO: - handling error
                 }
             }
         }
