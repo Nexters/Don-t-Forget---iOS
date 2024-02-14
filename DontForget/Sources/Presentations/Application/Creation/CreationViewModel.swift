@@ -18,17 +18,20 @@ final class CreationViewModel: ViewModelType {
     @Published var convertedDate: Date?
     @Published var creationResponse: CreationResponse?
     @Published var errorMessage: String?
+    private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+    @Published var anniversaryDetail: AnniversaryDetailDTO?
+    @Published var title: String?
+    @Published var date: String?
+    @Published var content: String = ""
+    @Published var calendarType: String = ""
+    @Published var cardType: String = ""
+    @Published var alarmSchedule: [String] = []
+    @Published var getDate: [Int] = []
     // MARK: - Types
     
     enum Action {
-        case registerAnniversary(
-            title: String,
-            date: String,
-            content: String,
-            calendarType: String,
-            cardType: String,
-            alarmSchedule: [String]
-        )
+        case registerAnniversary(parameters: RegisterAnniversaryRequest)
+        case editAnniversary(parameters: RegisterAnniversaryRequest, id: Int)
     }
     enum State {
         case idle
@@ -39,9 +42,10 @@ final class CreationViewModel: ViewModelType {
     
     // MARK: - Init
     
-    init(creationUseCase: CreationUseCaseProtocol) {
+    init(creationUseCase: CreationUseCaseProtocol, fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase) {
         self.creationUseCase = creationUseCase
         self.state = .idle
+        self.fetchAnniversaryDetailUseCase = fetchAnniversaryDetailUseCase
         self.alarmPeriods = creationUseCase.getAlarmPeriod()
     }
     
@@ -49,39 +53,20 @@ final class CreationViewModel: ViewModelType {
     
     func action(_ action: Action) {
         switch action {
-        case let .registerAnniversary(title, date, content, calendarType, cardType, alarmSchedule):
-            self.registerAnniversary(
-                title: title,
-                date: date,
-                content: content,
-                calendarType: calendarType,
-                cardType: cardType,
-                alarmSchedule: alarmSchedule
-            )
+        case .registerAnniversary(parameters: let parameters):
+            self.registerAnniversary(request: parameters)
+        case .editAnniversary(parameters: let parameters, id: let id):
+            self.editAnniversary(id: id, request: parameters)
         }
     }
     
     // MARK: - Method
     
-    func registerAnniversary(
-        title: String,
-        date: String,
-        content: String,
-        calendarType: String,
-        cardType: String,
-        alarmSchedule: [String]
-    ) {
+    func registerAnniversary(request: RegisterAnniversaryRequest) {
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
-                    let response = try await self.creationUseCase.registerAnniversary(
-                        title: title,
-                        date: date,
-                        content: content,
-                        calendarType: calendarType,
-                        cardType: cardType,
-                        alarmSchedule: alarmSchedule
-                    )
+                    let response = try await self.creationUseCase.registerAnniversary(request: request)
                     promise(.success(response))
                 } catch {
                     promise(.failure(error))
@@ -96,6 +81,61 @@ final class CreationViewModel: ViewModelType {
         }, receiveValue: { [weak self] response in
             self?.creationResponse = response
         })
+        .store(in: &cancellables)
+    }
+    
+    func editAnniversary(id: Int, request: RegisterAnniversaryRequest) {
+        Future<CreationResponse?, Error> { promise in
+            Task {
+                do {
+                    _ = try await self.creationUseCase.putAnniversary(id: id, parameters: request)
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: { completion in
+            if case let .failure(error) = completion {
+                self.errorMessage = error.localizedDescription
+            }
+        }, receiveValue: { [weak self] response in
+            self?.creationResponse = response
+        })
+        .store(in: &cancellables)
+    }
+    
+    func fetchAnniversaryDetail(id: Int) {
+        self.state = .loading
+        Future<AnniversaryDetailResponse?, Error> { promise in
+            Task {
+                do {
+                    let response = try await self.fetchAnniversaryDetailUseCase.execute(
+                        requestValue: .init(
+                            query: AnniversaryDetailQuery(
+                                queryId: id
+                            )
+                        )
+                    )
+                    promise(.success(response))
+                } catch {
+                    print("=== DEBUG: \(error)")
+                    promise(.failure(error))
+                    self.state = .failed("failed fetchAnniversaryDetail()")
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case .failure = completion {
+                #warning("handling error")
+            }
+        } receiveValue: { [weak self] response in
+            if let response = response {
+                self?.anniversaryDetail = response.anniversaryDetail
+                self?.state = .success
+            }
+        }
         .store(in: &cancellables)
     }
     
@@ -115,6 +155,9 @@ final class CreationViewModel: ViewModelType {
         let year = calendar.component(.year, from: convertedDate)
         let month = calendar.component(.month, from: convertedDate)
         let day = calendar.component(.day, from: convertedDate)
+        DispatchQueue.main.async {
+            self.date = "\(year)-\(month)-\(day)"
+        }
         var calculateYear = 0
         if year >= 1925 && year <= 1999 {
             calculateYear = year - 1900

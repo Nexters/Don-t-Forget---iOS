@@ -9,16 +9,19 @@ import SwiftUI
 
 struct AnniversaryDetailView: View {
     
-    enum HeaderIcon {
+    private enum HeaderIcon {
         case back
         case edit
         case delete
     }
     
+    @State private var showEditView = false
     @Environment(\.dismiss) private var dismiss
-    @State private var iconStates = [HeaderIcon.back: false,
-                                     .edit: false,
-                                     .delete: false]
+    @State private var iconStates = [
+        HeaderIcon.back: false,
+        .edit: false,
+        .delete: false
+    ]
     @State private var showConfirmView = false
     @StateObject var viewModel: DefaultAnniversaryDetailViewModel
     
@@ -30,7 +33,25 @@ struct AnniversaryDetailView: View {
                     Image(.homeBackgroundFull)
                         .resizable()
                         .scaledToFill()
-                    
+                    NavigationLink(
+                        destination: CreationView(
+                            viewModel: CreationViewModel(
+                                creationUseCase: CreationUseCase(
+                                    creationRepository: CreationRepository(
+                                        service: AnniversaryService()
+                                    )
+                                ),
+                                fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                                    anniversaryDetailRepository: AnniversaryDetailRepository(
+                                        service: AnniversaryService()
+                                    )
+                                )
+                            ),
+                            id: anniversaryDetail.anniversaryId,
+                            type: .edit
+                        ),
+                        isActive: $showEditView
+                    ) { EmptyView() }
                     VStack {
                         /* Custom Navigation Bar */
                         HStack(spacing: 0) {
@@ -82,6 +103,7 @@ struct AnniversaryDetailView: View {
                                     .onEnded({ _ in
                                         iconStates[.edit] = false
                                         // TODO: - Navigate to EditView
+                                        self.showEditView = true
                                     })
                                 )
                             
@@ -114,9 +136,8 @@ struct AnniversaryDetailView: View {
                         .padding(.vertical, 16)
                         
                         AnniversaryContentView(anniversary: anniversaryDetail)
-                        .padding(.bottom, 200)
+                            .padding(.bottom, 200)
                     }
-                    
                     if showConfirmView {
                         ConfirmView(
                             viewModel: viewModel,

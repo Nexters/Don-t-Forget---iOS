@@ -77,7 +77,6 @@ struct ConfirmView: View {
     var body: some View {
         ZStack {
             Color.black.opacity(0.4)
-            
             VStack {
                 // TODO: - 로고들어갈 자리
                 Rectangle()
