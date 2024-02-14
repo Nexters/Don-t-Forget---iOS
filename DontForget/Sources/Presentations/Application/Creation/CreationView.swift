@@ -147,7 +147,7 @@ struct CreationView: View {
                                         date: requestDate,
                                         content: memo,
                                         calendarType: calendarType,
-                                        cardType: randomCardType(),
+                                        cardType: viewModel.anniversaryDetail?.cardType ?? randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
                                     viewModel.action(.editAnniversary(parameters: request, id: id!))
