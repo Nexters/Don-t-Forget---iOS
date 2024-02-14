@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-
+    
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -23,6 +23,7 @@ struct HomeView: View {
     private var anniversaries: [AnniversaryDTO] {
         viewModel.anniversaries
     }
+    @State private var navigateToCreationView = false
     
     var body: some View {
         NavigationView {
@@ -53,7 +54,7 @@ struct HomeView: View {
                                 }
                             } else {
                                 LazyVGrid(columns: columns, content: {
-                                    CreationViewNavigationLink()
+                                    creationViewNavigationLink
                                         .padding(.leading, 24)
                                         .padding(.bottom, 510)
                                 })
@@ -72,7 +73,7 @@ struct HomeView: View {
                         ForEach(1..<anniversaries.count + 1, id: \.self) { index in
                             if anniversaries.count > 0 {
                                 if index == anniversaries.count {
-                                    CreationViewNavigationLink()
+                                    creationViewNavigationLink
                                 } else {
                                     NavigationLink {
                                         AnniversaryDetailView(
@@ -95,6 +96,9 @@ struct HomeView: View {
                     
                     Spacer()
                         .frame(height: 30)
+                }
+                .onChange(of: navigateToCreationView) { _, status in
+                    if !status { viewModel.action(.readAnniversaries) }
                 }
                 .onAppear {
                     viewModel.action(.readAnniversaries)
@@ -141,10 +145,10 @@ struct AddNewAnniversaryView: View {
     }
 }
 
-struct CreationViewNavigationLink: View {
-    var body: some View {
-        NavigationLink {
-            CreationView(
+extension HomeView {
+    var creationViewNavigationLink: some View {
+        NavigationLink(
+            destination: CreationView(
                 viewModel: CreationViewModel(
                     creationUseCase: CreationUseCase(
                         creationRepository: CreationRepository(
@@ -159,9 +163,9 @@ struct CreationViewNavigationLink: View {
                 ),
                 id: nil,
                 type: .create
-            )
-        } label: {
-            AddNewAnniversaryView()
-        }
+            ),
+            isActive: $navigateToCreationView,
+            label: { AddNewAnniversaryView() }
+        )
     }
 }
