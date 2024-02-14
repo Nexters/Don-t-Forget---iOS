@@ -10,6 +10,12 @@ import SwiftUI
 struct AnniversaryContentView: View {
     
     let anniversary: AnniversaryDetailDTO
+    private var dday: String {
+        let dday = Constants.getDDay(anniversary.solarDate)
+        if dday == 0 { return " DAY" }
+        else if dday > 0 { return  "+\(dday)" }
+        else { return "\(dday)" }
+    }
     
     var body: some View {
         HStack {
@@ -17,7 +23,7 @@ struct AnniversaryContentView: View {
                 Text(anniversary.solarDate)
                     .foregroundStyle(Color.gray600)
                     .font(.system(size: 18))
-                Text("D\(Constants.getDDay(anniversary.solarDate))")
+                Text("D\(dday)")
                     .font(.system(size: 72, weight: .bold))
                     .foregroundStyle(Color.primary500)
                 Spacer()
