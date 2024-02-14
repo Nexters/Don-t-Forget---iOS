@@ -53,7 +53,7 @@ struct HomeView: View {
                                 }
                             } else {
                                 LazyVGrid(columns: columns, content: {
-                                    AddNewAnniversaryView()
+                                    CreationViewNavigationLink()
                                         .padding(.leading, 24)
                                         .padding(.bottom, 510)
                                 })
@@ -72,11 +72,7 @@ struct HomeView: View {
                         ForEach(1..<anniversaries.count + 1, id: \.self) { index in
                             if anniversaries.count > 0 {
                                 if index == anniversaries.count {
-                                    NavigationLink {
-                                        CreationView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService())), fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(anniversaryDetailRepository: AnniversaryDetailRepository(service: AnniversaryService()))), id: nil, type: .create)
-                                    } label: {
-                                        AddNewAnniversaryView()
-                                    }
+                                    CreationViewNavigationLink()
                                 } else {
                                     NavigationLink {
                                         AnniversaryDetailView(
@@ -142,5 +138,30 @@ struct AddNewAnniversaryView: View {
             .padding(.horizontal, 20)
         }
         .frame(minHeight: 170)
+    }
+}
+
+struct CreationViewNavigationLink: View {
+    var body: some View {
+        NavigationLink {
+            CreationView(
+                viewModel: CreationViewModel(
+                    creationUseCase: CreationUseCase(
+                        creationRepository: CreationRepository(
+                            service: AnniversaryService()
+                        )
+                    ),
+                    fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                        anniversaryDetailRepository: AnniversaryDetailRepository(
+                            service: AnniversaryService()
+                        )
+                    )
+                ),
+                id: nil,
+                type: .create
+            )
+        } label: {
+            AddNewAnniversaryView()
+        }
     }
 }

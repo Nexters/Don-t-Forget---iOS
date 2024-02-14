@@ -32,7 +32,7 @@ extension DontForgetTarget: TargetType {
             return "anniversary/\(anniversaryId)"
         case .readAnniversaries:
             return "anniversary"
-        case let .editAnniversary(anniversaryId, parameter):
+        case let .editAnniversary(anniversaryId, _):
             return "anniversary/\(anniversaryId)"
         case let .deleteAnniversary(anniversaryId):
             return "anniversary/\(anniversaryId)"
@@ -64,7 +64,7 @@ extension DontForgetTarget: TargetType {
                 parameters: parameters,
                 encoding: JSONEncoding.default
             )
-        case let .editAnniversary(id,parameter):
+        case let .editAnniversary(_, parameter):
             let parameters = parameter.toDictionary()
             return .requestParameters(
                 parameters: parameters,

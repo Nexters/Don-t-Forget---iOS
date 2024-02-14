@@ -33,11 +33,25 @@ struct AnniversaryDetailView: View {
                     Image(.homeBackgroundFull)
                         .resizable()
                         .scaledToFill()
-                    NavigationLink(destination: CreationView(viewModel: CreationViewModel(creationUseCase: CreationUseCase(creationRepository: CreationRepository(service: AnniversaryService())), fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(anniversaryDetailRepository: AnniversaryDetailRepository(service: AnniversaryService()))), id: anniversaryDetail.anniversaryId, type: .edit)
-                        .navigationBarHidden(true)
-                        , isActive: $showEditView)
-                    {
-                    }
+                    NavigationLink(
+                        destination: CreationView(
+                            viewModel: CreationViewModel(
+                                creationUseCase: CreationUseCase(
+                                    creationRepository: CreationRepository(
+                                        service: AnniversaryService()
+                                    )
+                                ),
+                                fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                                    anniversaryDetailRepository: AnniversaryDetailRepository(
+                                        service: AnniversaryService()
+                                    )
+                                )
+                            ),
+                            id: anniversaryDetail.anniversaryId,
+                            type: .edit
+                        ),
+                        isActive: $showEditView
+                    ) { EmptyView() }
                     VStack {
                         /* Custom Navigation Bar */
                         HStack(spacing: 0) {
@@ -124,7 +138,6 @@ struct AnniversaryDetailView: View {
                         AnniversaryContentView(anniversary: anniversaryDetail)
                             .padding(.bottom, 200)
                     }
-                    
                     if showConfirmView {
                         ConfirmView(
                             viewModel: viewModel,
@@ -137,6 +150,7 @@ struct AnniversaryDetailView: View {
                 .ignoresSafeArea()
             }
         }
+        .navigationBarBackButtonHidden(true)
         .gesture(
             DragGesture(
                 minimumDistance: 10,

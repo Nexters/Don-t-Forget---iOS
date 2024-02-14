@@ -28,17 +28,20 @@ struct CreationView: View {
     @State private var calendarType = "SOLAR"
     @State private var requestDate = "1980-01-01"
     @State private var baseType = 0
-    @State private var baseDate = [80,1,1]
-    
+    @State private var baseDate = [80, 1, 1]
     private var id: Int?
-    private var type: CreationVIewType
+    private var type: CreationViewType
     private var isKeyboardVisible: Bool {
         keyboardHeight > 0
     }
     
     // MARK: - LifeCycle
     
-    init(viewModel: CreationViewModel, id: Int?, type: CreationVIewType) {
+    init(
+        viewModel: CreationViewModel,
+        id: Int?,
+        type: CreationViewType
+    ) {
         self.viewModel = viewModel
         self.type = type
         switch type {
@@ -69,7 +72,13 @@ struct CreationView: View {
                             .id(Field.eventName)
                             .padding(.bottom, 48)
                             InputDateView(
-                                selectedDay: $baseDate[2], selectedMonth: $baseDate[1], selectedYear: $baseDate[0], selectedSegment: $baseType, requestDate: $requestDate, calendarType: $calendarType, viewModel: viewModel
+                                selectedDay: $baseDate[2], 
+                                selectedMonth: $baseDate[1],
+                                selectedYear: $baseDate[0],
+                                selectedSegment: $baseType,
+                                requestDate: $requestDate,
+                                calendarType: $calendarType,
+                                viewModel: viewModel
                             )
                             .focused($focusField, equals: .date)
                             .id(Field.date)
@@ -100,6 +109,7 @@ struct CreationView: View {
                         )
                     }
                 }
+                .padding(.top)
                 .navigationBarTitle("기념일 만들기", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -119,9 +129,7 @@ struct CreationView: View {
                             if focusField == .eventName {
                                 hideKeyboard()
                             } else {
-                                
                                 switch type {
-                                    
                                 case .create:
                                     let request = RegisterAnniversaryRequest(
                                         title: name,
@@ -133,9 +141,7 @@ struct CreationView: View {
                                     )
                                     viewModel.action(.registerAnniversary(parameters: request))
                                     self.presentationMode.wrappedValue.dismiss()
-
                                 case .edit:
-                                    print("asdasdasd")
                                     let request = RegisterAnniversaryRequest(
                                         title: name,
                                         date: requestDate,
@@ -167,23 +173,18 @@ struct CreationView: View {
             }
             .onAppear {
                 switch type {
-                    
                 case .create:
                     self.selectedAlarmIndexes = Set(["D_DAY"])
                 case .edit:
                     viewModel.$anniversaryDetail
                         .receive(on: DispatchQueue.main)
                         .sink {  res in
-                            print("=============\(res)")
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
                             self.baseType = res?.baseType == "SOLAR" ? 0 : 1
                             if let date = res?.baseDate {
-                                print(self.extractYearMonthDay(from: date)!)
                                 self.baseDate = self.extractYearMonthDay(from: date)!
-                            } else {
-                                print("Date is nil")
                             }
                         }
                         .store(in: &cancellables)
@@ -197,7 +198,6 @@ struct CreationView: View {
                     guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                     keyboardHeight = keyboardFrame.height
                 }
-                
                 NotificationCenter
                     .default
                     .addObserver(
@@ -225,179 +225,11 @@ struct CreationView: View {
                     )
             }
         }
-    }
-}
-
-struct InputNameView: View {
-    @Binding var name: String
-    @FocusState private var isNameFieldFocused: Bool
-    var viewModel: CreationViewModel
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .red)
-                .padding(.leading, 16)
-                .padding(.bottom, 32)
-                .foregroundColor(.white)
-            TextField(
-                "",
-                text: $name,
-                prompt: Text("사랑하는 엄마에게").foregroundColor(.gray700)
-            )
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 20)
-            .frame(height: 46)
-            .focused($isNameFieldFocused)
-            .foregroundColor(.white)
-            Rectangle()
-                .padding(.horizontal, 20)
-                .frame(height: 1)
-                .foregroundColor(isNameFieldFocused ? Color.primary500 : Color.gray800)
-                .onChange(of: name, { _, text in
-                    self.viewModel.title = text
-                })
-        }
-    }
-}
-
-struct InputDateView: View {
-    @Binding var selectedDay: Int
-    @Binding var selectedMonth: Int
-    @Binding var selectedYear: Int
-    @Binding var selectedSegment: Int
-    @Binding var requestDate: String
-    @Binding var calendarType: String
-    private let segments = ["양력으로 입력", "음력으로 입력"]
-    var viewModel: CreationViewModel
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text.coloredText(
-                "날짜 *",
-                coloredPart: "*",
-                color: .red
-            )
-            .padding(.leading, 16)
-            .padding(.bottom, 32)
-            .foregroundColor(.white)
-            
-            Picker(
-                "",
-                selection: $selectedSegment
-            ) {
-                ForEach(0..<2) { index in
-                    Text(segments[index]).tag(index)
-                }
-            }
-            .onChange(of: selectedSegment) {  _, _ in
-                Task {
-                    let dateType: ConvertDate = selectedSegment == 0 ? .lunar : .solar
-                    let convertedDate = await viewModel.convertToLunarOrSolar(
-                        type: dateType,
-                        date: updateViewModelWithSelectedDate()
-                    )
-                    selectedYear = convertedDate[0]
-                    selectedMonth = convertedDate[1]
-                    selectedDay = convertedDate[2]
-                    
-                    updateRequestDate()
-                    let strType: String = selectedSegment == 0 ? "SOLAR" : "LUNAR"
-                    calendarType = strType
-                }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
-            
-            HStack {
-                Spacer()
-                CustomDatePicker(
-                    selectedDay: $selectedDay,
-                    selectedMonth: $selectedMonth,
-                    selectedYear: $selectedYear
-                )
-                .onChange(of: [selectedDay, selectedMonth, selectedYear]) { _, _ in updateRequestDate() }
-                .padding(.horizontal, 60)
-                Spacer()
-            }
-            .padding(.horizontal, 16)
-        }
-    }
-}
-
-struct AlarmView: View {
-    @Binding var selectedAlarmIndexes: Set<String>
-    @Binding var strAlarmAry: [String]
-    var alarmPeriods: [AlarmPeriod]
-    var viewModel: CreationViewModel
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("미리 알림")
-                .padding(.leading, 16)
-                .padding(.bottom, 32)
-                .foregroundColor(.white)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHGrid(rows: [GridItem(.fixed(74))], spacing: 8) {
-                    ForEach(alarmPeriods, id: \.self) { alarmPeriod in
-                        Rectangle()
-                            .fill(selectedAlarmIndexes.contains(alarmPeriod.schedule) ? Color.primary500 : Color.gray700)
-                            .frame(width: 74, height: 40)
-                            .cornerRadius(50)
-                            .overlay(
-                                Text(alarmPeriod.title)
-                                    .foregroundColor(selectedAlarmIndexes.contains(alarmPeriod.schedule) ? Color.white : Color.gray400)
-                            )
-                            .onTapGesture {
-                                if selectedAlarmIndexes.contains(alarmPeriod.schedule) {
-                                    selectedAlarmIndexes.remove(alarmPeriod.schedule)
-                                } else {
-                                    selectedAlarmIndexes.insert(alarmPeriod.schedule)
-                                }
-                            }
-                    }
-                }
-                .onChange(of: selectedAlarmIndexes, { _, alarm in
-                    strAlarmAry = Array(alarm)
-                })
-                .padding(.horizontal, 16)
-            }
-        }
-    }
-}
-
-struct MemoView: View {
-    
-    @Binding var memo: String
-    @FocusState private var isMemoFieldFocused: Bool
-    var viewModel: CreationViewModel
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("간단 메모")
-                .padding(.leading, 16)
-                .padding(.bottom, 32)
-                .foregroundColor(.white)
-            TextField(
-                "", text: $memo,
-                prompt: Text("가족여행 미리 계획하기").foregroundColor(.gray700)
-            )
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 20)
-            .frame(height: 46)
-            .focused($isMemoFieldFocused)
-            .foregroundColor(.white)
-            Rectangle()
-                .padding(.horizontal, 20)
-                .frame(height: 1)
-                .foregroundColor(isMemoFieldFocused ? Color.primary500 : Color.gray800)
-        }
+        .navigationBarHidden(true)
     }
 }
 
 // MARK: - Extension
-
 extension CreationView {
     private func hideKeyboard() {
         UIApplication.shared.sendAction(
@@ -411,18 +243,16 @@ extension CreationView {
     private func extractYearMonthDay(from dateString: String) -> [Int]? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-
         guard let date = dateFormatter.date(from: dateString) else {
             print("Invalid date format")
             return nil
         }
-
+        
         let calendar = Calendar.current
-
         let year = calendar.component(.year, from: date) % 100
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
-
+        
         return [year, month, day]
     }
     
@@ -442,33 +272,5 @@ extension CreationView {
     private func randomCardType() -> String {
         let cardType = ["LUNAR", "TAIL", "ARM", "FACE", "FOREST"]
         return cardType.randomElement()!
-    }
-}
-
-extension InputDateView {
-    private func convertToFullYear(twoDigitYear: Int) -> Int {
-        if twoDigitYear >= 25 && twoDigitYear <= 99 {
-            return 1900 + twoDigitYear
-        } else if twoDigitYear >= 0 && twoDigitYear <= 24 {
-            return 2000 + twoDigitYear
-        } else {
-            return twoDigitYear
-        }
-    }
-    
-    private func updateRequestDate() {
-        let fullYear = convertToFullYear(twoDigitYear: selectedYear)
-        let fullMonth = String(format: "%02d", selectedMonth)
-        let fullDay = String(format: "%02d", selectedDay)
-        self.requestDate = "\(fullYear)-\(fullMonth)-\(fullDay)"
-    }
-    
-    private func updateViewModelWithSelectedDate() -> Date {
-        let fullYear = convertToFullYear(twoDigitYear: selectedYear)
-        return viewModel.updateConvertedDate(
-            day: selectedDay,
-            month: selectedMonth,
-            year: fullYear
-        )
     }
 }

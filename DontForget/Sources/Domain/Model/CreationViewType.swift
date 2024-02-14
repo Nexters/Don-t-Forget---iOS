@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CreationVIewType {
+enum CreationViewType {
     case create
     case edit
 }
