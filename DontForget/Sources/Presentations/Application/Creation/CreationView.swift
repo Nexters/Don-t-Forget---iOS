@@ -182,7 +182,7 @@ struct CreationView: View {
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            self.baseType = res?.baseType == "SOLAR" ? 0 : 1
+                            self.baseType = res?.baseType == ConvertDate.solar.title ? 0 : 1
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
                             }

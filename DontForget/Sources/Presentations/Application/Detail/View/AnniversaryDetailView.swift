@@ -161,6 +161,9 @@ struct AnniversaryDetailView: View {
                 }
             })
         )
+        .onChange(of: showEditView, { _, show in
+            if !show { viewModel.action(.fetchAnniversaryDetail) }
+        })
         .onAppear {
             viewModel.action(.fetchAnniversaryDetail)
         }

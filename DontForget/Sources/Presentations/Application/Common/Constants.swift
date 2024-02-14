@@ -19,6 +19,6 @@ struct Constants {
         let from = formatter.date(from: formatted)!
         let calendar = Calendar.current
         let currentDate = Date()
-        return calendar.dateComponents([.day], from: from, to: currentDate).day! + 1
+        return calendar.dateComponents([.day], from: from, to: currentDate).day! - 1
     }
 }
