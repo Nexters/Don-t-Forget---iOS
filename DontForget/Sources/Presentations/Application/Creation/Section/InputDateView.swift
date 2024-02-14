@@ -38,7 +38,7 @@ struct InputDateView: View {
             }
             .onChange(of: selectedSegment) {  _, _ in
                 Task {
-                    let dateType: ConvertDate = selectedSegment == 0 ? .lunar : .solar
+                    let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
                     let convertedDate = await viewModel.convertToLunarOrSolar(
                         type: dateType,
                         date: updateViewModelWithSelectedDate()
@@ -48,9 +48,9 @@ struct InputDateView: View {
                     selectedDay = convertedDate[2]
                     
                     updateRequestDate()
-                    let strType: String = selectedSegment == 0 ? "SOLAR" : "LUNAR"
-                    calendarType = strType
+                    calendarType = dateType.title
                 }
+                .cancel()
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)

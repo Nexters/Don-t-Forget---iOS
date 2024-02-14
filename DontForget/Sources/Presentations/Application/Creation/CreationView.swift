@@ -147,7 +147,7 @@ struct CreationView: View {
                                         date: requestDate,
                                         content: memo,
                                         calendarType: calendarType,
-                                        cardType: randomCardType(),
+                                        cardType: viewModel.anniversaryDetail?.cardType ?? randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
                                     viewModel.action(.editAnniversary(parameters: request, id: id!))
@@ -182,7 +182,7 @@ struct CreationView: View {
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            self.baseType = res?.baseType == "SOLAR" ? 0 : 1
+                            self.baseType = res?.baseType == ConvertDate.solar.title ? 0 : 1
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
                             }
