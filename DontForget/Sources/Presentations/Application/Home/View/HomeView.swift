@@ -94,6 +94,10 @@ struct HomeView: View {
                     .padding(.horizontal, 24)
                     .padding(.top, 28)
                     
+                    Button("FCM TEST") {
+                        viewModel.action(.fcmTest)
+                    }.buttonStyle(BorderedButtonStyle())
+                    
                     Spacer()
                         .frame(height: 30)
                 }
@@ -102,6 +106,7 @@ struct HomeView: View {
                 }
                 .onAppear {
                     viewModel.action(.readAnniversaries)
+                    viewModel.action(.changePushState)
                 }
             }
             .background(

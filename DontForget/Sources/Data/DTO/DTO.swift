@@ -7,6 +7,34 @@
 
 import Foundation
 
+struct TestRequest {
+    let deviceUuid: String
+    let title: String
+    let body: String
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "deviceUuid": deviceUuid,
+            "title": title,
+            "body": body
+        ]
+    }
+}
+
+struct ChangePushStateRequest {
+    let token: String
+    let deviceUuid: String
+    let status: String
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "token": token,
+            "deviceUuid": deviceUuid,
+            "status": status
+        ]
+    }
+}
+
 struct RegisterAnniversaryRequest {
     let title: String
     let date: String

@@ -20,6 +20,8 @@ final class DefaultHomeViewModel: ViewModelType {
     
     enum Action {
         case readAnniversaries
+        case changePushState
+        case fcmTest
     }
     
     enum State {
@@ -45,6 +47,10 @@ final class DefaultHomeViewModel: ViewModelType {
         switch action {
         case .readAnniversaries:
             readAnniversaries()
+        case .changePushState:
+            changeStatus()
+        case .fcmTest:
+            fcmTest()
         }
     }
     
@@ -115,6 +121,52 @@ final class DefaultHomeViewModel: ViewModelType {
             if let response = response {
                 self?.firstAnniversaryDetail = response.anniversaryDetail
             }
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func changeStatus() {
+        Future<Int, Error> { promise in
+            Task {
+                do {
+                    let response = try await AnniversaryService.shared.changePushState(status: "ON")
+                    promise(.success(response))
+                } catch {
+                    print("=== DEBUG: changeStatus \(error)")
+                    promise(.failure(error))
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case .failure = completion {
+                #warning("handling error")
+            }
+        } receiveValue: { response in
+            print("=== DEBUG: fcm 발송 테스트 \(response)")
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func fcmTest() {
+        Future<Int, Error> { promise in
+            Task {
+                do {
+                    let response = try await AnniversaryService.shared.fcmTest()
+                    promise(.success(response))
+                } catch {
+                    print("=== DEBUG: fcmTest \(error)")
+                    promise(.failure(error))
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case .failure = completion {
+                #warning("handling error")
+            }
+        } receiveValue: { [weak self] response in
+            print("=== DEBUG: fcmTest \(response)")
         }
         .store(in: &cancellables)
     }
