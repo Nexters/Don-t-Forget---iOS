@@ -94,9 +94,11 @@ struct HomeView: View {
                     .padding(.horizontal, 24)
                     .padding(.top, 28)
                     
+                    #if DEBUG
                     Button("FCM TEST") {
                         viewModel.action(.fcmTest)
                     }.buttonStyle(BorderedButtonStyle())
+                    #endif
                     
                     Spacer()
                         .frame(height: 30)
