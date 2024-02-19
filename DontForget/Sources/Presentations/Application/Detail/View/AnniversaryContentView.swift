@@ -12,9 +12,13 @@ struct AnniversaryContentView: View {
     let anniversary: AnniversaryDetailDTO
     private var dday: String {
         let dday = Constants.getDDay(anniversary.solarDate)
-        if dday == 0 { return " DAY" }
-        else if dday > 0 { return  "+\(dday)" }
-        else { return "\(dday)" }
+        if dday == 0 {
+            return " DAY"
+        } else if dday > 0 {
+            return  "+\(dday)"
+        } else {
+            return "\(dday)"
+        }
     }
     
     var body: some View {

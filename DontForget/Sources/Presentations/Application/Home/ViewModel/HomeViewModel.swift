@@ -165,7 +165,7 @@ final class DefaultHomeViewModel: ViewModelType {
             if case .failure = completion {
                 #warning("handling error")
             }
-        } receiveValue: { [weak self] response in
+        } receiveValue: { response in
             print("=== DEBUG: fcmTest \(response)")
         }
         .store(in: &cancellables)
