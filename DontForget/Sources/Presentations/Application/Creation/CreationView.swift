@@ -14,7 +14,7 @@ struct CreationView: View {
     private enum Field: Hashable {
         case eventName, date, alarm, memo
     }
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var memo = ""
     @State private var strDate  = ""
@@ -34,7 +34,9 @@ struct CreationView: View {
     private var isKeyboardVisible: Bool {
         keyboardHeight > 0
     }
-    
+    @State private var showConfirmView = false
+    @State private var alertType: AlertType = .cancelCreating
+
     // MARK: - LifeCycle
     
     init(
@@ -57,8 +59,18 @@ struct CreationView: View {
     // MARK: - View
     
     var body: some View {
+        
         NavigationView {
             ZStack(alignment: .bottom) {
+                if showConfirmView {
+                    ConfirmView(
+                        viewModel: viewModel,
+                        alertType: alertType,
+                        isPresentend: $showConfirmView,
+                        dismiss: dismiss
+                    )
+                    .zIndex(1)
+                }
                 Color.gray900
                     .ignoresSafeArea(.all)
                 ScrollView {
@@ -114,7 +126,14 @@ struct CreationView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            self.presentationMode.wrappedValue.dismiss()
+                            switch type {
+                            case .create:
+                                self.alertType = .cancelCreating
+                            case .edit:
+                                self.alertType = .cancelEditing
+                            }
+                            showConfirmView = true
+                            print("asdsad")
                         } label: {
                             Text("취소")
                                 .foregroundColor(.gray600)
@@ -140,7 +159,7 @@ struct CreationView: View {
                                         alarmSchedule: strAlarmAry
                                     )
                                     viewModel.action(.registerAnniversary(parameters: request))
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                 case .edit:
                                     let request = RegisterAnniversaryRequest(
                                         title: name,
@@ -151,7 +170,7 @@ struct CreationView: View {
                                         alarmSchedule: strAlarmAry
                                     )
                                     viewModel.action(.editAnniversary(parameters: request, id: id!))
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                 }
                             }
                         } label: {
@@ -228,6 +247,7 @@ struct CreationView: View {
         .navigationBarHidden(true)
     }
 }
+
 
 // MARK: - Extension
 extension CreationView {
