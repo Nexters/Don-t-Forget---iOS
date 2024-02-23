@@ -133,7 +133,6 @@ struct CreationView: View {
                                 self.alertType = .cancelEditing
                             }
                             showConfirmView = true
-                            print("asdsad")
                         } label: {
                             Text("취소")
                                 .foregroundColor(.gray600)

@@ -36,7 +36,7 @@ struct ConfirmView: View {
         case .deleteAnniversary:
             return "기념일을 삭제할까요?"
         case .cancelCreating:
-            return "기념일 만들기를 취소할까용?"
+            return "기념일 만들기를 취소할까요?"
         }
     }
     
