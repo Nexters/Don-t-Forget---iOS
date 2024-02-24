@@ -18,10 +18,11 @@ struct CustomDatePicker: View {
     @State private var monthProxy: ScrollViewProxy?
     @State private var dayProxy: ScrollViewProxy?
     @State private var isProgrammaticScroll = false
+    private let infiniteScrollMultiplier = 100
     
     private let days = 1...31
     private let months = 1...12
-    private let years = 00...99
+    private let years = Array(0...99) 
     
     var body: some View {
         HStack(spacing: 0) {
@@ -123,7 +124,7 @@ struct CustomDatePicker: View {
         withAnimation {
             proxy?.scrollTo(value, anchor: .center)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.isProgrammaticScroll = false
         }
     }
