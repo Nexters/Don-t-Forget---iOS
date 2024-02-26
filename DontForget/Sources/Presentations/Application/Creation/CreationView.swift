@@ -111,7 +111,7 @@ struct CreationView: View {
                             )
                             .focused($focusField, equals: .memo)
                             .id(Field.memo)
-                            .padding(.bottom, 90)
+                            .padding(.bottom, 140)
                             .disableAutocorrection(true)
                         }
                         .background(
