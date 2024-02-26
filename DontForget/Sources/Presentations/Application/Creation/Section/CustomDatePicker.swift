@@ -25,30 +25,35 @@ struct CustomDatePicker: View {
     private let years = Array(0...99) 
     
     var body: some View {
-        HStack(spacing: 0) {
-            HStack(spacing: 0) {
+        HStack(spacing: 20) {
+            HStack(spacing: 10) {
                 datePickerComponent(
                     values: Array(years),
                     selection: $selectedYear,
                     proxy: $yearProxy
                 )
+                .frame(width: 32)
                 Text("년")
                     .foregroundColor(.gray)
             }
-            HStack(spacing: 0) {
+
+            HStack(spacing: 10) {
                 datePickerComponent(
                     values: Array(months),
                     selection: $selectedMonth,
                     proxy: $monthProxy
                 )
+                .frame(width: 32)
                 Text("월").foregroundColor(.gray)
             }
-            HStack(spacing: 0) {
+
+            HStack(spacing: 10) {
                 datePickerComponent(
                     values: Array(days),
                     selection: $selectedDay,
                     proxy: $dayProxy
                 )
+                .frame(width: 32)
                 Text("일").foregroundColor(.gray)
             }
         }
@@ -74,19 +79,19 @@ struct CustomDatePicker: View {
                 ScrollViewReader { scrollViewProxy in
                     ScrollView(showsIndicators: false) {
                         VStack {
-                            Spacer(minLength: fullView.size.height / 2 - 31.5)
+                            Spacer(minLength: fullView.size.height / 2 - 25)
                             LazyVGrid(columns: [GridItem(.fixed(32))], spacing: 0) {
                                 ForEach(values, id: \.self) { value in
                                     Text(String(format: "%02d", value))
                                         .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
-                                        .frame(height: 63)
+                                        .frame(width: 60, height: 63)
                                         .id(value)
                                         .anchorPreference(key: CenterPreferenceKey.self, value: .bounds) { anchor in
                                             [value: fullView[anchor].midY - (fullView.size.height / 2)]
                                         }
                                 }
                             }
-                            Spacer(minLength: fullView.size.height / 2 - 31.5)
+                            Spacer(minLength: fullView.size.height / 2 - 25)
                         }
                     }
                     .onAppear {

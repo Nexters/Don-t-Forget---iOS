@@ -14,6 +14,7 @@ struct CreationView: View {
     private enum Field: Hashable {
         case eventName, date, alarm, memo
     }
+    
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var memo = ""
@@ -176,7 +177,7 @@ struct CreationView: View {
                             Text(focusField == .eventName ? "다음" : "완료")
                                 .foregroundColor(.white)
                                 .padding()
-                                .frame(height: 50)
+                                .frame(height: 72)
                                 .frame(maxWidth: .infinity)
                                 .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
                                     .fill(Color.primary500))
@@ -193,6 +194,7 @@ struct CreationView: View {
                 switch type {
                 case .create:
                     self.selectedAlarmIndexes = Set(["D_DAY"])
+                    focusField = .eventName
                 case .edit:
                     viewModel.$anniversaryDetail
                         .receive(on: DispatchQueue.main)
@@ -200,14 +202,13 @@ struct CreationView: View {
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            self.baseType = res?.baseType == ConvertDate.solar.title ? 0 : 1
+                            self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
                             }
                         }
                         .store(in: &cancellables)
                 }
-                focusField = .eventName
                 NotificationCenter.default.addObserver(
                     forName: UIResponder.keyboardWillShowNotification,
                     object: nil,
@@ -246,7 +247,6 @@ struct CreationView: View {
         .navigationBarHidden(true)
     }
 }
-
 
 // MARK: - Extension
 extension CreationView {

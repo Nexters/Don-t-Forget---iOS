@@ -22,8 +22,9 @@ struct InputDateView: View {
             Text.coloredText(
                 "날짜 *",
                 coloredPart: "*",
-                color: .red
+                color: .pink
             )
+            .font(.system(size: 19, weight: .semibold))
             .padding(.leading, 16)
             .padding(.bottom, 32)
             .foregroundColor(.white)
@@ -31,11 +32,13 @@ struct InputDateView: View {
             Picker(
                 "",
                 selection: $selectedSegment
-            ) {
+            )
+            {
                 ForEach(0..<2) { index in
                     Text(segments[index]).tag(index)
                 }
             }
+            .frame(height: 52)
             .onChange(of: selectedSegment) {  _, _ in
                 Task {
                     let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
@@ -64,7 +67,7 @@ struct InputDateView: View {
                     selectedYear: $selectedYear
                 )
                 .onChange(of: [selectedDay, selectedMonth, selectedYear]) { _, _ in updateRequestDate() }
-                .padding(.horizontal, 60)
+                .padding(.horizontal, 20)
                 Spacer()
             }
             .padding(.horizontal, 16)
