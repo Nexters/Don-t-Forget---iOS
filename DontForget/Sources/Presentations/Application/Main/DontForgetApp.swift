@@ -56,6 +56,9 @@ extension AppDelegate: MessagingDelegate {
         didReceiveRegistrationToken fcmToken: String?
     ) {
         print("=== DEBUG: Firebase registration token - \(String(describing: fcmToken))")
+        if let fcmToken = fcmToken {
+            UserDefaults.standard.set(fcmToken, forKey: .fcmToken)
+        }
     }
 }
 
@@ -66,7 +69,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        
         let userInfo = notification.request.content.userInfo
         print("=== DEBUG: willPresent: userInfo: ", userInfo)
         completionHandler([.banner, .sound, .badge])

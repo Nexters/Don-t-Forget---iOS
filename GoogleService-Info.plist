@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.teamnexters.DontForget</string>
+	<string>com.dazzling.DontForget</string>
 	<key>PROJECT_ID</key>
 	<string>dontforget-1a171</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1002066859580:ios:911629690334eaad1d1539</string>
+	<string>1:1002066859580:ios:077d8dd09088fb271d1539</string>
 </dict>
 </plist>
