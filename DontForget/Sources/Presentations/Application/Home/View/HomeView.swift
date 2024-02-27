@@ -90,10 +90,15 @@ struct HomeView: View {
                                     creationViewNavigationLink
                                 } else {
                                     GridView(anniversary: anniversaries[index])
-                                        .onTapGesture {
-                                            id = anniversaries[index].anniversaryId
-                                            isNavigate = true
-                                        }
+                                        .simultaneousGesture(
+                                            TapGesture()
+                                                .onEnded({
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                        id = anniversaries[index].anniversaryId
+                                                        isNavigate = true
+                                                    }
+                                                })
+                                        )
                                 }
                             }
                         }

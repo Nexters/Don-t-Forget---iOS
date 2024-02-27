@@ -10,6 +10,7 @@ import SwiftUI
 struct GridView: View {
     
     let anniversary: AnniversaryDTO
+    @State private var scale = 1.0
     
     var body: some View {
         HStack {
@@ -69,5 +70,19 @@ struct GridView: View {
             }
                 .clipShape(RoundedRectangle(cornerRadius: 16))
         )
+        .gesture(
+            TapGesture()
+                .onEnded({ _ in
+                    withAnimation(.easeIn(duration: 0.1)) {
+                        scale = 0.96
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation {
+                            scale = 1.0
+                        }
+                    }
+                })
+        )
+        .scaleEffect(scale)
     }
 }
