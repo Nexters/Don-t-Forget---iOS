@@ -16,7 +16,7 @@ struct InputDateView: View {
     @Binding var calendarType: String
     private let segments = ["양력으로 입력", "음력으로 입력"]
     var viewModel: CreationViewModel
-    
+    @State private var isPickerDisabled = false
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text.coloredText(
@@ -38,8 +38,10 @@ struct InputDateView: View {
                     Text(segments[index]).tag(index)
                 }
             }
+            .disabled(isPickerDisabled) 
             .frame(height: 52)
             .onChange(of: selectedSegment) {  _, _ in
+                temporarilyDisablePicker()
                 Task {
                     let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
                     let convertedDate = await viewModel.convertToLunarOrSolar(
@@ -77,17 +79,19 @@ struct InputDateView: View {
 
 extension InputDateView {
     private func convertToFullYear(twoDigitYear: Int) -> Int {
-        if twoDigitYear >= 25 && twoDigitYear <= 99 {
-            return 1900 + twoDigitYear
-        } else if twoDigitYear >= 0 && twoDigitYear <= 24 {
-            return 2000 + twoDigitYear
+        let getTwoDigitYear = twoDigitYear % 100
+        if getTwoDigitYear >= 25 && getTwoDigitYear <= 99 {
+            return 1900 + getTwoDigitYear
+        } else if getTwoDigitYear >= 0 && getTwoDigitYear <= 24 {
+            return 2000 + getTwoDigitYear
         } else {
-            return twoDigitYear
+            return getTwoDigitYear
         }
     }
     
     private func updateRequestDate() {
         let fullYear = convertToFullYear(twoDigitYear: selectedYear)
+        print(fullYear)
         let fullMonth = String(format: "%02d", selectedMonth)
         let fullDay = String(format: "%02d", selectedDay)
         self.requestDate = "\(fullYear)-\(fullMonth)-\(fullDay)"
@@ -95,10 +99,19 @@ extension InputDateView {
     
     private func updateViewModelWithSelectedDate() -> Date {
         let fullYear = convertToFullYear(twoDigitYear: selectedYear)
+        print(fullYear)
+
         return viewModel.updateConvertedDate(
             day: selectedDay,
             month: selectedMonth,
             year: fullYear
         )
+    }
+    private func temporarilyDisablePicker() {
+        isPickerDisabled = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print("asd")
+            isPickerDisabled = false
+        }
     }
 }

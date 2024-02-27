@@ -22,7 +22,7 @@ struct CustomDatePicker: View {
     
     private let days = 1...31
     private let months = 1...12
-    private let years = Array(0...99) 
+    private let years = Array(0...99) + Array(100...199) + Array(200...299)
     
     var body: some View {
         HStack(spacing: 20) {
@@ -82,7 +82,8 @@ struct CustomDatePicker: View {
                             Spacer(minLength: fullView.size.height / 2 - 25)
                             LazyVGrid(columns: [GridItem(.fixed(32))], spacing: 0) {
                                 ForEach(values, id: \.self) { value in
-                                    Text(String(format: "%02d", value))
+                                    let displayValue = value % 100
+                                    Text("\(String(format: "%02d", displayValue))")
                                         .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
                                         .frame(width: 60, height: 63)
                                         .id(value)
