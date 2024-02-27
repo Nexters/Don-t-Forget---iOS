@@ -53,7 +53,7 @@ struct HomeView: View {
                         
                         VStack {
                             /* Main Anniversary */
-                            if let firstAnniversary = viewModel.anniversaries.first {
+                            if let firstAnniversary = anniversaries.first {
                                 ZStack {
                                     if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
                                         AnniversaryContentView(anniversary: firstAnniversaryDetail)
