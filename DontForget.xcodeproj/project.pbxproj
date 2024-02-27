@@ -46,6 +46,9 @@
 		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
 		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AD147F3E2B58006000561846 /* ComposableArchitecture */; };
+		AD36D44B2B8DD37D00250705 /* DeletionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */; };
+		AD36D44D2B8DD39500250705 /* DeletionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36D44C2B8DD39500250705 /* DeletionInterface.swift */; };
+		AD36D44F2B8DDBA100250705 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD36D44E2B8DDBA100250705 /* GoogleService-Info.plist */; };
 		AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */; };
 		AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45862B68C287009529DE /* AnniversaryContentView.swift */; };
 		AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B458C2B68DE8F009529DE /* ConfirmView.swift */; };
@@ -71,7 +74,6 @@
 		ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */; };
 		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
 		ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */; };
-		ADC7C2052B6A99F800EBE58C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,9 @@
 		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionRepository.swift; sourceTree = "<group>"; };
+		AD36D44C2B8DD39500250705 /* DeletionInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionInterface.swift; sourceTree = "<group>"; };
+		AD36D44E2B8DDBA100250705 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailView.swift; sourceTree = "<group>"; };
 		AD3B45862B68C287009529DE /* AnniversaryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryContentView.swift; sourceTree = "<group>"; };
 		AD3B458C2B68DE8F009529DE /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
@@ -160,7 +165,6 @@
 		ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAnniversaryUseCase.swift; sourceTree = "<group>"; };
 		ADC7C2022B6A7DF400EBE58C /* DontForget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DontForget.entitlements; sourceTree = "<group>"; };
 		ADC7C2032B6A7DFA00EBE58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +249,7 @@
 				09642C502B67C7640015220E /* CreationInterface.swift */,
 				ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */,
 				ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */,
+				AD36D44C2B8DD39500250705 /* DeletionInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				09642C5A2B67CA230015220E /* CreationRepository.swift */,
 				ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */,
 				ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */,
+				AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -322,7 +328,7 @@
 		AD147EF22B57F85600561846 = {
 			isa = PBXGroup;
 			children = (
-				ADC7C2042B6A99F700EBE58C /* GoogleService-Info.plist */,
+				AD36D44E2B8DDBA100250705 /* GoogleService-Info.plist */,
 				AD147F0C2B57F89300561846 /* .swiftlint.yml */,
 				AD147EFD2B57F85600561846 /* DontForget */,
 				AD147F2C2B57FFB500561846 /* DontForgetWidget */,
@@ -609,9 +615,9 @@
 				AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */,
 				AD7D58622B75E89B00832817 /* splash_lottie.json in Resources */,
 				AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */,
-				ADC7C2052B6A99F800EBE58C /* GoogleService-Info.plist in Resources */,
 				AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */,
 				AD147F032B57F85700561846 /* Assets.xcassets in Resources */,
+				AD36D44F2B8DDBA100250705 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,8 +680,10 @@
 				09642C552B67C8440015220E /* CreationViewModel.swift in Sources */,
 				09642C512B67C7640015220E /* CreationInterface.swift in Sources */,
 				AD0F99312B7C521700E2A915 /* InputDateView.swift in Sources */,
+				AD36D44B2B8DD37D00250705 /* DeletionRepository.swift in Sources */,
 				ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */,
 				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
+				AD36D44D2B8DD39500250705 /* DeletionInterface.swift in Sources */,
 				ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */,
 				ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */,
 				ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */,

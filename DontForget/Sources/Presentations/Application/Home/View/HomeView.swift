@@ -24,6 +24,8 @@ struct HomeView: View {
         viewModel.anniversaries
     }
     @State private var navigateToCreationView = false
+    @State private var isNavigate = false
+    @State private var id = -1
     
     var body: some View {
         NavigationView {
@@ -35,29 +37,41 @@ struct HomeView: View {
                             .resizable()
                             .scaledToFill()
                         
+                        NavigationLink(isActive: $isNavigate) {
+                            AnniversaryDetailView(
+                                viewModel: DefaultAnniversaryDetailViewModel(
+                                    anniversaryId: id,
+                                    anniversaryDetailRepository: AnniversaryDetailRepository(
+                                        service: AnniversaryService.shared
+                                    ),
+                                    deletionRepository: DeletionRepository(
+                                        service: AnniversaryService.shared
+                                    )
+                                )
+                            )
+                        } label: { EmptyView() }
+                        
                         VStack {
                             /* Main Anniversary */
                             if let firstAnniversary = viewModel.anniversaries.first {
-                                NavigationLink {
-                                    AnniversaryDetailView(
-                                        viewModel: DefaultAnniversaryDetailViewModel(
-                                            anniversaryId: firstAnniversary.anniversaryId,
-                                            anniversaryDetailRepository: AnniversaryDetailRepository(
-                                                service: AnniversaryService.shared
-                                            )
-                                        )
-                                    )
-                                } label: {
+                                ZStack {
                                     if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
                                         AnniversaryContentView(anniversary: firstAnniversaryDetail)
+                                            .onTapGesture {
+                                                id = firstAnniversaryDetail.anniversaryId
+                                                isNavigate = true
+                                            }
                                     }
                                 }
+                                .onAppear {
+                                    viewModel.action(.fetchFirstAnniversaryDetail)
+                                }
                             } else {
-                                LazyVGrid(columns: columns, content: {
+                                LazyVGrid(columns: columns) {
                                     creationViewNavigationLink
                                         .padding(.leading, 24)
                                         .padding(.bottom, 510)
-                                })
+                                }
                             }
                         }
                         .padding(.top, Constants.topLayout)
@@ -75,18 +89,11 @@ struct HomeView: View {
                                 if index == anniversaries.count {
                                     creationViewNavigationLink
                                 } else {
-                                    NavigationLink {
-                                        AnniversaryDetailView(
-                                            viewModel: DefaultAnniversaryDetailViewModel(
-                                                anniversaryId: anniversaries[index].anniversaryId,
-                                                anniversaryDetailRepository: AnniversaryDetailRepository(
-                                                    service: AnniversaryService.shared
-                                                )
-                                            )
-                                        )
-                                    } label: {
-                                        GridView(anniversary: anniversaries[index])
-                                    }
+                                    GridView(anniversary: anniversaries[index])
+                                        .onTapGesture {
+                                            id = anniversaries[index].anniversaryId
+                                            isNavigate = true
+                                        }
                                 }
                             }
                         }
@@ -96,9 +103,6 @@ struct HomeView: View {
                     
                     Spacer()
                         .frame(height: 30)
-                }
-                .onChange(of: navigateToCreationView) { _, status in
-                    if !status { viewModel.action(.readAnniversaries) }
                 }
                 .onAppear {
                     viewModel.action(.readAnniversaries)
@@ -152,12 +156,12 @@ extension HomeView {
                 viewModel: CreationViewModel(
                     creationUseCase: CreationUseCase(
                         creationRepository: CreationRepository(
-                            service: AnniversaryService()
+                            service: AnniversaryService.shared
                         )
                     ),
                     fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
                         anniversaryDetailRepository: AnniversaryDetailRepository(
-                            service: AnniversaryService()
+                            service: AnniversaryService.shared
                         )
                     )
                 ),

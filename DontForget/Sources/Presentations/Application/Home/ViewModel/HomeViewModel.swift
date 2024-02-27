@@ -16,10 +16,11 @@ final class DefaultHomeViewModel: ViewModelType {
     @Published var firstAnniversaryDetail: AnniversaryDetailDTO?
     @Published var anniversaries: [AnniversaryDTO]
     private let readAnniversariesUseCase: ReadAnniversariesUseCase
-    private let fetchFirstAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+    private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
     
     enum Action {
         case readAnniversaries
+        case fetchFirstAnniversaryDetail
     }
     
     enum State {
@@ -33,7 +34,7 @@ final class DefaultHomeViewModel: ViewModelType {
         self.state = .idle
         self.anniversaries = []
         self.readAnniversariesUseCase = readAnniversariesUseCase
-        self.fetchFirstAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
+        self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
             anniversaryDetailRepository: AnniversaryDetailRepository(
                 service: AnniversaryService.shared
             )
@@ -45,6 +46,10 @@ final class DefaultHomeViewModel: ViewModelType {
         switch action {
         case .readAnniversaries:
             readAnniversaries()
+        case .fetchFirstAnniversaryDetail:
+            if let firstAnniversary = self.anniversaries.first {
+                fetchAnniversaryDetail(anniversaryId: firstAnniversary.anniversaryId)
+            }
         }
     }
     
@@ -76,23 +81,19 @@ final class DefaultHomeViewModel: ViewModelType {
             }
         } receiveValue: { [weak self] response in
             if let self = self, let response = response {
-                // TODO: - Sort anniversaries by date
-                self.anniversaries = response.anniversaries
+                self.anniversaries = response.anniversaries.sorted(by: { $0.solarDate < $1.solarDate })
                 print("=== DEBUG: \(self.anniversaries)")
-                if !self.anniversaries.isEmpty {
-                    self.fetchFirstAnniversaryDetail(anniversaryId: self.anniversaries.first!.anniversaryId)
-                }
                 self.state = .success
             }
         }
         .store(in: &cancellables)
     }
     
-    private func fetchFirstAnniversaryDetail(anniversaryId: Int) {
+    private func fetchAnniversaryDetail(anniversaryId: Int) {
         Future<AnniversaryDetailResponse?, Error> { promise in
             Task {
                 do {
-                    let response = try await self.fetchFirstAnniversaryDetailUseCase.execute(
+                    let response = try await self.fetchAnniversaryDetailUseCase.execute(
                         requestValue: .init(
                             query: AnniversaryDetailQuery(
                                 queryId: anniversaryId
@@ -101,7 +102,7 @@ final class DefaultHomeViewModel: ViewModelType {
                     )
                     promise(.success(response))
                 } catch {
-                    print("=== DEBUG: \(error)")
+                    print("=== DEBUG here: \(error)")
                     promise(.failure(error))
                 }
             }

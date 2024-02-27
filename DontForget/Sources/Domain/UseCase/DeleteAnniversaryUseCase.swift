@@ -18,13 +18,13 @@ struct DeleteAnniversaryUseCaseRequestValue {
 final class DefaultDeleteAnniversaryUseCase: DeleteAnniversaryUseCase {
     
     // MARK: - Properties
-    private let anniversaryDetailRepository: AnniversaryDetailRepository
+    private let deletionRepository: DeletionRepository
     
-    init(anniversaryDetailRepository: AnniversaryDetailRepository) {
-        self.anniversaryDetailRepository = anniversaryDetailRepository
+    init(deletionRepository: DeletionRepository) {
+        self.deletionRepository = deletionRepository
     }
     
     func execute(requestValue: DeleteAnniversaryUseCaseRequestValue) async throws {
-        try await anniversaryDetailRepository.deleteAnniversary(query: requestValue.query)
+        try await deletionRepository.deleteAnniversary(query: requestValue.query)
     }
 }

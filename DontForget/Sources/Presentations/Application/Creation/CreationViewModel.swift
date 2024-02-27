@@ -42,7 +42,10 @@ final class CreationViewModel: ViewModelType {
     
     // MARK: - Init
     
-    init(creationUseCase: CreationUseCaseProtocol, fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase) {
+    init(
+        creationUseCase: CreationUseCaseProtocol,
+        fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+    ) {
         self.creationUseCase = creationUseCase
         self.state = .idle
         self.fetchAnniversaryDetailUseCase = fetchAnniversaryDetailUseCase
