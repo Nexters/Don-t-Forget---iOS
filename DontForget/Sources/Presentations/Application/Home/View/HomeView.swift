@@ -103,26 +103,17 @@ struct HomeView: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 20)
                     .padding(.top, 28)
                     
                     Spacer()
-                        .frame(height: 30)
+                        .frame(height: 120)
                 }
                 .onAppear {
                     viewModel.action(.readAnniversaries)
                 }
             }
-            .background(
-                LinearGradient(
-                    colors: [
-                        Color(hex: 0x212529),
-                        Color(hex: 0x0E1317)
-                    ],
-                    startPoint: .top,
-                    endPoint: .center
-                )
-            )
+            .background(Color.bgColor)
             .ignoresSafeArea()
         }
     }

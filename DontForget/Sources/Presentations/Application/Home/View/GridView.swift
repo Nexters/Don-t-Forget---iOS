@@ -18,8 +18,9 @@ struct GridView: View {
                 Text(anniversary.title)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.gray900: .gray50)
+                    .lineLimit(1)
                 Text("D\(Constants.getDDay(anniversary.solarDate))")
-                    .font(.system(size: 36, weight: .bold))
+                    .font(.system(size: 34, weight: .bold))
                     .foregroundStyle(
                         [
                             Anniversary.CardType.lunar.rawValue,
@@ -39,6 +40,7 @@ struct GridView: View {
             .padding(.bottom, 20)
             Spacer()
         }
+        .frame(height: 183)
         .background(
             ZStack {
                 Color(hex: 0x181E23)
@@ -68,8 +70,8 @@ struct GridView: View {
                         .scaledToFill()
                 }
             }
-                .clipShape(RoundedRectangle(cornerRadius: 16))
         )
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         .gesture(
             TapGesture()
                 .onEnded({ _ in

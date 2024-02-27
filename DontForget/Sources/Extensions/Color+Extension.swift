@@ -15,6 +15,8 @@ extension Color {
             self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
     
+    static let bgColor = Color(hex: 0x0E1317)
+    
     static let gray50 = Color(hex: 0xF8F9FA)
     static let gray100 = Color(hex: 0xF1F3F5)
     static let gray200 = Color(hex: 0xE9ECEf)
