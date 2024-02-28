@@ -48,7 +48,7 @@ struct HomeView: View {
                         } label: {
                             EmptyView()
                         }
-                        .hidden()
+                        
                         /* Background */
                         if anniversaries.isEmpty {
                             Image(.homeBackgroundFull)
@@ -57,7 +57,7 @@ struct HomeView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 32))
                         }
                         /* Main Anniversary */
-                        if let firstAnniversary = anniversaries.first {
+                        if anniversaries.first != nil {
                             ZStack {
                                 VStack {
                                     Image(.homeBackgroundFull)
@@ -68,14 +68,17 @@ struct HomeView: View {
                                 }
                                 if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
                                     AnniversaryContentView(anniversary: firstAnniversaryDetail)
-                                        .onTapGesture {
-                                            id = firstAnniversaryDetail.anniversaryId
-                                            isNavigate = true
-                                        }
+                                        .padding(.top, 120)
                                 }
                             }
                             .onAppear {
                                 viewModel.action(.fetchFirstAnniversaryDetail)
+                            }
+                            .onTapGesture {
+                                if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                    id = firstAnniversaryDetail.anniversaryId
+                                    isNavigate = true
+                                }
                             }
                         } else {
                             LazyVGrid(columns: columns) {
@@ -119,7 +122,7 @@ struct HomeView: View {
                     }.buttonStyle(BorderedButtonStyle())
                     #endif
                 }
-                .offset(y: anniversaries.isEmpty ? 0 : -120)
+                .offset(y: anniversaries.isEmpty ? 0 : -140)
                 .onAppear {
                     viewModel.action(.readAnniversaries)
                     viewModel.action(.changePushState)
