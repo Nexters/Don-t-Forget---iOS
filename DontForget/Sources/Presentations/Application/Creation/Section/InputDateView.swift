@@ -14,6 +14,7 @@ struct InputDateView: View {
     @Binding var selectedSegment: Int
     @Binding var requestDate: String
     @Binding var calendarType: String
+    @State private var type: ConvertDate = .solar
     private let segments = ["양력으로 입력", "음력으로 입력"]
     var viewModel: CreationViewModel
     @State private var isPickerDisabled = false
@@ -42,6 +43,7 @@ struct InputDateView: View {
             .frame(height: 52)
             .onChange(of: selectedSegment) {  _, _ in
                 temporarilyDisablePicker()
+                self.type =  selectedSegment == 0 ? .solar : .lunar
                 Task {
                     let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
                     let convertedDate = await viewModel.convertToLunarOrSolar(
@@ -51,7 +53,6 @@ struct InputDateView: View {
                     selectedYear = convertedDate[0]
                     selectedMonth = convertedDate[1]
                     selectedDay = convertedDate[2]
-                    
                     updateRequestDate()
                     calendarType = dateType.title
                 }
@@ -66,7 +67,8 @@ struct InputDateView: View {
                 CustomDatePicker(
                     selectedDay: $selectedDay,
                     selectedMonth: $selectedMonth,
-                    selectedYear: $selectedYear
+                    selectedYear: $selectedYear, 
+                    type: $type
                 )
                 .onChange(of: [selectedDay, selectedMonth, selectedYear]) { _, _ in updateRequestDate() }
                 .padding(.horizontal, 20)
