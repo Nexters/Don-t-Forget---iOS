@@ -59,18 +59,19 @@ struct HomeView: View {
                         /* Main Anniversary */
                         if anniversaries.first != nil {
                             ZStack {
-                                VStack {
-                                    Image(.homeBackgroundFull)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .clipShape(RoundedRectangle(cornerRadius: 32))
-                                    Spacer()
-                                }
+                                Image(.splashBackground)
+                                    .resizable()
+                                    .scaledToFill()
+                                LottieView(
+                                    name: .mainLottie,
+                                    loopMode: .loop
+                                )
                                 if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
                                     AnniversaryContentView(anniversary: firstAnniversaryDetail)
                                         .padding(.top, 120)
                                 }
                             }
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
                             .onAppear {
                                 viewModel.action(.fetchFirstAnniversaryDetail)
                             }

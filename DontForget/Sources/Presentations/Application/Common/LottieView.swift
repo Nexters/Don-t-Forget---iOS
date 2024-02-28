@@ -59,3 +59,7 @@ struct LottieView: UIViewRepresentable {
         }
     }
 }
+
+extension LottieView {
+    static let lottieInDetailView = LottieView(name: .mainLottie, loopMode: .loop)
+}

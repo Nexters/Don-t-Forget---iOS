@@ -28,9 +28,13 @@ struct AnniversaryDetailView: View {
     var body: some View {
         ZStack {
             /* Background */
-            Image(.homeBackgroundFull)
+            Image(.splashBackground)
                 .resizable()
                 .scaledToFill()
+            VStack {
+                Spacer()
+                LottieView.lottieInDetailView
+            }
             if let anniversaryDetail = viewModel.anniversaryDetail {
                 NavigationLink(
                     destination: CreationView(
