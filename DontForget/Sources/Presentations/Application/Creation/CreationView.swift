@@ -158,8 +158,10 @@ struct CreationView: View {
                                         cardType: randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    viewModel.action(.registerAnniversary(parameters: request))
-                                    dismiss()
+                                    if name != "" {
+                                        viewModel.action(.registerAnniversary(parameters: request))
+                                        dismiss()
+                                    }
                                 case .edit:
                                     let request = RegisterAnniversaryRequest(
                                         title: name,
@@ -169,8 +171,10 @@ struct CreationView: View {
                                         cardType: viewModel.anniversaryDetail?.cardType ?? randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    viewModel.action(.editAnniversary(parameters: request, id: id!))
-                                    dismiss()
+                                    if name != "" {
+                                        viewModel.action(.editAnniversary(parameters: request, id: id!))
+                                        dismiss()
+                                    }
                                 }
                             }
                         } label: {
@@ -202,6 +206,7 @@ struct CreationView: View {
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
+                            print(ConvertDate.solar.title)
                             self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
