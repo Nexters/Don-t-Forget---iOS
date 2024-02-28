@@ -115,4 +115,50 @@ class AnniversaryService {
             }
         }
     }
+    
+    func changePushState(status: String) async throws -> Int {
+        try await withCheckedThrowingContinuation { continuation in
+            if let token = UserDefaults.standard.string(forKey: .fcmToken) {
+                let request = ChangePushStateRequest(
+                    token: token,
+                    deviceUuid: Constants.uuid,
+                    status: status
+                )
+                provider.request(.changePushState(parameter: request)) { result in
+                    switch result {
+                    case let .success(response):
+                        do {
+                            let response = try response.map(Int.self)
+                            continuation.resume(returning: response)
+                        } catch {
+                            continuation.resume(throwing: error)
+                        }
+                    case let .failure(error):
+                        print("=== DEBUG: changePushState \(error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func fcmTest() async throws -> Int {
+        try await withCheckedThrowingContinuation { continuation in
+            let request = TestRequest(deviceUuid: Constants.uuid, title: "하잉", body: "다연이지요")
+            provider.request(.fcmTest(parameter: request)) { result in
+                switch result {
+                case let .success(response):
+                    do {
+                        let response = try response.map(Int.self)
+                        continuation.resume(returning: response)
+                        print("=== fcmTest() \(response)")
+                    } catch {
+                        continuation.resume(throwing: error)
+                        print("=== fcmTest() \(error)")
+                    }
+                case let .failure(error):
+                    print("=== DEBUG: fcmTest \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }

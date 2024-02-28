@@ -20,3 +20,7 @@ struct AnniversariesResponse: Decodable {
 struct AnniversaryDetailResponse: Decodable {
     let anniversaryDetail: AnniversaryDetailDTO
 }
+
+struct TestResponse: Decodable {
+    let code: String
+}

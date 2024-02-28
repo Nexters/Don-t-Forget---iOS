@@ -8,6 +8,7 @@
 import SwiftUI
 
 enum AlertType {
+    case cancelCreating
     case cancelEditing
     case deleteAnniversary
 }
@@ -25,7 +26,7 @@ struct ConfirmView: View {
     @State private var animationOffsetY = UIScreen.height
     
     var isConfirmToCancel: Bool {
-        alertType == .cancelEditing
+        alertType == .cancelEditing || alertType == .cancelCreating
     }
     
     var confirmTitle: String {
@@ -34,6 +35,8 @@ struct ConfirmView: View {
             return "기념일 수정을 취소할까요?"
         case .deleteAnniversary:
             return "기념일을 삭제할까요?"
+        case .cancelCreating:
+            return "기념일 만들기를 취소할까요?"
         }
     }
     
@@ -43,6 +46,8 @@ struct ConfirmView: View {
             "수정 중이던 내용은\n저장되지 않고, 사라집니다."
         case .deleteAnniversary:
             "기념일을 삭제한 후에는\n되돌릴 수 없어요."
+        case .cancelCreating:
+            "만들고 있던 기념일은\n저장되지않고, 사라집니다."
         }
     }
     

@@ -48,4 +48,7 @@ extension String {
     
     /* Lottie */
     static let splashLottie = "splash_lottie"
+    
+    /* UserDefaults key*/
+    static let fcmToken = "fcmToken"
 }
