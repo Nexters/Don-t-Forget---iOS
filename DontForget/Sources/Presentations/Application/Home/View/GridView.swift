@@ -30,7 +30,7 @@ struct GridView: View {
                             anniversary.cardType == Anniversary.CardType.arm.rawValue ? .gray50 : .yellow500
                     )
                 Spacer(minLength: 30)
-                Text(anniversary.solarDate)
+                Text(anniversary.solarDate.replacingOccurrences(of: "-", with: "."))
                     .font(.system(size: 16))
                     .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.primary700 : .white)
                     .opacity(0.5)
