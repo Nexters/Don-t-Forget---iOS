@@ -29,6 +29,7 @@ extension String {
     /* Image */
     static let splashBackground = "splashBackground"
     
+    static let homeBackgroundWithNoise = "homeBackgroundWithNoise"
     static let homeBackgroundFull = "homeBackgroundFull"
     static let homeBackgroundHalf = "homeBackgroundHalf"
     static let cardBackground1 = "Card_BG_1"

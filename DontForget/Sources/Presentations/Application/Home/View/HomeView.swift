@@ -32,11 +32,7 @@ struct HomeView: View {
             ScrollView {
                 VStack {
                     ZStack {
-                        /* Background */
-                        Image(viewModel.anniversaries.count == 0 ? .homeBackgroundFull : .homeBackgroundHalf)
-                            .resizable()
-                            .scaledToFill()
-                        
+                        /* Navigation Link with Empty View*/
                         NavigationLink(isActive: $isNavigate) {
                             AnniversaryDetailView(
                                 viewModel: DefaultAnniversaryDetailViewModel(
@@ -49,35 +45,46 @@ struct HomeView: View {
                                     )
                                 )
                             )
-                        } label: { EmptyView() }
-                        
-                        VStack {
-                            /* Main Anniversary */
-                            if let firstAnniversary = anniversaries.first {
-                                ZStack {
-                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
-                                        AnniversaryContentView(anniversary: firstAnniversaryDetail)
-                                            .onTapGesture {
-                                                id = firstAnniversaryDetail.anniversaryId
-                                                isNavigate = true
-                                            }
-                                    }
+                        } label: {
+                            EmptyView()
+                        }
+                        .hidden()
+                        /* Background */
+                        if anniversaries.isEmpty {
+                            Image(.homeBackgroundFull)
+                                .resizable()
+                                .scaledToFill()
+                                .clipShape(RoundedRectangle(cornerRadius: 32))
+                        }
+                        /* Main Anniversary */
+                        if let firstAnniversary = anniversaries.first {
+                            ZStack {
+                                VStack {
+                                    Image(.homeBackgroundFull)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .clipShape(RoundedRectangle(cornerRadius: 32))
+                                    Spacer()
                                 }
-                                .onAppear {
-                                    viewModel.action(.fetchFirstAnniversaryDetail)
-                                }
-                            } else {
-                                LazyVGrid(columns: columns) {
-                                    creationViewNavigationLink
-                                        .padding(.leading, 24)
-                                        .padding(.bottom, 510)
+                                if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                    AnniversaryContentView(anniversary: firstAnniversaryDetail)
+                                        .onTapGesture {
+                                            id = firstAnniversaryDetail.anniversaryId
+                                            isNavigate = true
+                                        }
                                 }
                             }
+                            .onAppear {
+                                viewModel.action(.fetchFirstAnniversaryDetail)
+                            }
+                        } else {
+                            LazyVGrid(columns: columns) {
+                                creationViewNavigationLink
+                                    .padding(.leading, 24)
+                                    .padding(.bottom, 510)
+                            }
                         }
-                        .padding(.top, Constants.topLayout)
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: 32))
-                    
                     Spacer()
                     
                     LazyVGrid(
@@ -111,16 +118,20 @@ struct HomeView: View {
                         viewModel.action(.fcmTest)
                     }.buttonStyle(BorderedButtonStyle())
                     #endif
-                    
-                    Spacer()
-                        .frame(height: 120)
                 }
+                .offset(y: anniversaries.isEmpty ? 0 : -120)
                 .onAppear {
                     viewModel.action(.readAnniversaries)
                     viewModel.action(.changePushState)
                 }
             }
-            .background(Color.bgColor)
+            .scrollDisabled(anniversaries.isEmpty)
+            .background(
+                Image(.homeBackgroundWithNoise)
+                    .resizable()
+                    .scaledToFill()
+                    .brightness(-0.01)
+            )
             .ignoresSafeArea()
         }
     }
