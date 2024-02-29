@@ -132,7 +132,17 @@ final class DefaultHomeViewModel: ViewModelType {
         Future<Int, Error> { promise in
             Task {
                 do {
-                    let response = try await AnniversaryService.shared.changePushState(status: "ON")
+                    var status = NotificationStatus.ON.rawValue
+                    UNUserNotificationCenter.current().getNotificationSettings { settings in
+                        switch settings.authorizationStatus {
+                        case .notDetermined, .authorized: /// 한 번만 허용, 푸시 허용
+                            status = NotificationStatus.ON.rawValue
+                        default:
+                            status = NotificationStatus.OFF.rawValue
+                        }
+                    }
+                    let response = try await AnniversaryService.shared.changePushState(status: status)
+                    print("=== DEBUG: changeStatus \(status)")
                     promise(.success(response))
                 } catch {
                     print("=== DEBUG: changeStatus \(error)")
