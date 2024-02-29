@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AlarmView: View {
+    
     @Binding var selectedAlarmIndexes: Set<String>
     @Binding var strAlarmAry: [String]
     var alarmPeriods: [AlarmPeriod]
@@ -16,6 +17,7 @@ struct AlarmView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("미리 알림")
+                .font(.system(size: 19, weight: .semibold))
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)

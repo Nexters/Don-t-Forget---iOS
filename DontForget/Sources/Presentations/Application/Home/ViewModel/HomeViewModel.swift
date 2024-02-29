@@ -17,7 +17,8 @@ final class DefaultHomeViewModel: ViewModelType {
     @Published var anniversaries: [AnniversaryDTO]
     private let readAnniversariesUseCase: ReadAnniversariesUseCase
     private let fetchFirstAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
-    
+    private var isLoadingAnniversaryDetail = false
+
     enum Action {
         case readAnniversaries
         case changePushState
@@ -76,7 +77,8 @@ final class DefaultHomeViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
+        .sink { [weak self] completion in
+            self?.isLoadingAnniversaryDetail = false // 작업 완료 후 상태 업데이트
             if case .failure = completion {
                 #warning("handling error")
             }
@@ -86,7 +88,10 @@ final class DefaultHomeViewModel: ViewModelType {
                 self.anniversaries = response.anniversaries
                 print("=== DEBUG: \(self.anniversaries)")
                 if !self.anniversaries.isEmpty {
+                    print(self.anniversaries.first!.anniversaryId)
                     self.fetchFirstAnniversaryDetail(anniversaryId: self.anniversaries.first!.anniversaryId)
+                } else {
+                    
                 }
                 self.state = .success
             }
@@ -98,6 +103,7 @@ final class DefaultHomeViewModel: ViewModelType {
         Future<AnniversaryDetailResponse?, Error> { promise in
             Task {
                 do {
+                    print("쿼리ID\(anniversaryId)")
                     let response = try await self.fetchFirstAnniversaryDetailUseCase.execute(
                         requestValue: .init(
                             query: AnniversaryDetailQuery(
@@ -105,6 +111,7 @@ final class DefaultHomeViewModel: ViewModelType {
                             )
                         )
                     )
+                    print("뷰모델!!\(response)")
                     promise(.success(response))
                 } catch {
                     print("=== DEBUG: \(error)")

@@ -14,7 +14,8 @@ struct InputNameView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .red)
+            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .pink)
+                .font(.system(size: 19, weight: .semibold))
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
