@@ -14,16 +14,18 @@ struct InputDateView: View {
     @Binding var selectedSegment: Int
     @Binding var requestDate: String
     @Binding var calendarType: String
+    @State private var type: ConvertDate = .solar
     private let segments = ["양력으로 입력", "음력으로 입력"]
     var viewModel: CreationViewModel
-    
+    @State private var isPickerDisabled = false
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text.coloredText(
                 "날짜 *",
                 coloredPart: "*",
-                color: .red
+                color: .pink
             )
+            .font(.system(size: 19, weight: .semibold))
             .padding(.leading, 16)
             .padding(.bottom, 32)
             .foregroundColor(.white)
@@ -36,7 +38,11 @@ struct InputDateView: View {
                     Text(segments[index]).tag(index)
                 }
             }
+            .disabled(isPickerDisabled) 
+            .frame(height: 52)
             .onChange(of: selectedSegment) {  _, _ in
+                temporarilyDisablePicker()
+                self.type =  selectedSegment == 0 ? .solar : .lunar
                 Task {
                     let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
                     let convertedDate = await viewModel.convertToLunarOrSolar(
@@ -46,7 +52,6 @@ struct InputDateView: View {
                     selectedYear = convertedDate[0]
                     selectedMonth = convertedDate[1]
                     selectedDay = convertedDate[2]
-                    
                     updateRequestDate()
                     calendarType = dateType.title
                 }
@@ -61,10 +66,11 @@ struct InputDateView: View {
                 CustomDatePicker(
                     selectedDay: $selectedDay,
                     selectedMonth: $selectedMonth,
-                    selectedYear: $selectedYear
+                    selectedYear: $selectedYear, 
+                    type: $type
                 )
                 .onChange(of: [selectedDay, selectedMonth, selectedYear]) { _, _ in updateRequestDate() }
-                .padding(.horizontal, 60)
+                .padding(.horizontal, 20)
                 Spacer()
             }
             .padding(.horizontal, 16)
@@ -74,12 +80,13 @@ struct InputDateView: View {
 
 extension InputDateView {
     private func convertToFullYear(twoDigitYear: Int) -> Int {
-        if twoDigitYear >= 25 && twoDigitYear <= 99 {
-            return 1900 + twoDigitYear
-        } else if twoDigitYear >= 0 && twoDigitYear <= 24 {
-            return 2000 + twoDigitYear
+        let getTwoDigitYear = twoDigitYear % 100
+        if getTwoDigitYear >= 25 && getTwoDigitYear <= 99 {
+            return 1900 + getTwoDigitYear
+        } else if getTwoDigitYear >= 0 && getTwoDigitYear <= 24 {
+            return 2000 + getTwoDigitYear
         } else {
-            return twoDigitYear
+            return getTwoDigitYear
         }
     }
     
@@ -97,5 +104,11 @@ extension InputDateView {
             month: selectedMonth,
             year: fullYear
         )
+    }
+    private func temporarilyDisablePicker() {
+        isPickerDisabled = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            isPickerDisabled = false
+        }
     }
 }

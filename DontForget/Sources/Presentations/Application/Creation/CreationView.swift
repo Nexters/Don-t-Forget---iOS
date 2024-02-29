@@ -108,7 +108,7 @@ struct CreationView: View {
                             )
                             .focused($focusField, equals: .memo)
                             .id(Field.memo)
-                            .padding(.bottom, 90)
+                            .padding(.bottom, 140)
                             .disableAutocorrection(true)
                         }
                         .background(
@@ -155,8 +155,10 @@ struct CreationView: View {
                                         cardType: randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    viewModel.action(.registerAnniversary(parameters: request))
-                                    dismiss()
+                                    if !name.isEmpty {
+                                        viewModel.action(.registerAnniversary(parameters: request))
+                                        dismiss()
+                                    }
                                 case .edit:
                                     let request = RegisterAnniversaryRequest(
                                         title: name,
@@ -166,15 +168,17 @@ struct CreationView: View {
                                         cardType: viewModel.anniversaryDetail?.cardType ?? randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    viewModel.action(.editAnniversary(parameters: request, id: id!))
-                                    dismiss()
+                                    if !name.isEmpty {
+                                        viewModel.action(.editAnniversary(parameters: request, id: id!))
+                                        dismiss()
+                                    }
                                 }
                             }
                         } label: {
                             Text(focusField == .eventName ? "다음" : "완료")
                                 .foregroundColor(.white)
                                 .padding()
-                                .frame(height: 50)
+                                .frame(height: 72)
                                 .frame(maxWidth: .infinity)
                                 .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
                                     .fill(Color.primary500))
@@ -191,6 +195,7 @@ struct CreationView: View {
                 switch type {
                 case .create:
                     self.selectedAlarmIndexes = Set([AlarmPeriod.dDay.schedule])
+                    focusField = .eventName
                 case .edit:
                     viewModel.fetchAnniversaryDetail(id: id!)
                     viewModel.$anniversaryDetail
@@ -199,14 +204,13 @@ struct CreationView: View {
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            self.baseType = res?.baseType == ConvertDate.solar.title ? 0 : 1
+                            self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
                             }
                         }
                         .store(in: &cancellables)
                 }
-                focusField = .eventName
                 NotificationCenter.default.addObserver(
                     forName: UIResponder.keyboardWillShowNotification,
                     object: nil,
@@ -261,7 +265,7 @@ extension CreationView {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: dateString) else {
-            print("Invalid date format")
+            print("=== DEBUG: Invalid date format")
             return nil
         }
         

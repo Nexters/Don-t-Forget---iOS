@@ -11,6 +11,8 @@ struct CustomDatePicker: View {
     @Binding var selectedDay: Int
     @Binding var selectedMonth: Int
     @Binding var selectedYear: Int
+    @Binding var type: ConvertDate
+
     @State private var dragOffset: CGFloat = 0
     @State private var scrollViewProxy: ScrollViewProxy?
     
@@ -20,35 +22,39 @@ struct CustomDatePicker: View {
     @State private var isProgrammaticScroll = false
     private let infiniteScrollMultiplier = 100
     
-    private let days = 1...31
     private let months = 1...12
-    private let years = Array(0...99) 
+    private let years = Array(0...99) + Array(100...199) + Array(200...299)
     
     var body: some View {
-        HStack(spacing: 0) {
-            HStack(spacing: 0) {
+        HStack(spacing: 20) {
+            HStack(spacing: 10) {
                 datePickerComponent(
                     values: Array(years),
                     selection: $selectedYear,
                     proxy: $yearProxy
                 )
+                .frame(width: 32)
                 Text("년")
                     .foregroundColor(.gray)
             }
-            HStack(spacing: 0) {
+
+            HStack(spacing: 10) {
                 datePickerComponent(
                     values: Array(months),
                     selection: $selectedMonth,
                     proxy: $monthProxy
                 )
+                .frame(width: 32)
                 Text("월").foregroundColor(.gray)
             }
-            HStack(spacing: 0) {
+
+            HStack(spacing: 10) {
                 datePickerComponent(
-                    values: Array(days),
+                    values: daysInMonth(for: type),
                     selection: $selectedDay,
                     proxy: $dayProxy
                 )
+                .frame(width: 32)
                 Text("일").foregroundColor(.gray)
             }
         }
@@ -74,19 +80,20 @@ struct CustomDatePicker: View {
                 ScrollViewReader { scrollViewProxy in
                     ScrollView(showsIndicators: false) {
                         VStack {
-                            Spacer(minLength: fullView.size.height / 2 - 31.5)
+                            Spacer(minLength: fullView.size.height / 2 - 25)
                             LazyVGrid(columns: [GridItem(.fixed(32))], spacing: 0) {
                                 ForEach(values, id: \.self) { value in
-                                    Text(String(format: "%02d", value))
+                                    let displayValue = value % 100
+                                    Text("\(String(format: "%02d", displayValue))")
                                         .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
-                                        .frame(height: 63)
+                                        .frame(width: 60, height: 63)
                                         .id(value)
                                         .anchorPreference(key: CenterPreferenceKey.self, value: .bounds) { anchor in
                                             [value: fullView[anchor].midY - (fullView.size.height / 2)]
                                         }
                                 }
                             }
-                            Spacer(minLength: fullView.size.height / 2 - 31.5)
+                            Spacer(minLength: fullView.size.height / 2 - 25)
                         }
                     }
                     .onAppear {
@@ -128,18 +135,28 @@ struct CustomDatePicker: View {
             self.isProgrammaticScroll = false
         }
     }
+    private func daysInMonth(for type: ConvertDate) -> [Int] {
+        switch type {
+        case .solar:
+            return Array(1...31)
+        case .lunar:
+            return Array(1...30)
+        }
+    }
 }
 
 struct CustomDatePicker_Previews: PreviewProvider {
     @State static var selectedDay = 1
     @State static var selectedMonth = 1
     @State static var selectedYear = 80
-    
+    @State static var type: ConvertDate = .solar
+
     static var previews: some View {
         CustomDatePicker(
             selectedDay: $selectedDay,
             selectedMonth: $selectedMonth,
-            selectedYear: $selectedYear
+            selectedYear: $selectedYear, 
+            type: $type
         )
     }
 }
