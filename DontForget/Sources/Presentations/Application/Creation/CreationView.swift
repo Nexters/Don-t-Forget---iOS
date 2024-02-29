@@ -157,7 +157,6 @@ struct CreationView: View {
                                     )
                                     if !name.isEmpty {
                                         viewModel.action(.registerAnniversary(parameters: request))
-                                        dismiss()
                                     }
                                 case .edit:
                                     let request = RegisterAnniversaryRequest(
@@ -170,7 +169,6 @@ struct CreationView: View {
                                     )
                                     if !name.isEmpty {
                                         viewModel.action(.editAnniversary(parameters: request, id: id!))
-                                        dismiss()
                                     }
                                 }
                             }
@@ -246,6 +244,13 @@ struct CreationView: View {
                         name: UIResponder.keyboardWillHideNotification,
                         object: nil
                     )
+            }
+            .onReceive(viewModel.viewDismissalModePublisher) { shouldDismiss in
+                if shouldDismiss {
+                    withAnimation {
+                        dismiss()
+                    }
+                }
             }
         }
         .navigationBarHidden(true)

@@ -88,6 +88,9 @@ final class DefaultHomeViewModel: ViewModelType {
                 self.anniversaries = response.anniversaries.sorted(by: { $0.solarDate < $1.solarDate })
                 print("=== DEBUG: \(self.anniversaries)")
                 self.state = .success
+                if !self.anniversaries.isEmpty {
+                    self.fetchFirstAnniversaryDetail()
+                }
             }
         }
         .store(in: &cancellables)
@@ -108,7 +111,7 @@ final class DefaultHomeViewModel: ViewModelType {
                         )
                         promise(.success(response))
                     } catch {
-                        print("=== DEBUG here: \(error)")
+                        print("=== DEBUG here: \(error) \n \(firstAnniversary)")
                         promise(.failure(error))
                     }
                 }

@@ -27,6 +27,14 @@ final class CreationViewModel: ViewModelType {
     @Published var cardType: String = ""
     @Published var alarmSchedule: [String] = []
     @Published var getDate: [Int] = []
+    
+    var viewDismissalModePublisher = PassthroughSubject<Bool, Never>()
+    private var dismiss = false {
+            didSet {
+                viewDismissalModePublisher.send(dismiss)
+            }
+        }
+    
     // MARK: - Types
     
     enum Action {
@@ -66,6 +74,7 @@ final class CreationViewModel: ViewModelType {
     // MARK: - Method
     
     func registerAnniversary(request: RegisterAnniversaryRequest) {
+        self.state = .loading
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
@@ -77,17 +86,19 @@ final class CreationViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink(receiveCompletion: { completion in
+        .sink { completion in
             if case let .failure(error) = completion {
                 self.errorMessage = error.localizedDescription
             }
-        }, receiveValue: { [weak self] response in
-            self?.creationResponse = response
-        })
+        } receiveValue: { response in
+            self.creationResponse = response
+            self.dismiss = true
+        }
         .store(in: &cancellables)
     }
     
     func editAnniversary(id: Int, request: RegisterAnniversaryRequest) {
+        self.state = .loading
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
@@ -104,6 +115,7 @@ final class CreationViewModel: ViewModelType {
             }
         }, receiveValue: { [weak self] response in
             self?.creationResponse = response
+            self?.dismiss = true
         })
         .store(in: &cancellables)
     }

@@ -78,7 +78,9 @@ struct AnniversaryDetailView: View {
                             })
                             .onEnded({ _ in
                                 iconStates[.back] = false
-                                dismiss()
+                                withAnimation {
+                                    dismiss()
+                                }
                             })
                         )
                     
@@ -137,7 +139,7 @@ struct AnniversaryDetailView: View {
                 .padding(.vertical, 16)
                 
                 if let detail = viewModel.anniversaryDetail {
-                    AnniversaryContentView(anniversary: viewModel.anniversaryDetail!)
+                    AnniversaryContentView(anniversary: detail)
                         .padding(.bottom, 200)
                 }
             }
@@ -163,12 +165,21 @@ struct AnniversaryDetailView: View {
             )
             .onEnded({ value in
                 if value.translation.width > 200 {
-                    dismiss()
+                    withAnimation {
+                        dismiss()
+                    }
                 }
             })
         )
         .onAppear {
             viewModel.action(.fetchAnniversaryDetail)
+        }
+        .onReceive(viewModel.viewDismissalModePublisher) { shouldDismiss in
+            if shouldDismiss {
+                withAnimation {
+                    dismiss()
+                }
+            }
         }
     }
 }

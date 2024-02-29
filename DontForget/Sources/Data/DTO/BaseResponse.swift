@@ -10,7 +10,7 @@ import Foundation
 struct Empty: Decodable {}
 
 struct CreationResponse: Decodable {
-    let anniversaryId: String
+//    let anniversaryId: Int
 }
 
 struct AnniversariesResponse: Decodable {

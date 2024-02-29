@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
+    private static let scrollTopView = "scrollTopView"
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -29,120 +30,127 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    ZStack {
-                        /* Navigation Link with Empty View*/
-                        NavigationLink(isActive: $isNavigate) {
-                            AnniversaryDetailView(
-                                viewModel: DefaultAnniversaryDetailViewModel(
-                                    anniversaryId: id,
-                                    anniversaryDetailRepository: AnniversaryDetailRepository(
-                                        service: AnniversaryService.shared
-                                    ),
-                                    deletionRepository: DeletionRepository(
-                                        service: AnniversaryService.shared
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack {
+                        ZStack {
+                            /* Navigation Link with Empty View*/
+                            NavigationLink(isActive: $isNavigate) {
+                                AnniversaryDetailView(
+                                    viewModel: DefaultAnniversaryDetailViewModel(
+                                        anniversaryId: id,
+                                        anniversaryDetailRepository: AnniversaryDetailRepository(
+                                            service: AnniversaryService.shared
+                                        ),
+                                        deletionRepository: DeletionRepository(
+                                            service: AnniversaryService.shared
+                                        )
                                     )
                                 )
-                            )
-                        } label: {
-                            EmptyView()
-                        }
-                        
-                        /* Background */
-                        if anniversaries.isEmpty {
-                            ZStack {
-                                Image(.splashBackground)
-                                    .resizable()
-                                    .scaledToFill()
-                                LottieView(
-                                    name: .mainLottie,
-                                    loopMode: .loop
-                                )
+                            } label: {
+                                EmptyView()
                             }
-                            .clipShape(RoundedRectangle(cornerRadius: 32))
-                        }
-                        /* Main Anniversary */
-                        if anniversaries.first != nil {
-                            ZStack {
-                                Image(.splashBackground)
-                                    .resizable()
-                                    .scaledToFill()
-                                LottieView(
-                                    name: .mainLottie,
-                                    loopMode: .loop
-                                )
-                                if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
-                                    AnniversaryContentView(anniversary: firstAnniversaryDetail)
-                                        .padding(.top, 120)
+                            
+                            /* Background */
+                            if anniversaries.isEmpty {
+                                ZStack {
+                                    Image(.splashBackground)
+                                        .resizable()
+                                        .scaledToFill()
+                                    LottieView(
+                                        name: .mainLottie,
+                                        loopMode: .loop
+                                    )
                                 }
+                                .clipShape(RoundedRectangle(cornerRadius: 32))
                             }
-                            .clipShape(RoundedRectangle(cornerRadius: 32))
-                            .onAppear {
-                                viewModel.action(.fetchFirstAnniversaryDetail)
-                            }
-                            .onTapGesture {
-                                if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
-                                    id = firstAnniversaryDetail.anniversaryId
-                                    isNavigate = true
+                            /* Main Anniversary */
+                            if anniversaries.first != nil {
+                                ZStack {
+                                    Image(.splashBackground)
+                                        .resizable()
+                                        .scaledToFill()
+                                    LottieView(
+                                        name: .mainLottie,
+                                        loopMode: .loop
+                                    )
+                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                        AnniversaryContentView(anniversary: firstAnniversaryDetail)
+                                            .padding(.top, 120)
+                                    }
                                 }
-                            }
-                        } else {
-                            LazyVGrid(columns: columns) {
-                                creationViewNavigationLink
-                                    .padding(.leading, 24)
-                                    .padding(.bottom, 510)
-                            }
-                        }
-                    }
-                    Spacer()
-                    
-                    LazyVGrid(
-                        columns: columns,
-                        spacing: 20
-                    ) {
-                        ForEach(1..<anniversaries.count + 1, id: \.self) { index in
-                            if anniversaries.count > 0 {
-                                if index == anniversaries.count {
+                                .clipShape(RoundedRectangle(cornerRadius: 32))
+                                .onTapGesture {
+                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                        id = firstAnniversaryDetail.anniversaryId
+                                        isNavigate = true
+                                    }
+                                }
+                            } else {
+                                LazyVGrid(columns: columns) {
                                     creationViewNavigationLink
-                                } else {
-                                    GridView(anniversary: anniversaries[index])
-                                        .simultaneousGesture(
-                                            TapGesture()
-                                                .onEnded({
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                        id = anniversaries[index].anniversaryId
-                                                        isNavigate = true
-                                                    }
-                                                })
-                                        )
+                                        .padding(.leading, 24)
+                                        .padding(.bottom, 510)
                                 }
                             }
                         }
+                        Spacer()
+                        
+                        LazyVGrid(
+                            columns: columns,
+                            spacing: 20
+                        ) {
+                            ForEach(1..<anniversaries.count + 1, id: \.self) { index in
+                                if anniversaries.count > 0 {
+                                    if index == anniversaries.count {
+                                        creationViewNavigationLink
+                                    } else {
+                                        GridView(anniversary: anniversaries[index])
+                                            .simultaneousGesture(
+                                                TapGesture()
+                                                    .onEnded({
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                            id = anniversaries[index].anniversaryId
+                                                            isNavigate = true
+                                                        }
+                                                    })
+                                            )
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 28)
+                        
+                        #if DEBUG
+                        Button("FCM TEST") {
+                            viewModel.action(.fcmTest)
+                        }.buttonStyle(BorderedButtonStyle())
+                        #endif
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 28)
-                    
-                    #if DEBUG
-                    Button("FCM TEST") {
-                        viewModel.action(.fcmTest)
-                    }.buttonStyle(BorderedButtonStyle())
-                    #endif
+                    .offset(y: anniversaries.isEmpty ? 0 : -140)
+                    .onAppear {
+                        viewModel.action(.readAnniversaries)
+                        viewModel.action(.changePushState)
+                    }
+                    .id(Self.scrollTopView)
                 }
-                .offset(y: anniversaries.isEmpty ? 0 : -140)
-                .onAppear {
-                    viewModel.action(.readAnniversaries)
-                    viewModel.action(.changePushState)
+                .scrollDisabled(anniversaries.isEmpty)
+                .background(
+                    Image(.homeBackgroundWithNoise)
+                        .resizable()
+                        .scaledToFill()
+                        .brightness(-0.01)
+                )
+                .ignoresSafeArea()
+                .onChange(of: anniversaries) { _, anniversaries in
+                    if anniversaries.isEmpty {
+                        withAnimation {
+                            proxy.scrollTo(Self.scrollTopView, anchor: .top)
+                        }
+                    }
                 }
             }
-            .scrollDisabled(anniversaries.isEmpty)
-            .background(
-                Image(.homeBackgroundWithNoise)
-                    .resizable()
-                    .scaledToFill()
-                    .brightness(-0.01)
-            )
-            .ignoresSafeArea()
         }
     }
 }

@@ -57,7 +57,7 @@ extension RegisterAnniversaryRequest {
      }
 }
 
-struct AnniversaryDTO: Decodable {
+struct AnniversaryDTO: Decodable, Equatable {
     let anniversaryId: Int
     let title: String
     let lunarDate: String

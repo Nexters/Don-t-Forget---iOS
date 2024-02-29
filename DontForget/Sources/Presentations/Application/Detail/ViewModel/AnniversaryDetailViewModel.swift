@@ -19,6 +19,12 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     private let deletionRepository: DeletionRepository
     private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
     private let deleteAnniversaryUseCase: DeleteAnniversaryUseCase
+    var viewDismissalModePublisher = PassthroughSubject<Bool, Never>()
+    private var dismiss = false {
+            didSet {
+                viewDismissalModePublisher.send(dismiss)
+            }
+        }
     
     enum Action {
         case fetchAnniversaryDetail
@@ -95,7 +101,6 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     }
     
     private func deleteAnniversary() {
-        self.state = .loading
         Future<Bool, Error> { promise in
             Task {
                 do {
@@ -114,9 +119,10 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         .sink { completion in
             if case .failure = completion {
                 #warning("handling error")
+                print(completion)
             }
         } receiveValue: { _ in
-            self.state = .deleted
+            self.dismiss = true
         }
         .store(in: &cancellables)
     }

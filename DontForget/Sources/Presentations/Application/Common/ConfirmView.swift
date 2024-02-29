@@ -75,7 +75,6 @@ struct ConfirmView: View {
             let viewModel = viewModel as! DefaultAnniversaryDetailViewModel
             viewModel.action(.deleteAnniversary)
             #warning("Need to check response code")
-            cancelEditingAction()
         }
     }
     
