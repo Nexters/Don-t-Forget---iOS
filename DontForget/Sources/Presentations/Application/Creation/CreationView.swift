@@ -180,12 +180,14 @@ struct CreationView: View {
                                 .padding()
                                 .frame(height: 72)
                                 .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
-                                    .fill(Color.primary500))
+                                .background(
+                                    RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
+                                        .fill(name.isEmpty ? Color.gray400 : Color.primary500))
                         }
                         .padding(.bottom, isKeyboardVisible  ? 0 : 16)
                         .padding(.leading, isKeyboardVisible ? -10 : 20)
                         .padding(.trailing, isKeyboardVisible ? 0 : 20)
+                        .disabled(name.isEmpty)
                     }
                 }
                 .padding(.top, isKeyboardVisible && focusField == .memo ? keyboardHeight + 20 : 0)

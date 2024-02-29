@@ -51,10 +51,16 @@ struct HomeView: View {
                         
                         /* Background */
                         if anniversaries.isEmpty {
-                            Image(.homeBackgroundFull)
-                                .resizable()
-                                .scaledToFill()
-                                .clipShape(RoundedRectangle(cornerRadius: 32))
+                            ZStack {
+                                Image(.splashBackground)
+                                    .resizable()
+                                    .scaledToFill()
+                                LottieView(
+                                    name: .mainLottie,
+                                    loopMode: .loop
+                                )
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
                         }
                         /* Main Anniversary */
                         if anniversaries.first != nil {

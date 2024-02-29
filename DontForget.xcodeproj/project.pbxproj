@@ -27,8 +27,8 @@
 		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
 		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
 		AD0417FD2B8F1D7900307944 /* splash_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0417FC2B8F1D7800307944 /* splash_lottie.json */; };
-		AD0417FF2B8F1DAE00307944 /* main_card_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0417FE2B8F1DAE00307944 /* main_card_lottie.json */; };
 		AD0418012B904D9F00307944 /* NotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0418002B904D9F00307944 /* NotificationStatus.swift */; };
+		AD0418032B9056B300307944 /* main_card_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0418022B9056B300307944 /* main_card_lottie.json */; };
 		AD0F992D2B7C509000E2A915 /* CreationViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F992C2B7C509000E2A915 /* CreationViewType.swift */; };
 		AD0F992F2B7C520500E2A915 /* InputNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F992E2B7C520500E2A915 /* InputNameView.swift */; };
 		AD0F99312B7C521700E2A915 /* InputDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F99302B7C521700E2A915 /* InputDateView.swift */; };
@@ -119,8 +119,8 @@
 		09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		AD0417FC2B8F1D7800307944 /* splash_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_lottie.json; sourceTree = "<group>"; };
-		AD0417FE2B8F1DAE00307944 /* main_card_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_card_lottie.json; sourceTree = "<group>"; };
 		AD0418002B904D9F00307944 /* NotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatus.swift; sourceTree = "<group>"; };
+		AD0418022B9056B300307944 /* main_card_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_card_lottie.json; sourceTree = "<group>"; };
 		AD0F992C2B7C509000E2A915 /* CreationViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewType.swift; sourceTree = "<group>"; };
 		AD0F992E2B7C520500E2A915 /* InputNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNameView.swift; sourceTree = "<group>"; };
 		AD0F99302B7C521700E2A915 /* InputDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDateView.swift; sourceTree = "<group>"; };
@@ -386,8 +386,8 @@
 		AD147F102B57FAF900561846 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AD0417FE2B8F1DAE00307944 /* main_card_lottie.json */,
 				AD0417FC2B8F1D7800307944 /* splash_lottie.json */,
+				AD0418022B9056B300307944 /* main_card_lottie.json */,
 				AD147F022B57F85700561846 /* Assets.xcassets */,
 				AD147F1C2B57FDA500561846 /* Localizable.strings */,
 			);
@@ -618,7 +618,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD0417FF2B8F1DAE00307944 /* main_card_lottie.json in Resources */,
+				AD0418032B9056B300307944 /* main_card_lottie.json in Resources */,
 				AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */,
 				AD0417FD2B8F1D7900307944 /* splash_lottie.json in Resources */,
 				AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */,
