@@ -190,7 +190,7 @@ struct CreationView: View {
             .onAppear {
                 switch type {
                 case .create:
-                    self.selectedAlarmIndexes = Set(["D_DAY"])
+                    self.selectedAlarmIndexes = Set([AlarmPeriod.dDay.schedule])
                 case .edit:
                     viewModel.fetchAnniversaryDetail(id: id!)
                     viewModel.$anniversaryDetail
@@ -287,7 +287,13 @@ extension CreationView {
     }
     
     private func randomCardType() -> String {
-        let cardType = ["LUNAR", "TAIL", "ARM", "FACE", "FOREST"]
+        let cardType = [
+            CardType.lunar.rawValue,
+            CardType.tail.rawValue,
+            CardType.arm.rawValue,
+            CardType.face.rawValue,
+            CardType.forest.rawValue
+        ]
         return cardType.randomElement()!
     }
 }
