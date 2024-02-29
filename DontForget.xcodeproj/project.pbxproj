@@ -63,7 +63,7 @@
 		ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */; };
 		ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */; };
 		ADA2CC082B6CCD76001A38D9 /* AnniversariesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */; };
-		ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */; };
+		ADA2CC0A2B6CCECC001A38D9 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* CardType.swift */; };
 		ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0B2B6CD037001A38D9 /* Query.swift */; };
 		ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
@@ -155,7 +155,7 @@
 		ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAnniversariesUseCase.swift; sourceTree = "<group>"; };
 		ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesInterface.swift; sourceTree = "<group>"; };
-		ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
+		ADA2CC092B6CCECC001A38D9 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		ADA2CC0B2B6CD037001A38D9 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesRepository.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 			children = (
 				AD0F992C2B7C509000E2A915 /* CreationViewType.swift */,
 				09642C5D2B67CA6F0015220E /* CreationModel.swift */,
-				ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */,
+				ADA2CC092B6CCECC001A38D9 /* CardType.swift */,
 				ADA2CC0B2B6CD037001A38D9 /* Query.swift */,
 			);
 			path = Model;
@@ -692,7 +692,7 @@
 				ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */,
 				ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */,
 				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
-				ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */,
+				ADA2CC0A2B6CCECC001A38D9 /* CardType.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
 				ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */,
 				09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */,

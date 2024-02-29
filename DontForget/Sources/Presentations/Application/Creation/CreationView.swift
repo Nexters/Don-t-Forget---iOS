@@ -51,7 +51,6 @@ struct CreationView: View {
             break
         case .edit:
             self.id = id
-            viewModel.fetchAnniversaryDetail(id: id!)
         }
         configure()
     }
@@ -59,7 +58,6 @@ struct CreationView: View {
     // MARK: - View
     
     var body: some View {
-        
         NavigationView {
             ZStack(alignment: .bottom) {
                 if showConfirmView {
@@ -194,6 +192,7 @@ struct CreationView: View {
                 case .create:
                     self.selectedAlarmIndexes = Set(["D_DAY"])
                 case .edit:
+                    viewModel.fetchAnniversaryDetail(id: id!)
                     viewModel.$anniversaryDetail
                         .receive(on: DispatchQueue.main)
                         .sink {  res in
@@ -246,7 +245,6 @@ struct CreationView: View {
         .navigationBarHidden(true)
     }
 }
-
 
 // MARK: - Extension
 extension CreationView {

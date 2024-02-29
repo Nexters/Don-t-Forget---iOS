@@ -49,9 +49,7 @@ final class DefaultHomeViewModel: ViewModelType {
         case .readAnniversaries:
             readAnniversaries()
         case .fetchFirstAnniversaryDetail:
-            if let firstAnniversary = self.anniversaries.first {
-                fetchAnniversaryDetail(anniversaryId: firstAnniversary.anniversaryId)
-            }
+            fetchFirstAnniversaryDetail()
         case .changePushState:
             changeStatus()
         case .fcmTest:
@@ -95,35 +93,39 @@ final class DefaultHomeViewModel: ViewModelType {
         .store(in: &cancellables)
     }
     
-    private func fetchAnniversaryDetail(anniversaryId: Int) {
-        Future<AnniversaryDetailResponse?, Error> { promise in
-            Task {
-                do {
-                    let response = try await self.fetchAnniversaryDetailUseCase.execute(
-                        requestValue: .init(
-                            query: AnniversaryDetailQuery(
-                                queryId: anniversaryId
+    private func fetchFirstAnniversaryDetail() {
+        if let firstAnniversary = self.anniversaries.first {
+            self.state = .loading
+            Future<AnniversaryDetailResponse?, Error> { promise in
+                Task {
+                    do {
+                        let response = try await self.fetchAnniversaryDetailUseCase.execute(
+                            requestValue: .init(
+                                query: AnniversaryDetailQuery(
+                                    queryId: firstAnniversary.anniversaryId
+                                )
                             )
                         )
-                    )
-                    promise(.success(response))
-                } catch {
-                    print("=== DEBUG here: \(error)")
-                    promise(.failure(error))
+                        promise(.success(response))
+                    } catch {
+                        print("=== DEBUG here: \(error)")
+                        promise(.failure(error))
+                    }
                 }
             }
-        }
-        .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure = completion {
+                    #warning("handling error")
+                }
+            } receiveValue: { [weak self] response in
+                if let response = response {
+                    self?.firstAnniversaryDetail = response.anniversaryDetail
+                    self?.state = .success
+                }
             }
-        } receiveValue: { [weak self] response in
-            if let response = response {
-                self?.firstAnniversaryDetail = response.anniversaryDetail
-            }
+            .store(in: &cancellables)
         }
-        .store(in: &cancellables)
     }
     
     private func changeStatus() {

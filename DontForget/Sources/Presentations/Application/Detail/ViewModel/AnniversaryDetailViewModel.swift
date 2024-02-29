@@ -38,7 +38,7 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         anniversaryDetailRepository: AnniversaryDetailRepository,
         deletionRepository: DeletionRepository
     ) {
-        self.state = .idle
+        self.state = .loading
         self.anniversaryId = anniversaryId
         self.anniversaryDetailRepository = anniversaryDetailRepository
         self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
@@ -63,7 +63,6 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     // MARK: - Method
     private func fetchAnniversaryDetail() {
         Future<AnniversaryDetailResponse?, Error> { promise in
-            self.state = .loading
             Task {
                 do {
                     let response = try await self.fetchAnniversaryDetailUseCase.execute(
@@ -96,8 +95,8 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     }
     
     private func deleteAnniversary() {
+        self.state = .loading
         Future<Bool, Error> { promise in
-            self.state = .loading
             Task {
                 do {
                     try await self.deleteAnniversaryUseCase.execute(

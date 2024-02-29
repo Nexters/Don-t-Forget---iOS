@@ -21,22 +21,22 @@ struct GridView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(anniversary.title)
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.gray900: .gray50)
+                    .foregroundStyle(anniversary.cardType == CardType.face.rawValue ? Color.gray900: .gray50)
                     .lineLimit(1)
                 Text("D\(Constants.getDDay(anniversary.solarDate))")
                     .font(.system(size: 34, weight: .bold))
                     .foregroundStyle(
                         [
-                            Anniversary.CardType.lunar.rawValue,
-                            Anniversary.CardType.face.rawValue,
-                            Anniversary.CardType.forest.rawValue
+                            CardType.lunar.rawValue,
+                            CardType.face.rawValue,
+                            CardType.forest.rawValue
                         ].contains(anniversary.cardType) ? Color.primary500 :
-                            anniversary.cardType == Anniversary.CardType.arm.rawValue ? .gray50 : .yellow500
+                            anniversary.cardType == CardType.arm.rawValue ? .gray50 : .yellow500
                     )
                 Spacer(minLength: 30)
                 Text(solarDate)
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(anniversary.cardType == Anniversary.CardType.face.rawValue ? Color.primary700 : .white)
+                    .foregroundStyle(anniversary.cardType == CardType.face.rawValue ? Color.primary700 : .white)
                     .opacity(0.5)
             }
             .padding(.horizontal, 20)
@@ -50,21 +50,21 @@ struct GridView: View {
                 Color(hex: 0x181E23)
                     .ignoresSafeArea()
                 switch anniversary.cardType {
-                case Anniversary.CardType.lunar.rawValue:
+                case CardType.lunar.rawValue:
                     Image(.cardBackground1)
                         .resizable()
                         .scaledToFill()
-                case Anniversary.CardType.face.rawValue:
+                case CardType.face.rawValue:
                     Color(hex: 0xD3E3F0)
                     Image(.cardBackground2)
                         .resizable()
                         .scaledToFill()
-                case Anniversary.CardType.arm.rawValue:
+                case CardType.arm.rawValue:
                     Color.primary500
                     Image(.cardBackground3)
                         .resizable()
                         .scaledToFill()
-                case Anniversary.CardType.tail.rawValue:
+                case CardType.tail.rawValue:
                     Image(.cardBackground4)
                         .resizable()
                         .scaledToFill()

@@ -35,123 +35,123 @@ struct AnniversaryDetailView: View {
                 Spacer()
                 LottieView.lottieInDetailView
             }
-            if let anniversaryDetail = viewModel.anniversaryDetail {
-                NavigationLink(
-                    destination: CreationView(
-                        viewModel: CreationViewModel(
-                            creationUseCase: CreationUseCase(
-                                creationRepository: CreationRepository(
-                                    service: AnniversaryService.shared
-                                )
-                            ),
-                            fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
-                                anniversaryDetailRepository: AnniversaryDetailRepository(
-                                    service: AnniversaryService.shared
-                                )
+            NavigationLink(
+                destination: CreationView(
+                    viewModel: CreationViewModel(
+                        creationUseCase: CreationUseCase(
+                            creationRepository: CreationRepository(
+                                service: AnniversaryService.shared
                             )
                         ),
-                        id: anniversaryDetail.anniversaryId,
-                        type: .edit
+                        fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                            anniversaryDetailRepository: AnniversaryDetailRepository(
+                                service: AnniversaryService.shared
+                            )
+                        )
                     ),
-                    isActive: $showEditView
-                ) { EmptyView() }
-                VStack {
-                    /* Custom Navigation Bar */
-                    HStack(spacing: 0) {
-                        /* back icon */
-                        Image(.backIcon)
-                            .foregroundColor(.white)
-                            .frame(width: 24, height: 24)
-                            .padding(12)
-                            .background {
-                                if iconStates[.back]! {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundStyle(Color.white.opacity(0.1))
-                                }
+                    id: viewModel.anniversaryId,
+                    type: .edit
+                ),
+                isActive: $showEditView
+            ) { EmptyView() }
+            VStack {
+                /* Custom Navigation Bar */
+                HStack(spacing: 0) {
+                    /* back icon */
+                    Image(.backIcon)
+                        .foregroundColor(.white)
+                        .frame(width: 24, height: 24)
+                        .padding(12)
+                        .background {
+                            if iconStates[.back]! {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .foregroundStyle(Color.white.opacity(0.1))
                             }
-                            .gesture(
-                                DragGesture(
-                                    minimumDistance: 0,
-                                    coordinateSpace: .local
-                                )
-                                .onChanged({ _ in
-                                    iconStates[.back] = true
-                                })
-                                .onEnded({ _ in
-                                    iconStates[.back] = false
-                                    dismiss()
-                                })
+                        }
+                        .gesture(
+                            DragGesture(
+                                minimumDistance: 0,
+                                coordinateSpace: .local
                             )
-                        
-                        Spacer()
-                        /* edit icon */
-                        Image(.editIcon)
-                            .foregroundColor(.white)
-                            .frame(width: 24, height: 24)
-                            .padding(12)
-                            .background {
-                                if iconStates[.edit]! {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundStyle(Color.white.opacity(0.1))
-                                }
-                            }
-                            .gesture(
-                                DragGesture(
-                                    minimumDistance: 0,
-                                    coordinateSpace: .local
-                                )
-                                .onChanged({ _ in
-                                    iconStates[.edit] = true
-                                })
-                                .onEnded({ _ in
-                                    iconStates[.edit] = false
-                                    self.showEditView = true
-                                })
-                            )
-                        
-                        /* delete icon */
-                        Image(.deleteIcon)
-                            .foregroundColor(.white)
-                            .frame(width: 24, height: 24)
-                            .padding(12)
-                            .background {
-                                if iconStates[.delete]! {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundStyle(Color.white.opacity(0.1))
-                                }
-                            }
-                            .gesture(
-                                DragGesture(
-                                    minimumDistance: 0,
-                                    coordinateSpace: .local
-                                )
-                                .onChanged({ _ in
-                                    iconStates[.delete] = true
-                                })
-                                .onEnded({ _ in
-                                    iconStates[.delete] = false
-                                    showConfirmView = true
-                                })
-                            )
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
+                            .onChanged({ _ in
+                                iconStates[.back] = true
+                            })
+                            .onEnded({ _ in
+                                iconStates[.back] = false
+                                dismiss()
+                            })
+                        )
                     
-                    AnniversaryContentView(anniversary: anniversaryDetail)
+                    Spacer()
+                    /* edit icon */
+                    Image(.editIcon)
+                        .foregroundColor(.white)
+                        .frame(width: 24, height: 24)
+                        .padding(12)
+                        .background {
+                            if iconStates[.edit]! {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .foregroundStyle(Color.white.opacity(0.1))
+                            }
+                        }
+                        .gesture(
+                            DragGesture(
+                                minimumDistance: 0,
+                                coordinateSpace: .local
+                            )
+                            .onChanged({ _ in
+                                iconStates[.edit] = true
+                            })
+                            .onEnded({ _ in
+                                iconStates[.edit] = false
+                                self.showEditView = true
+                            })
+                        )
+                    
+                    /* delete icon */
+                    Image(.deleteIcon)
+                        .foregroundColor(.white)
+                        .frame(width: 24, height: 24)
+                        .padding(12)
+                        .background {
+                            if iconStates[.delete]! {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .foregroundStyle(Color.white.opacity(0.1))
+                            }
+                        }
+                        .gesture(
+                            DragGesture(
+                                minimumDistance: 0,
+                                coordinateSpace: .local
+                            )
+                            .onChanged({ _ in
+                                iconStates[.delete] = true
+                            })
+                            .onEnded({ _ in
+                                iconStates[.delete] = false
+                                showConfirmView = true
+                            })
+                        )
+                }
+                .padding(.horizontal, 24)
+                .padding(.vertical, 16)
+                
+                if let detail = viewModel.anniversaryDetail {
+                    AnniversaryContentView(anniversary: viewModel.anniversaryDetail!)
                         .padding(.bottom, 200)
                 }
-                if showConfirmView {
-                    ConfirmView(
-                        viewModel: viewModel,
-                        alertType: .deleteAnniversary,
-                        isPresentend: $showConfirmView,
-                        dismiss: dismiss
-                    )
-                }
             }
-            if viewModel.state == .idle {
+            if viewModel.state == .loading {
                 Color.black.opacity(0.4)
                 ProgressView()
+            }
+            if showConfirmView {
+                ConfirmView(
+                    viewModel: viewModel,
+                    alertType: .deleteAnniversary,
+                    isPresentend: $showConfirmView,
+                    dismiss: dismiss
+                )
             }
         }
         .ignoresSafeArea()
