@@ -117,13 +117,12 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         }
         .receive(on: DispatchQueue.main)
         .sink { completion in
+            self.dismiss = true
             if case .failure = completion {
                 #warning("handling error")
                 print(completion)
             }
-        } receiveValue: { _ in
-            self.dismiss = true
-        }
+        } receiveValue: { _ in }
         .store(in: &cancellables)
     }
 }

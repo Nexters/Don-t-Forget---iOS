@@ -87,12 +87,12 @@ final class CreationViewModel: ViewModelType {
         }
         .receive(on: DispatchQueue.main)
         .sink { completion in
+            self.dismiss = true
             if case let .failure(error) = completion {
                 self.errorMessage = error.localizedDescription
             }
         } receiveValue: { response in
             self.creationResponse = response
-            self.dismiss = true
         }
         .store(in: &cancellables)
     }
@@ -109,14 +109,15 @@ final class CreationViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink(receiveCompletion: { completion in
+        .sink { completion in
+            self.dismiss = true
             if case let .failure(error) = completion {
                 self.errorMessage = error.localizedDescription
+                print("=== \(String(describing: self.errorMessage))")
             }
-        }, receiveValue: { [weak self] response in
-            self?.creationResponse = response
-            self?.dismiss = true
-        })
+        } receiveValue: { response in
+            self.creationResponse = response
+        }
         .store(in: &cancellables)
     }
     
