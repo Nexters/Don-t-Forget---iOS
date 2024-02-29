@@ -109,7 +109,7 @@ struct ConfirmView: View {
                         Text("닫기")
                             .font(.system(size: 16))
                             .foregroundStyle(Color.gray600)
-                            .padding(.horizontal, 60)
+                            .padding(.trailing, 60)
                             .padding(.bottom, 5)
                     }
                     
@@ -123,7 +123,7 @@ struct ConfirmView: View {
                         Text(isConfirmToCancel ? "취소" : "삭제")
                             .font(.system(size: 16))
                             .foregroundStyle(isConfirmToCancel ? Color.primary500 : .red500)
-                            .padding(.horizontal, 60)
+                            .padding(.leading, 60)
                             .padding(.bottom, 5)
                     }
                 }
