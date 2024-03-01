@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GridView: View {
     
+    let gridWidth = (UIScreen.width - 60) / 2
     let anniversary: AnniversaryDTO
     @State private var scale = 1.0
     private var solarDate: String {
@@ -44,7 +45,7 @@ struct GridView: View {
             .padding(.bottom, 20)
             Spacer()
         }
-        .frame(height: 183)
+        .frame(width: gridWidth, height: gridWidth)
         .background(
             ZStack {
                 Color(hex: 0x181E23)

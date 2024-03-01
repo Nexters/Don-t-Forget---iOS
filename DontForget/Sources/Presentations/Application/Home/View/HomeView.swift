@@ -160,10 +160,10 @@ struct HomeView: View {
 }
 
 struct AddNewAnniversaryView: View {
+    let gridWidth = (UIScreen.width - 60) / 2
     var body: some View {
         ZStack {
             Color(hex: 0x181E23)
-                .opacity(0.4)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color.gray700, lineWidth: 1.0)
@@ -174,11 +174,11 @@ struct AddNewAnniversaryView: View {
                     .foregroundStyle(Color.gray500)
                 Text("기념일 만들기")
                     .foregroundStyle(Color.gray400)
-                    .font(.pretendard(.semiBold, size: 20))
+                    .font(.pretendard(.semiBold, size: 18))
             }
             .padding(.horizontal, 20)
         }
-        .frame(minHeight: 170)
+        .frame(width: gridWidth, height: gridWidth)
     }
 }
 
