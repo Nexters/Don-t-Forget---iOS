@@ -18,6 +18,7 @@ struct CreationView: View {
     @State private var name = ""
     @State private var memo = ""
     @State private var strDate  = ""
+    @State private var viewUpdateTrigger = UUID()
     @State private var keyboardHeight = CGFloat(0)
     @FocusState private var focusField: Field?
     @State private var scrollViewProxy: ScrollViewProxy?
@@ -190,6 +191,7 @@ struct CreationView: View {
                 }
                 .padding(.top, isKeyboardVisible && focusField == .memo ? keyboardHeight + 20 : 0)
                 .animation(.default, value: keyboardHeight)
+                .id(viewUpdateTrigger)
             }
             .onAppear {
                 switch type {
@@ -204,10 +206,17 @@ struct CreationView: View {
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
+                                self.requestDate = res?.baseDate ?? ""
+                                self.viewUpdateTrigger = UUID()
                             }
+                            if res?.baseType == "SOLAR" {
+                                self.baseType = 0
+                            } else {
+                                self.baseType = 1
+                            }
+
                         }
                         .store(in: &cancellables)
                 }

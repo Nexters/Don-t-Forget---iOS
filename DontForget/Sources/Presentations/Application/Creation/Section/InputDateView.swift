@@ -12,12 +12,17 @@ struct InputDateView: View {
     @Binding var selectedMonth: Int
     @Binding var selectedYear: Int
     @Binding var selectedSegment: Int
+    
     @Binding var requestDate: String
     @Binding var calendarType: String
     @State private var type: ConvertDate = .solar
     private let segments = ["양력으로 입력", "음력으로 입력"]
     var viewModel: CreationViewModel
     @State private var isPickerDisabled = false
+    @State private var isInitialLoad = true
+    @State private var stateInt = 0
+    @State private var previousSelectedSegment: Int? = nil
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text.coloredText(
@@ -32,7 +37,7 @@ struct InputDateView: View {
             
             Picker(
                 "",
-                selection: $selectedSegment
+                selection: $stateInt
             ) {
                 ForEach(0..<2) { index in
                     Text(segments[index]).tag(index)
@@ -40,26 +45,34 @@ struct InputDateView: View {
             }
             .disabled(isPickerDisabled) 
             .frame(height: 52)
-            .onChange(of: selectedSegment) {  _, _ in
-                temporarilyDisablePicker()
-                self.type =  selectedSegment == 0 ? .solar : .lunar
-                Task {
-                    let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
-                    let convertedDate = await viewModel.convertToLunarOrSolar(
-                        type: dateType,
-                        date: updateViewModelWithSelectedDate()
-                    )
-                    selectedYear = convertedDate[0]
-                    selectedMonth = convertedDate[1]
-                    selectedDay = convertedDate[2]
-                    updateRequestDate()
-                    calendarType = dateType.title
-                }
-                .cancel()
+            .onChange(of: stateInt) { _ ,newSelectedSegment in
+                        temporarilyDisablePicker()
+                        self.type = newSelectedSegment == 0 ? .solar : .lunar
+                        Task {
+                            let dateType: ConvertDate = newSelectedSegment == 0 ? .solar : .lunar
+                            let convertedDate = await viewModel.convertToLunarOrSolar(
+                                type: dateType,
+                                date: updateViewModelWithSelectedDate()
+                            )
+                            selectedYear = convertedDate[0]
+                            selectedMonth = convertedDate[1]
+                            selectedDay = convertedDate[2]
+                            updateRequestDate()
+                            calendarType = dateType.title
+                        }
+                        .cancel()
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
+            .onAppear {
+                print(selectedSegment)
+                if self.selectedSegment == 0 {
+                    self.stateInt = 0
+                } else {
+                    self.stateInt = 1
+                }
+            }
             
             HStack {
                 Spacer()
