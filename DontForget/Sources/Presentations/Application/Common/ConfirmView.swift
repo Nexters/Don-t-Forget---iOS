@@ -88,11 +88,12 @@ struct ConfirmView: View {
                     .padding(.top, 32)
                     .padding(.bottom, 24)
                 Text(confirmTitle)
+                    .font(.pretendard(.semiBold, size: 18))
                     .foregroundStyle(.white)
                     .padding(.bottom, 16)
                 Text(confirmDescription)
                     .multilineTextAlignment(.center)
-                    .font(.system(size: 16))
+                    .font(.pretendard(.regular, size: 16))
                     .foregroundStyle(Color.gray600)
                     .padding(.bottom, 28)
                 
@@ -107,7 +108,7 @@ struct ConfirmView: View {
                         closeAction()
                     } label: {
                         Text("닫기")
-                            .font(.system(size: 16))
+                            .font(.pretendard(size: 16))
                             .foregroundStyle(Color.gray600)
                             .padding(.trailing, 60)
                             .padding(.bottom, 5)
@@ -121,7 +122,7 @@ struct ConfirmView: View {
                         isConfirmToCancel ? cancelEditingAction() : deleteAnniversaryAction()
                     } label: {
                         Text(isConfirmToCancel ? "취소" : "삭제")
-                            .font(.system(size: 16))
+                            .font(.pretendard(size: 16))
                             .foregroundStyle(isConfirmToCancel ? Color.primary500 : .red500)
                             .padding(.leading, 60)
                             .padding(.bottom, 5)

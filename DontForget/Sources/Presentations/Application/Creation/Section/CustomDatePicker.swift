@@ -36,6 +36,7 @@ struct CustomDatePicker: View {
                 .frame(width: 32)
                 Text("년")
                     .foregroundColor(.gray)
+                    .font(.pretendard(size: 15))
             }
 
             HStack(spacing: 10) {
@@ -45,7 +46,9 @@ struct CustomDatePicker: View {
                     proxy: $monthProxy
                 )
                 .frame(width: 32)
-                Text("월").foregroundColor(.gray)
+                Text("월")
+                    .foregroundColor(.gray)
+                    .font(.pretendard(size: 15))
             }
 
             HStack(spacing: 10) {
@@ -55,7 +58,9 @@ struct CustomDatePicker: View {
                     proxy: $dayProxy
                 )
                 .frame(width: 32)
-                Text("일").foregroundColor(.gray)
+                Text("일")
+                    .foregroundColor(.gray)
+                    .font(.pretendard(size: 15))
             }
         }
         .onChange(of: selectedYear) { _, newValue in
@@ -85,6 +90,7 @@ struct CustomDatePicker: View {
                                 ForEach(values, id: \.self) { value in
                                     let displayValue = value % 100
                                     Text("\(String(format: "%02d", displayValue))")
+                                        .font(.pretendard(size: 24))
                                         .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
                                         .frame(width: 60, height: 63)
                                         .id(value)

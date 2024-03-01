@@ -23,9 +23,9 @@ struct InputDateView: View {
             Text.coloredText(
                 "날짜 *",
                 coloredPart: "*",
-                color: .pink
+                color: .pink500
             )
-            .font(.system(size: 19, weight: .semibold))
+            .font(.pretendard(.semiBold, size: 16))
             .padding(.leading, 16)
             .padding(.bottom, 32)
             .foregroundColor(.white)
@@ -35,7 +35,9 @@ struct InputDateView: View {
                 selection: $selectedSegment
             ) {
                 ForEach(0..<2) { index in
-                    Text(segments[index]).tag(index)
+                    Text(segments[index])
+                        .tag(index)
+                        .font(.pretendard(size: 15))
                 }
             }
             .disabled(isPickerDisabled) 

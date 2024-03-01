@@ -16,14 +16,16 @@ struct MemoView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("간단 메모")
-                .font(.system(size: 19, weight: .semibold))
+                .font(.pretendard(.semiBold, size: 16))
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
             TextField(
                 "", 
                 text: $memo,
-                prompt: Text("가족 여행 미리 계획하기").foregroundColor(.gray700)
+                prompt: Text("가족 여행 미리 계획하기")
+                    .foregroundColor(.gray700)
+                    .font(.pretendard(size: 20))
             )
             .multilineTextAlignment(.center)
             .padding(.horizontal, 20)

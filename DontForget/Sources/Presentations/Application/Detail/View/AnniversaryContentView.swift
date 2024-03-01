@@ -26,20 +26,19 @@ struct AnniversaryContentView: View {
             VStack(alignment: .leading) {
                 Text(anniversary.solarDate.replacingOccurrences(of: "-", with: "."))
                     .foregroundStyle(Color.gray600)
-                    .font(.system(size: 18))
+                    .font(.pretendard(size: 18))
                 Text("D\(dday)")
-                    .font(.system(size: 72, weight: .bold))
+                    .font(.pretendard(.bold, size: 72))
                     .foregroundStyle(Color.primary500)
                 Spacer()
                     .frame(height: 20)
-                
                 VStack(alignment: .leading, spacing: 8) {
                     Text(anniversary.title)
-                        .font(.system(size: 20, weight: .semibold))
+                        .font(.pretendard(.semiBold, size: 20))
                         .foregroundStyle(.white)
                     if !anniversary.content.isEmpty {
                         Text(anniversary.content)
-                            .font(.system(size: 16))
+                            .font(.pretendard(size: 16))
                             .foregroundStyle(Color.gray600)
                     }
                 }

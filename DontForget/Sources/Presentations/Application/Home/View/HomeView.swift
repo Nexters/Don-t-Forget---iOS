@@ -174,6 +174,7 @@ struct AddNewAnniversaryView: View {
                     .foregroundStyle(Color.gray500)
                 Text("기념일 만들기")
                     .foregroundStyle(Color.gray400)
+                    .font(.pretendard(.semiBold, size: 20))
             }
             .padding(.horizontal, 20)
         }
