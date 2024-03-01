@@ -33,8 +33,7 @@ struct InputDateView: View {
             Picker(
                 "",
                 selection: $selectedSegment
-            )
-            {
+            ) {
                 ForEach(0..<2) { index in
                     Text(segments[index]).tag(index)
                 }
@@ -93,7 +92,6 @@ extension InputDateView {
     
     private func updateRequestDate() {
         let fullYear = convertToFullYear(twoDigitYear: selectedYear)
-        print(fullYear)
         let fullMonth = String(format: "%02d", selectedMonth)
         let fullDay = String(format: "%02d", selectedDay)
         self.requestDate = "\(fullYear)-\(fullMonth)-\(fullDay)"
@@ -101,8 +99,6 @@ extension InputDateView {
     
     private func updateViewModelWithSelectedDate() -> Date {
         let fullYear = convertToFullYear(twoDigitYear: selectedYear)
-        print(fullYear)
-
         return viewModel.updateConvertedDate(
             day: selectedDay,
             month: selectedMonth,
@@ -112,7 +108,6 @@ extension InputDateView {
     private func temporarilyDisablePicker() {
         isPickerDisabled = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("asd")
             isPickerDisabled = false
         }
     }

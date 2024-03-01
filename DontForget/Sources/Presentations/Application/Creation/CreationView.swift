@@ -14,7 +14,6 @@ struct CreationView: View {
     private enum Field: Hashable {
         case eventName, date, alarm, memo
     }
-    
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var memo = ""
@@ -52,7 +51,6 @@ struct CreationView: View {
             break
         case .edit:
             self.id = id
-            viewModel.fetchAnniversaryDetail(id: id!)
         }
         configure()
     }
@@ -60,7 +58,6 @@ struct CreationView: View {
     // MARK: - View
     
     var body: some View {
-        
         NavigationView {
             ZStack(alignment: .bottom) {
                 if showConfirmView {
@@ -158,9 +155,8 @@ struct CreationView: View {
                                         cardType: randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    if name != "" {
+                                    if !name.isEmpty {
                                         viewModel.action(.registerAnniversary(parameters: request))
-                                        dismiss()
                                     }
                                 case .edit:
                                     let request = RegisterAnniversaryRequest(
@@ -171,9 +167,8 @@ struct CreationView: View {
                                         cardType: viewModel.anniversaryDetail?.cardType ?? randomCardType(),
                                         alarmSchedule: strAlarmAry
                                     )
-                                    if name != "" {
+                                    if !name.isEmpty {
                                         viewModel.action(.editAnniversary(parameters: request, id: id!))
-                                        dismiss()
                                     }
                                 }
                             }
@@ -183,12 +178,14 @@ struct CreationView: View {
                                 .padding()
                                 .frame(height: 72)
                                 .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
-                                    .fill(Color.primary500))
+                                .background(
+                                    RoundedRectangle(cornerRadius: isKeyboardVisible ? 0 : 8)
+                                        .fill(name.isEmpty ? Color.gray400 : Color.primary500))
                         }
                         .padding(.bottom, isKeyboardVisible  ? 0 : 16)
                         .padding(.leading, isKeyboardVisible ? -10 : 20)
                         .padding(.trailing, isKeyboardVisible ? 0 : 20)
+                        .disabled(name.isEmpty)
                     }
                 }
                 .padding(.top, isKeyboardVisible && focusField == .memo ? keyboardHeight + 20 : 0)
@@ -197,16 +194,16 @@ struct CreationView: View {
             .onAppear {
                 switch type {
                 case .create:
-                    self.selectedAlarmIndexes = Set(["D_DAY"])
+                    self.selectedAlarmIndexes = Set([AlarmPeriod.dDay.schedule])
                     focusField = .eventName
                 case .edit:
+                    viewModel.fetchAnniversaryDetail(id: id!)
                     viewModel.$anniversaryDetail
                         .receive(on: DispatchQueue.main)
                         .sink {  res in
                             self.name = res?.title ?? ""
                             self.memo = res?.content ?? ""
                             self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            print(ConvertDate.solar.title)
                             self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
                             if let date = res?.baseDate {
                                 self.baseDate = self.extractYearMonthDay(from: date)!
@@ -248,6 +245,13 @@ struct CreationView: View {
                         object: nil
                     )
             }
+            .onReceive(viewModel.viewDismissalModePublisher) { shouldDismiss in
+                if shouldDismiss {
+                    withAnimation {
+                        dismiss()
+                    }
+                }
+            }
         }
         .navigationBarHidden(true)
     }
@@ -268,7 +272,7 @@ extension CreationView {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: dateString) else {
-            print("Invalid date format")
+            print("=== DEBUG: Invalid date format")
             return nil
         }
         
@@ -294,7 +298,13 @@ extension CreationView {
     }
     
     private func randomCardType() -> String {
-        let cardType = ["LUNAR", "TAIL", "ARM", "FACE", "FOREST"]
+        let cardType = [
+            CardType.lunar.rawValue,
+            CardType.tail.rawValue,
+            CardType.arm.rawValue,
+            CardType.face.rawValue,
+            CardType.forest.rawValue
+        ]
         return cardType.randomElement()!
     }
 }

@@ -16,33 +16,43 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     @Published var state: State
     @Published var anniversaryDetail: AnniversaryDetailDTO?
     private let anniversaryDetailRepository: AnniversaryDetailRepository
+    private let deletionRepository: DeletionRepository
     private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
     private let deleteAnniversaryUseCase: DeleteAnniversaryUseCase
+    var viewDismissalModePublisher = PassthroughSubject<Bool, Never>()
+    private var dismiss = false {
+            didSet {
+                viewDismissalModePublisher.send(dismiss)
+            }
+        }
     
     enum Action {
         case fetchAnniversaryDetail
         case deleteAnniversary
     }
     
-    enum State {
+    enum State: Equatable {
         case idle
         case loading
         case success
         case failed(String)
+        case deleted
     }
     
     init(
         anniversaryId: Int,
-        anniversaryDetailRepository: AnniversaryDetailRepository
+        anniversaryDetailRepository: AnniversaryDetailRepository,
+        deletionRepository: DeletionRepository
     ) {
-        self.state = .idle
+        self.state = .loading
         self.anniversaryId = anniversaryId
         self.anniversaryDetailRepository = anniversaryDetailRepository
         self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
             anniversaryDetailRepository: anniversaryDetailRepository
         )
+        self.deletionRepository = deletionRepository
         self.deleteAnniversaryUseCase = DefaultDeleteAnniversaryUseCase(
-            anniversaryDetailRepository: anniversaryDetailRepository
+            deletionRepository: deletionRepository
         )
     }
     
@@ -58,7 +68,6 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     
     // MARK: - Method
     private func fetchAnniversaryDetail() {
-        self.state = .loading
         Future<AnniversaryDetailResponse?, Error> { promise in
             Task {
                 do {
@@ -92,17 +101,28 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     }
     
     private func deleteAnniversary() {
-        self.state = .loading
-        Task {
-            do {
-                try await self.deleteAnniversaryUseCase.execute(
-                    requestValue: .init(
-                        query: AnniversaryDetailQuery(
-                            queryId: self.anniversaryId
+        Future<Bool, Error> { promise in
+            Task {
+                do {
+                    try await self.deleteAnniversaryUseCase.execute(
+                        requestValue: .init(
+                            query: AnniversaryDetailQuery(
+                                queryId: self.anniversaryId
+                            )
                         )
                     )
-                )
+                    promise(.success(true))
+                }
             }
         }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            self.dismiss = true
+            if case .failure = completion {
+                #warning("handling error")
+                print(completion)
+            }
+        } receiveValue: { _ in }
+        .store(in: &cancellables)
     }
 }

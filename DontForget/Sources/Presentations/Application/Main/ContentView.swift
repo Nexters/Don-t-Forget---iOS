@@ -13,14 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(hex: 0x212529),
-                    Color(hex: 0x0E1317)
-                ],
-                startPoint: .top,
-                endPoint: .center
-            )
+            Color.bgColor
             HomeView()
             if showingSplash {
                 SplashView()

@@ -26,6 +26,9 @@
 		0965460E2B5B9CE900CDF4CC /* CreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965460D2B5B9CE900CDF4CC /* CreationView.swift */; };
 		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
 		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
+		AD0417FD2B8F1D7900307944 /* splash_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0417FC2B8F1D7800307944 /* splash_lottie.json */; };
+		AD0418012B904D9F00307944 /* NotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0418002B904D9F00307944 /* NotificationStatus.swift */; };
+		AD0418032B9056B300307944 /* main_card_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0418022B9056B300307944 /* main_card_lottie.json */; };
 		AD0F992D2B7C509000E2A915 /* CreationViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F992C2B7C509000E2A915 /* CreationViewType.swift */; };
 		AD0F992F2B7C520500E2A915 /* InputNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F992E2B7C520500E2A915 /* InputNameView.swift */; };
 		AD0F99312B7C521700E2A915 /* InputDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F99302B7C521700E2A915 /* InputDateView.swift */; };
@@ -45,7 +48,8 @@
 		AD147F322B57FFB500561846 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F312B57FFB500561846 /* AppIntent.swift */; };
 		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
 		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AD147F3E2B58006000561846 /* ComposableArchitecture */; };
+		AD36D44B2B8DD37D00250705 /* DeletionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */; };
+		AD36D44D2B8DD39500250705 /* DeletionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36D44C2B8DD39500250705 /* DeletionInterface.swift */; };
 		AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */; };
 		AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45862B68C287009529DE /* AnniversaryContentView.swift */; };
 		AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B458C2B68DE8F009529DE /* ConfirmView.swift */; };
@@ -53,14 +57,13 @@
 		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD7D58602B75E7CB00832817 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = AD7D585F2B75E7CB00832817 /* Lottie */; };
-		AD7D58622B75E89B00832817 /* splash_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD7D58612B75E89B00832817 /* splash_lottie.json */; };
 		AD7D58642B75E8F400832817 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7D58632B75E8F400832817 /* LottieView.swift */; };
 		AD9320E32B600589009A9437 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9320E22B600589009A9437 /* GridView.swift */; };
 		ADA138432B58093E006F0219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA138422B58093E006F0219 /* HomeView.swift */; };
 		ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */; };
 		ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */; };
 		ADA2CC082B6CCD76001A38D9 /* AnniversariesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */; };
-		ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */; };
+		ADA2CC0A2B6CCECC001A38D9 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* CardType.swift */; };
 		ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0B2B6CD037001A38D9 /* Query.swift */; };
 		ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
@@ -114,6 +117,9 @@
 		0965460D2B5B9CE900CDF4CC /* CreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationView.swift; sourceTree = "<group>"; };
 		09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
+		AD0417FC2B8F1D7800307944 /* splash_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_lottie.json; sourceTree = "<group>"; };
+		AD0418002B904D9F00307944 /* NotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatus.swift; sourceTree = "<group>"; };
+		AD0418022B9056B300307944 /* main_card_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_card_lottie.json; sourceTree = "<group>"; };
 		AD0F992C2B7C509000E2A915 /* CreationViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewType.swift; sourceTree = "<group>"; };
 		AD0F992E2B7C520500E2A915 /* InputNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNameView.swift; sourceTree = "<group>"; };
 		AD0F99302B7C521700E2A915 /* InputDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDateView.swift; sourceTree = "<group>"; };
@@ -136,20 +142,21 @@
 		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionRepository.swift; sourceTree = "<group>"; };
+		AD36D44C2B8DD39500250705 /* DeletionInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionInterface.swift; sourceTree = "<group>"; };
 		AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailView.swift; sourceTree = "<group>"; };
 		AD3B45862B68C287009529DE /* AnniversaryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryContentView.swift; sourceTree = "<group>"; };
 		AD3B458C2B68DE8F009529DE /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		AD7D58612B75E89B00832817 /* splash_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_lottie.json; sourceTree = "<group>"; };
 		AD7D58632B75E8F400832817 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		AD9320E22B600589009A9437 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		ADA138422B58093E006F0219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ADA2CBFB2B6CC078001A38D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		ADA2CC032B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAnniversariesUseCase.swift; sourceTree = "<group>"; };
 		ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesInterface.swift; sourceTree = "<group>"; };
-		ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
+		ADA2CC092B6CCECC001A38D9 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		ADA2CC0B2B6CD037001A38D9 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesRepository.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -171,7 +178,6 @@
 				ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */,
 				09642C402B649B820015220E /* CombineMoya in Frameworks */,
 				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
-				AD147F3F2B58006000561846 /* ComposableArchitecture in Frameworks */,
 				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
 				ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
@@ -245,6 +251,7 @@
 				09642C502B67C7640015220E /* CreationInterface.swift */,
 				ADA2CC072B6CCD76001A38D9 /* AnniversariesInterface.swift */,
 				ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */,
+				AD36D44C2B8DD39500250705 /* DeletionInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -274,6 +281,7 @@
 				09642C5A2B67CA230015220E /* CreationRepository.swift */,
 				ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */,
 				ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */,
+				AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -283,8 +291,9 @@
 			children = (
 				AD0F992C2B7C509000E2A915 /* CreationViewType.swift */,
 				09642C5D2B67CA6F0015220E /* CreationModel.swift */,
-				ADA2CC092B6CCECC001A38D9 /* Anniversary.swift */,
+				ADA2CC092B6CCECC001A38D9 /* CardType.swift */,
 				ADA2CC0B2B6CD037001A38D9 /* Query.swift */,
+				AD0418002B904D9F00307944 /* NotificationStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,7 +384,8 @@
 		AD147F102B57FAF900561846 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AD7D58612B75E89B00832817 /* splash_lottie.json */,
+				AD0417FC2B8F1D7800307944 /* splash_lottie.json */,
+				AD0418022B9056B300307944 /* main_card_lottie.json */,
 				AD147F022B57F85700561846 /* Assets.xcassets */,
 				AD147F1C2B57FDA500561846 /* Localizable.strings */,
 			);
@@ -526,7 +536,6 @@
 			);
 			name = DontForget;
 			packageProductDependencies = (
-				AD147F3E2B58006000561846 /* ComposableArchitecture */,
 				09642C3F2B649B820015220E /* CombineMoya */,
 				09642C412B649B820015220E /* Moya */,
 				09642C432B649B820015220E /* ReactiveMoya */,
@@ -585,7 +594,6 @@
 			);
 			mainGroup = AD147EF22B57F85600561846;
 			packageReferences = (
-				AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */,
 				09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */,
 				ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -606,8 +614,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0418032B9056B300307944 /* main_card_lottie.json in Resources */,
 				AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */,
-				AD7D58622B75E89B00832817 /* splash_lottie.json in Resources */,
+				AD0417FD2B8F1D7900307944 /* splash_lottie.json in Resources */,
 				AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */,
 				AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */,
 				AD147F032B57F85700561846 /* Assets.xcassets in Resources */,
@@ -652,6 +661,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0418012B904D9F00307944 /* NotificationStatus.swift in Sources */,
 				09642C5B2B67CA230015220E /* CreationRepository.swift in Sources */,
 				AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */,
 				AD0F992F2B7C520500E2A915 /* InputNameView.swift in Sources */,
@@ -674,13 +684,15 @@
 				09642C552B67C8440015220E /* CreationViewModel.swift in Sources */,
 				09642C512B67C7640015220E /* CreationInterface.swift in Sources */,
 				AD0F99312B7C521700E2A915 /* InputDateView.swift in Sources */,
+				AD36D44B2B8DD37D00250705 /* DeletionRepository.swift in Sources */,
 				ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */,
 				AD9320E32B600589009A9437 /* GridView.swift in Sources */,
+				AD36D44D2B8DD39500250705 /* DeletionInterface.swift in Sources */,
 				ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */,
 				ADA2CC042B6CCB8B001A38D9 /* ReadAnniversariesUseCase.swift in Sources */,
 				ADA2CBFC2B6CC078001A38D9 /* HomeViewModel.swift in Sources */,
 				ADA138432B58093E006F0219 /* HomeView.swift in Sources */,
-				ADA2CC0A2B6CCECC001A38D9 /* Anniversary.swift in Sources */,
+				ADA2CC0A2B6CCECC001A38D9 /* CardType.swift in Sources */,
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
 				ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */,
 				09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */,
@@ -784,7 +796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -841,7 +853,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -859,10 +871,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DontForget/DontForget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "\"DontForget/Preview Content\"";
-				DEVELOPMENT_TEAM = JA7UDVTQBU;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7D5PZJWQ9T;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -873,15 +887,17 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 1.0.1;
 				"OTHER_LDFLAGS[arch=*]" = "-Wl,-ld_classic";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -896,10 +912,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DontForget/DontForget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "\"DontForget/Preview Content\"";
-				DEVELOPMENT_TEAM = JA7UDVTQBU;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7D5PZJWQ9T;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -910,11 +928,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -932,22 +951,26 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JA7UDVTQBU;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7D5PZJWQ9T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DontForgetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "챙겨챙겨";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget.DontForgetWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget.DontForgetWidget";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -963,22 +986,26 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JA7UDVTQBU;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7D5PZJWQ9T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DontForgetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "챙겨챙겨";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget.DontForgetWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget.DontForgetWidget";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1037,14 +1064,6 @@
 				minimumVersion = 0.7.2;
 			};
 		};
-		AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "http://github.com/pointfreeco/swift-composable-architecture.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.0;
-			};
-		};
 		AD7D585E2B75E7CB00832817 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -1083,11 +1102,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */;
 			productName = KoreanLunarSolarConverter;
-		};
-		AD147F3E2B58006000561846 /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD147F3D2B58006000561846 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
 		};
 		AD7D585F2B75E7CB00832817 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

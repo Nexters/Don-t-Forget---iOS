@@ -16,11 +16,11 @@ final class DefaultHomeViewModel: ViewModelType {
     @Published var firstAnniversaryDetail: AnniversaryDetailDTO?
     @Published var anniversaries: [AnniversaryDTO]
     private let readAnniversariesUseCase: ReadAnniversariesUseCase
-    private let fetchFirstAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
-    private var isLoadingAnniversaryDetail = false
-
+    private let fetchAnniversaryDetailUseCase: FetchAnniversaryDetailUseCase
+    
     enum Action {
         case readAnniversaries
+        case fetchFirstAnniversaryDetail
         case changePushState
         case fcmTest
     }
@@ -36,7 +36,7 @@ final class DefaultHomeViewModel: ViewModelType {
         self.state = .idle
         self.anniversaries = []
         self.readAnniversariesUseCase = readAnniversariesUseCase
-        self.fetchFirstAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
+        self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
             anniversaryDetailRepository: AnniversaryDetailRepository(
                 service: AnniversaryService.shared
             )
@@ -48,6 +48,8 @@ final class DefaultHomeViewModel: ViewModelType {
         switch action {
         case .readAnniversaries:
             readAnniversaries()
+        case .fetchFirstAnniversaryDetail:
+            fetchFirstAnniversaryDetail()
         case .changePushState:
             changeStatus()
         case .fcmTest:
@@ -77,66 +79,73 @@ final class DefaultHomeViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { [weak self] completion in
-            self?.isLoadingAnniversaryDetail = false // 작업 완료 후 상태 업데이트
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { [weak self] response in
-            if let self = self, let response = response {
-                // TODO: - Sort anniversaries by date
-                self.anniversaries = response.anniversaries
-                print("=== DEBUG: \(self.anniversaries)")
-                if !self.anniversaries.isEmpty {
-                    print(self.anniversaries.first!.anniversaryId)
-                    self.fetchFirstAnniversaryDetail(anniversaryId: self.anniversaries.first!.anniversaryId)
-                } else {
-                    
-                }
-                self.state = .success
-            }
-        }
-        .store(in: &cancellables)
-    }
-    
-    private func fetchFirstAnniversaryDetail(anniversaryId: Int) {
-        Future<AnniversaryDetailResponse?, Error> { promise in
-            Task {
-                do {
-                    print("쿼리ID\(anniversaryId)")
-                    let response = try await self.fetchFirstAnniversaryDetailUseCase.execute(
-                        requestValue: .init(
-                            query: AnniversaryDetailQuery(
-                                queryId: anniversaryId
-                            )
-                        )
-                    )
-                    print("뷰모델!!\(response)")
-                    promise(.success(response))
-                } catch {
-                    print("=== DEBUG: \(error)")
-                    promise(.failure(error))
-                }
-            }
-        }
-        .receive(on: DispatchQueue.main)
         .sink { completion in
             if case .failure = completion {
                 #warning("handling error")
             }
         } receiveValue: { [weak self] response in
-            if let response = response {
-                self?.firstAnniversaryDetail = response.anniversaryDetail
+            if let self = self, let response = response {
+                self.anniversaries = response.anniversaries.sorted(by: { $0.solarDate < $1.solarDate })
+                print("=== DEBUG: \(self.anniversaries)")
+                self.state = .success
+                if !self.anniversaries.isEmpty {
+                    self.fetchFirstAnniversaryDetail()
+                }
             }
         }
         .store(in: &cancellables)
+    }
+    
+    private func fetchFirstAnniversaryDetail() {
+        if let firstAnniversary = self.anniversaries.first {
+            self.state = .loading
+            Future<AnniversaryDetailResponse?, Error> { promise in
+                Task {
+                    do {
+                        let response = try await self.fetchAnniversaryDetailUseCase.execute(
+                            requestValue: .init(
+                                query: AnniversaryDetailQuery(
+                                    queryId: firstAnniversary.anniversaryId
+                                )
+                            )
+                        )
+                        promise(.success(response))
+                    } catch {
+                        print("=== DEBUG here: \(error) \n \(firstAnniversary)")
+                        promise(.failure(error))
+                    }
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure = completion {
+                    #warning("handling error")
+                }
+            } receiveValue: { [weak self] response in
+                if let response = response {
+                    self?.firstAnniversaryDetail = response.anniversaryDetail
+                    self?.state = .success
+                }
+            }
+            .store(in: &cancellables)
+        }
     }
     
     private func changeStatus() {
         Future<Int, Error> { promise in
             Task {
                 do {
-                    let response = try await AnniversaryService.shared.changePushState(status: "ON")
+                    var status = NotificationStatus.ON.rawValue
+                    UNUserNotificationCenter.current().getNotificationSettings { settings in
+                        switch settings.authorizationStatus {
+                        case .notDetermined, .authorized: /// 한 번만 허용, 푸시 허용
+                            status = NotificationStatus.ON.rawValue
+                        default:
+                            status = NotificationStatus.OFF.rawValue
+                        }
+                    }
+                    let response = try await AnniversaryService.shared.changePushState(status: status)
+                    print("=== DEBUG: changeStatus \(status)")
                     promise(.success(response))
                 } catch {
                     print("=== DEBUG: changeStatus \(error)")

@@ -21,7 +21,8 @@ struct MemoView: View {
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
             TextField(
-                "", text: $memo,
+                "", 
+                text: $memo,
                 prompt: Text("가족 여행 미리 계획하기").foregroundColor(.gray700)
             )
             .multilineTextAlignment(.center)

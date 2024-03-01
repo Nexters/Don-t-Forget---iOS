@@ -24,7 +24,7 @@ struct AnniversaryContentView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(anniversary.solarDate)
+                Text(anniversary.solarDate.replacingOccurrences(of: "-", with: "."))
                     .foregroundStyle(Color.gray600)
                     .font(.system(size: 18))
                 Text("D\(dday)")
@@ -37,9 +37,11 @@ struct AnniversaryContentView: View {
                     Text(anniversary.title)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text(anniversary.content)
-                        .font(.system(size: 16))
-                        .foregroundStyle(Color.gray600)
+                    if !anniversary.content.isEmpty {
+                        Text(anniversary.content)
+                            .font(.system(size: 16))
+                            .foregroundStyle(Color.gray600)
+                    }
                 }
                 .padding(.horizontal, 16)
                 .overlay(

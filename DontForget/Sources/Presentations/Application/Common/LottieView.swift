@@ -40,11 +40,10 @@ struct LottieView: UIViewRepresentable {
         animationView.contentMode = contentMode
         animationView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            animationView.widthAnchor.constraint(equalToConstant: 400), /// 높이 넒이 알잘딱하게 수정하시면됩니다.
-//            animationView.heightAnchor.constraint(equalToConstant: 390),
-//            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            animationView.heightAnchor.constraint(equalToConstant: 390),
+            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         animationView.loopMode = loopMode
@@ -59,4 +58,8 @@ struct LottieView: UIViewRepresentable {
             }
         }
     }
+}
+
+extension LottieView {
+    static let lottieInDetailView = LottieView(name: .mainLottie, loopMode: .loop)
 }

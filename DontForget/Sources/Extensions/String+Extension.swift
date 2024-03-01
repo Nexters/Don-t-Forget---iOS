@@ -29,6 +29,7 @@ extension String {
     /* Image */
     static let splashBackground = "splashBackground"
     
+    static let homeBackgroundWithNoise = "homeBackgroundWithNoise"
     static let homeBackgroundFull = "homeBackgroundFull"
     static let homeBackgroundHalf = "homeBackgroundHalf"
     static let cardBackground1 = "Card_BG_1"
@@ -48,6 +49,7 @@ extension String {
     
     /* Lottie */
     static let splashLottie = "splash_lottie"
+    static let mainLottie = "main_card_lottie"
     
     /* UserDefaults key*/
     static let fcmToken = "fcmToken"
