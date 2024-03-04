@@ -79,11 +79,7 @@ final class DefaultHomeViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { [weak self] response in
+        .sink { _ in } receiveValue: { [weak self] response in
             if let self = self, let response = response {
                 self.anniversaries = response.anniversaries.sorted(by: { $0.solarDate < $1.solarDate })
                 print("=== DEBUG: \(self.anniversaries)")
@@ -117,11 +113,7 @@ final class DefaultHomeViewModel: ViewModelType {
                 }
             }
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                if case .failure = completion {
-                    #warning("handling error")
-                }
-            } receiveValue: { [weak self] response in
+            .sink { _ in } receiveValue: { [weak self] response in
                 if let response = response {
                     self?.firstAnniversaryDetail = response.anniversaryDetail
                     self?.state = .success
@@ -154,13 +146,7 @@ final class DefaultHomeViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { response in
-            print("=== DEBUG: fcm 발송 테스트 \(response)")
-        }
+        .sink { _ in } receiveValue: { _ in }
         .store(in: &cancellables)
     }
     
@@ -177,11 +163,7 @@ final class DefaultHomeViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { response in
+        .sink { _ in } receiveValue: { response in
             print("=== DEBUG: fcmTest \(response)")
         }
         .store(in: &cancellables)

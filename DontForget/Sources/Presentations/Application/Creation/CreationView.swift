@@ -46,10 +46,7 @@ struct CreationView: View {
     ) {
         self.viewModel = viewModel
         self.type = type
-        switch type {
-        case .create:
-            break
-        case .edit:
+        if let id = id {
             self.id = id
         }
         configure()
@@ -194,60 +191,8 @@ struct CreationView: View {
                 .padding(.top, isKeyboardVisible && focusField == .memo ? keyboardHeight + 20 : 0)
                 .animation(.default, value: keyboardHeight)
             }
-            .onAppear {
-                switch type {
-                case .create:
-                    self.selectedAlarmIndexes = Set([AlarmPeriod.dDay.schedule])
-                    focusField = .eventName
-                case .edit:
-                    viewModel.fetchAnniversaryDetail(id: id!)
-                    viewModel.$anniversaryDetail
-                        .receive(on: DispatchQueue.main)
-                        .sink {  res in
-                            self.name = res?.title ?? ""
-                            self.memo = res?.content ?? ""
-                            self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                            self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
-                            if let date = res?.baseDate {
-                                self.baseDate = self.extractYearMonthDay(from: date)!
-                            }
-                        }
-                        .store(in: &cancellables)
-                }
-                NotificationCenter.default.addObserver(
-                    forName: UIResponder.keyboardWillShowNotification,
-                    object: nil,
-                    queue: .main
-                ) { noti in
-                    guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-                    keyboardHeight = keyboardFrame.height
-                }
-                NotificationCenter
-                    .default
-                    .addObserver(
-                        forName: UIResponder.keyboardWillHideNotification,
-                        object: nil,
-                        queue: .main
-                    ) { _ in
-                        keyboardHeight = 0
-                    }
-            }
-            .onDisappear {
-                NotificationCenter
-                    .default
-                    .removeObserver(
-                        self,
-                        name: UIResponder.keyboardWillShowNotification,
-                        object: nil
-                    )
-                NotificationCenter
-                    .default
-                    .removeObserver(
-                        self,
-                        name: UIResponder.keyboardWillHideNotification,
-                        object: nil
-                    )
-            }
+            .onAppear(perform: actionsOnAppear)
+            .onDisappear(perform: actionOnDisappear)
             .onReceive(viewModel.viewDismissalModePublisher) { shouldDismiss in
                 if shouldDismiss {
                     withAnimation {
@@ -274,16 +219,11 @@ extension CreationView {
     private func extractYearMonthDay(from dateString: String) -> [Int]? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: dateString) else {
-            print("=== DEBUG: Invalid date format")
-            return nil
-        }
-        
+        let date = dateFormatter.date(from: dateString)!
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date) % 100
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
-        
         return [year, month, day]
     }
     
@@ -301,13 +241,58 @@ extension CreationView {
     }
     
     private func randomCardType() -> String {
-        let cardType = [
-            CardType.lunar.rawValue,
-            CardType.tail.rawValue,
-            CardType.arm.rawValue,
-            CardType.face.rawValue,
-            CardType.forest.rawValue
-        ]
-        return cardType.randomElement()!
+        return CardType.allCases.randomElement()!.rawValue
+    }
+    
+    private func actionsOnAppear() {
+        switch type {
+        case .create:
+            self.selectedAlarmIndexes = Set([AlarmPeriod.dDay.schedule])
+            focusField = .eventName
+        case .edit:
+            viewModel.fetchAnniversaryDetail(id: id!)
+            viewModel.$anniversaryDetail
+                .receive(on: DispatchQueue.main)
+                .sink {  res in
+                    self.name = res?.title ?? ""
+                    self.memo = res?.content ?? ""
+                    self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
+                    self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
+                    if let date = res?.baseDate {
+                        self.baseDate = self.extractYearMonthDay(from: date)!
+                    }
+                }
+                .store(in: &cancellables)
+        }
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            queue: .main
+        ) { noti in
+            guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            keyboardHeight = keyboardFrame.height
+        }
+        NotificationCenter
+            .default
+            .addObserver(
+                forName: UIResponder.keyboardWillHideNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                keyboardHeight = 0
+            }
+    }
+    
+    private func actionOnDisappear() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 }

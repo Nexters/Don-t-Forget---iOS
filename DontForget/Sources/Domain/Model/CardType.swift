@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CardType: String {
+enum CardType: String, CaseIterable {
     case lunar = "LUNAR"
     case face = "FACE"
     case arm = "ARM"

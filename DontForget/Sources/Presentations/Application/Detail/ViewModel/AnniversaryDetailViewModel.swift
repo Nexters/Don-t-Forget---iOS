@@ -87,11 +87,7 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { [weak self] response in
+        .sink { _ in } receiveValue: { [weak self] response in
             if let response = response {
                 self?.anniversaryDetail = response.anniversaryDetail
                 self?.state = .success
@@ -119,8 +115,7 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         .sink { completion in
             self.dismiss = true
             if case .failure = completion {
-                #warning("handling error")
-                print(completion)
+                print("=== DEBUG: \(completion)")
             }
         } receiveValue: { _ in }
         .store(in: &cancellables)
