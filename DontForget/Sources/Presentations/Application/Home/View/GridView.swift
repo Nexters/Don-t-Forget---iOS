@@ -15,6 +15,16 @@ struct GridView: View {
         let solarDate = anniversary.solarDate.replacingOccurrences(of: "-", with: ".")
         return String(solarDate[solarDate.index(solarDate.startIndex, offsetBy: 2)..<solarDate.endIndex])
     }
+    private var dday: String {
+        let dday = Constants.getDDay(anniversary.solarDate)
+        if dday == 0 {
+            return "D-DAY"
+        } else if dday > 0 {
+            return "D+\(dday)"
+        } else {
+            return "D\(dday)"
+        }
+    }
     
     var body: some View {
         HStack {
@@ -23,7 +33,7 @@ struct GridView: View {
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundStyle(anniversary.cardType == CardType.face.rawValue ? Color.gray900: .gray50)
                     .lineLimit(1)
-                Text("D\(Constants.getDDay(anniversary.solarDate))")
+                Text(dday)
                     .font(.system(size: 34, weight: .bold))
                     .foregroundStyle(
                         [
