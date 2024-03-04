@@ -27,6 +27,7 @@ struct HomeView: View {
     @State private var navigateToCreationView = false
     @State private var isNavigate = false
     @State private var id = -1
+    private var networkConnected: Bool { NetworkMonitor.shared.isConnected }
     
     var body: some View {
         NavigationView {
@@ -81,7 +82,8 @@ struct HomeView: View {
                                 }
                                 .clipShape(RoundedRectangle(cornerRadius: 32))
                                 .onTapGesture {
-                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail {
+                                    if let firstAnniversaryDetail = viewModel.firstAnniversaryDetail,
+                                    networkConnected {
                                         id = firstAnniversaryDetail.anniversaryId
                                         isNavigate = true
                                     }
@@ -109,9 +111,11 @@ struct HomeView: View {
                                             .simultaneousGesture(
                                                 TapGesture()
                                                     .onEnded({
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                            id = anniversaries[index].anniversaryId
-                                                            isNavigate = true
+                                                        if networkConnected {
+                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                                id = anniversaries[index].anniversaryId
+                                                                isNavigate = true
+                                                            }
                                                         }
                                                     })
                                             )
@@ -129,10 +133,7 @@ struct HomeView: View {
                         #endif
                     }
                     .offset(y: anniversaries.isEmpty ? 0 : -140)
-                    .onAppear {
-                        viewModel.action(.readAnniversaries)
-                        viewModel.action(.changePushState)
-                    }
+                    .onAppear(perform: actionOnAppear)
                     .id(Self.scrollTopView)
                 }
                 .scrollDisabled(anniversaries.isEmpty)
@@ -147,6 +148,20 @@ struct HomeView: View {
                     if anniversaries.isEmpty {
                         withAnimation {
                             proxy.scrollTo(Self.scrollTopView, anchor: .top)
+                        }
+                    }
+                }
+                .onChange(of: networkConnected) { _, status in
+                    if status {
+                        actionOnAppear()
+                    }
+                }
+                .toolbar {
+                    if !networkConnected {
+                        ToolbarItem(placement: .status) {
+                            Text("네트워크 연결이 없어요")
+                                .font(.pretendard(size: 15))
+                                .foregroundStyle(.white)
                         }
                     }
                 }
@@ -204,5 +219,11 @@ extension HomeView {
             isActive: $navigateToCreationView,
             label: { AddNewAnniversaryView() }
         )
+        .disabled(!networkConnected)
+    }
+    
+    private func actionOnAppear() {
+        viewModel.action(.readAnniversaries)
+        viewModel.action(.changePushState)
     }
 }

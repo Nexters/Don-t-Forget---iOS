@@ -164,7 +164,7 @@ struct AnniversaryDetailView: View {
                 coordinateSpace: .local
             )
             .onEnded({ value in
-                if value.translation.width > 200 {
+                if value.translation.width > 100 {
                     withAnimation {
                         dismiss()
                     }
