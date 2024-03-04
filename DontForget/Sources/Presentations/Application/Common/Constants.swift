@@ -20,6 +20,6 @@ struct Constants {
         let calendar = Calendar.current
         let startOfCurrentDate = calendar.startOfDay(for: Date())
         let startOfTargetDate = calendar.startOfDay(for: from)
-        return calendar.dateComponents([.day], from: startOfCurrentDate, to: startOfTargetDate).day!
+        return calendar.dateComponents([.day], from: startOfCurrentDate, to: startOfTargetDate).day! * -1
     }
 }
