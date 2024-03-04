@@ -200,6 +200,11 @@ struct CreationView: View {
                     }
                 }
             }
+            .onChange(of: showConfirmView) { _, showed in
+                if showed {
+                    hideKeyboard()
+                }
+            }
         }
         .navigationBarHidden(true)
     }
