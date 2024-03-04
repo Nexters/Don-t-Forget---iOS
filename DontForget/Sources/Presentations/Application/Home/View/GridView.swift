@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GridView: View {
     
+    let gridWidth = (UIScreen.width - 60) / 2
     let anniversary: AnniversaryDTO
     @State private var scale = 1.0
     private var solarDate: String {
@@ -20,11 +21,11 @@ struct GridView: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(anniversary.title)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.pretendard(.semiBold, size: 16))
                     .foregroundStyle(anniversary.cardType == CardType.face.rawValue ? Color.gray900: .gray50)
                     .lineLimit(1)
                 Text("D\(Constants.getDDay(anniversary.solarDate))")
-                    .font(.system(size: 34, weight: .bold))
+                    .font(.pretendard(.bold, size: 34))
                     .foregroundStyle(
                         [
                             CardType.lunar.rawValue,
@@ -35,7 +36,7 @@ struct GridView: View {
                     )
                 Spacer(minLength: 30)
                 Text(solarDate)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.pretendard(.medium, size: 16))
                     .foregroundStyle(anniversary.cardType == CardType.face.rawValue ? Color.primary700 : .white)
                     .opacity(0.5)
             }
@@ -44,7 +45,7 @@ struct GridView: View {
             .padding(.bottom, 20)
             Spacer()
         }
-        .frame(height: 183)
+        .frame(width: gridWidth, height: gridWidth)
         .background(
             ZStack {
                 Color(hex: 0x181E23)
