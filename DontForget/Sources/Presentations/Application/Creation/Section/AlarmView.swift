@@ -16,8 +16,8 @@ struct AlarmView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("미리 알림")
-                .font(.system(size: 19, weight: .semibold))
+            Text("알림")
+                .font(.pretendard(.semiBold, size: 16))
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
@@ -31,6 +31,7 @@ struct AlarmView: View {
                             .cornerRadius(50)
                             .overlay(
                                 Text(alarmPeriod.title)
+                                    .font(.pretendard(size: 15))
                                     .foregroundColor(selectedAlarmIndexes.contains(alarmPeriod.schedule) ? Color.white : Color.gray400)
                             )
                             .onTapGesture {

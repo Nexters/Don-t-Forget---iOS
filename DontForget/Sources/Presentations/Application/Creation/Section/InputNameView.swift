@@ -14,15 +14,17 @@ struct InputNameView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .pink)
-                .font(.system(size: 19, weight: .semibold))
+            Text.coloredText("기념일 이름 *", coloredPart: "*", color: .pink500)
+                .font(.pretendard(.semiBold, size: 16))
                 .padding(.leading, 16)
                 .padding(.bottom, 32)
                 .foregroundColor(.white)
             TextField(
                 "",
                 text: $name,
-                prompt: Text("사랑하는 엄마에게").foregroundColor(.gray700)
+                prompt: Text("사랑하는 엄마 생일")
+                    .foregroundColor(.gray700)
+                    .font(.pretendard(size: 20))
             )
             .multilineTextAlignment(.center)
             .padding(.horizontal, 20)

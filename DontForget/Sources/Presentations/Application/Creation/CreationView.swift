@@ -134,7 +134,9 @@ struct CreationView: View {
                         } label: {
                             Text("취소")
                                 .foregroundColor(.gray600)
+                                .font(.pretendard(.semiBold, size: 16))
                         }
+                        .disabled(showConfirmView)
                     }
                 }
                 VStack {
@@ -174,6 +176,7 @@ struct CreationView: View {
                             }
                         } label: {
                             Text(focusField == .eventName ? "다음" : "완료")
+                                .font(.pretendard(.semiBold, size: 20))
                                 .foregroundColor(.white)
                                 .padding()
                                 .frame(height: 72)
