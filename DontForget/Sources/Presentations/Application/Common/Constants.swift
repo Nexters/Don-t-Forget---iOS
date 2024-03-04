@@ -18,7 +18,8 @@ struct Constants {
         formatter.dateFormat = "yyyy-MM-dd"
         let from = formatter.date(from: formatted)!
         let calendar = Calendar.current
-        let currentDate = Date()
-        return calendar.dateComponents([.day], from: from, to: currentDate).day! - 1
+        let startOfCurrentDate = calendar.startOfDay(for: Date())
+        let startOfTargetDate = calendar.startOfDay(for: from)
+        return calendar.dateComponents([.day], from: startOfCurrentDate, to: startOfTargetDate).day!
     }
 }

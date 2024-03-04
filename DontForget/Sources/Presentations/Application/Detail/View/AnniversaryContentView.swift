@@ -13,11 +13,11 @@ struct AnniversaryContentView: View {
     private var dday: String {
         let dday = Constants.getDDay(anniversary.solarDate)
         if dday == 0 {
-            return " DAY"
+            return "D-DAY"
         } else if dday > 0 {
-            return  "+\(dday)"
+            return "D+\(dday)"
         } else {
-            return "\(dday)"
+            return "D\(dday)"
         }
     }
     
@@ -27,7 +27,7 @@ struct AnniversaryContentView: View {
                 Text(anniversary.solarDate.replacingOccurrences(of: "-", with: "."))
                     .foregroundStyle(Color.gray600)
                     .font(.pretendard(size: 18))
-                Text("D\(dday)")
+                Text(dday)
                     .font(.pretendard(.bold, size: 72))
                     .foregroundStyle(Color.primary500)
                 Spacer()
