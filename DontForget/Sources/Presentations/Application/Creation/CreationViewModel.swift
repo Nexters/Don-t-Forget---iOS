@@ -22,11 +22,6 @@ final class CreationViewModel: ViewModelType {
     @Published var anniversaryDetail: AnniversaryDetailDTO?
     @Published var title: String?
     @Published var date: String?
-    @Published var content: String = ""
-    @Published var calendarType: String = ""
-    @Published var cardType: String = ""
-    @Published var alarmSchedule: [String] = []
-    @Published var getDate: [Int] = []
     
     var viewDismissalModePublisher = PassthroughSubject<Bool, Never>()
     private var dismiss = false {
@@ -142,11 +137,7 @@ final class CreationViewModel: ViewModelType {
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { [weak self] response in
+        .sink { _ in } receiveValue: { [weak self] response in
             if let response = response {
                 self?.anniversaryDetail = response.anniversaryDetail
                 self?.state = .success

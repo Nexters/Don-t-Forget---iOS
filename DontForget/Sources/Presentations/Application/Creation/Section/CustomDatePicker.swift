@@ -88,8 +88,7 @@ struct CustomDatePicker: View {
                             Spacer(minLength: fullView.size.height / 2 - 25)
                             LazyVGrid(columns: [GridItem(.fixed(32))], spacing: 0) {
                                 ForEach(values, id: \.self) { value in
-                                    let displayValue = value % 100
-                                    Text("\(String(format: "%02d", displayValue))")
+                                    Text("\(String(format: "%02d", value % 100))")
                                         .font(.pretendard(size: 24))
                                         .foregroundColor(selection.wrappedValue == value ? .blue : .gray)
                                         .frame(width: 60, height: 63)
@@ -108,8 +107,7 @@ struct CustomDatePicker: View {
                     }
                     .onPreferenceChange(CenterPreferenceKey.self) { centers in
                         DispatchQueue.main.async {
-                            if !isProgrammaticScroll,
-                                let closest = centers.min(by: { abs($0.value) < abs($1.value) }),
+                            if !isProgrammaticScroll, let closest = centers.min(by: { abs($0.value) < abs($1.value) }),
                                selection.wrappedValue != closest.key {
                                 withAnimation {
                                     scrollViewProxy.scrollTo(closest.key, anchor: .center)

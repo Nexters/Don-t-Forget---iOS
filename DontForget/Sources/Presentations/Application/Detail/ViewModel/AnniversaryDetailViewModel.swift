@@ -13,7 +13,7 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     // MARK: - Properties
     let anniversaryId: Int
     private var cancellables = Set<AnyCancellable>()
-    @Published var state: State
+    @Published var state: State = .idle
     @Published var anniversaryDetail: AnniversaryDetailDTO?
     private let anniversaryDetailRepository: AnniversaryDetailRepository
     private let deletionRepository: DeletionRepository
@@ -44,7 +44,6 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         anniversaryDetailRepository: AnniversaryDetailRepository,
         deletionRepository: DeletionRepository
     ) {
-        self.state = .loading
         self.anniversaryId = anniversaryId
         self.anniversaryDetailRepository = anniversaryDetailRepository
         self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
@@ -82,19 +81,13 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
                 } catch {
                     print("=== DEBUG: \(error)")
                     promise(.failure(error))
-                    self.state = .failed("failed fetchAnniversaryDetail()")
                 }
             }
         }
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure = completion {
-                #warning("handling error")
-            }
-        } receiveValue: { [weak self] response in
+        .sink { _ in } receiveValue: { [weak self] response in
             if let response = response {
                 self?.anniversaryDetail = response.anniversaryDetail
-                self?.state = .success
             }
         }
         .store(in: &cancellables)
@@ -119,8 +112,7 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
         .sink { completion in
             self.dismiss = true
             if case .failure = completion {
-                #warning("handling error")
-                print(completion)
+                print("=== DEBUG: \(completion)")
             }
         } receiveValue: { _ in }
         .store(in: &cancellables)
