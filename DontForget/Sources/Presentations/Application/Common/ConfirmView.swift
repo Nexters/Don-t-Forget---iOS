@@ -137,7 +137,7 @@ struct ConfirmView: View {
             .padding(.horizontal, 45)
             .offset(y: animationOffsetY)
             .onAppear {
-                withAnimation(.spring) {
+                withAnimation(Animation.spring()) {
                     animationOffsetY = 0
                 }
             }
