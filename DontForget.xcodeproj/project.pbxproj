@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		09642C3B2B649B260015220E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C3A2B649B260015220E /* EndPoint.swift */; };
 		09642C3D2B649B2D0015220E /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C3C2B649B2D0015220E /* APIConstant.swift */; };
-		09642C402B649B820015220E /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C3F2B649B820015220E /* CombineMoya */; };
 		09642C422B649B820015220E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C412B649B820015220E /* Moya */; };
-		09642C442B649B820015220E /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C432B649B820015220E /* ReactiveMoya */; };
 		09642C462B649FD00015220E /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C452B649FD00015220E /* DTO.swift */; };
 		09642C482B64A1680015220E /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C472B64A1680015220E /* BaseResponse.swift */; };
 		09642C4A2B64A37A0015220E /* AnniversaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C492B64A37A0015220E /* AnniversaryService.swift */; };
@@ -187,8 +185,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */,
-				09642C402B649B820015220E /* CombineMoya in Frameworks */,
-				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
 				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
 				ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
@@ -559,9 +555,7 @@
 			);
 			name = DontForget;
 			packageProductDependencies = (
-				09642C3F2B649B820015220E /* CombineMoya */,
 				09642C412B649B820015220E /* Moya */,
-				09642C432B649B820015220E /* ReactiveMoya */,
 				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
 				ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */,
 				ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */,
@@ -1092,20 +1086,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		09642C3F2B649B820015220E /* CombineMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = CombineMoya;
-		};
 		09642C412B649B820015220E /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
-		};
-		09642C432B649B820015220E /* ReactiveMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = ReactiveMoya;
 		};
 		09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */ = {
 			isa = XCSwiftPackageProductDependency;
