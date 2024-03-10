@@ -41,8 +41,6 @@ extension DontForgetTarget: TargetType {
             return "v1/notice/device"
         case .fcmTest:
             return "v1/notice"
-        default:
-            return ""
         }
     }
     

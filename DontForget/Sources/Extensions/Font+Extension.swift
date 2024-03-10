@@ -39,8 +39,6 @@ extension Font {
                 return "Pretendard-SemiBold"
             case .thin:
                 return "Pretendard-Thin"
-            default:
-                return ""
             }
         }
     }
