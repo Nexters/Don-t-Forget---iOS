@@ -8,7 +8,6 @@
 import Foundation
 import Network
 
-@Observable
 final class NetworkMonitor: ObservableObject {
     static let shared = NetworkMonitor()
     private let networkMonitor = NWPathMonitor()
