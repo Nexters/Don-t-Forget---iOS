@@ -16,8 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build without test
+    - name: Build
       run: |
-        xcodebuild build -project DontForget.xcodeproj \
+        xcodebuild clean test -project DontForget.xcodeproj \
         -scheme DontForget \
         -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest'
