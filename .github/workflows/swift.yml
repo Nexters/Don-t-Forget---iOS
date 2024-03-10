@@ -19,5 +19,5 @@ jobs:
     - name: Build
       run: |
         xcodebuild clean test -project DontForget.xcodeproj \
-        -scheme DontForget-Release \
+        -scheme DontForget \
         -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
