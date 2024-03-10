@@ -170,10 +170,6 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    HomeView()
-}
-
 struct AddNewAnniversaryView: View {
     let gridWidth = (UIScreen.width - 60) / 2
     var body: some View {
