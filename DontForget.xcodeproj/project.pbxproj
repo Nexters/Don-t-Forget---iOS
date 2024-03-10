@@ -77,6 +77,7 @@
 		ADA2CC0A2B6CCECC001A38D9 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* CardType.swift */; };
 		ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0B2B6CD037001A38D9 /* Query.swift */; };
 		ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */; };
+		ADA39C1F2B9D7D4200F790FA /* DontForgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA39C1E2B9D7D4200F790FA /* DontForgetTests.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
 		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
 		ADAFFDD32B70C7FB00746D3E /* AnniversaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */; };
@@ -95,6 +96,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = AD147F252B57FFB500561846;
 			remoteInfo = DontForgetWidgetExtension;
+		};
+		ADA39C202B9D7D4200F790FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD147EF32B57F85600561846 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD147EFA2B57F85600561846;
+			remoteInfo = DontForget;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -181,6 +189,8 @@
 		ADA2CC092B6CCECC001A38D9 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		ADA2CC0B2B6CD037001A38D9 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesRepository.swift; sourceTree = "<group>"; };
+		ADA39C1C2B9D7D4200F790FA /* DontForgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DontForgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA39C1E2B9D7D4200F790FA /* DontForgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetTests.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailViewModel.swift; sourceTree = "<group>"; };
@@ -213,6 +223,13 @@
 			files = (
 				AD147F2B2B57FFB500561846 /* SwiftUI.framework in Frameworks */,
 				AD147F292B57FFB500561846 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA39C192B9D7D4200F790FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +375,7 @@
 				AD147F0C2B57F89300561846 /* .swiftlint.yml */,
 				AD147EFD2B57F85600561846 /* DontForget */,
 				AD147F2C2B57FFB500561846 /* DontForgetWidget */,
+				ADA39C1D2B9D7D4200F790FA /* DontForgetTests */,
 				AD147F272B57FFB500561846 /* Frameworks */,
 				AD147EFC2B57F85600561846 /* Products */,
 			);
@@ -368,6 +386,7 @@
 			children = (
 				AD147EFB2B57F85600561846 /* DontForget.app */,
 				AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */,
+				ADA39C1C2B9D7D4200F790FA /* DontForgetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -540,6 +559,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ADA39C1D2B9D7D4200F790FA /* DontForgetTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADA39C1E2B9D7D4200F790FA /* DontForgetTests.swift */,
+			);
+			path = DontForgetTests;
+			sourceTree = "<group>";
+		};
 		ADAFFDDA2B70CD5A00746D3E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +633,24 @@
 			productReference = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		ADA39C1B2B9D7D4200F790FA /* DontForgetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA39C242B9D7D4200F790FA /* Build configuration list for PBXNativeTarget "DontForgetTests" */;
+			buildPhases = (
+				ADA39C182B9D7D4200F790FA /* Sources */,
+				ADA39C192B9D7D4200F790FA /* Frameworks */,
+				ADA39C1A2B9D7D4200F790FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADA39C212B9D7D4200F790FA /* PBXTargetDependency */,
+			);
+			name = DontForgetTests;
+			productName = DontForgetTests;
+			productReference = ADA39C1C2B9D7D4200F790FA /* DontForgetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -621,6 +666,10 @@
 					};
 					AD147F252B57FFB500561846 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					ADA39C1B2B9D7D4200F790FA = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = AD147EFA2B57F85600561846;
 					};
 				};
 			};
@@ -646,6 +695,7 @@
 			targets = (
 				AD147EFA2B57F85600561846 /* DontForget */,
 				AD147F252B57FFB500561846 /* DontForgetWidgetExtension */,
+				ADA39C1B2B9D7D4200F790FA /* DontForgetTests */,
 			);
 		};
 /* End PBXProject section */
@@ -679,6 +729,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD147F342B57FFB600561846 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA39C1A2B9D7D4200F790FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +830,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADA39C182B9D7D4200F790FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA39C1F2B9D7D4200F790FA /* DontForgetTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -780,6 +845,11 @@
 			isa = PBXTargetDependency;
 			target = AD147F252B57FFB500561846 /* DontForgetWidgetExtension */;
 			targetProxy = AD147F362B57FFB600561846 /* PBXContainerItemProxy */;
+		};
+		ADA39C212B9D7D4200F790FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD147EFA2B57F85600561846 /* DontForget */;
+			targetProxy = ADA39C202B9D7D4200F790FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1067,6 +1137,44 @@
 			};
 			name = Release;
 		};
+		ADA39C222B9D7D4200F790FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DontForget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DontForget";
+			};
+			name = Debug;
+		};
+		ADA39C232B9D7D4200F790FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DontForget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DontForget";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1093,6 +1201,15 @@
 			buildConfigurations = (
 				AD147F3A2B57FFB600561846 /* Debug */,
 				AD147F3B2B57FFB600561846 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADA39C242B9D7D4200F790FA /* Build configuration list for PBXNativeTarget "DontForgetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA39C222B9D7D4200F790FA /* Debug */,
+				ADA39C232B9D7D4200F790FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
