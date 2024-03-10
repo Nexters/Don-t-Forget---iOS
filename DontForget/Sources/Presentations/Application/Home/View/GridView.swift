@@ -22,9 +22,8 @@ struct GridView: View {
             return "D-DAY"
         } else if dday > 0 {
             return "D+\(dday)"
-        } else {
-            return "D\(dday)"
-        }
+        } 
+        return "D\(dday)"
     }
     
     var body: some View {
