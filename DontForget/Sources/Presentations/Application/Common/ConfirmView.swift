@@ -37,6 +37,8 @@ struct ConfirmView: View {
             return "기념일을 삭제할까요?"
         case .cancelCreating:
             return "기념일 만들기를 취소할까요?"
+        default:
+            return ""
         }
     }
     
@@ -48,6 +50,8 @@ struct ConfirmView: View {
             "기념일을 삭제한 후에는\n되돌릴 수 없어요."
         case .cancelCreating:
             "만들고 있던 기념일은\n저장되지않고, 사라집니다."
+        default:
+            return ""
         }
     }
     

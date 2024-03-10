@@ -17,6 +17,8 @@ enum ConvertDate {
             return "SOLAR"
         case .lunar:
             return "LUNAR"
+        default:
+            return ""
         }
     }
 }
@@ -43,6 +45,8 @@ enum AlarmPeriod {
             return "2주 전"
         case .oneMonthAgo:
             return "1달 전"
+        default:
+            return ""
         }
     }
     
@@ -60,6 +64,8 @@ enum AlarmPeriod {
             return "TWO_WEEKS"
         case .oneMonthAgo:
             return "ONE_MONTH"
+        default:
+            return ""
         }
     }
 }
