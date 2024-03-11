@@ -82,7 +82,7 @@ struct ConfirmView: View {
         ZStack {
             Color.black.opacity(0.4)
             VStack {
-                Image(.anniversaryDelete)
+                Image(.calendarDeleteIcon)
                     .resizable()
                     .frame(width: 56, height: 56)
                     .padding(.top, 32)
