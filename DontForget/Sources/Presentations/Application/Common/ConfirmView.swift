@@ -43,11 +43,11 @@ struct ConfirmView: View {
     var confirmDescription: String {
         switch alertType {
         case .cancelEditing:
-            "수정 중이던 내용은\n저장되지 않고, 사라집니다."
+            return "수정 중이던 내용은\n저장되지 않고, 사라집니다."
         case .deleteAnniversary:
-            "기념일을 삭제한 후에는\n되돌릴 수 없어요."
+            return "기념일을 삭제한 후에는\n되돌릴 수 없어요."
         case .cancelCreating:
-            "만들고 있던 기념일은\n저장되지않고, 사라집니다."
+            return "만들고 있던 기념일은\n저장되지않고, 사라집니다."
         }
     }
     
@@ -82,7 +82,7 @@ struct ConfirmView: View {
         ZStack {
             Color.black.opacity(0.4)
             VStack {
-                Image(.anniversaryDelete)
+                Image(.calendarDeleteIcon)
                     .resizable()
                     .frame(width: 56, height: 56)
                     .padding(.top, 32)
@@ -137,7 +137,7 @@ struct ConfirmView: View {
             .padding(.horizontal, 45)
             .offset(y: animationOffsetY)
             .onAppear {
-                withAnimation(.spring) {
+                withAnimation(Animation.spring()) {
                     animationOffsetY = 0
                 }
             }

@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		09642C3B2B649B260015220E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C3A2B649B260015220E /* EndPoint.swift */; };
 		09642C3D2B649B2D0015220E /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C3C2B649B2D0015220E /* APIConstant.swift */; };
-		09642C402B649B820015220E /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C3F2B649B820015220E /* CombineMoya */; };
 		09642C422B649B820015220E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C412B649B820015220E /* Moya */; };
-		09642C442B649B820015220E /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 09642C432B649B820015220E /* ReactiveMoya */; };
 		09642C462B649FD00015220E /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C452B649FD00015220E /* DTO.swift */; };
 		09642C482B64A1680015220E /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C472B64A1680015220E /* BaseResponse.swift */; };
 		09642C4A2B64A37A0015220E /* AnniversaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09642C492B64A37A0015220E /* AnniversaryService.swift */; };
@@ -41,13 +39,6 @@
 		AD147F0D2B57F89300561846 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = AD147F0C2B57F89300561846 /* .swiftlint.yml */; };
 		AD147F1A2B57FDA500561846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD147F1C2B57FDA500561846 /* Localizable.strings */; };
 		AD147F212B57FF7500561846 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F202B57FF7500561846 /* String+Extension.swift */; };
-		AD147F292B57FFB500561846 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD147F282B57FFB500561846 /* WidgetKit.framework */; };
-		AD147F2B2B57FFB500561846 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD147F2A2B57FFB500561846 /* SwiftUI.framework */; };
-		AD147F2E2B57FFB500561846 /* DontForgetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F2D2B57FFB500561846 /* DontForgetWidgetBundle.swift */; };
-		AD147F302B57FFB500561846 /* DontForgetWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F2F2B57FFB500561846 /* DontForgetWidget.swift */; };
-		AD147F322B57FFB500561846 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD147F312B57FFB500561846 /* AppIntent.swift */; };
-		AD147F342B57FFB600561846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD147F332B57FFB600561846 /* Assets.xcassets */; };
-		AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD1D31F92B9589A700ECCBFD /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D31F82B9589A700ECCBFD /* NetworkMonitor.swift */; };
 		AD36D44B2B8DD37D00250705 /* DeletionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */; };
 		AD36D44D2B8DD39500250705 /* DeletionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36D44C2B8DD39500250705 /* DeletionInterface.swift */; };
@@ -77,6 +68,7 @@
 		ADA2CC0A2B6CCECC001A38D9 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC092B6CCECC001A38D9 /* CardType.swift */; };
 		ADA2CC0C2B6CD037001A38D9 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0B2B6CD037001A38D9 /* Query.swift */; };
 		ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */; };
+		ADA39C1F2B9D7D4200F790FA /* DontForgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA39C1E2B9D7D4200F790FA /* DontForgetTests.swift */; };
 		ADAA246A2B63822E00363D04 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA24692B63822E00363D04 /* SplashView.swift */; };
 		ADAA246E2B638BFF00363D04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA246D2B638BFF00363D04 /* Constants.swift */; };
 		ADAFFDD32B70C7FB00746D3E /* AnniversaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */; };
@@ -89,12 +81,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AD147F362B57FFB600561846 /* PBXContainerItemProxy */ = {
+		ADA39C202B9D7D4200F790FA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD147EF32B57F85600561846 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AD147F252B57FFB500561846;
-			remoteInfo = DontForgetWidgetExtension;
+			remoteGlobalIDString = AD147EFA2B57F85600561846;
+			remoteInfo = DontForget;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -105,7 +97,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AD147F382B57FFB600561846 /* DontForgetWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 1;
@@ -145,14 +136,8 @@
 		AD147F1B2B57FDA500561846 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD147F1F2B57FDD300561846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD147F202B57FF7500561846 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DontForgetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD147F282B57FFB500561846 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AD147F2A2B57FFB500561846 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		AD147F2D2B57FFB500561846 /* DontForgetWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetWidgetBundle.swift; sourceTree = "<group>"; };
-		AD147F2F2B57FFB500561846 /* DontForgetWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetWidget.swift; sourceTree = "<group>"; };
-		AD147F312B57FFB500561846 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		AD147F332B57FFB600561846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AD147F352B57FFB600561846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD1D31F82B9589A700ECCBFD /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		AD36D44A2B8DD37D00250705 /* DeletionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionRepository.swift; sourceTree = "<group>"; };
 		AD36D44C2B8DD39500250705 /* DeletionInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionInterface.swift; sourceTree = "<group>"; };
@@ -181,6 +166,8 @@
 		ADA2CC092B6CCECC001A38D9 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		ADA2CC0B2B6CD037001A38D9 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		ADA2CC0D2B6CE4CC001A38D9 /* AnniversariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversariesRepository.swift; sourceTree = "<group>"; };
+		ADA39C1C2B9D7D4200F790FA /* DontForgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DontForgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA39C1E2B9D7D4200F790FA /* DontForgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetTests.swift; sourceTree = "<group>"; };
 		ADAA24692B63822E00363D04 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		ADAA246D2B638BFF00363D04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADAFFDD22B70C7FB00746D3E /* AnniversaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailViewModel.swift; sourceTree = "<group>"; };
@@ -198,8 +185,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */,
-				09642C402B649B820015220E /* CombineMoya in Frameworks */,
-				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
 				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
 				ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
@@ -207,12 +192,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD147F232B57FFB500561846 /* Frameworks */ = {
+		ADA39C192B9D7D4200F790FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD147F2B2B57FFB500561846 /* SwiftUI.framework in Frameworks */,
-				AD147F292B57FFB500561846 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +340,7 @@
 				AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */,
 				AD147F0C2B57F89300561846 /* .swiftlint.yml */,
 				AD147EFD2B57F85600561846 /* DontForget */,
-				AD147F2C2B57FFB500561846 /* DontForgetWidget */,
+				ADA39C1D2B9D7D4200F790FA /* DontForgetTests */,
 				AD147F272B57FFB500561846 /* Frameworks */,
 				AD147EFC2B57F85600561846 /* Products */,
 			);
@@ -367,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				AD147EFB2B57F85600561846 /* DontForget.app */,
-				AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */,
+				ADA39C1C2B9D7D4200F790FA /* DontForgetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -477,18 +460,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AD147F2C2B57FFB500561846 /* DontForgetWidget */ = {
-			isa = PBXGroup;
-			children = (
-				AD147F2D2B57FFB500561846 /* DontForgetWidgetBundle.swift */,
-				AD147F2F2B57FFB500561846 /* DontForgetWidget.swift */,
-				AD147F312B57FFB500561846 /* AppIntent.swift */,
-				AD147F332B57FFB600561846 /* Assets.xcassets */,
-				AD147F352B57FFB600561846 /* Info.plist */,
-			);
-			path = DontForgetWidget;
-			sourceTree = "<group>";
-		};
 		AD3B45902B6A7056009529DE /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +511,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ADA39C1D2B9D7D4200F790FA /* DontForgetTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADA39C1E2B9D7D4200F790FA /* DontForgetTests.swift */,
+			);
+			path = DontForgetTests;
+			sourceTree = "<group>";
+		};
 		ADAFFDDA2B70CD5A00746D3E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,13 +552,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				AD147F372B57FFB600561846 /* PBXTargetDependency */,
 			);
 			name = DontForget;
 			packageProductDependencies = (
-				09642C3F2B649B820015220E /* CombineMoya */,
 				09642C412B649B820015220E /* Moya */,
-				09642C432B649B820015220E /* ReactiveMoya */,
 				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
 				ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */,
 				ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */,
@@ -589,22 +565,23 @@
 			productReference = AD147EFB2B57F85600561846 /* DontForget.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AD147F252B57FFB500561846 /* DontForgetWidgetExtension */ = {
+		ADA39C1B2B9D7D4200F790FA /* DontForgetTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD147F392B57FFB600561846 /* Build configuration list for PBXNativeTarget "DontForgetWidgetExtension" */;
+			buildConfigurationList = ADA39C242B9D7D4200F790FA /* Build configuration list for PBXNativeTarget "DontForgetTests" */;
 			buildPhases = (
-				AD147F222B57FFB500561846 /* Sources */,
-				AD147F232B57FFB500561846 /* Frameworks */,
-				AD147F242B57FFB500561846 /* Resources */,
+				ADA39C182B9D7D4200F790FA /* Sources */,
+				ADA39C192B9D7D4200F790FA /* Frameworks */,
+				ADA39C1A2B9D7D4200F790FA /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ADA39C212B9D7D4200F790FA /* PBXTargetDependency */,
 			);
-			name = DontForgetWidgetExtension;
-			productName = DontForgetWidgetExtension;
-			productReference = AD147F262B57FFB500561846 /* DontForgetWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
+			name = DontForgetTests;
+			productName = DontForgetTests;
+			productReference = ADA39C1C2B9D7D4200F790FA /* DontForgetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -619,8 +596,9 @@
 					AD147EFA2B57F85600561846 = {
 						CreatedOnToolsVersion = 15.0;
 					};
-					AD147F252B57FFB500561846 = {
+					ADA39C1B2B9D7D4200F790FA = {
 						CreatedOnToolsVersion = 15.0;
+						TestTargetID = AD147EFA2B57F85600561846;
 					};
 				};
 			};
@@ -645,7 +623,7 @@
 			projectRoot = "";
 			targets = (
 				AD147EFA2B57F85600561846 /* DontForget */,
-				AD147F252B57FFB500561846 /* DontForgetWidgetExtension */,
+				ADA39C1B2B9D7D4200F790FA /* DontForgetTests */,
 			);
 		};
 /* End PBXProject section */
@@ -674,11 +652,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD147F242B57FFB500561846 /* Resources */ = {
+		ADA39C1A2B9D7D4200F790FA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD147F342B57FFB600561846 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,23 +740,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD147F222B57FFB500561846 /* Sources */ = {
+		ADA39C182B9D7D4200F790FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD147F2E2B57FFB500561846 /* DontForgetWidgetBundle.swift in Sources */,
-				AD147F302B57FFB500561846 /* DontForgetWidget.swift in Sources */,
-				AD147F322B57FFB500561846 /* AppIntent.swift in Sources */,
+				ADA39C1F2B9D7D4200F790FA /* DontForgetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AD147F372B57FFB600561846 /* PBXTargetDependency */ = {
+		ADA39C212B9D7D4200F790FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AD147F252B57FFB500561846 /* DontForgetWidgetExtension */;
-			targetProxy = AD147F362B57FFB600561846 /* PBXContainerItemProxy */;
+			target = AD147EFA2B57F85600561846 /* DontForget */;
+			targetProxy = ADA39C202B9D7D4200F790FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -848,7 +823,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -905,7 +880,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -939,7 +914,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -980,7 +955,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -997,73 +972,49 @@
 			};
 			name = Release;
 		};
-		AD147F3A2B57FFB600561846 /* Debug */ = {
+		ADA39C222B9D7D4200F790FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DontForgetWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "챙겨챙겨";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
+					"$(LD_RUNPATH_SEARCH_PATHS_SHALLOW_BUNDLE_$(SHALLOW_BUNDLE))",
 				);
-				MARKETING_VERSION = 1.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget.DontForgetWidget;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForgetTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget.DontForgetWidget";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DontForget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DontForget";
 			};
 			name = Debug;
 		};
-		AD147F3B2B57FFB600561846 /* Release */ = {
+		ADA39C232B9D7D4200F790FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DontForgetWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "챙겨챙겨";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
+					"$(LD_RUNPATH_SEARCH_PATHS_SHALLOW_BUNDLE_$(SHALLOW_BUNDLE))",
 				);
-				MARKETING_VERSION = 1.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget.DontForgetWidget;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForgetTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget.DontForgetWidget";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DontForget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DontForget";
 			};
 			name = Release;
 		};
@@ -1088,11 +1039,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AD147F392B57FFB600561846 /* Build configuration list for PBXNativeTarget "DontForgetWidgetExtension" */ = {
+		ADA39C242B9D7D4200F790FA /* Build configuration list for PBXNativeTarget "DontForgetTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD147F3A2B57FFB600561846 /* Debug */,
-				AD147F3B2B57FFB600561846 /* Release */,
+				ADA39C222B9D7D4200F790FA /* Debug */,
+				ADA39C232B9D7D4200F790FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1135,20 +1086,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		09642C3F2B649B820015220E /* CombineMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = CombineMoya;
-		};
 		09642C412B649B820015220E /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
-		};
-		09642C432B649B820015220E /* ReactiveMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = ReactiveMoya;
 		};
 		09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */ = {
 			isa = XCSwiftPackageProductDependency;

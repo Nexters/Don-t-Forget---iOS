@@ -31,9 +31,7 @@ struct CreationView: View {
     @State private var baseDate = [80, 1, 1]
     private var id: Int?
     private var type: CreationViewType
-    private var isKeyboardVisible: Bool {
-        keyboardHeight > 0
-    }
+    private var isKeyboardVisible: Bool { keyboardHeight > 0 }
     @State private var showConfirmView = false
     @State private var alertType: AlertType = .cancelCreating
 
@@ -200,7 +198,7 @@ struct CreationView: View {
                     }
                 }
             }
-            .onChange(of: showConfirmView) { _, showed in
+            .onChange(of: showConfirmView) { showed in
                 if showed {
                     hideKeyboard()
                 }

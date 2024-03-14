@@ -144,14 +144,14 @@ struct HomeView: View {
                         .brightness(-0.01)
                 )
                 .ignoresSafeArea()
-                .onChange(of: anniversaries) { _, anniversaries in
+                .onChange(of: anniversaries) { anniversaries in
                     if anniversaries.isEmpty {
                         withAnimation {
                             proxy.scrollTo(Self.scrollTopView, anchor: .top)
                         }
                     }
                 }
-                .onChange(of: networkConnected) { _, status in
+                .onChange(of: networkConnected) { status in
                     if status {
                         actionOnAppear()
                     }
@@ -168,10 +168,6 @@ struct HomeView: View {
             }
         }
     }
-}
-
-#Preview {
-    HomeView()
 }
 
 struct AddNewAnniversaryView: View {

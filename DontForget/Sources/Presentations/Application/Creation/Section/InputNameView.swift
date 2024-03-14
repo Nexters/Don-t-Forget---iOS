@@ -35,9 +35,9 @@ struct InputNameView: View {
                 .padding(.horizontal, 20)
                 .frame(height: 1)
                 .foregroundColor(isNameFieldFocused ? Color.primary500 : Color.gray800)
-                .onChange(of: name, { _, text in
+                .onChange(of: name) { text in
                     self.viewModel.title = text
-                })
+                }
         }
     }
 }

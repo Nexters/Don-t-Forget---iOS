@@ -43,9 +43,9 @@ struct AlarmView: View {
                             }
                     }
                 }
-                .onChange(of: selectedAlarmIndexes, { _, alarm in
+                .onChange(of: selectedAlarmIndexes) { alarm in
                     strAlarmAry = Array(alarm)
-                })
+                }
                 .padding(.horizontal, 16)
             }
         }

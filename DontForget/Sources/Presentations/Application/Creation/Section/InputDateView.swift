@@ -42,7 +42,7 @@ struct InputDateView: View {
             }
             .disabled(isPickerDisabled) 
             .frame(height: 52)
-            .onChange(of: selectedSegment) {  _, _ in
+            .onChange(of: selectedSegment) {  _ in
                 temporarilyDisablePicker()
                 self.type =  selectedSegment == 0 ? .solar : .lunar
                 Task {
@@ -71,7 +71,7 @@ struct InputDateView: View {
                     selectedYear: $selectedYear, 
                     type: $type
                 )
-                .onChange(of: [selectedDay, selectedMonth, selectedYear]) { _, _ in updateRequestDate() }
+                .onChange(of: [selectedDay, selectedMonth, selectedYear]) { _ in updateRequestDate() }
                 .padding(.horizontal, 20)
                 Spacer()
             }

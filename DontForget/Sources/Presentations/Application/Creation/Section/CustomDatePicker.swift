@@ -63,13 +63,13 @@ struct CustomDatePicker: View {
                     .font(.pretendard(size: 15))
             }
         }
-        .onChange(of: selectedYear) { _, newValue in
+        .onChange(of: selectedYear) { newValue in
             scrollToComponent(value: newValue, proxy: yearProxy)
         }
-        .onChange(of: selectedMonth) { _, newValue in
+        .onChange(of: selectedMonth) { newValue in
             scrollToComponent(value: newValue, proxy: monthProxy)
         }
-        .onChange(of: selectedDay) { _, newValue in
+        .onChange(of: selectedDay) { newValue in
             scrollToComponent(value: newValue, proxy: dayProxy)
         }
         .padding(.horizontal, 20)
