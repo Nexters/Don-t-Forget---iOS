@@ -85,7 +85,6 @@ class AnniversaryService {
     
     func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse {
         return try await withCheckedThrowingContinuation { continuation in
-            print("=== DEBUG: fetch detail \(anniversaryId)")
             provider.request(.readAnniversary(anniversaryId: anniversaryId)) { result in
                 switch result {
                 case let .success(response):

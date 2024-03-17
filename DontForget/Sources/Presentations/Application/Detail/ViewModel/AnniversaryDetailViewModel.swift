@@ -67,30 +67,37 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
     
     // MARK: - Method
     private func fetchAnniversaryDetail() {
-        Future<AnniversaryDetailResponse?, Error> { promise in
-            Task {
-                do {
-                    let response = try await self.fetchAnniversaryDetailUseCase.execute(
-                        requestValue: .init(
-                            query: AnniversaryDetailQuery(
-                                queryId: self.anniversaryId
+        if let cachedDetail = CacheManager.shared.loadDetail(self.anniversaryId) {
+            self.anniversaryDetail = cachedDetail.dto
+        } else {
+            Future<AnniversaryDetailResponse?, Error> { promise in
+                Task {
+                    do {
+                        let response = try await self.fetchAnniversaryDetailUseCase.execute(
+                            requestValue: .init(
+                                query: AnniversaryDetailQuery(
+                                    queryId: self.anniversaryId
+                                )
                             )
                         )
-                    )
-                    promise(.success(response))
-                } catch {
-                    print("=== DEBUG: \(error)")
-                    promise(.failure(error))
+                        promise(.success(response))
+                    } catch {
+                        print("=== DEBUG: \(error)")
+                        promise(.failure(error))
+                    }
                 }
             }
-        }
-        .receive(on: DispatchQueue.main)
-        .sink { _ in } receiveValue: { [weak self] response in
-            if let response = response {
-                self?.anniversaryDetail = response.anniversaryDetail
+            .receive(on: DispatchQueue.main)
+            .sink { _ in } receiveValue: { [weak self] response in
+                if let response = response {
+                    let detail = response.anniversaryDetail
+                    print("=== DEBUG: fetch detail \(detail.anniversaryId)")
+                    self?.anniversaryDetail = detail
+                    CacheManager.shared.setDetail(AnniversaryDetail(anniversaryDetailDTO: detail))
+                }
             }
+            .store(in: &cancellables)
         }
-        .store(in: &cancellables)
     }
     
     private func deleteAnniversary() {

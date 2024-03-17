@@ -77,3 +77,10 @@ struct AnniversaryDetailDTO: Decodable {
     let baseDate: String
     let baseType: String
 }
+
+class AnniversaryDetail {
+    let dto: AnniversaryDetailDTO
+    init(anniversaryDetailDTO: AnniversaryDetailDTO) {
+        self.dto = anniversaryDetailDTO
+    }
+}

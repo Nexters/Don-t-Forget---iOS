@@ -55,6 +55,7 @@
 		AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45862B68C287009529DE /* AnniversaryContentView.swift */; };
 		AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B458C2B68DE8F009529DE /* ConfirmView.swift */; };
 		AD6097C62B7CD9C3005060A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */; };
+		AD7637612BA70887007552E1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7637602BA70887007552E1 /* CacheManager.swift */; };
 		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD7BEBBC2B91E93B00A03753 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD7BEBB32B91E93A00A03753 /* Pretendard-Medium.otf */; };
@@ -160,6 +161,7 @@
 		AD3B45862B68C287009529DE /* AnniversaryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryContentView.swift; sourceTree = "<group>"; };
 		AD3B458C2B68DE8F009529DE /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AD7637602BA70887007552E1 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD7BEBB32B91E93A00A03753 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		09642C342B649A750015220E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				AD76375F2BA70845007552E1 /* Cache */,
 				09642C5F2B67D2D00015220E /* Error */,
 				09642C392B649B1D0015220E /* Network */,
 				09642C592B67CA160015220E /* Repository */,
@@ -498,6 +501,14 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		AD76375F2BA70845007552E1 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				AD7637602BA70887007552E1 /* CacheManager.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		AD7BEBB22B91E92F00A03753 /* Pretendard */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +758,7 @@
 				AD147F212B57FF7500561846 /* String+Extension.swift in Sources */,
 				ADA2CC0E2B6CE4CC001A38D9 /* AnniversariesRepository.swift in Sources */,
 				09642C612B67D2DC0015220E /* ErrorResponse.swift in Sources */,
+				AD7637612BA70887007552E1 /* CacheManager.swift in Sources */,
 				09642C4A2B64A37A0015220E /* AnniversaryService.swift in Sources */,
 				09642C532B67C76F0015220E /* CreationUseCase.swift in Sources */,
 				ADAFFDD52B70C8CC00746D3E /* FetchAnniversaryDetailUseCase.swift in Sources */,
