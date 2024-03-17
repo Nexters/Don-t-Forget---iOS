@@ -82,7 +82,6 @@ final class DefaultHomeViewModel: ViewModelType {
         .sink { _ in } receiveValue: { [weak self] response in
             if let self = self, let response = response {
                 self.anniversaries = response.anniversaries.sorted(by: { $0.solarDate < $1.solarDate })
-                print("=== DEBUG: \(self.anniversaries)")
                 self.state = .success
                 if !self.anniversaries.isEmpty {
                     self.fetchFirstAnniversaryDetail()
@@ -137,7 +136,6 @@ final class DefaultHomeViewModel: ViewModelType {
                         }
                     }
                     let response = try await AnniversaryService.shared.changePushState(status: status)
-                    print("=== DEBUG: changeStatus \(status)")
                     promise(.success(response))
                 } catch {
                     print("=== DEBUG: changeStatus \(error)")

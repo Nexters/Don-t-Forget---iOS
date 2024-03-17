@@ -105,10 +105,10 @@ final class CreationViewModel: ViewModelType {
         }
         .receive(on: DispatchQueue.main)
         .sink { completion in
+            CacheManager.shared.removeDetail(id)
             self.dismiss = true
             if case let .failure(error) = completion {
                 self.errorMessage = error.localizedDescription
-                print("=== \(String(describing: self.errorMessage))")
             }
         } receiveValue: { response in
             self.creationResponse = response
@@ -130,7 +130,6 @@ final class CreationViewModel: ViewModelType {
                     )
                     promise(.success(response))
                 } catch {
-                    print("=== DEBUG: \(error)")
                     promise(.failure(error))
                     self.state = .failed("failed fetchAnniversaryDetail()")
                 }
