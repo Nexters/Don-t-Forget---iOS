@@ -8,8 +8,8 @@
 import Foundation
 import Moya
 
-class AnniversaryService {
-    
+class AnniversaryService: AnniversaryServiceProtocol {
+
     static let shared = AnniversaryService()
     private let provider = MoyaProvider<DontForgetTarget>()
     

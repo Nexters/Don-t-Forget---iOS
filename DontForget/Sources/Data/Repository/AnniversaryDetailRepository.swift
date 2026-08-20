@@ -8,10 +8,10 @@
 import Foundation
 
 final class AnniversaryDetailRepository: AnniversaryDetailInterface {
-    
-    private let service: AnniversaryService
-    
-    init(service: AnniversaryService) {
+
+    private let service: AnniversaryServiceProtocol
+
+    init(service: AnniversaryServiceProtocol) {
         self.service = service
     }
     

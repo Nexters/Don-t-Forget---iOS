@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+
     @State private var showingSplash = true
-    
+    @State private var showingLocalDataWarning = false
+
     var body: some View {
         ZStack {
             Color.bgColor
@@ -19,14 +20,31 @@ struct ContentView: View {
                 SplashView()
                     .onAppear(perform: actionWhileShowingSplash)
             }
+            if showingLocalDataWarning {
+                LocalDataWarningView(onDismissed: {
+                    showingLocalDataWarning = false
+                })
+            }
         }
         .ignoresSafeArea()
     }
-    
+
     private func actionWhileShowingSplash() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             withAnimation {
                 showingSplash = false
+            }
+            checkLocalDataWarning()
+        }
+    }
+
+    private func checkLocalDataWarning() {
+        let isDismissed = UserDefaults.standard.bool(forKey: "localDataWarningDismissed")
+        if !isDismissed {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation {
+                    showingLocalDataWarning = true
+                }
             }
         }
     }

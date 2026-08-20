@@ -40,12 +40,12 @@ struct AnniversaryDetailView: View {
                     viewModel: CreationViewModel(
                         creationUseCase: CreationUseCase(
                             creationRepository: CreationRepository(
-                                service: AnniversaryService.shared
+                                service: LocalAnniversaryService.shared
                             )
                         ),
                         fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
                             anniversaryDetailRepository: AnniversaryDetailRepository(
-                                service: AnniversaryService.shared
+                                service: LocalAnniversaryService.shared
                             )
                         )
                     ),

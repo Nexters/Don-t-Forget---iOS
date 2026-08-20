@@ -65,7 +65,7 @@ struct AnniversaryDTO: Decodable, Equatable {
     let cardType: String
 }
 
-struct AnniversaryDetailDTO: Decodable {
+struct AnniversaryDetailDTO: Codable {
     let anniversaryId: Int
     let title: String
     let lunarDate: String
