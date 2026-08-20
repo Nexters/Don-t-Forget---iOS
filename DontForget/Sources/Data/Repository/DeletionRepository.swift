@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class DeletionRepository: DeletionInterface {
+public final class DeletionRepository: DeletionInterface {
 
     private let service: AnniversaryServiceProtocol
 
-    init(service: AnniversaryServiceProtocol) {
+    public init(service: AnniversaryServiceProtocol) {
         self.service = service
     }
     

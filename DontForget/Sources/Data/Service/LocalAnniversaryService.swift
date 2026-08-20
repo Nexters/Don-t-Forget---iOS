@@ -7,12 +7,12 @@
 
 import Foundation
 
-class LocalAnniversaryService: AnniversaryServiceProtocol {
-    static let shared = LocalAnniversaryService()
+public class LocalAnniversaryService: AnniversaryServiceProtocol {
+    public static let shared = LocalAnniversaryService()
     private let storage = LocalAnniversaryStorage.shared
     private let idGenerator = AnniversaryIdGenerator.shared
 
-    func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+    public func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
         let newId = idGenerator.generateId()
         let detail = AnniversaryDetailDTO(
             anniversaryId: newId,
@@ -30,7 +30,7 @@ class LocalAnniversaryService: AnniversaryServiceProtocol {
         return CreationResponse()
     }
 
-    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+    public func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
         let detail = AnniversaryDetailDTO(
             anniversaryId: id,
             title: parameters.title,
@@ -47,7 +47,7 @@ class LocalAnniversaryService: AnniversaryServiceProtocol {
         return CreationResponse()
     }
 
-    func fetchAnniversaries() async throws -> AnniversariesResponse {
+    public func fetchAnniversaries() async throws -> AnniversariesResponse {
         let details = try storage.loadAll()
         let dtos = details.map { detail -> AnniversaryDTO in
             AnniversaryDTO(
@@ -61,20 +61,20 @@ class LocalAnniversaryService: AnniversaryServiceProtocol {
         return AnniversariesResponse(anniversaries: dtos)
     }
 
-    func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse {
+    public func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse {
         let detail = try storage.load(id: anniversaryId)
         return AnniversaryDetailResponse(anniversaryDetail: detail)
     }
 
-    func deleteAnniversary(anniversaryId: Int) async throws {
+    public func deleteAnniversary(anniversaryId: Int) async throws {
         try storage.delete(id: anniversaryId)
     }
 
-    func changePushState(status: String) async throws -> Int {
+    public func changePushState(status: String) async throws -> Int {
         return 200
     }
 
-    func fcmTest() async throws -> Int {
+    public func fcmTest() async throws -> Int {
         return 200
     }
 }

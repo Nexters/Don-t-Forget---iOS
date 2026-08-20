@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class AnniversariesRepository: AnniversariesInterface {
+public final class AnniversariesRepository: AnniversariesInterface {
 
     private let service: AnniversaryServiceProtocol
 
-    init(service: AnniversaryServiceProtocol) {
+    public init(service: AnniversaryServiceProtocol) {
         self.service = service
     }
     

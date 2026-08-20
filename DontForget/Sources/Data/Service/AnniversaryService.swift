@@ -8,9 +8,9 @@
 import Foundation
 import Moya
 
-class AnniversaryService: AnniversaryServiceProtocol {
+public class AnniversaryService: AnniversaryServiceProtocol {
 
-    static let shared = AnniversaryService()
+    public static let shared = AnniversaryService()
     private let provider = MoyaProvider<DontForgetTarget>()
     
     func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {  /// 기념일 등록을 요청하는 함수 Swift Concurrency를 통해 비동기처리

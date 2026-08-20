@@ -7,19 +7,19 @@
 
 import Foundation
 
-class LocalAnniversaryStorage {
-    static let shared = LocalAnniversaryStorage()
+public class LocalAnniversaryStorage {
+    public static let shared = LocalAnniversaryStorage()
     private let userDefaults = UserDefaults.standard
     private let anniversariesKey = "anniversaries"
 
-    enum StorageError: Error {
+    public enum StorageError: Error {
         case encodingFailed
         case decodingFailed
         case notFound
         case saveFailed
     }
 
-    func save(anniversary: AnniversaryDetailDTO) throws {
+    public func save(anniversary: AnniversaryDetailDTO) throws {
         var anniversaries = try loadAll()
 
         if let index = anniversaries.firstIndex(where: { $0.anniversaryId == anniversary.anniversaryId }) {
@@ -33,7 +33,7 @@ class LocalAnniversaryStorage {
         userDefaults.set(encoded, forKey: anniversariesKey)
     }
 
-    func loadAll() throws -> [AnniversaryDetailDTO] {
+    public func loadAll() throws -> [AnniversaryDetailDTO] {
         guard let data = userDefaults.data(forKey: anniversariesKey) else {
             return []
         }
@@ -46,7 +46,7 @@ class LocalAnniversaryStorage {
         }
     }
 
-    func load(id: Int) throws -> AnniversaryDetailDTO {
+    public func load(id: Int) throws -> AnniversaryDetailDTO {
         let anniversaries = try loadAll()
         guard let anniversary = anniversaries.first(where: { $0.anniversaryId == id }) else {
             throw StorageError.notFound
@@ -54,7 +54,7 @@ class LocalAnniversaryStorage {
         return anniversary
     }
 
-    func delete(id: Int) throws {
+    public func delete(id: Int) throws {
         var anniversaries = try loadAll()
         anniversaries.removeAll { $0.anniversaryId == id }
 
@@ -63,7 +63,7 @@ class LocalAnniversaryStorage {
         userDefaults.set(encoded, forKey: anniversariesKey)
     }
 
-    func deleteAll() {
+    public func deleteAll() {
         userDefaults.removeObject(forKey: anniversariesKey)
     }
 }
