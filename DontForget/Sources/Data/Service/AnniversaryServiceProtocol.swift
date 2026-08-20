@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol AnniversaryServiceProtocol {
+public protocol AnniversaryServiceProtocol {
     func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
     func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
     func fetchAnniversaries() async throws -> AnniversariesResponse

@@ -50,7 +50,9 @@ struct LocalDataWarningView: View {
 
                 HStack(spacing: 12) {
                     Button {
-                        UserDefaults.standard.set(true, forKey: "localDataWarningDismissed")
+                        let defaults = UserDefaults.standard
+                        defaults.set(true, forKey: "localDataWarningDismissed")
+                        defaults.set(Bundle.main.appVersion, forKey: "localDataWarningLastVersion")
                         dismiss()
                         onDismissed?()
                     } label: {

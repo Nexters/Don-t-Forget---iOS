@@ -39,8 +39,12 @@ struct ContentView: View {
     }
 
     private func checkLocalDataWarning() {
-        let isDismissed = UserDefaults.standard.bool(forKey: "localDataWarningDismissed")
-        if !isDismissed {
+        let defaults = UserDefaults.standard
+        let isDismissed = defaults.bool(forKey: "localDataWarningDismissed")
+        let appVersion = Bundle.main.appVersion
+        let lastSeenVersion = defaults.string(forKey: "localDataWarningLastVersion") ?? ""
+
+        if !isDismissed || lastSeenVersion != appVersion {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation {
                     showingLocalDataWarning = true
