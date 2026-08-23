@@ -7,10 +7,18 @@
 
 import Foundation
 
-struct AnniversaryQuery: Equatable {
-    let query: String
+public struct AnniversaryQuery: Equatable {
+    public let query: String
+
+    public init(query: String) {
+        self.query = query
+    }
 }
 
-struct AnniversaryDetailQuery: Equatable {
-    let queryId: Int
+public struct AnniversaryDetailQuery: Equatable {
+    public let queryId: Int
+
+    public init(queryId: Int) {
+        self.queryId = queryId
+    }
 }
