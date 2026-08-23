@@ -15,7 +15,7 @@ public final class DeletionRepository: DeletionInterface {
         self.service = service
     }
     
-    public func deleteAnniversary(query: AnniversaryDetailQuery) async throws {
+    func deleteAnniversary(query: AnniversaryDetailQuery) async throws {
         try await service.deleteAnniversary(anniversaryId: query.queryId)
     }
 }
