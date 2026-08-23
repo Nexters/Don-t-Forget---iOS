@@ -15,7 +15,7 @@ public final class AnniversaryDetailRepository: AnniversaryDetailInterface {
         self.service = service
     }
     
-    func fetchAnniversaryDetail(query: AnniversaryDetailQuery) async throws -> AnniversaryDetailResponse {
+    public func fetchAnniversaryDetail(query: AnniversaryDetailQuery) async throws -> AnniversaryDetailResponse {
         return try await service.fetchAnniversaryDetail(anniversaryId: query.queryId)
     }
 }

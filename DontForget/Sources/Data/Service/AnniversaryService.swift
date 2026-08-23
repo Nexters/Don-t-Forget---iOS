@@ -8,6 +8,16 @@
 import Foundation
 import Moya
 
+public protocol AnniversaryServiceProtocol {
+    func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
+    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
+    func fetchAnniversaries() async throws -> AnniversariesResponse
+    func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse
+    func deleteAnniversary(anniversaryId: Int) async throws
+    func changePushState(status: String) async throws -> Int
+    func fcmTest() async throws -> Int
+}
+
 public class AnniversaryService: AnniversaryServiceProtocol {
 
     public static let shared = AnniversaryService()

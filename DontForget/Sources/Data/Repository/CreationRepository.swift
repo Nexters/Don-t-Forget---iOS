@@ -15,11 +15,11 @@ public final class CreationRepository: CreationInterface {
         self.service = service
     }
     
-    func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse {
+    public func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse {
         return try await service.registerAnniversary(parameters: request)
     }
-    
-    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+
+    public func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
         return try await service.putAnniversary(id: id, parameters: parameters)
     }
 }
