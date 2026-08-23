@@ -9,13 +9,13 @@ import Foundation
 import Moya
 
 public protocol AnniversaryServiceProtocol {
-    public func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
-    public func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
-    public func fetchAnniversaries() async throws -> AnniversariesResponse
-    public func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse
-    public func deleteAnniversary(anniversaryId: Int) async throws
-    public func changePushState(status: String) async throws -> Int
-    public func fcmTest() async throws -> Int
+    func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
+    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse
+    func fetchAnniversaries() async throws -> AnniversariesResponse
+    func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse
+    func deleteAnniversary(anniversaryId: Int) async throws
+    func changePushState(status: String) async throws -> Int
+    func fcmTest() async throws -> Int
 }
 
 public class AnniversaryService: AnniversaryServiceProtocol {
