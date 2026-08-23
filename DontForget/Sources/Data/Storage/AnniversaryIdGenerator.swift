@@ -11,23 +11,20 @@ public class AnniversaryIdGenerator {
     public static let shared = AnniversaryIdGenerator()
     private let userDefaults = UserDefaults.standard
     private let idCounterKey = "anniversaryIdCounter"
-    private let queue = DispatchQueue(label: "com.dontforget.idgenerator", attributes: .concurrent)
+    private let queue = DispatchQueue(label: "com.dontforget.idgenerator")
 
     public func generateId() -> Int {
-        var newId = 0
-        queue.sync {
-            let current = userDefaults.integer(forKey: idCounterKey)
-            newId = current + 1
-            queue.async(flags: .barrier) {
-                self.userDefaults.set(newId, forKey: self.idCounterKey)
-            }
+        /// 읽기와 쓰기를 하나의 임계 영역에서 처리해야 동시 호출 시에도 ID가 중복되지 않습니다.
+        return queue.sync { () -> Int in
+            let newId = userDefaults.integer(forKey: idCounterKey) + 1
+            userDefaults.set(newId, forKey: idCounterKey)
+            return newId
         }
-        return newId
     }
 
     public func reset() {
-        queue.async(flags: .barrier) {
-            self.userDefaults.removeObject(forKey: self.idCounterKey)
+        queue.sync {
+            userDefaults.removeObject(forKey: idCounterKey)
         }
     }
 }
