@@ -105,6 +105,9 @@ final class DefaultAnniversaryDetailViewModel: ViewModelType {
                         )
                     )
                     promise(.success(true))
+                } catch {
+                    print("=== DEBUG: deleteAnniversary \(error)")
+                    promise(.failure(error))
                 }
             }
         }
