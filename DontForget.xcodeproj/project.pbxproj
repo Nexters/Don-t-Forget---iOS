@@ -87,6 +87,7 @@
 		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
 		ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */; };
 		ADE66426303B298700CA060B /* LocalAnniversaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66425303B298700CA060B /* LocalAnniversaryService.swift */; };
+		ADE66430303B2A0000CA060B /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66431303B2A0000CA060B /* LocalNotificationService.swift */; };
 		ADE6642A303B29A000CA060B /* LocalAnniversaryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66428303B29A000CA060B /* LocalAnniversaryStorage.swift */; };
 		ADE6642B303B29A000CA060B /* AnniversaryIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66427303B29A000CA060B /* AnniversaryIdGenerator.swift */; };
 		ADE6642D303B29B900CA060B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6642C303B29B900CA060B /* Bundle+Extension.swift */; };
@@ -196,6 +197,7 @@
 		ADC7C2022B6A7DF400EBE58C /* DontForget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DontForget.entitlements; sourceTree = "<group>"; };
 		ADC7C2032B6A7DFA00EBE58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADE66425303B298700CA060B /* LocalAnniversaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnniversaryService.swift; sourceTree = "<group>"; };
+		ADE66431303B2A0000CA060B /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
 		ADE66427303B29A000CA060B /* AnniversaryIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryIdGenerator.swift; sourceTree = "<group>"; };
 		ADE66428303B29A000CA060B /* LocalAnniversaryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnniversaryStorage.swift; sourceTree = "<group>"; };
 		ADE6642C303B29B900CA060B /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			children = (
 				09642C492B64A37A0015220E /* AnniversaryService.swift */,
 				ADE66425303B298700CA060B /* LocalAnniversaryService.swift */,
+				ADE66431303B2A0000CA060B /* LocalNotificationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */,
 				AD0F992F2B7C520500E2A915 /* InputNameView.swift in Sources */,
 				ADE66426303B298700CA060B /* LocalAnniversaryService.swift in Sources */,
+				ADE66430303B2A0000CA060B /* LocalNotificationService.swift in Sources */,
 				ADAFFDD72B70C98C00746D3E /* AnniversaryDetailRepository.swift in Sources */,
 				09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */,
 				AD147F012B57F85600561846 /* ContentView.swift in Sources */,

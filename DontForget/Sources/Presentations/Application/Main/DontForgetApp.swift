@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import UserNotifications
+
 import FirebaseCore
-import FirebaseMessaging
 
 @main
 struct DontForgetApp: App {
@@ -27,38 +28,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         FirebaseApp.configure()
-        
-        Messaging.messaging().delegate = self
+
         UNUserNotificationCenter.current().delegate = self
-        
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in }
-        )
-        
-        application.registerForRemoteNotifications()
-        return true
-    }
-    
-    func application(
-        _ application: UIApplication,
-        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-    ) {
-        Messaging.messaging().apnsToken = deviceToken
-    }
-}
 
-extension AppDelegate: MessagingDelegate {
-
-    func messaging(
-        _ messaging: Messaging,
-        didReceiveRegistrationToken fcmToken: String?
-    ) {
-        print("=== DEBUG: Firebase registration token - \(String(describing: fcmToken))")
-        if let fcmToken = fcmToken {
-            UserDefaults.standard.set(fcmToken, forKey: .fcmToken)
+        /// 서버 푸시가 없으므로 권한을 받은 뒤 저장된 기념일의 알림을 직접 예약합니다.
+        Task {
+            await LocalNotificationService.shared.requestAuthorization()
+            await LocalNotificationService.shared.rescheduleAll()
         }
+
+        return true
     }
 }
 

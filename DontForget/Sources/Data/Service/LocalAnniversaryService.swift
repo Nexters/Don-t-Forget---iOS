@@ -61,6 +61,30 @@ struct AnniversaryDateCalculator {
         )
     }
 
+    /// 다가오는 기념일을 이른 순서로 count개 돌려줍니다.
+    /// 음력 기념일은 해마다 양력 날짜가 달라지므로 매번 다시 계산합니다.
+    func upcomingSolarDates(
+        baseDate: String,
+        baseType: String,
+        from referenceDate: Date = Date(),
+        count: Int
+    ) -> [Date] {
+        var results: [Date] = []
+        var cursor = referenceDate
+
+        for _ in 0..<count {
+            let dates = upcomingDates(baseDate: baseDate, baseType: baseType, from: cursor)
+            guard let solar = formatter.date(from: dates.solar) else { break }
+            /// 같은 날짜가 반복되면(변환 실패 등) 더 진행하지 않습니다.
+            if let last = results.last, solar <= last { break }
+            results.append(solar)
+            guard let next = calendar.date(byAdding: .day, value: 1, to: solar) else { break }
+            cursor = next
+        }
+
+        return results
+    }
+
     /// 특정 연도의 기념일 후보를 양력/음력 쌍으로 만듭니다.
     private func candidate(year: Int, month: Int, day: Int, baseType: String) -> (solar: Date, lunar: Date)? {
         if baseType == ConvertDate.lunar.title {
@@ -113,11 +137,13 @@ public class LocalAnniversaryService: AnniversaryServiceProtocol {
     public func registerAnniversary(parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
         let newId = idGenerator.generateId()
         try storage.save(anniversary: makeDetail(id: newId, parameters: parameters))
+        await LocalNotificationService.shared.rescheduleAll()
         return CreationResponse()
     }
 
     public func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
         try storage.save(anniversary: makeDetail(id: id, parameters: parameters))
+        await LocalNotificationService.shared.rescheduleAll()
         return CreationResponse()
     }
 
@@ -143,6 +169,7 @@ public class LocalAnniversaryService: AnniversaryServiceProtocol {
 
     public func deleteAnniversary(anniversaryId: Int) async throws {
         try storage.delete(id: anniversaryId)
+        await LocalNotificationService.shared.rescheduleAll()
     }
 
     public func changePushState(status: String) async throws -> Int {
