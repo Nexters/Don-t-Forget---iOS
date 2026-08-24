@@ -7,11 +7,15 @@
 
 import Foundation
 
-enum ServiceError: Error {
+public enum ServiceError: Error {
     case serverError(ErrorResponse)
     case unknownError(Error)
 }
 
-struct ErrorResponse: Decodable {
-    let message: String
+public struct ErrorResponse: Decodable {
+    public let message: String
+
+    public init(message: String) {
+        self.message = message
+    }
 }

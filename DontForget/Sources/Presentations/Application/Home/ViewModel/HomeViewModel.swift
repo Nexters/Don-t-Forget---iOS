@@ -38,7 +38,7 @@ final class DefaultHomeViewModel: ViewModelType {
         self.readAnniversariesUseCase = readAnniversariesUseCase
         self.fetchAnniversaryDetailUseCase = DefaultFetchAnniversaryDetailUseCase(
             anniversaryDetailRepository: AnniversaryDetailRepository(
-                service: AnniversaryService.shared
+                service: LocalAnniversaryService.shared
             )
         )
     }
@@ -136,7 +136,7 @@ final class DefaultHomeViewModel: ViewModelType {
                             status = NotificationStatus.OFF.rawValue
                         }
                     }
-                    let response = try await AnniversaryService.shared.changePushState(status: status)
+                    let response = try await LocalAnniversaryService.shared.changePushState(status: status)
                     print("=== DEBUG: changeStatus \(status)")
                     promise(.success(response))
                 } catch {
@@ -154,7 +154,7 @@ final class DefaultHomeViewModel: ViewModelType {
         Future<Int, Error> { promise in
             Task {
                 do {
-                    let response = try await AnniversaryService.shared.fcmTest()
+                    let response = try await LocalAnniversaryService.shared.fcmTest()
                     promise(.success(response))
                 } catch {
                     print("=== DEBUG: fcmTest \(error)")

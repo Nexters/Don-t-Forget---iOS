@@ -7,19 +7,19 @@
 
 import Foundation
 
-final class CreationRepository: CreationInterface {
-    
-    private let service: AnniversaryService
-    
-    init(service: AnniversaryService) {
+public final class CreationRepository: CreationInterface {
+
+    private let service: AnniversaryServiceProtocol
+
+    public init(service: AnniversaryServiceProtocol) {
         self.service = service
     }
     
-    func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse {
+    public func registerAnniversary(request: RegisterAnniversaryRequest) async throws -> CreationResponse {
         return try await service.registerAnniversary(parameters: request)
     }
-    
-    func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
+
+    public func putAnniversary(id: Int, parameters: RegisterAnniversaryRequest) async throws -> CreationResponse {
         return try await service.putAnniversary(id: id, parameters: parameters)
     }
 }

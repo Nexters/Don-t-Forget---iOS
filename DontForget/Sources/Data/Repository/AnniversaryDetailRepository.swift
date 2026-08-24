@@ -7,15 +7,15 @@
 
 import Foundation
 
-final class AnniversaryDetailRepository: AnniversaryDetailInterface {
-    
-    private let service: AnniversaryService
-    
-    init(service: AnniversaryService) {
+public final class AnniversaryDetailRepository: AnniversaryDetailInterface {
+
+    private let service: AnniversaryServiceProtocol
+
+    public init(service: AnniversaryServiceProtocol) {
         self.service = service
     }
     
-    func fetchAnniversaryDetail(query: AnniversaryDetailQuery) async throws -> AnniversaryDetailResponse {
+    public func fetchAnniversaryDetail(query: AnniversaryDetailQuery) async throws -> AnniversaryDetailResponse {
         return try await service.fetchAnniversaryDetail(anniversaryId: query.queryId)
     }
 }

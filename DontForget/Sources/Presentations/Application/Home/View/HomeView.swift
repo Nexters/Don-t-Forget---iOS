@@ -17,7 +17,7 @@ struct HomeView: View {
     @StateObject private var viewModel = DefaultHomeViewModel(
         readAnniversariesUseCase: DefaultReadAnniversariesUseCase(
             anniversariesRepository: AnniversariesRepository(
-                service: AnniversaryService.shared
+                service: LocalAnniversaryService.shared
             )
         )
     )
@@ -41,10 +41,10 @@ struct HomeView: View {
                                     viewModel: DefaultAnniversaryDetailViewModel(
                                         anniversaryId: id,
                                         anniversaryDetailRepository: AnniversaryDetailRepository(
-                                            service: AnniversaryService.shared
+                                            service: LocalAnniversaryService.shared
                                         ),
                                         deletionRepository: DeletionRepository(
-                                            service: AnniversaryService.shared
+                                            service: LocalAnniversaryService.shared
                                         )
                                     )
                                 )
@@ -204,12 +204,12 @@ extension HomeView {
                 viewModel: CreationViewModel(
                     creationUseCase: CreationUseCase(
                         creationRepository: CreationRepository(
-                            service: AnniversaryService.shared
+                            service: LocalAnniversaryService.shared
                         )
                     ),
                     fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
                         anniversaryDetailRepository: AnniversaryDetailRepository(
-                            service: AnniversaryService.shared
+                            service: LocalAnniversaryService.shared
                         )
                     )
                 ),

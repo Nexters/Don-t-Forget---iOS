@@ -7,18 +7,26 @@
 
 import Foundation
 
-struct Empty: Decodable {}
+public struct Empty: Decodable {}
 
-struct CreationResponse: Decodable {
+public struct CreationResponse: Decodable {
 //    let anniversaryId: Int
 }
 
-struct AnniversariesResponse: Decodable {
-    let anniversaries: [AnniversaryDTO]
+public struct AnniversariesResponse: Decodable {
+    public let anniversaries: [AnniversaryDTO]
+
+    public init(anniversaries: [AnniversaryDTO]) {
+        self.anniversaries = anniversaries
+    }
 }
 
-struct AnniversaryDetailResponse: Decodable {
-    let anniversaryDetail: AnniversaryDetailDTO
+public struct AnniversaryDetailResponse: Decodable {
+    public let anniversaryDetail: AnniversaryDetailDTO
+
+    public init(anniversaryDetail: AnniversaryDetailDTO) {
+        self.anniversaryDetail = anniversaryDetail
+    }
 }
 
 struct TestResponse: Decodable {
