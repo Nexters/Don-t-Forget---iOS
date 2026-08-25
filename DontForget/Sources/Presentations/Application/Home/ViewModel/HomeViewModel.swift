@@ -21,8 +21,6 @@ final class DefaultHomeViewModel: ViewModelType {
     enum Action {
         case readAnniversaries
         case fetchFirstAnniversaryDetail
-        case changePushState
-        case fcmTest
     }
     
     enum State {
@@ -50,10 +48,6 @@ final class DefaultHomeViewModel: ViewModelType {
             readAnniversaries()
         case .fetchFirstAnniversaryDetail:
             fetchFirstAnniversaryDetail()
-        case .changePushState:
-            changeStatus()
-        case .fcmTest:
-            fcmTest()
         }
     }
     
@@ -121,51 +115,5 @@ final class DefaultHomeViewModel: ViewModelType {
             }
             .store(in: &cancellables)
         }
-    }
-    
-    private func changeStatus() {
-        Future<Int, Error> { promise in
-            Task {
-                do {
-                    var status = NotificationStatus.ON.rawValue
-                    UNUserNotificationCenter.current().getNotificationSettings { settings in
-                        switch settings.authorizationStatus {
-                        case .notDetermined, .authorized: /// 한 번만 허용, 푸시 허용
-                            status = NotificationStatus.ON.rawValue
-                        default:
-                            status = NotificationStatus.OFF.rawValue
-                        }
-                    }
-                    let response = try await LocalAnniversaryService.shared.changePushState(status: status)
-                    print("=== DEBUG: changeStatus \(status)")
-                    promise(.success(response))
-                } catch {
-                    print("=== DEBUG: changeStatus \(error)")
-                    promise(.failure(error))
-                }
-            }
-        }
-        .receive(on: DispatchQueue.main)
-        .sink { _ in } receiveValue: { _ in }
-        .store(in: &cancellables)
-    }
-    
-    private func fcmTest() {
-        Future<Int, Error> { promise in
-            Task {
-                do {
-                    let response = try await LocalAnniversaryService.shared.fcmTest()
-                    promise(.success(response))
-                } catch {
-                    print("=== DEBUG: fcmTest \(error)")
-                    promise(.failure(error))
-                }
-            }
-        }
-        .receive(on: DispatchQueue.main)
-        .sink { _ in } receiveValue: { response in
-            print("=== DEBUG: fcmTest \(response)")
-        }
-        .store(in: &cancellables)
     }
 }

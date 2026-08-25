@@ -28,7 +28,3 @@ public struct AnniversaryDetailResponse: Decodable {
         self.anniversaryDetail = anniversaryDetail
     }
 }
-
-struct TestResponse: Decodable {
-    let code: String
-}

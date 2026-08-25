@@ -34,6 +34,11 @@ struct CreationView: View {
     private var isKeyboardVisible: Bool {
         keyboardHeight > 0
     }
+    /// 기념일 만들기에서는 제목을 입력하는 동안 "다음"으로 키보드를 내리는 단계를 둡니다.
+    /// 편집 화면은 값이 이미 채워져 있어 이 단계 없이 바로 완료됩니다.
+    private var isNameInputStep: Bool {
+        type == .create && focusField == .eventName
+    }
     @State private var showConfirmView = false
     @State private var alertType: AlertType = .cancelCreating
 
@@ -141,7 +146,7 @@ struct CreationView: View {
                     HStack {
                         Spacer()
                         Button {
-                            if focusField == .eventName {
+                            if isNameInputStep {
                                 hideKeyboard()
                             } else {
                                 switch type {
@@ -172,7 +177,7 @@ struct CreationView: View {
                                 }
                             }
                         } label: {
-                            Text(focusField == .eventName ? "다음" : "완료")
+                            Text(isNameInputStep ? "다음" : "완료")
                                 .font(.pretendard(.semiBold, size: 20))
                                 .foregroundColor(.white)
                                 .padding()
