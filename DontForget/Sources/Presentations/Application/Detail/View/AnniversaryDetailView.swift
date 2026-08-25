@@ -9,19 +9,8 @@ import SwiftUI
 
 struct AnniversaryDetailView: View {
     
-    private enum HeaderIcon {
-        case back
-        case edit
-        case delete
-    }
-    
     @State private var showEditView = false
     @Environment(\.dismiss) private var dismiss
-    @State private var iconStates = [
-        HeaderIcon.back: false,
-        .edit: false,
-        .delete: false
-    ]
     @State private var showConfirmView = false
     @ObservedObject var viewModel: DefaultAnniversaryDetailViewModel
     
@@ -31,113 +20,14 @@ struct AnniversaryDetailView: View {
             Image(.splashBackground)
                 .resizable()
                 .scaledToFill()
+                .ignoresSafeArea()
             VStack {
                 Spacer()
                 LottieView.lottieInDetailView
             }
-            NavigationLink(
-                destination: CreationView(
-                    viewModel: CreationViewModel(
-                        creationUseCase: CreationUseCase(
-                            creationRepository: CreationRepository(
-                                service: LocalAnniversaryService.shared
-                            )
-                        ),
-                        fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
-                            anniversaryDetailRepository: AnniversaryDetailRepository(
-                                service: LocalAnniversaryService.shared
-                            )
-                        )
-                    ),
-                    id: viewModel.anniversaryId,
-                    type: .edit
-                ),
-                isActive: $showEditView
-            ) { EmptyView() }
+            .ignoresSafeArea()
+            /// 네비게이션 바가 차지하는 만큼 아래에서 시작해야 하므로 safe area를 그대로 둡니다.
             VStack {
-                /* Custom Navigation Bar */
-                HStack(spacing: 0) {
-                    /* back icon */
-                    Image(.backIcon)
-                        .foregroundColor(.white)
-                        .frame(width: 24, height: 24)
-                        .padding(12)
-                        .background {
-                            if iconStates[.back]! {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.white.opacity(0.1))
-                            }
-                        }
-                        .gesture(
-                            DragGesture(
-                                minimumDistance: 0,
-                                coordinateSpace: .local
-                            )
-                            .onChanged({ _ in
-                                iconStates[.back] = true
-                            })
-                            .onEnded({ _ in
-                                iconStates[.back] = false
-                                withAnimation {
-                                    dismiss()
-                                }
-                            })
-                        )
-                    
-                    Spacer()
-                    /* edit icon */
-                    Image(.editIcon)
-                        .foregroundColor(.white)
-                        .frame(width: 24, height: 24)
-                        .padding(12)
-                        .background {
-                            if iconStates[.edit]! {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.white.opacity(0.1))
-                            }
-                        }
-                        .gesture(
-                            DragGesture(
-                                minimumDistance: 0,
-                                coordinateSpace: .local
-                            )
-                            .onChanged({ _ in
-                                iconStates[.edit] = true
-                            })
-                            .onEnded({ _ in
-                                iconStates[.edit] = false
-                                self.showEditView = true
-                            })
-                        )
-                    
-                    /* delete icon */
-                    Image(.deleteIcon)
-                        .foregroundColor(.white)
-                        .frame(width: 24, height: 24)
-                        .padding(12)
-                        .background {
-                            if iconStates[.delete]! {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.white.opacity(0.1))
-                            }
-                        }
-                        .gesture(
-                            DragGesture(
-                                minimumDistance: 0,
-                                coordinateSpace: .local
-                            )
-                            .onChanged({ _ in
-                                iconStates[.delete] = true
-                            })
-                            .onEnded({ _ in
-                                iconStates[.delete] = false
-                                showConfirmView = true
-                            })
-                        )
-                }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 16)
-                
                 if let detail = viewModel.anniversaryDetail {
                     AnniversaryContentView(anniversary: detail)
                         .padding(.bottom, 200)
@@ -145,6 +35,7 @@ struct AnniversaryDetailView: View {
             }
             if viewModel.state == .loading {
                 Color.black.opacity(0.4)
+                    .ignoresSafeArea()
                 ProgressView()
             }
             if showConfirmView {
@@ -154,23 +45,51 @@ struct AnniversaryDetailView: View {
                     isPresentend: $showConfirmView,
                     dismiss: dismiss
                 )
+                .ignoresSafeArea()
             }
         }
-        .ignoresSafeArea()
-        .navigationBarBackButtonHidden(true)
-        .gesture(
-            DragGesture(
-                minimumDistance: 10,
-                coordinateSpace: .local
-            )
-            .onEnded({ value in
-                if value.translation.width > 100 {
-                    withAnimation {
-                        dismiss()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack(spacing: 0) {
+                    Button {
+                        showEditView = true
+                    } label: {
+                        Image(.editIcon)
+                            .foregroundColor(.white)
                     }
+                    .buttonStyle(NavigationBarIconButtonStyle())
+
+                    Button {
+                        showConfirmView = true
+                    } label: {
+                        Image(.deleteIcon)
+                            .foregroundColor(.white)
+                    }
+                    .buttonStyle(NavigationBarIconButtonStyle())
                 }
-            })
-        )
+            }
+        }
+        /// 배경 이미지가 상단까지 이어지도록 바를 투명하게 둡니다.
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .navigationDestination(isPresented: $showEditView) {
+            CreationView(
+                viewModel: CreationViewModel(
+                    creationUseCase: CreationUseCase(
+                        creationRepository: CreationRepository(
+                            service: LocalAnniversaryService.shared
+                        )
+                    ),
+                    fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                        anniversaryDetailRepository: AnniversaryDetailRepository(
+                            service: LocalAnniversaryService.shared
+                        )
+                    )
+                ),
+                id: viewModel.anniversaryId,
+                type: .edit
+            )
+        }
         .onAppear {
             viewModel.action(.fetchAnniversaryDetail)
         }
@@ -181,5 +100,20 @@ struct AnniversaryDetailView: View {
                 }
             }
         }
+    }
+}
+
+/// 기존 커스텀 네비게이션 바의 눌림 효과(반투명 라운드 배경)를 그대로 재현합니다.
+private struct NavigationBarIconButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 24, height: 24)
+            .padding(12)
+            .background {
+                if configuration.isPressed {
+                    RoundedRectangle(cornerRadius: 16)
+                        .foregroundStyle(Color.white.opacity(0.1))
+                }
+            }
     }
 }
