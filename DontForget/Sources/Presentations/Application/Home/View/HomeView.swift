@@ -30,28 +30,11 @@ struct HomeView: View {
     private var networkConnected: Bool { NetworkMonitor.shared.isConnected }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack {
                         ZStack {
-                            /* Navigation Link with Empty View*/
-                            NavigationLink(isActive: $isNavigate) {
-                                AnniversaryDetailView(
-                                    viewModel: DefaultAnniversaryDetailViewModel(
-                                        anniversaryId: id,
-                                        anniversaryDetailRepository: AnniversaryDetailRepository(
-                                            service: LocalAnniversaryService.shared
-                                        ),
-                                        deletionRepository: DeletionRepository(
-                                            service: LocalAnniversaryService.shared
-                                        )
-                                    )
-                                )
-                            } label: {
-                                EmptyView()
-                            }
-                            
                             /* Background */
                             if anniversaries.isEmpty {
                                 ZStack {
@@ -159,6 +142,41 @@ struct HomeView: View {
                         }
                     }
                 }
+                /// 제목을 비워야 상세 화면의 뒤로가기 버튼이 화살표만 남습니다.
+                .navigationTitle("")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.hidden, for: .navigationBar)
+                .navigationDestination(isPresented: $isNavigate) {
+                    AnniversaryDetailView(
+                        viewModel: DefaultAnniversaryDetailViewModel(
+                            anniversaryId: id,
+                            anniversaryDetailRepository: AnniversaryDetailRepository(
+                                service: LocalAnniversaryService.shared
+                            ),
+                            deletionRepository: DeletionRepository(
+                                service: LocalAnniversaryService.shared
+                            )
+                        )
+                    )
+                }
+                .navigationDestination(isPresented: $navigateToCreationView) {
+                    CreationView(
+                        viewModel: CreationViewModel(
+                            creationUseCase: CreationUseCase(
+                                creationRepository: CreationRepository(
+                                    service: LocalAnniversaryService.shared
+                                )
+                            ),
+                            fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
+                                anniversaryDetailRepository: AnniversaryDetailRepository(
+                                    service: LocalAnniversaryService.shared
+                                )
+                            )
+                        ),
+                        id: nil,
+                        type: .create
+                    )
+                }
             }
         }
     }
@@ -192,27 +210,15 @@ struct AddNewAnniversaryView: View {
 }
 
 extension HomeView {
+    /// 화면 두 곳에서 같은 생성 화면으로 이동하므로, 목적지는 navigationDestination 한 곳에 두고
+    /// 여기서는 이동을 요청하기만 합니다.
     var creationViewNavigationLink: some View {
-        NavigationLink(
-            destination: CreationView(
-                viewModel: CreationViewModel(
-                    creationUseCase: CreationUseCase(
-                        creationRepository: CreationRepository(
-                            service: LocalAnniversaryService.shared
-                        )
-                    ),
-                    fetchAnniversaryDetailUseCase: DefaultFetchAnniversaryDetailUseCase(
-                        anniversaryDetailRepository: AnniversaryDetailRepository(
-                            service: LocalAnniversaryService.shared
-                        )
-                    )
-                ),
-                id: nil,
-                type: .create
-            ),
-            isActive: $navigateToCreationView,
-            label: { AddNewAnniversaryView() }
-        )
+        Button {
+            navigateToCreationView = true
+        } label: {
+            AddNewAnniversaryView()
+        }
+        .buttonStyle(.plain)
         .disabled(!networkConnected)
     }
     
