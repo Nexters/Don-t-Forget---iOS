@@ -50,22 +50,19 @@ struct AnniversaryDetailView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                HStack(spacing: 0) {
-                    Button {
-                        showEditView = true
-                    } label: {
-                        Image(.editIcon)
-                            .foregroundColor(.white)
-                    }
-                    .buttonStyle(NavigationBarIconButtonStyle())
-
-                    Button {
-                        showConfirmView = true
-                    } label: {
-                        Image(.deleteIcon)
-                            .foregroundColor(.white)
-                    }
-                    .buttonStyle(NavigationBarIconButtonStyle())
+                Button {
+                    showEditView = true
+                } label: {
+                    Image(.editIcon)
+                        .foregroundColor(.white)
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showConfirmView = true
+                } label: {
+                    Image(.deleteIcon)
+                        .foregroundColor(.white)
                 }
             }
         }
@@ -100,20 +97,5 @@ struct AnniversaryDetailView: View {
                 }
             }
         }
-    }
-}
-
-/// 기존 커스텀 네비게이션 바의 눌림 효과(반투명 라운드 배경)를 그대로 재현합니다.
-private struct NavigationBarIconButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(width: 24, height: 24)
-            .padding(12)
-            .background {
-                if configuration.isPressed {
-                    RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(Color.white.opacity(0.1))
-                }
-            }
     }
 }
