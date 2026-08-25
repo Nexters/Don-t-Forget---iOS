@@ -97,7 +97,8 @@ final class CreationViewModel: ViewModelType {
         Future<CreationResponse?, Error> { promise in
             Task {
                 do {
-                    _ = try await self.creationUseCase.putAnniversary(id: id, parameters: request)
+                    let response = try await self.creationUseCase.putAnniversary(id: id, parameters: request)
+                    promise(.success(response))
                 } catch {
                     promise(.failure(error))
                 }
