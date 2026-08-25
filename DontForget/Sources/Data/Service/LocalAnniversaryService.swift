@@ -172,14 +172,6 @@ public class LocalAnniversaryService: AnniversaryServiceProtocol {
         await LocalNotificationService.shared.rescheduleAll()
     }
 
-    public func changePushState(status: String) async throws -> Int {
-        return 200
-    }
-
-    public func fcmTest() async throws -> Int {
-        return 200
-    }
-
     // MARK: - Private
 
     private func makeDetail(id: Int, parameters: RegisterAnniversaryRequest) -> AnniversaryDetailDTO {

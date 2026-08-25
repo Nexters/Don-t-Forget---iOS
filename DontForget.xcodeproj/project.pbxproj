@@ -27,7 +27,6 @@
 		09FD8FA92B5FE6B500EB83D8 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */; };
 		09FD8FAB2B5FF1CF00EB83D8 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */; };
 		AD0417FD2B8F1D7900307944 /* splash_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0417FC2B8F1D7800307944 /* splash_lottie.json */; };
-		AD0418012B904D9F00307944 /* NotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0418002B904D9F00307944 /* NotificationStatus.swift */; };
 		AD0418032B9056B300307944 /* main_card_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = AD0418022B9056B300307944 /* main_card_lottie.json */; };
 		AD0F992D2B7C509000E2A915 /* CreationViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F992C2B7C509000E2A915 /* CreationViewType.swift */; };
 		AD0F992F2B7C520500E2A915 /* InputNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F992E2B7C520500E2A915 /* InputNameView.swift */; };
@@ -85,7 +84,6 @@
 		ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */; };
 		ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */; };
 		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
-		ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */; };
 		ADE66426303B298700CA060B /* LocalAnniversaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66425303B298700CA060B /* LocalAnniversaryService.swift */; };
 		ADE66430303B2A0000CA060B /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66431303B2A0000CA060B /* LocalNotificationService.swift */; };
 		ADE6642A303B29A000CA060B /* LocalAnniversaryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66428303B29A000CA060B /* LocalAnniversaryStorage.swift */; };
@@ -135,7 +133,6 @@
 		09FD8FA82B5FE6B500EB83D8 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		09FD8FAA2B5FF1CF00EB83D8 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		AD0417FC2B8F1D7800307944 /* splash_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_lottie.json; sourceTree = "<group>"; };
-		AD0418002B904D9F00307944 /* NotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatus.swift; sourceTree = "<group>"; };
 		AD0418022B9056B300307944 /* main_card_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_card_lottie.json; sourceTree = "<group>"; };
 		AD0F992C2B7C509000E2A915 /* CreationViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewType.swift; sourceTree = "<group>"; };
 		AD0F992E2B7C520500E2A915 /* InputNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNameView.swift; sourceTree = "<group>"; };
@@ -209,7 +206,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADC7C2012B6A7B3300EBE58C /* FirebaseMessaging in Frameworks */,
 				09642C402B649B820015220E /* CombineMoya in Frameworks */,
 				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
 				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
@@ -331,7 +327,6 @@
 				09642C5D2B67CA6F0015220E /* CreationModel.swift */,
 				ADA2CC092B6CCECC001A38D9 /* CardType.swift */,
 				ADA2CC0B2B6CD037001A38D9 /* Query.swift */,
-				AD0418002B904D9F00307944 /* NotificationStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -608,7 +603,6 @@
 				09642C432B649B820015220E /* ReactiveMoya */,
 				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
 				ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */,
-				ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */,
 				AD7D585F2B75E7CB00832817 /* Lottie */,
 			);
 			productName = DontForget;
@@ -737,7 +731,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD0418012B904D9F00307944 /* NotificationStatus.swift in Sources */,
 				09642C5B2B67CA230015220E /* CreationRepository.swift in Sources */,
 				AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */,
 				AD0F992F2B7C520500E2A915 /* InputNameView.swift in Sources */,
@@ -1196,11 +1189,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
-		};
-		ADC7C2002B6A7B3300EBE58C /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

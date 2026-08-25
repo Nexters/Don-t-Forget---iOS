@@ -125,12 +125,6 @@ struct HomeView: View {
                         }
                         .padding(.horizontal, 20)
                         .padding(.top, 28)
-                        
-                        #if DEBUG
-                        Button("FCM TEST") {
-                            viewModel.action(.fcmTest)
-                        }.buttonStyle(BorderedButtonStyle())
-                        #endif
                     }
                     .offset(y: anniversaries.isEmpty ? 0 : -140)
                     .onAppear(perform: actionOnAppear)
@@ -224,6 +218,5 @@ extension HomeView {
     
     private func actionOnAppear() {
         viewModel.action(.readAnniversaries)
-        viewModel.action(.changePushState)
     }
 }

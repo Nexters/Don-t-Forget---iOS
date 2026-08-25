@@ -52,5 +52,4 @@ extension String {
     static let mainLottie = "main_card_lottie"
     
     /* UserDefaults key*/
-    static let fcmToken = "fcmToken"
 }

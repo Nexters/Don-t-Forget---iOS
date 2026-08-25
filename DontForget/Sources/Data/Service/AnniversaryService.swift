@@ -14,8 +14,6 @@ public protocol AnniversaryServiceProtocol {
     func fetchAnniversaries() async throws -> AnniversariesResponse
     func fetchAnniversaryDetail(anniversaryId: Int) async throws -> AnniversaryDetailResponse
     func deleteAnniversary(anniversaryId: Int) async throws
-    func changePushState(status: String) async throws -> Int
-    func fcmTest() async throws -> Int
 }
 
 public class AnniversaryService: AnniversaryServiceProtocol {
@@ -121,52 +119,6 @@ public class AnniversaryService: AnniversaryServiceProtocol {
                 case let .failure(error):
                     print("=== DEBUG: \(error)")
                     continuation.resume()
-                }
-            }
-        }
-    }
-    
-    public func changePushState(status: String) async throws -> Int {
-        try await withCheckedThrowingContinuation { continuation in
-            if let token = UserDefaults.standard.string(forKey: .fcmToken) {
-                let request = ChangePushStateRequest(
-                    token: token,
-                    deviceUuid: Constants.uuid,
-                    status: status
-                )
-                provider.request(.changePushState(parameter: request)) { result in
-                    switch result {
-                    case let .success(response):
-                        do {
-                            let response = try response.map(Int.self)
-                            continuation.resume(returning: response)
-                        } catch {
-                            continuation.resume(throwing: error)
-                        }
-                    case let .failure(error):
-                        print("=== DEBUG: changePushState \(error)")
-                    }
-                }
-            }
-        }
-    }
-    
-    public func fcmTest() async throws -> Int {
-        try await withCheckedThrowingContinuation { continuation in
-            let request = TestRequest(deviceUuid: Constants.uuid, title: "하잉", body: "다연이지요")
-            provider.request(.fcmTest(parameter: request)) { result in
-                switch result {
-                case let .success(response):
-                    do {
-                        let response = try response.map(Int.self)
-                        continuation.resume(returning: response)
-                        print("=== DEBUG: fcmTest() \(response)")
-                    } catch {
-                        continuation.resume(throwing: error)
-                        print("=== DEBUG: fcmTest() \(error)")
-                    }
-                case let .failure(error):
-                    print("=== DEBUG: failed fcmTest \(error.localizedDescription)")
                 }
             }
         }
