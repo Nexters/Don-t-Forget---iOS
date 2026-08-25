@@ -44,14 +44,17 @@ final class CreationUseCase: CreationUseCaseProtocol {
         return AlarmPeriod.allCases
     }
     
+    /// 화면에 표시할 달력 기준으로 날짜를 변환합니다.
+    /// type은 "이 날짜를 무엇으로 볼 것인가"이므로, 원본은 그 반대 기준의 날짜입니다.
+    /// 변환할 수 없는 날짜(지원 범위 밖)는 입력값을 그대로 돌려줍니다.
     func converToDate(type: ConvertDate, date: Date) async -> Date {
         switch type {
         case .solar:
-            let lunarDate = try? lunarConverter.lunarDate(fromSolar: date)
-            return lunarDate!.date
+            /// 음력으로 보고 있던 날짜를 양력으로 바꿉니다.
+            return (try? solarConverter.solarDate(fromLunar: date))?.date ?? date
         case .lunar:
-            let solarDate = try? solarConverter.solarDate(fromLunar: date)
-            return solarDate!.date
+            /// 양력으로 보고 있던 날짜를 음력으로 바꿉니다.
+            return (try? lunarConverter.lunarDate(fromSolar: date))?.date ?? date
         }
     }
 }
