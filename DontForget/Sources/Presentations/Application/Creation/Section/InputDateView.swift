@@ -42,11 +42,14 @@ struct InputDateView: View {
             }
             .disabled(isPickerDisabled) 
             .frame(height: 52)
-            .onChange(of: selectedSegment) {  _, _ in
+            .onChange(of: selectedSegment) { _, newValue in
+                let dateType: ConvertDate = newValue == 0 ? .solar : .lunar
+                self.type = dateType
+                /// 저장된 기념일을 불러오면서 세그먼트가 맞춰진 경우입니다.
+                /// 표시 중인 날짜가 이미 그 기준이므로 변환하면 안 됩니다.
+                guard dateType.title != calendarType else { return }
                 temporarilyDisablePicker()
-                self.type =  selectedSegment == 0 ? .solar : .lunar
                 Task {
-                    let dateType: ConvertDate = selectedSegment == 0 ? .solar : .lunar
                     let convertedDate = await viewModel.convertToLunarOrSolar(
                         type: dateType,
                         date: updateViewModelWithSelectedDate()
@@ -57,7 +60,6 @@ struct InputDateView: View {
                     updateRequestDate()
                     calendarType = dateType.title
                 }
-                .cancel()
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)

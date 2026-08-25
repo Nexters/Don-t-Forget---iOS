@@ -228,8 +228,9 @@ extension CreationView {
     
     private func extractYearMonthDay(from dateString: String) -> [Int]? {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.date(from: dateString)!
+        guard let date = dateFormatter.date(from: dateString) else { return nil }
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date) % 100
         let month = calendar.component(.month, from: date)
@@ -263,14 +264,21 @@ extension CreationView {
             viewModel.fetchAnniversaryDetail(id: id!)
             viewModel.$anniversaryDetail
                 .receive(on: DispatchQueue.main)
-                .sink {  res in
-                    self.name = res?.title ?? ""
-                    self.memo = res?.content ?? ""
-                    self.selectedAlarmIndexes = Set(res?.alarmSchedule ?? [])
-                    self.baseType = res?.baseType == ConvertDate.solar.title ? 1 : 0
-                    if let date = res?.baseDate {
-                        self.baseDate = self.extractYearMonthDay(from: date)!
+                .sink { res in
+                    guard let res else { return }
+                    self.name = res.title
+                    self.memo = res.content
+                    self.selectedAlarmIndexes = Set(res.alarmSchedule)
+                    self.strAlarmAry = res.alarmSchedule
+                    /// 세그먼트보다 먼저 날짜와 기준을 맞춰야 합니다.
+                    /// 세그먼트가 먼저 바뀌면 아직 기본값인 날짜를 변환해 덮어씁니다.
+                    if let date = self.extractYearMonthDay(from: res.baseDate) {
+                        self.baseDate = date
                     }
+                    self.requestDate = res.baseDate
+                    self.calendarType = res.baseType
+                    /// 세그먼트는 0이 양력, 1이 음력입니다.
+                    self.baseType = res.baseType == ConvertDate.lunar.title ? 1 : 0
                 }
                 .store(in: &cancellables)
         }
