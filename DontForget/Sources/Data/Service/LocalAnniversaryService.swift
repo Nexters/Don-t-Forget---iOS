@@ -17,6 +17,10 @@ struct AnniversaryDateCalculator {
     private let solarConverter = KoreanLunarToSolarConverter()
     private let lunarConverter = KoreanSolarToLunarConverter()
     private let lunarRangeChecker = KoreanLunarDateRangeChecker()
+    /// KoreanLunarSolarConverter는 내부에 동기화 없는 캐시 딕셔너리를 두고 있어
+    /// 여러 Task에서 동시에 호출하면 캐시가 깨져 크래시합니다.
+    /// 변환은 짧게 끝나므로 직렬 큐로 묶어 한 번에 하나씩만 수행합니다.
+    private static let conversionQueue = DispatchQueue(label: "com.dontforget.datecalculator")
     private let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -33,6 +37,17 @@ struct AnniversaryDateCalculator {
         baseDate: String,
         baseType: String,
         from referenceDate: Date = Date()
+    ) -> (solar: String, lunar: String) {
+        Self.conversionQueue.sync { () -> (solar: String, lunar: String) in
+            computeUpcomingDates(baseDate: baseDate, baseType: baseType, from: referenceDate)
+        }
+    }
+
+    /// 반드시 conversionQueue 안에서 호출해야 합니다.
+    private func computeUpcomingDates(
+        baseDate: String,
+        baseType: String,
+        from referenceDate: Date
     ) -> (solar: String, lunar: String) {
         guard let base = formatter.date(from: baseDate) else {
             return (solar: baseDate, lunar: baseDate)
@@ -69,11 +84,30 @@ struct AnniversaryDateCalculator {
         from referenceDate: Date = Date(),
         count: Int
     ) -> [Date] {
+        /// 회차마다 큐를 드나들지 않도록 한 번만 잠급니다.
+        /// 안에서는 잠금 없는 computeUpcomingDates를 불러야 중첩 sync 데드락을 피할 수 있습니다.
+        Self.conversionQueue.sync { () -> [Date] in
+            computeUpcomingSolarDates(
+                baseDate: baseDate,
+                baseType: baseType,
+                from: referenceDate,
+                count: count
+            )
+        }
+    }
+
+    /// 반드시 conversionQueue 안에서 호출해야 합니다.
+    private func computeUpcomingSolarDates(
+        baseDate: String,
+        baseType: String,
+        from referenceDate: Date,
+        count: Int
+    ) -> [Date] {
         var results: [Date] = []
         var cursor = referenceDate
 
         for _ in 0..<count {
-            let dates = upcomingDates(baseDate: baseDate, baseType: baseType, from: cursor)
+            let dates = computeUpcomingDates(baseDate: baseDate, baseType: baseType, from: cursor)
             guard let solar = formatter.date(from: dates.solar) else { break }
             /// 같은 날짜가 반복되면(변환 실패 등) 더 진행하지 않습니다.
             if let last = results.last, solar <= last { break }
