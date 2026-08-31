@@ -46,15 +46,14 @@ final class CreationUseCase: CreationUseCaseProtocol {
         return AlarmPeriod.allCases
     }
     
+    /// 변환 지원 범위(1000~2050년)를 벗어나면 입력값을 그대로 돌려줍니다.
     func converToDate(type: ConvertDate, date: Date) async -> Date {
         conversionQueue.sync { () -> Date in
             switch type {
             case .solar:
-                let lunarDate = try? lunarConverter.lunarDate(fromSolar: date)
-                return lunarDate!.date
+                return (try? lunarConverter.lunarDate(fromSolar: date))?.date ?? date
             case .lunar:
-                let solarDate = try? solarConverter.solarDate(fromLunar: date)
-                return solarDate!.date
+                return (try? solarConverter.solarDate(fromLunar: date))?.date ?? date
             }
         }
     }

@@ -16,6 +16,8 @@ struct InputDateView: View {
     @Binding var calendarType: String
     @State private var type: ConvertDate = .solar
     private let segments = ["양력으로 입력", "음력으로 입력"]
+    /// 현재 연도로부터 몇 해 뒤까지 고를 수 있게 할지. 두 자리 연도 창의 끝을 정합니다.
+    private static let futureYearAllowance = 5
     var viewModel: CreationViewModel
     @State private var isPickerDisabled = false
     var body: some View {
@@ -81,15 +83,14 @@ struct InputDateView: View {
 }
 
 extension InputDateView {
+    /// 피커가 두 자리 연도를 쓰므로 100년 창 안에서만 연도를 표현할 수 있습니다.
+    /// 창의 끝을 현재 연도보다 조금 뒤에 두어 다가오는 기념일도 등록할 수 있게 합니다.
+    /// (2026년 기준 1932~2031년)
     private func convertToFullYear(twoDigitYear: Int) -> Int {
-        let getTwoDigitYear = twoDigitYear % 100
-        if getTwoDigitYear >= 25 && getTwoDigitYear <= 99 {
-            return 1900 + getTwoDigitYear
-        } else if getTwoDigitYear >= 0 && getTwoDigitYear <= 24 {
-            return 2000 + getTwoDigitYear
-        } else {
-            return getTwoDigitYear
-        }
+        let yearInCentury = twoDigitYear % 100
+        let latestYear = Calendar.current.component(.year, from: Date()) + Self.futureYearAllowance
+        let candidate = latestYear - (latestYear % 100) + yearInCentury
+        return candidate <= latestYear ? candidate : candidate - 100
     }
     
     private func updateRequestDate() {
