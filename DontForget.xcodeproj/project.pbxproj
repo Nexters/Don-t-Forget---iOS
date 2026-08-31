@@ -53,7 +53,6 @@
 		AD3B45852B68B634009529DE /* AnniversaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */; };
 		AD3B45872B68C288009529DE /* AnniversaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B45862B68C287009529DE /* AnniversaryContentView.swift */; };
 		AD3B458D2B68DE8F009529DE /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B458C2B68DE8F009529DE /* ConfirmView.swift */; };
-		AD6097C62B7CD9C3005060A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */; };
 		AD76D0622B594A5000EFB12E /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */; };
 		AD76D0642B594D2F00EFB12E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76D0632B594D2F00EFB12E /* Color+Extension.swift */; };
 		AD7BEBBC2B91E93B00A03753 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD7BEBB32B91E93A00A03753 /* Pretendard-Medium.otf */; };
@@ -83,13 +82,12 @@
 		ADAFFDD72B70C98C00746D3E /* AnniversaryDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD62B70C98C00746D3E /* AnniversaryDetailRepository.swift */; };
 		ADAFFDD92B70C9A700746D3E /* AnniversaryDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDD82B70C9A700746D3E /* AnniversaryDetailInterface.swift */; };
 		ADAFFDDD2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFFDDC2B70D4A400746D3E /* DeleteAnniversaryUseCase.swift */; };
-		ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */; };
 		ADE66426303B298700CA060B /* LocalAnniversaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66425303B298700CA060B /* LocalAnniversaryService.swift */; };
-		ADE66430303B2A0000CA060B /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66431303B2A0000CA060B /* LocalNotificationService.swift */; };
 		ADE6642A303B29A000CA060B /* LocalAnniversaryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66428303B29A000CA060B /* LocalAnniversaryStorage.swift */; };
 		ADE6642B303B29A000CA060B /* AnniversaryIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66427303B29A000CA060B /* AnniversaryIdGenerator.swift */; };
 		ADE6642D303B29B900CA060B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6642C303B29B900CA060B /* Bundle+Extension.swift */; };
 		ADE6642F303B29E400CA060B /* LocalDataWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6642E303B29E400CA060B /* LocalDataWarningView.swift */; };
+		ADE66430303B2A0000CA060B /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE66431303B2A0000CA060B /* LocalNotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,7 +160,6 @@
 		AD3B45842B68B634009529DE /* AnniversaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryDetailView.swift; sourceTree = "<group>"; };
 		AD3B45862B68C287009529DE /* AnniversaryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryContentView.swift; sourceTree = "<group>"; };
 		AD3B458C2B68DE8F009529DE /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
-		AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD76D0612B594A5000EFB12E /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		AD76D0632B594D2F00EFB12E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD7BEBB32B91E93A00A03753 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -194,11 +191,11 @@
 		ADC7C2022B6A7DF400EBE58C /* DontForget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DontForget.entitlements; sourceTree = "<group>"; };
 		ADC7C2032B6A7DFA00EBE58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADE66425303B298700CA060B /* LocalAnniversaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnniversaryService.swift; sourceTree = "<group>"; };
-		ADE66431303B2A0000CA060B /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
 		ADE66427303B29A000CA060B /* AnniversaryIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnniversaryIdGenerator.swift; sourceTree = "<group>"; };
 		ADE66428303B29A000CA060B /* LocalAnniversaryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAnniversaryStorage.swift; sourceTree = "<group>"; };
 		ADE6642C303B29B900CA060B /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		ADE6642E303B29E400CA060B /* LocalDataWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataWarningView.swift; sourceTree = "<group>"; };
+		ADE66431303B2A0000CA060B /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,7 +206,6 @@
 				09642C402B649B820015220E /* CombineMoya in Frameworks */,
 				09642C442B649B820015220E /* ReactiveMoya in Frameworks */,
 				09642C642B67FD9E0015220E /* KoreanLunarSolarConverter in Frameworks */,
-				ADC7C1FF2B6A7B3300EBE58C /* FirebaseAnalytics in Frameworks */,
 				09642C422B649B820015220E /* Moya in Frameworks */,
 				AD7D58602B75E7CB00832817 /* Lottie in Frameworks */,
 			);
@@ -364,7 +360,6 @@
 		AD147EF22B57F85600561846 = {
 			isa = PBXGroup;
 			children = (
-				AD6097C52B7CD9C3005060A6 /* GoogleService-Info.plist */,
 				AD147F0C2B57F89300561846 /* .swiftlint.yml */,
 				AD147EFD2B57F85600561846 /* DontForget */,
 				AD147F2C2B57FFB500561846 /* DontForgetWidget */,
@@ -602,7 +597,6 @@
 				09642C412B649B820015220E /* Moya */,
 				09642C432B649B820015220E /* ReactiveMoya */,
 				09642C632B67FD9E0015220E /* KoreanLunarSolarConverter */,
-				ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */,
 				AD7D585F2B75E7CB00832817 /* Lottie */,
 			);
 			productName = DontForget;
@@ -657,7 +651,6 @@
 			packageReferences = (
 				09642C3E2B649B820015220E /* XCRemoteSwiftPackageReference "Moya" */,
 				09642C622B67FD9E0015220E /* XCRemoteSwiftPackageReference "KoreanLunarSolarConverter" */,
-				ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				AD7D585E2B75E7CB00832817 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = AD147EFC2B57F85600561846 /* Products */;
@@ -689,7 +682,6 @@
 				AD7BEBBF2B91E93B00A03753 /* Pretendard-ExtraBold.otf in Resources */,
 				AD147F062B57F85700561846 /* Preview Assets.xcassets in Resources */,
 				AD147F032B57F85700561846 /* Assets.xcassets in Resources */,
-				AD6097C62B7CD9C3005060A6 /* GoogleService-Info.plist in Resources */,
 				AD7BEBBD2B91E93B00A03753 /* Pretendard-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -969,12 +961,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				"OTHER_LDFLAGS[arch=*]" = "-Wl,-ld_classic";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DontForget;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1010,11 +1002,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DontForget;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1047,7 +1039,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget.DontForgetWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget.DontForgetWidget";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DontForgetWidget;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1082,7 +1074,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dazzling.DontForget.DontForgetWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.dazzling.DontForget.DontForgetWidget";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DontForgetWidget;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1149,14 +1141,6 @@
 				minimumVersion = 4.4.0;
 			};
 		};
-		ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.20.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1184,11 +1168,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD7D585E2B75E7CB00832817 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
-		};
-		ADC7C1FE2B6A7B3300EBE58C /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ADC7C1FD2B6A7B3300EBE58C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

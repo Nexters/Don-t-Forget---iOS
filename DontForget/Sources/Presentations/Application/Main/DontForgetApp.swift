@@ -8,8 +8,6 @@
 import SwiftUI
 import UserNotifications
 
-import FirebaseCore
-
 @main
 struct DontForgetApp: App {
     
@@ -27,8 +25,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        FirebaseApp.configure()
-
         UNUserNotificationCenter.current().delegate = self
 
         /// 서버 푸시가 없으므로 권한을 받은 뒤 저장된 기념일의 알림을 직접 예약합니다.
