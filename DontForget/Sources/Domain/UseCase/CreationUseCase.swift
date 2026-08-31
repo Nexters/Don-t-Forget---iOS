@@ -23,6 +23,8 @@ final class CreationUseCase: CreationUseCaseProtocol {
     private let creationRepository: CreationInterface
     private let solarConverter =  KoreanLunarToSolarConverter()
     private let lunarConverter = KoreanSolarToLunarConverter()
+    /// 컨버터가 내부 캐시를 동기화 없이 갱신하므로 동시 호출을 막습니다.
+    private let conversionQueue = DispatchQueue(label: "com.dontforget.creationusecase.conversion")
     
     // MARK: - Init
     init(creationRepository: CreationInterface) {
@@ -45,13 +47,15 @@ final class CreationUseCase: CreationUseCaseProtocol {
     }
     
     func converToDate(type: ConvertDate, date: Date) async -> Date {
-        switch type {
-        case .solar:
-            let lunarDate = try? lunarConverter.lunarDate(fromSolar: date)
-            return lunarDate!.date
-        case .lunar:
-            let solarDate = try? solarConverter.solarDate(fromLunar: date)
-            return solarDate!.date
+        conversionQueue.sync { () -> Date in
+            switch type {
+            case .solar:
+                let lunarDate = try? lunarConverter.lunarDate(fromSolar: date)
+                return lunarDate!.date
+            case .lunar:
+                let solarDate = try? solarConverter.solarDate(fromLunar: date)
+                return solarDate!.date
+            }
         }
     }
 }
