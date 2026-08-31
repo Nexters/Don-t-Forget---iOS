@@ -166,12 +166,8 @@ final class CreationViewModel: ViewModelType {
         DispatchQueue.main.async {
             self.date = "\(year)-\(month)-\(day)"
         }
-        var calculateYear = 0
-        if year >= 1925 && year <= 1999 {
-            calculateYear = year - 1900
-        } else if year >= 2000 && year <= 2024 {
-            calculateYear = year - 2000
-        }
-        return [calculateYear, month, day]
+        /// 피커는 두 자리 연도를 표시하고, InputDateView가 이를 다시 네 자리로 되돌립니다.
+        /// 여기서 연도 범위를 따로 나누면 범위 밖 연도가 0으로 떨어져 피커가 튑니다.
+        return [year % 100, month, day]
     }
 }
